@@ -1,1 +1,124 @@
 /* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* ---------------------------- */
+  /* ---- CUSTOM BREAKPOINTS ---- */
+  /* ---------------------------- */
+
+  --breakpoint-xs: 375px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 1024px;
+  --breakpoint-lg: 1440px;
+  --breakpoint-xl: 1920px;
+
+  /* ---------------------- */
+  /* ---- CUSTOM FONTS ---- */
+  /* ---------------------- */
+
+  --font-poppins: "Poppins", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+
+  /* ---------------------- */
+  /* ---- CUSTOM COLOR ---- */
+  /* ---------------------- */
+
+  --color-main: #15803d;
+  --color-text: #231f20;
+  --color-bg-light: #ffffff;
+  --color-border: #dddddd;
+  --color-icon: #a4a4a4;
+  --color-gray-one: #686868;
+  --color-warning: #f59e0b;
+  --color-success: #00c247;
+  --color-error: #dc2626;
+  --color-information: #3b82f6;
+  --color-black: #000;
+  --color-white: #fff;
+
+  --color-main-50: #f0fdf5;
+  --color-main-100: #dcfce8;
+  --color-main-200: #bbf7d1;
+  --color-main-300: #86efad;
+  --color-main-400: #4ade81;
+  --color-main-500: #22c55f;
+  --color-main-600: #16a34b;
+  --color-main-700: #15803d;
+  --color-main-800: #166534;
+  --color-main-900: #14532c;
+  --color-main-950: #052e14;
+
+  --color-text-50: #f8f7f8;
+  --color-text-100: #f0eeee;
+  --color-text-200: #ded9da;
+  --color-text-300: #c1b8bb;
+  --color-text-400: #9f9196;
+  --color-text-500: #847379;
+  --color-text-600: #6c5d62;
+  --color-text-700: #584c50;
+  --color-text-800: #4b4144;
+  --color-text-900: #41393b;
+  --color-text-950: #231f20;
+
+  --color-warning-50: #fff8eb;
+  --color-warning-100: #feeac7;
+  --color-warning-200: #fdd28a;
+  --color-warning-300: #fcbb4d;
+  --color-warning-400: #fbab24;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d98b06;
+  --color-warning-700: #b47409;
+  --color-warning-800: #92610e;
+  --color-warning-900: #78510f;
+  --color-warning-950: #452c03;
+
+  --color-success-50: #eefff3;
+  --color-success-100: #d7ffe5;
+  --color-success-200: #b2ffcd;
+  --color-success-300: #76ffa7;
+  --color-success-400: #33f579;
+  --color-success-500: #09de56;
+  --color-success-600: #00c247;
+  --color-success-700: #049139;
+  --color-success-800: #0a7131;
+  --color-success-900: #0a5d2b;
+  --color-success-950: #003415;
+
+  --color-error-50: #fef2f2;
+  --color-error-100: #fee2e2;
+  --color-error-200: #fecaca;
+  --color-error-300: #fca5a5;
+  --color-error-400: #f87171;
+  --color-error-500: #ef4444;
+  --color-error-600: #dc2626;
+  --color-error-700: #b91c1c;
+  --color-error-800: #991b1b;
+  --color-error-900: #7f1d1d;
+  --color-error-950: #450a0a;
+
+  --color-information-50: #eff5ff;
+  --color-information-100: #dbe8fe;
+  --color-information-200: #bfd7fe;
+  --color-information-300: #93bbfd;
+  --color-information-400: #609afa;
+  --color-information-500: #3b82f6;
+  --color-information-600: #2570eb;
+  --color-information-700: #1d64d8;
+  --color-information-800: #1e55af;
+  --color-information-900: #1e478a;
+  --color-information-950: #172e54;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
