@@ -3,10 +3,16 @@ import { RouterOutlet } from '@angular/router';
 import { ButtonComponent } from './components/button/button.component';
 import { TagNameComponent } from './components/tag-name/tag-name.component';
 import { Tag } from './components/tag-name/tag-name.type';
+import { CardCourseComponent } from './components/card-course/card-course.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, ButtonComponent, TagNameComponent],
+  imports: [
+    RouterOutlet,
+    ButtonComponent,
+    TagNameComponent,
+    CardCourseComponent,
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
