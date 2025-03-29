@@ -1,0 +1,25 @@
+<div
+  class="p-5 border border-border rounded-lg shadow-sm flex flex-col gap-2.5"
+>
+  <!-- TODO REVOIR LE RESPONSIVE SI LG OU MD -->
+  <div class="lg:flex lg:items-start lg:justify-between">
+    <div class="min-w-[260px]">
+      <h6 class="font-semibold lg:text-lg">{{ course.name }}</h6>
+      <div class="mt-1 flex items-center justify-between font-medium text-sm">
+        <p>{{ course.date }}</p>
+        <p class="text-error">{{ course.places }}/{{ course.maxPlaces }}</p>
+      </div>
+      <div class="mt-1.5 flex items-center justify-between">
+        <app-tag-name [color]="course.tag.color" [size]="course.tag.size">
+          {{ course.tag.name }}
+        </app-tag-name>
+        <p class="font-poppins font-medium text-xs">{{ course.coach }}</p>
+      </div>
+    </div>
+    <app-button size="tiny" class="hidden lg:block">Réserver</app-button>
+  </div>
+  <p class="text-sm text-gray-one">
+    {{ course.description }}
+  </p>
+  <app-button size="tiny" class="lg:hidden">Réserver</app-button>
+</div>
