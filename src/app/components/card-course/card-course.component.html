@@ -10,7 +10,7 @@
         <p class="text-error">{{ course.places }}/{{ course.maxPlaces }}</p>
       </div>
       <div class="mt-1.5 flex items-center justify-between">
-        <app-tag-name [color]="course.tag.color" [size]="course.tag.size">
+        <app-tag-name [tag]="course.tag">
           {{ course.tag.name }}
         </app-tag-name>
         <p class="font-poppins font-medium text-xs">{{ course.coach }}</p>
