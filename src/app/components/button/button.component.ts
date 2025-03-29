@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 // TODO REVOIR ICI LE TYPAGE POUR QUE MON IDE ME LE PROPOSE
 export type ButtonType = 'primary' | 'ghost';
+// TODO AJOUTER AUSSI UN TYPE POUR LA TAILLE ET UN DISABLED
 
 @Component({
   selector: 'app-button',
