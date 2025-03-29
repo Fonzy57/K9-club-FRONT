@@ -3,8 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { ButtonComponent } from './components/button/button.component';
 import { TagNameComponent } from './components/tag-name/tag-name.component';
 import { Tag } from './components/tag-name/tag-name.type';
-import { CardCourseComponent } from './components/card-course/card-course.component';
-import { CardCourse } from './components/card-course/card-course.type';
+import { CardCourseComponent } from './components/card/card-course/card-course.component';
+import { CardCourse } from './components/card/card-course/card-course.type';
 
 @Component({
   selector: 'app-root',
