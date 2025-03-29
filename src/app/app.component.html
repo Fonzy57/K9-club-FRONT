@@ -7,11 +7,31 @@
 </h1>
 <p class="bg-main/20">Bienvenue sur le site du K9 Club</p>
 <p class="bg-main/20 font-poppins">Bienvenue sur le site du K9 Club</p>
+
 <div class="mt-4 mx-auto w-max">
-  <app-button type="primary" class="mt-6" (onClick)="handleClickPrimary()"
-    >Bouton primary</app-button
+  <app-button type="primary" class="mt-6" (onClick)="handleClickPrimary()">
+    Bouton primary</app-button
   >
 </div>
+
 <div class="mt-4 mx-auto w-max">
   <app-button type="ghost">Bouton ghost</app-button>
+</div>
+
+<h2>Tag name TINY :</h2>
+<div class="flex items-center w-max mx-auto gap-10">
+  @for (tag of tagsTiny; track $index) {
+  <app-tag-name [color]="tag.color" [size]="tag.size">
+    Tag {{ tag.name }}</app-tag-name
+  >
+  }
+</div>
+
+<h2>Tag name NORMAL :</h2>
+<div class="flex items-center w-max mx-auto gap-10">
+  @for (tag of tagsNormal; track $index) {
+  <app-tag-name [color]="tag.color" [size]="tag.size">
+    Tag {{ tag.name }}</app-tag-name
+  >
+  }
 </div>
