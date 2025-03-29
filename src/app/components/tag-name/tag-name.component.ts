@@ -18,7 +18,7 @@ export class TagNameComponent {
   @Input() tag!: Tag;
 
   get color(): string {
-    return TAG_TYPE_COLOR_MAP[this.tag.name] || 'gray';
+    return this.tag.color ?? (TAG_TYPE_COLOR_MAP[this.tag.name] || 'gray');
   }
 
   get label(): string {

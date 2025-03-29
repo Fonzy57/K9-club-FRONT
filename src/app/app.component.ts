@@ -36,7 +36,7 @@ export class AppComponent {
   ];
 
   tagsNormal: Tag[] = [
-    { name: 'agility', size: 'normal' },
+    { name: 'agility', size: 'normal', color: 'purple' }, // TODO ICI ON REDEFINI LA COULEUR
     { name: 'detection', size: 'normal' },
     { name: 'basic', size: 'normal' },
     { name: 'canicross', size: 'normal' },
