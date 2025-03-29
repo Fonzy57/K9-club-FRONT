@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { ButtonComponent } from '../button/button.component';
-import { TagNameComponent } from '../tag-name/tag-name.component';
+import { ButtonComponent } from '../../button/button.component';
+import { TagNameComponent } from '../../tag-name/tag-name.component';
 import { CardCourse } from './card-course.type';
 
 @Component({

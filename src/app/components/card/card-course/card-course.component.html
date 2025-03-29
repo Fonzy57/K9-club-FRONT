@@ -3,13 +3,15 @@
 >
   <!-- TODO REVOIR LE RESPONSIVE SI LG OU MD -->
   <div class="lg:flex lg:items-start lg:justify-between">
-    <div class="min-w-[260px]">
+    <div class="md:min-w-[260px]">
       <h6 class="font-semibold lg:text-lg">{{ course.name }}</h6>
       <div class="mt-1 flex items-center justify-between font-medium text-sm">
         <p>{{ course.date }}</p>
         <p class="text-error">{{ course.places }}/{{ course.maxPlaces }}</p>
       </div>
-      <div class="mt-1.5 flex items-center justify-between">
+      <div
+        class="mt-1.5 flex items-center justify-between flex-wrap-reverse gap-y-1.5"
+      >
         <app-tag-name [tag]="course.tag">
           {{ course.tag.name }}
         </app-tag-name>

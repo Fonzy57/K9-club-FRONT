@@ -1,0 +1,26 @@
+<div class="p-2.5 border border-border rounded-lg shadow-sm">
+  <!-- TODO REVOIR LE RESPONSIVE SI LG OU MD -->
+  <div
+    class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between"
+  >
+    <div class="md:min-w-[260px]">
+      <h6 class="font-semibold lg:text-lg">{{ course.name }}</h6>
+      <div
+        class="mt-1 flex items-center justify-between font-medium text-sm text-main"
+      >
+        <p>{{ course.date }}</p>
+      </div>
+      <div
+        class="mt-1.5 flex flex-col-reverse gap-y-2 lg:flex-row lg:items-center lg:justify-between"
+      >
+        <app-tag-name [tag]="course.tag">
+          {{ course.tag.name }}
+        </app-tag-name>
+        <p class="font-poppins font-medium text-xs">{{ course.coach }}</p>
+      </div>
+    </div>
+    <div>
+      <app-button type="cancel" size="tiny">Annuler</app-button>
+    </div>
+  </div>
+</div>

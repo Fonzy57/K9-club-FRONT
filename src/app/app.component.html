@@ -47,3 +47,10 @@
   <app-card-course [course]="course" />
   }
 </div>
+
+<h2 class="mt-5">Card pour les cours déjà réservés :</h2>
+<div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-3">
+  @for (reservedCourse of reservedCourses; track $index) {
+  <app-card-reserved-course [course]="reservedCourse" />
+  }
+</div>

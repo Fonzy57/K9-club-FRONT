@@ -1,4 +1,4 @@
-import { Tag } from '../tag-name/tag-name.type';
+import { Tag } from '../../tag-name/tag-name.type';
 
 export interface CardCourse {
   name: string;
