@@ -1,12 +1,6 @@
-<h1 class="text-3xl underline text-main font-bold">Hello {{ title }}</h1>
-<h1 class="text-3xl text-main font-bold">Poppins</h1>
-<h1
-  class="bg-main-200 sm:bg-error-400 md:bg-main-600 lg:bg-main-800 xl:bg-information-500"
->
+<h1 class="text-3xl underline text-main font-bold text-center">
   Hello {{ title }}
 </h1>
-<p class="bg-main/20">Bienvenue sur le site du K9 Club</p>
-<p class="bg-main/20 font-poppins">Bienvenue sur le site du K9 Club</p>
 
 <div class="mt-4 mx-auto w-max">
   <app-button type="primary" class="mt-6" (onClick)="handleClickPrimary()">
@@ -33,7 +27,7 @@
   <app-button type="ghost" size="tiny">Bouton ghost</app-button>
 </div>
 
-<h2>Tag name TINY :</h2>
+<h2 class="mt-5">Tag name TINY :</h2>
 <div class="flex items-center mx-auto gap-10 flex-wrap mt-4 lg:w-max">
   @for (tag of tagsTiny; track $index) {
   <app-tag-name [color]="tag.color" [size]="tag.size">
@@ -42,7 +36,7 @@
   }
 </div>
 
-<h2>Tag name NORMAL :</h2>
+<h2 class="mt-5">Tag name NORMAL :</h2>
 <div class="flex items-center mx-auto gap-10 flex-wrap mt-4 lg:w-max">
   @for (tag of tagsNormal; track $index) {
   <app-tag-name [color]="tag.color" [size]="tag.size">
@@ -51,5 +45,9 @@
   }
 </div>
 
-<h2>Card pour la réservation des cours :</h2>
-<app-card-course />
+<h2 class="mt-5">Card pour la réservation des cours :</h2>
+<div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-3">
+  @for (course of courses; track $index) {
+  <app-card-course [course]="course" />
+  }
+</div>
