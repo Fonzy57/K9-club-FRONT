@@ -26,30 +26,30 @@ export class AppComponent {
 
   /* TODO POUR LES TAGS */
   tagsTiny: Tag[] = [
-    { name: 'red', color: 'red', size: 'tiny' },
-    { name: 'orange', color: 'orange', size: 'tiny' },
-    { name: 'yellow', color: 'yellow', size: 'tiny' },
-    { name: 'green', color: 'green', size: 'tiny' },
-    { name: 'blue', color: 'blue', size: 'tiny' },
-    { name: 'purple', color: 'purple', size: 'tiny' },
-    { name: 'orange', color: 'orange', size: 'tiny' },
+    { name: 'agility' },
+    { name: 'detection' },
+    { name: 'basic' },
+    { name: 'canicross' },
+    { name: 'ring' },
+    { name: 'artistic' },
+    { name: 'puppy' },
   ];
 
   tagsNormal: Tag[] = [
-    { name: 'red', color: 'red', size: 'normal' },
-    { name: 'orange', color: 'orange', size: 'normal' },
-    { name: 'yellow', color: 'yellow', size: 'normal' },
-    { name: 'green', color: 'green', size: 'normal' },
-    { name: 'blue', color: 'blue', size: 'normal' },
-    { name: 'purple', color: 'purple', size: 'normal' },
-    { name: 'orange', color: 'orange', size: 'normal' },
+    { name: 'agility', size: 'normal', color: 'purple' }, // TODO ICI ON REDEFINI LA COULEUR
+    { name: 'detection', size: 'normal' },
+    { name: 'basic', size: 'normal' },
+    { name: 'canicross', size: 'normal' },
+    { name: 'ring', size: 'normal' },
+    { name: 'artistic', size: 'normal' },
+    { name: 'puppy', size: 'normal' },
   ];
 
   courses: CardCourse[] = [
     {
       name: 'Franchissement d’obstacles',
       date: '21 octobre 2025 10h30',
-      tag: { name: 'Agilité', color: 'orange', size: 'tiny' },
+      tag: { name: 'agility' },
       coach: 'Armand LESIGNAC',
       places: 8,
       maxPlaces: 10,
@@ -59,7 +59,7 @@ export class AppComponent {
     {
       name: 'Recherche d’objets ou de personne',
       date: '20 avril 2025 9h45',
-      tag: { name: 'Détection', color: 'purple', size: 'tiny' },
+      tag: { name: 'detection' },
       coach: 'Larmina El Akmar',
       places: 4,
       maxPlaces: 10,
@@ -69,7 +69,7 @@ export class AppComponent {
     {
       name: 'Sociabilité',
       date: '18 juin 2025 14h00',
-      tag: { name: 'Base', color: 'yellow', size: 'tiny' },
+      tag: { name: 'basic' },
       coach: 'Hubert BONISSEUR DE LA BATH',
       places: 1,
       maxPlaces: 10,
@@ -79,7 +79,7 @@ export class AppComponent {
     {
       name: 'Initiation au matériel',
       date: '17 mars 2025',
-      tag: { name: 'Canicross', color: 'blue', size: 'tiny' },
+      tag: { name: 'canicross' },
       coach: 'Raymond Pelletier',
       places: 6,
       maxPlaces: 10,
