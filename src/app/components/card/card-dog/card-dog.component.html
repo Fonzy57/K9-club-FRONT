@@ -1,0 +1,59 @@
+<div
+  class="p-3 bg-white border border-border rounded-lg shadow-sm flex flex-col gap-4 md:p-6"
+>
+  <!-- FIRST ROW -->
+  <div class="flex items-center justify-between flex-wrap gap-x-4 gap-y-2">
+    <div class="flex items-center gap-x-3">
+      <div class="w-[52px] h-[52px] rounded-full shadow-md">
+        <img
+          src="{{ dog.image }}"
+          alt="Dog image"
+          srcset=""
+          class="rounded-full"
+        />
+      </div>
+      <div class="flex flex-col gap-y-1 md:gap-y-0">
+        <p class="font-poppins font-semibold md:text-lg">{{ dog.name }}</p>
+        <p class="text-gray-one text-sm md:text-base">{{ dog.race }}</p>
+      </div>
+    </div>
+    <div class="border border-main py-2 px-3 rounded-lg shadow-xs">
+      <p class="text-main text-sm font-medium">{{ dog.age }} ans</p>
+    </div>
+  </div>
+
+  <!-- SECOND ROW -->
+  <div class="grid grid-cols-1 xs:grid-cols-2">
+    <div class="flex flex-col gap-y-1">
+      <p class="font-poppins font-semibold md:text-lg">Cours suivis</p>
+      <p class="text-gray-one text-sm md:text-base">{{ dog.nbOfCourses }}</p>
+    </div>
+    <div class="flex flex-col gap-y-1">
+      <p class="font-poppins font-semibold md:text-lg">Prochain cours</p>
+      <div class="flex items-end gap-x-2 flex-wrap gap-y-1 xs:justify-between">
+        <p class="text-gray-one text-sm md:text-base">{{ dog.nextCourse }}</p>
+        <app-tag-name [tag]="dog.tag" />
+      </div>
+    </div>
+  </div>
+
+  <!-- THIRD ROW -->
+  <div class="grid grid-cols-1 xs:grid-cols-2">
+    <div class="flex flex-col gap-y-1">
+      <p class="font-poppins font-semibold md:text-lg">Inscrit depuis</p>
+      <p class="text-gray-one text-sm md:text-base">
+        {{ dog.inscriptionDate }}
+      </p>
+    </div>
+    <div class="flex flex-col gap-y-1">
+      <p class="font-poppins font-semibold md:text-lg">Badges</p>
+      <div class="flex items-center gap-2 flex-wrap">
+        @for (badge of dog.badges; track $index) {
+        <div class="w-6 h-6 bg-amber-800">
+          <img src="{{ badge.image }}" alt="{{ badge.name }}" srcset="" />
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+</div>

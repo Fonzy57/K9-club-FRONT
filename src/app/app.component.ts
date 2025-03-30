@@ -7,6 +7,8 @@ import { CardCourseComponent } from './components/card/card-course/card-course.c
 import { CardCourse } from './components/card/card-course/card-course.type';
 import { CardReservedCourseComponent } from './components/card/card-reserved-course/card-reserved-course.component';
 import { ReservedCardCourse } from './components/card/card-reserved-course/card-reserved-course.type';
+import { CardDogComponent } from './components/card/card-dog/card-dog.component';
+import { CardDog } from './components/card/card-dog/card-dog.type';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +18,7 @@ import { ReservedCardCourse } from './components/card/card-reserved-course/card-
     TagNameComponent,
     CardCourseComponent,
     CardReservedCourseComponent,
+    CardDogComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
@@ -117,6 +120,35 @@ export class AppComponent {
       date: '17 mars 2025',
       tag: { name: 'canicross' },
       coach: 'Raymond Pelletier',
+    },
+  ];
+
+  dogs: CardDog[] = [
+    {
+      image: '/images/dogs/rex.png',
+      name: 'Rex',
+      race: 'Berger allemand',
+      age: 5,
+      nbOfCourses: 2,
+      nextCourse: '25 mars 2025',
+      tag: { name: 'agility' },
+      inscriptionDate: '17 mars 2024',
+      badges: [
+        { name: 'best dog', image: '/images/badges/best-dog.png' },
+        { name: 'best dog', image: '/images/badges/best-dog.png' },
+        { name: 'best dog', image: '/images/badges/best-dog.png' },
+      ],
+    },
+    {
+      image: '/images/dogs/simba.png',
+      name: 'Simba',
+      race: 'Golden Retriver',
+      age: 2,
+      nbOfCourses: 16,
+      nextCourse: '20 avril 2025',
+      tag: { name: 'canicross' },
+      inscriptionDate: '21 octobre 2024',
+      badges: [{ name: 'best dog', image: '/images/badges/best-dog.png' }],
     },
   ];
 }
