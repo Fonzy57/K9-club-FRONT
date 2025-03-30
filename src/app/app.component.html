@@ -54,3 +54,14 @@
   <app-card-reserved-course [course]="reservedCourse" />
   }
 </div>
+
+<h2 class="mt-5">Card pour les chiens :</h2>
+<div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+  <app-card-dog />
+  <app-card-dog />
+  <app-card-dog />
+  <app-card-dog />
+  <!-- @for (reservedCourse of reservedCourses; track $index) {
+  <app-card-reserved-course [course]="reservedCourse" />
+  } -->
+</div>

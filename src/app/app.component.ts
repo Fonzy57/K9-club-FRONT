@@ -7,6 +7,7 @@ import { CardCourseComponent } from './components/card/card-course/card-course.c
 import { CardCourse } from './components/card/card-course/card-course.type';
 import { CardReservedCourseComponent } from './components/card/card-reserved-course/card-reserved-course.component';
 import { ReservedCardCourse } from './components/card/card-reserved-course/card-reserved-course.type';
+import { CardDogComponent } from './components/card/card-dog/card-dog.component';
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,7 @@ import { ReservedCardCourse } from './components/card/card-reserved-course/card-
     TagNameComponent,
     CardCourseComponent,
     CardReservedCourseComponent,
+    CardDogComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
