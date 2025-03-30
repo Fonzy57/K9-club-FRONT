@@ -1,1 +1,29 @@
-<p>custom-input works!</p>
+<div class="flex flex-col gap-y-1">
+  <label for="{{ inputName }}" class="text-sm">{{ label }}</label>
+  <div
+    class="bg-white border border-border rounded-lg py-[11px] px-4 flex items-center gap-x-2 shadow-sm focus-within:border-main focus-within:ring-2 focus-within:ring-main/20"
+  >
+    <input
+      [type]="actualType"
+      name="{{ inputName }}"
+      id="{{ inputName }}"
+      class="focus:outline-none autofill:bg-none text-sm w-full h-full bg-transparent truncate placeholder:text-gray-two text-black disabled:text-gray-two"
+      placeholder="{{ placeholder }}"
+    />
+
+    <!-- TODO VOIR POUR FAIRE LA CONDITION DE L'AFFICHAGE ICI je ne peux pas utiliser isPassword car
+      c'est juste pour changer le type d'input pour afficher le texte 
+    -->
+    <div
+      class="w-5 h-5 {{
+        isPassword ? 'bg-icon' : 'bg-error'
+      }} rounded-full cursor-pointer"
+      (click)="showPassword()"
+    ></div>
+  </div>
+  @if (hintMessage) {
+  <p class="text-xs text-gray-one">{{ hintMessage }}</p>
+  } @if (errorMessage) {
+  <p class="text-xs text-error">{{ errorMessage }}</p>
+  }
+</div>
