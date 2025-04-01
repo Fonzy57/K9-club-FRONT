@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ReservedCardCourse } from './card-reserved-course.type';
-import { ButtonComponent } from '../../button/button.component';
-import { TagNameComponent } from '../../tag-name/tag-name.component';
+import { ButtonComponent } from '@components/button/button.component';
+import { TagNameComponent } from '@components/tag-name/tag-name.component';
 
 @Component({
   selector: 'app-card-reserved-course',
