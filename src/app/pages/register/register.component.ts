@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
+import { ButtonComponent } from '@components/button/button.component';
+import { CustomInputComponent } from '@components/custom-input/custom-input.component';
 
 @Component({
   selector: 'app-register',
-  imports: [],
+  imports: [ButtonComponent, CustomInputComponent],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+  styleUrl: './register.component.css',
 })
-export class RegisterComponent {
-
-}
+export class RegisterComponent {}
