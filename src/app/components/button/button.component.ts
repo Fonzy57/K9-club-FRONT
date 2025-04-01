@@ -25,6 +25,7 @@ export class ButtonComponent {
     this.onClick.emit();
   } */
 
+  /* TODO REVOIR LA TAILLE DES BOUTONS? LES NORMAUX NE SONT PAS ASSEZ GRAND */
   get bgColorClass(): string {
     switch (this.type) {
       case 'ghost':
