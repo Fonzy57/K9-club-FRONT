@@ -9,6 +9,12 @@
       "@components/*": [
         "app/components/*"
       ],
+      "@layouts/*": [
+        "app/layouts/*"
+      ],
+      "@pages/*": [
+        "app/pages/*"
+      ],
       "@services/*": [
         "app/services/*"
       ],
