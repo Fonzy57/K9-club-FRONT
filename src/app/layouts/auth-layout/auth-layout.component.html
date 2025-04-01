@@ -1,0 +1,37 @@
+<div class="h-dvh flex">
+  <div class="login-bg h-full flex-1">
+    <!-- TODO REVOIR LE DEGRADE -->
+    <div
+      class="w-full h-full bg-linear-to-t from-black flex flex-col justify-end"
+    >
+      <!-- TODO VOIR POUR FAIRE PASSER LE TITRE ET LE SOUS TITRE -->
+      <div class="text-white pb-32">
+        <div class="max-w-[1126px] mx-auto">
+          <h1 class="text-6xl font-semibold">
+            Rejoignez la communauté
+            <strong class="font-semibold text-main-600">K9 Club</strong>
+          </h1>
+          <p class="text-3xl w-[657px] mx-auto mt-10">
+            Inscrivez-vous pour accéder à nos services dédiés aux passionnés de
+            chiens.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <main class="h-full w-[640px] flex flex-col">
+    <div class="py-4 border-b border-border">
+      <div class="mx-auto w-max">
+        <img src="/images/logos/k9-logo-dark-mobile.png" alt="" />
+      </div>
+    </div>
+    <div class="flex-1">
+      <router-outlet />
+    </div>
+    <div class="py-4 border-t border-border">
+      <p class="text-center text-gray-one text-xs">
+        © {{ currentYear }} - K9 Club - Tous droits réservés. | v {{ version }}
+      </p>
+    </div>
+  </main>
+</div>
