@@ -8,7 +8,9 @@
     class="flex flex-col gap-y-6 sm:w-[550px] sm:mx-auto sm:gap-y-8 lg:w-[590px] lg:mx-0 xl:gap-y-12"
   >
     <div class="flex flex-col gap-y-6 xl:gap-y-12">
-      <h1 class="font-bold text-main text-4xl text-center lg:text-5xl">
+      <h1
+        class="font-bold text-main text-4xl text-center lg:text-5xl xl:text-[52px]"
+      >
         K9 Club : <br />
         Le meilleur pour votre chien !
       </h1>
@@ -74,39 +76,53 @@
 <!-- --------------- -->
 <!-- COURSES SECTION -->
 <!-- --------------- -->
-<div class="px-5 pb-6">
-  <h2 class="font-bold text-2xl text-main text-center">
+<div
+  class="px-5 pb-6 mt-10 md:px-10 lg:px-0 lg:max-w-[1166px] lg:mx-auto xl:max-w-[1474px] xl:mt-0 xl:pt-20"
+>
+  <h2
+    class="font-bold text-2xl text-main text-center sm:text-3xl lg:text-4xl xl:text-5xl"
+  >
     Découvrez nos cours canins
   </h2>
-  <p class="mt-6">
+  <p class="mt-6 md:w-2/3 md:mx-auto lg:text-lg lg:mt-10">
     Offrez à votre chien une éducation adaptée à ses besoins et à son âge. Nos
     séances sont conçues pour améliorer la relation maître-chien tout en
     garantissant une progression optimale. Filtrez les cours par catégorie et
     trouvez celui qui convient le mieux à votre compagnon !
   </p>
-  <div class="flex flex-col gap-y-4 mt-6">
+  <div
+    class="flex flex-col gap-y-4 mt-6 sm:flex-row sm:gap-x-4 sm:flex-wrap lg:mt-10"
+  >
     <div class="flex items-center gap-x-2">
       <input type="checkbox" name="all" id="all" />
-      <label for="all" class="text-sm">Tous</label>
+      <label for="all" class="text-sm lg:text-base">Tous</label>
     </div>
     <div class="flex items-center gap-x-2">
       <input type="checkbox" name="base" id="base" />
-      <label for="base" class="text-sm">Coméptences de base</label>
+      <label for="base" class="text-sm lg:text-base">Compétence de base</label>
     </div>
     <div class="flex items-center gap-x-2">
       <input type="checkbox" name="sport" id="sport" />
-      <label for="sport" class="text-sm">Coméptences sportives</label>
+      <label for="sport" class="text-sm lg:text-base"
+        >Compétence sportives</label
+      >
     </div>
     <div class="flex items-center gap-x-2">
       <input type="checkbox" name="detection" id="detection" />
-      <label for="detection" class="text-sm">Coméptences de flair</label>
+      <label for="detection" class="text-sm lg:text-base"
+        >Compétence de flair</label
+      >
     </div>
     <div class="flex items-center gap-x-2">
       <input type="checkbox" name="avanced" id="avanced" />
-      <label for="avanced" class="text-sm">Coméptences avancées</label>
+      <label for="avanced" class="text-sm lg:text-base"
+        >Compétence avancées</label
+      >
     </div>
   </div>
-  <div class="mt-6 grid grid-cols-1 gap-6">
+  <div
+    class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 md:gap-10 lg:gap-8 lg:grid-cols-3 xl:gap-10 xl:grid-cols-4"
+  >
     <!-- TODO EN FAIRE UN COMPOSANT PLUS TARD -->
     <div
       class="p-[18px] border border-main rounded-lg flex flex-col gap-y-4 shadow-lg"
@@ -222,7 +238,7 @@
     </div>
   </div>
   <!-- TODO METTRE LES LIENS QUAND LES PAGES SERONT FINIES -->
-  <div class="flex items-center justify-center gap-x-8 mt-11">
+  <div class="flex items-center justify-center gap-x-8 mt-11 sm:mt-18">
     <app-button type="ghost" size="normal">S'inscrire</app-button>
     <app-button size="normal">Se connecter</app-button>
   </div>
@@ -231,7 +247,7 @@
 <!-- -------------- -->
 <!-- WHY US SECTION -->
 <!-- -------------- -->
-<div class="px-5 py-10 flex flex-col items-center gap-y-10">
+<div class="px-5 py-20 flex flex-col items-center gap-y-10">
   <div class="flex flex-col gap-y-8">
     <h2 class="font-bold text-2xl text-main text-center">
       Pourquoi choisir K9 Club ? 🐶
