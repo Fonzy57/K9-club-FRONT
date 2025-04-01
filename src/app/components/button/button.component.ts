@@ -17,11 +17,13 @@ export class ButtonComponent {
   // TODO REVOIR ICI LE TYPAGE POUR QUE MON IDE ME LE PROPOSE
   @Input() type: ButtonType = 'primary';
   @Input() size: ButtonSize = 'normal';
-  @Output() onClick = new EventEmitter<void>();
+
+  /* TODO VOIR SI CETTE FONCTION EST NECESSAIRE OU PAS */
+  /* @Output() onClick = new EventEmitter<void>();
 
   handleClick() {
     this.onClick.emit();
-  }
+  } */
 
   get bgColorClass(): string {
     switch (this.type) {

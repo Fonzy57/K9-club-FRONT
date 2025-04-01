@@ -31,4 +31,8 @@ export class CustomInputComponent {
   showPassword() {
     this.actualType = this.actualType === 'password' ? 'text' : 'password';
   }
+
+  /* TODO VOIR POUR FAIRE LES INPUTS FONCTIONNELS EN RECUPERANT LES VALEURS ET LE FORM CONTROL D'ANGULAR */
+  /* https://medium.com/angular-gems/angular-custom-form-controls-nested-form-groups-made-easy-2ac09e91cf67 */
+  /* https://stackblitz.com/edit/custom-form-controls-demo?file=src%2Fapp%2Fapp.component.ts */
 }
