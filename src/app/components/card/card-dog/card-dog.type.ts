@@ -1,5 +1,5 @@
-import { BadgeDTO } from '../../../dto/badge.dto';
-import { Tag } from '../../tag-name/tag-name.type';
+import { Tag } from '@components/tag-name/tag-name.type';
+import { BadgeDTO } from '@models/badge';
 
 export interface CardDog {
   image: string;

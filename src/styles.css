@@ -20,6 +20,11 @@
   --font-poppins: "Poppins", sans-serif;
   --font-roboto: "Roboto", sans-serif;
 
+  /* ------------------------ */
+  /* ---- CUSTOM SHADOWS ---- */
+  /* ------------------------ */
+  --drop-shadow-hero: 0 4px 10px rgba(0, 0, 0, 0.5);
+
   /* ---------------------- */
   /* ---- CUSTOM COLOR ---- */
   /* ---------------------- */

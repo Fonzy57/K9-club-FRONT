@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ButtonComponent } from './components/button/button.component';
-import { TagNameComponent } from './components/tag-name/tag-name.component';
-import { Tag } from './components/tag-name/tag-name.type';
-import { CardCourseComponent } from './components/card/card-course/card-course.component';
-import { CardCourse } from './components/card/card-course/card-course.type';
-import { CardReservedCourseComponent } from './components/card/card-reserved-course/card-reserved-course.component';
-import { ReservedCardCourse } from './components/card/card-reserved-course/card-reserved-course.type';
-import { CardDogComponent } from './components/card/card-dog/card-dog.component';
-import { CardDog } from './components/card/card-dog/card-dog.type';
-import { CustomInputComponent } from './components/custom-input/custom-input.component';
+import { ButtonComponent } from '@components/button/button.component';
+import { TagNameComponent } from '@components/tag-name/tag-name.component';
+import { Tag } from '@components/tag-name/tag-name.type';
+import { CardCourseComponent } from '@components/card/card-course/card-course.component';
+import { CardCourse } from '@components/card/card-course/card-course.type';
+import { CardReservedCourseComponent } from '@components/card/card-reserved-course/card-reserved-course.component';
+import { ReservedCardCourse } from '@components/card/card-reserved-course/card-reserved-course.type';
+import { CardDogComponent } from '@components/card/card-dog/card-dog.component';
+import { CardDog } from '@components/card/card-dog/card-dog.type';
+import { CustomInputComponent } from '@components/custom-input/custom-input.component';
 
 @Component({
   selector: 'app-root',
