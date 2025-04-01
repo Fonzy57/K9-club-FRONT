@@ -28,12 +28,12 @@ export class ButtonComponent {
   get bgColorClass(): string {
     switch (this.type) {
       case 'ghost':
-        return 'bg-white border border-border hover:border-text active:bg-ghost-active';
+        return 'py-[7px] bg-white border border-border hover:border-text active:bg-ghost-active';
       case 'cancel':
-        return 'bg-error hover:bg-error-700 active:bg-error active:ring-2 active:ring-error/50';
+        return 'py-2 bg-error hover:bg-error-700 active:bg-error active:ring-2 active:ring-error/50';
       case 'primary':
       default:
-        return 'bg-main hover:bg-main-900 active:bg-main active:ring-2 active:ring-main/50';
+        return 'py-2 bg-main hover:bg-main-900 active:bg-main active:ring-2 active:ring-main/50';
     }
   }
 
