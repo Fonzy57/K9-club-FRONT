@@ -9,6 +9,7 @@ import { CardReservedCourseComponent } from './components/card/card-reserved-cou
 import { ReservedCardCourse } from './components/card/card-reserved-course/card-reserved-course.type';
 import { CardDogComponent } from './components/card/card-dog/card-dog.component';
 import { CardDog } from './components/card/card-dog/card-dog.type';
+import { CustomInputComponent } from './components/custom-input/custom-input.component';
 
 @Component({
   selector: 'app-root',
@@ -19,6 +20,7 @@ import { CardDog } from './components/card/card-dog/card-dog.type';
     CardCourseComponent,
     CardReservedCourseComponent,
     CardDogComponent,
+    CustomInputComponent,
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
