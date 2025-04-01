@@ -123,119 +123,24 @@
   <div
     class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 md:gap-10 lg:gap-8 lg:grid-cols-3 xl:gap-10 xl:grid-cols-4"
   >
-    <!-- TODO EN FAIRE UN COMPOSANT PLUS TARD -->
+    @for (course of courses; track $index) {
+
     <div
       class="p-[18px] border border-main rounded-lg flex flex-col gap-y-4 shadow-lg"
     >
       <div class="w-full">
         <img
-          src="/images/courses/course-slalom.jpg"
+          src="/images/courses/{{ course.image }}"
           alt=""
           class="rounded-md shadow-md"
         />
       </div>
-      <h3 class="font-bold text-main">Rappel parfait</h3>
+      <h3 class="font-bold text-main">{{ course.title }}</h3>
       <p class="text-sm">
-        Apprenez à votre chien à revenir immédiatement lorsque vous l’appelez,
-        même en présence de distractions.
+        {{ course.description }}
       </p>
     </div>
-    <div
-      class="p-[18px] border border-main rounded-lg flex flex-col gap-y-4 shadow-lg"
-    >
-      <div class="w-full">
-        <img
-          src="/images/courses/course-slalom.jpg"
-          alt=""
-          class="rounded-md shadow-md"
-        />
-      </div>
-      <h3 class="font-bold text-main">Rappel parfait</h3>
-      <p class="text-sm">
-        Apprenez à votre chien à revenir immédiatement lorsque vous l’appelez,
-        même en présence de distractions.
-      </p>
-    </div>
-    <div
-      class="p-[18px] border border-main rounded-lg flex flex-col gap-y-4 shadow-lg"
-    >
-      <div class="w-full">
-        <img
-          src="/images/courses/course-slalom.jpg"
-          alt=""
-          class="rounded-md shadow-md"
-        />
-      </div>
-      <h3 class="font-bold text-main">Rappel parfait</h3>
-      <p class="text-sm">
-        Apprenez à votre chien à revenir immédiatement lorsque vous l’appelez,
-        même en présence de distractions.
-      </p>
-    </div>
-    <div
-      class="p-[18px] border border-main rounded-lg flex flex-col gap-y-4 shadow-lg"
-    >
-      <div class="w-full">
-        <img
-          src="/images/courses/course-slalom.jpg"
-          alt=""
-          class="rounded-md shadow-md"
-        />
-      </div>
-      <h3 class="font-bold text-main">Rappel parfait</h3>
-      <p class="text-sm">
-        Apprenez à votre chien à revenir immédiatement lorsque vous l’appelez,
-        même en présence de distractions.
-      </p>
-    </div>
-    <div
-      class="p-[18px] border border-main rounded-lg flex flex-col gap-y-4 shadow-lg"
-    >
-      <div class="w-full">
-        <img
-          src="/images/courses/course-slalom.jpg"
-          alt=""
-          class="rounded-md shadow-md"
-        />
-      </div>
-      <h3 class="font-bold text-main">Rappel parfait</h3>
-      <p class="text-sm">
-        Apprenez à votre chien à revenir immédiatement lorsque vous l’appelez,
-        même en présence de distractions.
-      </p>
-    </div>
-    <div
-      class="p-[18px] border border-main rounded-lg flex flex-col gap-y-4 shadow-lg"
-    >
-      <div class="w-full">
-        <img
-          src="/images/courses/course-slalom.jpg"
-          alt=""
-          class="rounded-md shadow-md"
-        />
-      </div>
-      <h3 class="font-bold text-main">Rappel parfait</h3>
-      <p class="text-sm">
-        Apprenez à votre chien à revenir immédiatement lorsque vous l’appelez,
-        même en présence de distractions.
-      </p>
-    </div>
-    <div
-      class="p-[18px] border border-main rounded-lg flex flex-col gap-y-4 shadow-lg"
-    >
-      <div class="w-full">
-        <img
-          src="/images/courses/course-slalom.jpg"
-          alt=""
-          class="rounded-md shadow-md"
-        />
-      </div>
-      <h3 class="font-bold text-main">Rappel parfait</h3>
-      <p class="text-sm">
-        Apprenez à votre chien à revenir immédiatement lorsque vous l’appelez,
-        même en présence de distractions.
-      </p>
-    </div>
+    }
   </div>
   <!-- TODO METTRE LES LIENS QUAND LES PAGES SERONT FINIES -->
   <div class="flex items-center justify-center gap-x-8 mt-11 sm:mt-18">
@@ -312,157 +217,87 @@
 <!-- -------------- -->
 <!-- COACHS SECTION -->
 <!-- -------------- -->
-<div class="px-5 pb-10">
+<div
+  class="px-5 pb-10 lg:px-0 lg:max-w-[1166px] lg:mx-auto xl:max-w-[1474px] xl:mt-0 xl:pt-20"
+>
   <h2
     class="font-bold text-2xl text-main text-center sm:text-3xl lg:text-4xl xl:text-5xl"
   >
     Nos coachs
   </h2>
-  <div class="mt-10 grid grid-cols-1 gap-6">
-    <!-- TODO FAIRE UN COMPOSANT DES CARD POUR CETTE PAGE -->
+  <div
+    class="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8 lg:grid-cols-3 xl:grid-cols-4 xl:mt-20"
+  >
+    @for (coach of coachs; track $index) {
     <div class="p-[18px] border border-main-800 rounded-lg shadow-md">
       <div class="flex items-center gap-x-3">
         <div class="size-[50px] rounded-full">
           <img
-            src="/images/coachs/Lucien_Bramare.png"
+            src="/images/coachs/{{ coach.image }}"
             alt=""
-            class="rounded-full"
+            class="rounded-full shadow-md"
           />
         </div>
         <div class="flex flex-col gap-y-1">
           <h6 class="font-semibold text-main text-sm">
-            Hubert BONISSEUR DE LA BATH
+            {{ coach.prenom }} {{ coach.nom }}
           </h6>
           <p class="text-xs text-gray-one">
-            Éducation de base & Sociabilisation
+            {{ coach.specialite }}
           </p>
         </div>
       </div>
       <p class="mt-4">
-        Spécialiste en comportement canin, Hubert accompagne chiots et chiens
-        adultes dans l’apprentissage des ordres de base et la gestion des
-        interactions sociales.
+        {{ coach.commentaire }}
       </p>
     </div>
-    <!-- TODO FAIRE UN COMPOSANT DES CARD POUR CETTE PAGE -->
-    <div class="p-[18px] border border-main-800 rounded-lg shadow-md">
-      <div class="flex items-center gap-x-3">
-        <div class="size-[50px] rounded-full">
-          <img src="/images/coachs/Lesignac.png" alt="" class="rounded-full" />
-        </div>
-        <div class="flex flex-col gap-y-1">
-          <h6 class="font-semibold text-main text-sm">Armand LESIGNAC</h6>
-          <p class="text-xs text-gray-one">Agilité & Sport canin</p>
-        </div>
-      </div>
-      <p class="mt-4">
-        Passionné de sports canins, Armand vous guide dans la découverte de
-        l’agility, du canicross et des exercices de coordination pour améliorer
-        la condition physique de votre chien.
-      </p>
-    </div>
-    <!-- TODO FAIRE UN COMPOSANT DES CARD POUR CETTE PAGE -->
-    <div class="p-[18px] border border-main-800 rounded-lg shadow-md">
-      <div class="flex items-center gap-x-3">
-        <div class="size-[50px] rounded-full">
-          <img src="/images/coachs/Larmina.png" alt="" class="rounded-full" />
-        </div>
-        <div class="flex flex-col gap-y-1">
-          <h6 class="font-semibold text-main text-sm">
-            Larmina El Akmar Betouche
-          </h6>
-          <p class="text-xs text-gray-one">Détection & Pistage</p>
-        </div>
-      </div>
-      <p class="mt-4">
-        Experte en flair, Larmina entraîne les chiens à retrouver des objets
-        cachés, suivre des pistes humaines et développer leur odorat de manière
-        ludique et efficace.
-      </p>
-    </div>
-    <!-- TODO FAIRE UN COMPOSANT DES CARD POUR CETTE PAGE -->
-    <div class="p-[18px] border border-main-800 rounded-lg shadow-md">
-      <div class="flex items-center gap-x-3">
-        <div class="size-[50px] rounded-full">
-          <img
-            src="/images/coachs/Raymond_Pelletier.png"
-            alt=""
-            class="rounded-full"
-          />
-        </div>
-        <div class="flex flex-col gap-y-1">
-          <h6 class="font-semibold text-main text-sm">Raymond PELLETIER</h6>
-          <p class="text-xs text-gray-one">Obéissance avancée & réactivité</p>
-        </div>
-      </div>
-      <p class="mt-4">
-        Spécialisé dans le dressage avancé, Raymond enseigne aux chiens à
-        répondre aux commandes à distance et à réagir face à des situations
-        d’urgence.
-      </p>
-    </div>
-    <!-- TODO FAIRE UN COMPOSANT DES CARD POUR CETTE PAGE -->
-    <div class="p-[18px] border border-main-800 rounded-lg shadow-md">
-      <div class="flex items-center gap-x-3">
-        <div class="size-[50px] rounded-full">
-          <img src="/images/coachs/Gerhard.png" alt="" class="rounded-full" />
-        </div>
-        <div class="flex flex-col gap-y-1">
-          <h6 class="font-semibold text-main text-sm">Gerhard Moeller</h6>
-          <p class="text-xs text-gray-one">Rééducation & Comportement</p>
-        </div>
-      </div>
-      <p class="mt-4">
-        Comportementaliste canin, Gerhard aide les chiens à surmonter leurs
-        peurs, gérer leur stress et améliorer leur patience au quotidien.
-      </p>
-    </div>
+    }
   </div>
 
   <!-- TODO METTRE LES LIENS QUAND LES PAGES SERONT FINIES -->
-  <div class="flex items-center justify-center gap-x-8 mt-10">
+  <div class="flex items-center justify-center gap-x-8 mt-10 sm:mt-20">
     <app-button type="ghost" size="normal">S'inscrire</app-button>
     <app-button size="normal">Se connecter</app-button>
   </div>
 </div>
 
-<!-- -------------- -->
-<!-- COACHS SECTION -->
-<!-- -------------- -->
-<div class="px-5 pt-6 pb-24">
+<!-- ---------------- -->
+<!-- PARTNERS SECTION -->
+<!-- ---------------- -->
+<div class="px-5 pt-6 pb-24 sm:pt-14">
   <h2
     class="font-bold text-2xl text-main text-center sm:text-3xl lg:text-4xl xl:text-5xl"
   >
     Nos partenaires
   </h2>
   <div
-    class="mt-7 pt-2.5 flex items-center justify-center flex-wrap gap-8 md:mt-16 lg:gap-12 xl:max-w-[1474px] xl:mx-auto xl:gap-0 xl:justify-between xl:mt-24"
+    class="mt-10 flex items-center justify-center flex-wrap gap-8 md:mt-16 lg:gap-12 xl:max-w-[1474px] xl:mx-auto xl:gap-0 xl:justify-between xl:mt-24"
   >
-    <div class="sm:w-[100px] md:w-[120px]">
+    <div class="sm:w-[100px] md:w-[120px] xl:w-[180px]">
       <img
         src="/images/partners/federation-cynologique-internationale.png"
         alt="Logo de la federation cynologique internationale"
       />
     </div>
-    <div class="sm:w-[100px] md:w-[120px]">
+    <div class="sm:w-[100px] md:w-[120px] xl:w-[180px]">
       <img
         src="/images/partners/centrale-canine.png"
         alt="Logo de la federation cynologique internationale"
       />
     </div>
-    <div class="sm:w-[100px] md:w-[120px]">
+    <div class="sm:w-[100px] md:w-[120px] xl:w-[180px]">
       <img
         src="/images/partners/cuncbg.png"
         alt="Logo de la federation cynologique internationale"
       />
     </div>
-    <div class="sm:w-[100px] md:w-[120px]">
+    <div class="sm:w-[100px] md:w-[120px] xl:w-[180px]">
       <img
         src="/images/partners/american-kennel-club.png"
         alt="Logo de la federation cynologique internationale"
       />
     </div>
-    <div class="sm:w-[200px]">
+    <div class="sm:w-[200px] xl:w-[250px]">
       <img
         src="/images/partners/the-kennel-club.png"
         alt="Logo de la federation cynologique internationale"
