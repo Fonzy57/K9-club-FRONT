@@ -1,0 +1,25 @@
+<!-- TODO VOIR POUR CHANGER LE MONSIEUR EN MADAME SELON LE GENRE -->
+<h1 class="text-3xl font-semibold">Bonjour M. {{ name }}</h1>
+
+<!-- DOGS ROW -->
+<div class="mt-6">
+  <!-- TODO CHANGER LE PLURIEL OU LE SINGULIER SELON LE NOMBRE DE CHIENS -->
+  <h2 class="font-semibold text-2xl">
+    {{ dogs.length > 1 ? "Mes chiens" : "Mon chien" }}
+  </h2>
+  <div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    @for (dog of dogs; track $index) {
+    <app-card-dog [dog]="dog" />
+    }
+  </div>
+</div>
+
+<!-- COURSES ROW -->
+<div class="mt-6">
+  <h2 class="font-semibold text-2xl">Prochains cours</h2>
+  <div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+    @for (nextCourse of nextCourses; track $index) {
+    <app-card-next-course [nextCourse]="nextCourse" />
+    }
+  </div>
+</div>
