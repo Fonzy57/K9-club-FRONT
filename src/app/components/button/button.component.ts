@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 // TODO REVOIR ICI LE TYPAGE POUR QUE MON IDE ME LE PROPOSE
 export type ButtonType = 'primary' | 'ghost' | 'cancel';
@@ -9,7 +10,7 @@ export type ButtonSize = 'normal' | 'tiny';
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './button.component.html',
   styleUrl: './button.component.css',
 })
@@ -17,6 +18,8 @@ export class ButtonComponent {
   // TODO REVOIR ICI LE TYPAGE POUR QUE MON IDE ME LE PROPOSE
   @Input() type: ButtonType = 'primary';
   @Input() size: ButtonSize = 'normal';
+
+  @Input() routerLink?: any[] | string;
 
   /* TODO VOIR SI CETTE FONCTION EST NECESSAIRE OU PAS */
   /* @Output() onClick = new EventEmitter<void>();

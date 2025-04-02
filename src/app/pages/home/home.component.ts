@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ButtonComponent } from '@components/button/button.component';
 import { CopyrightComponent } from '@components/copyright/copyright.component';
+import { AppRoutes } from '@config/routes';
 
 @Component({
   selector: 'app-home',
@@ -9,6 +10,8 @@ import { CopyrightComponent } from '@components/copyright/copyright.component';
   styleUrl: './home.component.css',
 })
 export class HomeComponent {
+  AppRoutes = AppRoutes;
+
   courses: Course[] = [
     {
       image: 'course-slalom.jpg',
