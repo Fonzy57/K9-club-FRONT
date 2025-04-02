@@ -5,6 +5,8 @@ import { MainLayoutComponent } from '@layouts/main-layout/main-layout.component'
 import { HomeComponent } from '@pages/home/home.component';
 import { RegisterComponent } from '@pages/auth/register/register.component';
 import { LoginComponent } from '@pages/auth/login/login.component';
+import { AppLayoutComponent } from '@layouts/app-layout/app-layout.component';
+import { DashboardComponent } from '@pages/app/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -14,10 +16,13 @@ export const routes: Routes = [
   },
   {
     path: AppRoutes.auth.root,
-    /* pathMatch: 'full',
-    redirectTo: 'connexion', */
     component: AuthLayoutComponent,
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: AppRoutes.auth.register, // If user go to /auth he'll be redirect to /auth/inscription
+      },
       {
         path: AppRoutes.auth.register,
         component: RegisterComponent,
@@ -38,13 +43,13 @@ export const routes: Routes = [
       },
     ],
   },
-  /* {
+  {
     path: 'app',
     component: AppLayoutComponent,
     children: [
       { path: 'dashboard', component: DashboardComponent },
       // d'autres routes protégées ici
-    ]
+    ],
   },
-  { path: '**', redirectTo: '' } */
+  { path: '**', redirectTo: '' },
 ];
