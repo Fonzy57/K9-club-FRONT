@@ -1,4 +1,3 @@
-<!-- TODO METTRE LES BONS LIENS QUAND LES PAGES SERONT FINIES -->
 <div class="px-4 pt-4 pb-4 h-full">
   <!-- TODO PREVOIR UN COMPOSANT RETOUR BUTTON POUR NE PAS ME REPETER -->
   <button
@@ -11,7 +10,7 @@
   </button>
 
   <div class="flex items-center justify-center h-full">
-    <div class="mt-4 lg:w-[375px] lg:mx-auto">
+    <div class="mt-4 lg:mt-0 lg:w-[375px] lg:mx-auto">
       <div>
         <h2 class="text-2xl font-bold text-main">
           Se connecter à votre compte
@@ -20,7 +19,7 @@
       </div>
 
       <div
-        class="flex flex-col gap-y-8 mt-6 lg:mt-4 lg:gap-y-6 xl:mt-6 xl:gap-y-8"
+        class="flex flex-col gap-y-8 mt-6 lg:mt-4 lg:gap-y-6 xl:mt-11 xl:gap-y-8"
       >
         <div class="flex flex-col gap-y-4 lg:gap-y-3 xl:gap-y-4">
           <app-custom-input
@@ -35,9 +34,11 @@
           />
         </div>
 
-        <div>
+        <div class="flex items-center gap-x-2">
           <p>Mot de passe oublié ?</p>
-          <a href="#" class="">Réinitialiser le mot de passe</a>
+          <a href="#" class="text-main underline"
+            >Réinitialiser le mot de passe</a
+          >
         </div>
 
         <app-button>Se connecter</app-button>
@@ -45,7 +46,9 @@
 
       <p class="mt-6">
         Pas encore inscrit ?
-        <a [routerLink]="AppRoutes.auth.registerFull" class=""
+        <a
+          [routerLink]="AppRoutes.auth.registerFull"
+          class="text-main underline"
           >Créez un compte gratuitement</a
         >
         et rejoignez la communauté K9 Club !
