@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AppRoutes } from '@config/routes';
 import { AuthLayoutComponent } from '@layouts/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from '@layouts/main-layout/main-layout.component';
 import { HomeComponent } from '@pages/home/home.component';
@@ -6,18 +7,18 @@ import { RegisterComponent } from '@pages/register/register.component';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: AppRoutes.home,
     component: MainLayoutComponent,
     children: [{ path: '', component: HomeComponent }],
   },
   {
-    path: 'auth',
+    path: AppRoutes.auth.root,
     /* pathMatch: 'full',
     redirectTo: 'connexion', */
     component: AuthLayoutComponent,
     children: [
       {
-        path: 'inscription',
+        path: AppRoutes.auth.register,
         component: RegisterComponent,
         data: {
           title: 'Rejoignez la communauté K9 Club',
