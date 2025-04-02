@@ -1,5 +1,5 @@
 <div class="h-dvh flex">
-  <div class="login-bg h-full flex-1">
+  <div class="login-bg h-full flex-1 hidden lg:block">
     <!-- TODO REVOIR LE DEGRADE -->
     <div
       class="w-full h-full bg-linear-to-t from-black flex flex-col justify-end"
@@ -19,8 +19,8 @@
       </div>
     </div>
   </div>
-  <main class="h-full w-[640px] flex flex-col">
-    <div class="py-4 border-b border-border">
+  <main class="w-full flex flex-col lg:mx-auto lg:w-[640px]">
+    <div class="py-4 border-b border-border shadow-md lg:hidden xl:block">
       <div class="mx-auto w-max">
         <img src="/images/logos/k9-logo-dark-mobile.png" alt="" />
       </div>
@@ -28,9 +28,10 @@
     <div class="flex-1">
       <router-outlet />
     </div>
-    <div class="py-4 border-t border-border">
+    <div class="py-4 border-t border-border lg:py-2 xl:py-4">
       <p class="text-center text-gray-one text-xs">
-        © {{ currentYear }} - K9 Club - Tous droits réservés. | v {{ version }}
+        © {{ currentYear }} - K9 Club - Tous droits réservés. | v
+        {{ version }}
       </p>
     </div>
   </main>
