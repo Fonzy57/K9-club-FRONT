@@ -5,17 +5,17 @@ export const AppRoutes = {
     login: 'connexion',
     register: 'inscription',
     get loginFull() {
-      return `${this.root}/${this.login}`;
+      return `/${this.root}/${this.login}`;
     },
     get registerFull() {
-      return `${this.root}/${this.register}`;
+      return `/${this.root}/${this.register}`;
     },
   },
   app: {
     root: 'app',
     dashboard: 'dashboard',
     get dashboardFull() {
-      return `${this.root}/${this.dashboard}`;
+      return `/${this.root}/${this.dashboard}`;
     },
   },
 };
