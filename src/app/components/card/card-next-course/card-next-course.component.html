@@ -1,0 +1,28 @@
+<div
+  class="p-3 border bg-white border-border rounded-lg shadow-sm flex flex-col gap-2.5 lg:p-5"
+>
+  <!-- TODO REVOIR LE RESPONSIVE SI LG OU MD -->
+  <div class="lg:flex lg:items-start lg:justify-between">
+    <div class="md:min-w-[260px]">
+      <h6 class="font-semibold lg:text-lg">{{ nextCourse.name }}</h6>
+      <div class="mt-1 flex items-center justify-between font-medium text-sm">
+        <p class="text-main font-medium">{{ nextCourse.date }}</p>
+      </div>
+      <div
+        class="mt-1.5 flex items-center justify-between flex-wrap-reverse gap-y-1.5"
+      >
+        <app-tag-name [tag]="{ name: 'agility' }">
+          {{ nextCourse.tag }}
+        </app-tag-name>
+      </div>
+    </div>
+    <div
+      class="py-[9px] px-[13px] border border-border rounded-lg shadow-sm text-sm font-medium"
+    >
+      {{ nextCourse.dog }}
+    </div>
+  </div>
+  <p class="text-sm text-gray-one">
+    {{ nextCourse.description }}
+  </p>
+</div>
