@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { version } from 'config/version';
+import { version } from '@config/version';
 
 @Component({
   selector: 'app-auth-layout',
