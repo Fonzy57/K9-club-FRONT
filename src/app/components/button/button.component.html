@@ -1,6 +1,7 @@
 <!-- TODO AJOUTER AUSSI L'ICONE SI BESOIN -->
 <button
-  class="rounded-lg cursor-pointer font-poppins w-full shadow-sm transition duration-300 ease-in-out"
+  class="rounded-lg cursor-pointer font-poppins w-full shadow-sm"
+  [class]="transitionClass"
   [ngClass]="[bgColorClass, textColorClass, sizeClass]"
   [routerLink]="routerLink"
 >

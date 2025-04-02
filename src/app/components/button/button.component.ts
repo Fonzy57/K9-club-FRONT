@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 // TODO REVOIR ICI LE TYPAGE POUR QUE MON IDE ME LE PROPOSE
@@ -14,12 +20,27 @@ export type ButtonSize = 'normal' | 'tiny';
   templateUrl: './button.component.html',
   styleUrl: './button.component.css',
 })
-export class ButtonComponent {
+export class ButtonComponent implements AfterViewInit {
   // TODO REVOIR ICI LE TYPAGE POUR QUE MON IDE ME LE PROPOSE
   @Input() type: ButtonType = 'primary';
   @Input() size: ButtonSize = 'normal';
 
   @Input() routerLink?: any[] | string;
+
+  // Workaround for unwanted button animation on route transitions.
+  // Angular recreates the component on route change (router-outlet), triggering CSS transitions.
+  // We delay applying transition classes until after the initial render to avoid visual flickering.
+  hasRendered = false;
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.hasRendered = true;
+    });
+  }
+
+  get transitionClass(): string {
+    return this.hasRendered ? 'transition duration-300 ease-in-out' : '';
+  }
 
   /* TODO VOIR SI CETTE FONCTION EST NECESSAIRE OU PAS */
   /* @Output() onClick = new EventEmitter<void>();
