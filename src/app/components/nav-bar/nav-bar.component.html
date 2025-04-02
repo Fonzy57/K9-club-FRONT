@@ -18,7 +18,13 @@
       />
     </div>
     <nav class="flex items-center gap-x-4">
-      <app-button type="ghost" size="tiny"> S'inscrire </app-button>
+      <app-button
+        type="ghost"
+        size="tiny"
+        [routerLink]="AppRoutes.auth.registerFull"
+      >
+        S'inscrire
+      </app-button>
       <app-button size="tiny"> Se connecter </app-button>
     </nav>
   </div>

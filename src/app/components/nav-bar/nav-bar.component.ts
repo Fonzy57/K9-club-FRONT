@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ButtonComponent } from '@components/button/button.component';
+import { AppRoutes } from '@config/routes';
 
 @Component({
   selector: 'app-nav-bar',
@@ -7,4 +8,6 @@ import { ButtonComponent } from '@components/button/button.component';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
 })
-export class NavBarComponent {}
+export class NavBarComponent {
+  AppRoutes = AppRoutes;
+}
