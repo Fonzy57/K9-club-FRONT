@@ -18,6 +18,9 @@
       "@services/*": [
         "app/services/*"
       ],
+      "@config/*": [
+        "app/config/*"
+      ],
       "@models/*": [
         "app/models/*"
       ]
