@@ -6,7 +6,7 @@ import { HomeComponent } from '@pages/home/home.component';
 import { RegisterComponent } from '@pages/auth/register/register.component';
 import { LoginComponent } from '@pages/auth/login/login.component';
 import { AppLayoutComponent } from '@layouts/app-layout/app-layout.component';
-import { DashboardComponent } from '@pages/app/dashboard/dashboard.component';
+import { DashboardComponent } from '@pages/app/user/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
