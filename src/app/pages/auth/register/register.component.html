@@ -1,0 +1,68 @@
+<!-- TODO METTRE LES BONS LIENS QUAND LES PAGES SERONT FINIES -->
+<div class="px-4 pt-4 pb-4 h-full">
+  <!-- TODO PREVOIR UN COMPOSANT RETOUR BUTTON POUR NE PAS ME REPETER -->
+  <button
+    [routerLink]="AppRoutes.home"
+    class="flex items-center gap-x-1 cursor-pointer hover:text-main active:text-main-500 transition-all duration-300 ease-in-out md:pl-20 lg:pl-0"
+  >
+    <!-- TODO CHANGER L'ICONE QUAND J'AURAIS UNE BIBLIOTHEQUE -->
+    <img src="/icons/chevron-left.png" alt="" />
+    <p class="text-xs">Retour</p>
+  </button>
+  <div class="flex items-center justify-center h-full">
+    <div class="mt-4 lg:mt-0 lg:w-[375px] lg:mx-auto">
+      <div class="">
+        <div>
+          <h2 class="text-2xl font-bold text-main">Créer votre compte</h2>
+          <p class="mt-1">
+            Remplissez les informations ci-dessous pour créer votre compte.
+          </p>
+        </div>
+
+        <div
+          class="flex flex-col gap-y-8 mt-6 lg:mt-4 lg:gap-y-6 xl:mt-6 xl:gap-y-8"
+        >
+          <div class="flex flex-col gap-y-4 lg:gap-y-3 xl:gap-y-4">
+            <app-custom-input label="Nom" placeholder="Doe" type="text" />
+            <app-custom-input label="Prénom" placeholder="John" type="text" />
+            <app-custom-input
+              label="E-mail"
+              placeholder="john.doe@gmail.com"
+              type="mail"
+            />
+            <app-custom-input
+              label="Mot de passe"
+              placeholder="********************"
+              type="password"
+            />
+          </div>
+
+          <div class="flex items-start gap-x-2">
+            <input type="checkbox" name="cgv" id="cgv" class="mt-1" />
+            <div class="flex flex-col gap-y-1">
+              <label for="cgv" class="block text-sm">
+                J’accepte les conditions générales de K9 Club
+              </label>
+              <a href="#" class="text-main underline block text-xs">
+                Voir les conditions générales
+              </a>
+            </div>
+          </div>
+
+          <!--
+           TODO RENDRE LE BOUTON DISABLED TANT QUE LA CHECKBOX N'EST PAS COCHEE
+          OU QUE LES CHAMPS NE SONT PAS BONS
+          -->
+          <app-button>S'inscrire</app-button>
+        </div>
+
+        <p class="mt-6">
+          Déjà membre ?
+          <a [routerLink]="AppRoutes.auth.loginFull" class="text-main underline"
+            >Connectez-vous</a
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -25,7 +25,9 @@
       >
         S'inscrire
       </app-button>
-      <app-button size="tiny"> Se connecter </app-button>
+      <app-button size="tiny" [routerLink]="AppRoutes.auth.loginFull">
+        Se connecter
+      </app-button>
     </nav>
   </div>
 </div>

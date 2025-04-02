@@ -3,7 +3,8 @@ import { AppRoutes } from '@config/routes';
 import { AuthLayoutComponent } from '@layouts/auth-layout/auth-layout.component';
 import { MainLayoutComponent } from '@layouts/main-layout/main-layout.component';
 import { HomeComponent } from '@pages/home/home.component';
-import { RegisterComponent } from '@pages/register/register.component';
+import { RegisterComponent } from '@pages/auth/register/register.component';
+import { LoginComponent } from '@pages/auth/login/login.component';
 
 export const routes: Routes = [
   {
@@ -26,7 +27,15 @@ export const routes: Routes = [
             'Inscrivez-vous pour accéder à nos services dédiés aux passionnés de chiens.',
         },
       },
-      /* { path: 'connexion', component: LoginComponent }, */
+      {
+        path: AppRoutes.auth.login,
+        component: LoginComponent,
+        data: {
+          title: 'Connectez-vous à votre espace K9 Club',
+          subtitle:
+            'Accédez à votre compte et profitez de tous nos services dédiés aux passionnés de chiens.',
+        },
+      },
     ],
   },
   /* {
