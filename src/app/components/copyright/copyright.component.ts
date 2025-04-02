@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { version } from 'config/version';
+import { version } from '@config/version';
 
 @Component({
   selector: 'app-copyright',
