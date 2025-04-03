@@ -2,12 +2,12 @@
 <h1 class="text-3xl font-semibold">Bonjour M. {{ name }}</h1>
 
 <!-- DOGS ROW -->
-<div class="mt-6">
+<div class="mt-5">
   <!-- TODO CHANGER LE PLURIEL OU LE SINGULIER SELON LE NOMBRE DE CHIENS -->
   <h2 class="font-semibold text-2xl">
     {{ dogs.length > 1 ? "Mes chiens" : "Mon chien" }}
   </h2>
-  <div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+  <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
     @for (dog of dogs; track $index) {
     <app-card-dog [dog]="dog" />
     }
@@ -15,9 +15,14 @@
 </div>
 
 <!-- COURSES ROW -->
-<div class="mt-6">
-  <h2 class="font-semibold text-2xl">Prochains cours</h2>
-  <div class="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+<div class="mt-5">
+  <h2 class="font-semibold text-2xl">
+    {{ nextCourses.length > 1 ? "Prochains cours" : "Prochain cours" }}
+  </h2>
+  <!-- TODO VOIR SI JE LAISSE UN MAX HEIGHT AVEC UN SCROLL OU BIEN UN BOUTON "VOIR TOUS LES COURS" QUI ENVOIE SUR UNE NOUVELLE PAGE-->
+  <div
+    class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 max-h-[425px] overflow-auto"
+  >
     @for (nextCourse of nextCourses; track $index) {
     <app-card-next-course [nextCourse]="nextCourse" />
     }
