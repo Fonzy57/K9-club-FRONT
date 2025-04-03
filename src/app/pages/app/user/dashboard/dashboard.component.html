@@ -21,7 +21,7 @@
   </h2>
   <!-- TODO VOIR SI JE LAISSE UN MAX HEIGHT AVEC UN SCROLL OU BIEN UN BOUTON "VOIR TOUS LES COURS" QUI ENVOIE SUR UNE NOUVELLE PAGE-->
   <div
-    class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 max-h-[425px] overflow-auto"
+    class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 lg:max-h-[425px] lg:overflow-auto"
   >
     @for (nextCourse of nextCourses; track $index) {
     <app-card-next-course [nextCourse]="nextCourse" />

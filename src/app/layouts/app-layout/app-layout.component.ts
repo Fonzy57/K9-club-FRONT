@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { version } from '@config/version';
 import { SidebarComponent } from '@components/sidebar/sidebar.component';
 import { navItems } from '@config/user/app-nav-items';
+import { HeaderMobileComponent } from '@components/header-mobile/header-mobile.component';
 
 @Component({
   selector: 'app-app-layout',
-  imports: [RouterOutlet, SidebarComponent],
+  imports: [RouterOutlet, SidebarComponent, HeaderMobileComponent],
   templateUrl: './app-layout.component.html',
   styleUrl: './app-layout.component.css',
 })
