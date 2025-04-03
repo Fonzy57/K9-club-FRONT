@@ -22,6 +22,7 @@ export class HeaderMobileComponent {
   toggleMenu(): void {
     this.isOpen = !this.isOpen;
 
+    // Toggle the 'no-scroll-mobile' class on the <body> element to prevent background scrolling
     const body = this.document.body;
     if (this.isOpen) {
       this.renderer.addClass(body, 'no-scroll-mobile');
