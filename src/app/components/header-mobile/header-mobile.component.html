@@ -1,0 +1,54 @@
+<!-- TODO FAIRE EN SORTE QUE L'UTILISATEUR NE PEUT PAS SCROLL SI LE MENU EST OUVERT -->
+<div class="px-5 py-5 h-[70px] sm:px-10 bg-white border-b border-border">
+  <!-- LOGO -->
+  <div class="flex items-center justify-between">
+    <div class="w-[150px]">
+      <img src="/images/logos/k9-logo-dark.png" alt="Logo du K9 Club" />
+    </div>
+
+    <div
+      class="flex items-center gap-x-[10px] cursor-pointer"
+      (click)="toggleMenu()"
+    >
+      <p class="uppercase transition text-text text-xs sm:text-lg">menu</p>
+      <div class="flex flex-col gap-y-1 w-[14px] h-[14px]">
+        <span
+          class="w-full min-h-[2px] rounded-[20px] bg-gray-one transition-all duration-300 ease-in-out"
+          [ngClass]="{ 'translate-y-[6px] rotate-45': isOpen, '': !isOpen }"
+        ></span>
+        <span
+          class="w-full min-h-[2px] rounded-[20px] bg-gray-one transition-all duration-300 ease-in-out"
+          [ngClass]="{ 'opacity-0': isOpen, '': !isOpen }"
+        ></span>
+        <span
+          class="w-full min-h-[2px] rounded-[20px] bg-gray-one transition-all duration-300 ease-in-out"
+          [ngClass]="{ '-translate-y-[6px] -rotate-45': isOpen, '': !isOpen }"
+        ></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div
+    class="w-full bg-white z-50 h-[calc(100vh-70px)] fixed inset-x-0 top-[70px] bottom-0 transition-all duration-300 ease-in-out"
+    [ngClass]="{ 'left-0': isOpen, '-left-full': !isOpen }"
+  >
+    <div class="px-5 sm:px-10">
+      <div class="mt-8 flex flex-col gap-y-1">
+        @for (navItem of navItems; track $index) {
+        <app-nav-item [label]="navItem.label" [url]="navItem.url" />
+        }
+      </div>
+    </div>
+    <div
+      class="py-5 px-5 sm:px-10 border-t border-border absolute bottom-0 w-full"
+    >
+      <button
+        class="p-3 flex items-center gap-x-3 bg-white border border-border rounded-lg w-full shadow-xs cursor-pointer"
+      >
+        <div class="size-6 bg-amber-200"></div>
+        <p class="font-medium">Mon compte</p>
+      </button>
+    </div>
+  </div>
+</div>
