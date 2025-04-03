@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { navItems } from '@config/app-nav-items';
+import { NavItemComponent } from '@components/nav-item/nav-item.component';
+import { navItems } from '@config/user/app-nav-items';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [],
+  imports: [NavItemComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
