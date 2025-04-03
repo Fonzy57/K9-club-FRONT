@@ -131,3 +131,9 @@ body {
   font-family: "Roboto", sans-serif;
   color: var(--color-text);
 }
+
+.no-scroll-mobile {
+  overflow: hidden !important;
+  position: fixed;
+  touch-action: none;
+}
