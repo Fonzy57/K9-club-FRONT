@@ -10,7 +10,6 @@
     <!-- NAVIGATION -->
     <div class="mt-8 flex flex-col gap-y-1">
       @for (navItem of navItems; track $index) {
-      <!-- TODO FAIRE LE STYLE ACTIVE ET AU HOVER -->
       <app-nav-item
         [label]="navItem.label"
         [url]="navItem.url"
