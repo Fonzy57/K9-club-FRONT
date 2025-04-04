@@ -11,13 +11,17 @@
     <div class="mt-8 flex flex-col gap-y-1">
       @for (navItem of navItems; track $index) {
       <!-- TODO FAIRE LE STYLE ACTIVE ET AU HOVER -->
-      <app-nav-item [label]="navItem.label" [url]="navItem.url" />
+      <app-nav-item
+        [label]="navItem.label"
+        [url]="navItem.url"
+        [iconName]="navItem.icon"
+      />
       }
     </div>
   </div>
 
   <!-- ACCOUNT -->
   <div class="py-6 px-4 border-t border-border w-full">
-    <app-nav-item label="Mon compte" url="#" />
+    <app-nav-item label="Mon compte" url="#" iconName="ionPersonOutline" />
   </div>
 </div>

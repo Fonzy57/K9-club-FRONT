@@ -3,6 +3,7 @@ import { CardDogComponent } from '@components/card/card-dog/card-dog.component';
 import { CardDog } from '@components/card/card-dog/card-dog.type';
 import { CardNextCourseComponent } from '@components/card/card-next-course/card-next-course.component';
 import { Tag } from '@components/tag-name/tag-name.type';
+
 /* TODO POUR LES TYPES FAIRE DES FICHIERS DANS LE REPO "models" */
 export interface NextCourse {
   name: string;
