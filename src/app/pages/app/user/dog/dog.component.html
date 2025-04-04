@@ -1,0 +1,27 @@
+<h1 class="text-2xl md:text-3xl font-semibold">Mes chiens</h1>
+
+<div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+  <!-- TODO FAIRE LES DIV CLIQUABLES ET METTRE UNE COULEUR VERTE -->
+  <!-- TODO AFFICHER EN DESSOUS LES INFOS D'UN CHIEN QUI EST SELECTIONNÉ VOIR LE WIREFRAME -->
+
+  @for (dog of dogs; track $index) {
+  <div
+    class="py-3.5 px-4 bg-white border border-border rounded-lg shadow-sm flex items-center justify-between"
+  >
+    <div class="flex items-baseline gap-x-3.5">
+      <h2 class="font-semibold text-lg">{{ dog.name }}</h2>
+      <p class="text-base">{{ dog.race }}</p>
+    </div>
+    <div class="flex items-center gap-x-2">
+      <p>Modifier</p>
+      <p>Supprimer</p>
+    </div>
+  </div>
+  }
+
+  <!-- TODO FAIRE UN GRAPHIQUE EN MODE PES AVEC LES INFOS -->
+  <!-- 
+   -->
+
+  <!-- TODO FAIRE UNE SECTION DE BADGES -->
+</div>

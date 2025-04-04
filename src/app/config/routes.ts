@@ -14,8 +14,12 @@ export const AppRoutes = {
   app: {
     root: 'app',
     dashboard: 'dashboard',
+    dog: 'mes-chiens',
     get dashboardFull() {
       return `/${this.root}/${this.dashboard}`;
+    },
+    get dogFull() {
+      return `/${this.root}/${this.dog}`;
     },
   },
 };
