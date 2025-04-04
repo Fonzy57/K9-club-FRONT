@@ -2,7 +2,7 @@
   class="p-3 border bg-white border-border rounded-lg shadow-sm flex flex-col gap-2.5 lg:p-5"
 >
   <!-- TODO REVOIR LE RESPONSIVE SI LG OU MD -->
-  <div class="lg:flex lg:items-start lg:justify-between">
+  <div class="flex items-start justify-between flex-wrap gap-y-1.5">
     <div class="md:min-w-[260px]">
       <h6 class="font-semibold lg:text-lg">{{ nextCourse.name }}</h6>
       <div class="mt-1 flex items-center justify-between font-medium text-sm">
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div
-      class="py-[9px] px-[13px] border border-border rounded-lg shadow-sm text-sm font-medium"
+      class="py-[9px] px-[13px] border border-border rounded-lg shadow-sm text-sm font-medium w-max"
     >
       {{ nextCourse.dog }}
     </div>
