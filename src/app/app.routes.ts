@@ -7,6 +7,7 @@ import { RegisterComponent } from '@pages/auth/register/register.component';
 import { LoginComponent } from '@pages/auth/login/login.component';
 import { AppLayoutComponent } from '@layouts/app-layout/app-layout.component';
 import { DashboardComponent } from '@pages/app/user/dashboard/dashboard.component';
+import { DogComponent } from '@pages/app/user/dog/dog.component';
 
 export const routes: Routes = [
   {
@@ -47,7 +48,8 @@ export const routes: Routes = [
     path: 'app',
     component: AppLayoutComponent,
     children: [
-      { path: 'dashboard', component: DashboardComponent },
+      { path: AppRoutes.app.dashboard, component: DashboardComponent },
+      { path: AppRoutes.app.dog, component: DogComponent },
       // d'autres routes protégées ici
     ],
   },
