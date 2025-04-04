@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
@@ -17,7 +18,7 @@ import {
 
 @Component({
   selector: 'app-custom-icon',
-  imports: [NgIcon],
+  imports: [NgIcon, NgClass],
   templateUrl: './custom-icon.component.html',
   styleUrl: './custom-icon.component.css',
   viewProviders: [
@@ -40,4 +41,5 @@ import {
 export class CustomIconComponent {
   @Input() name!: string;
   @Input() size: string = '24';
+  @Input() class: string = '';
 }
