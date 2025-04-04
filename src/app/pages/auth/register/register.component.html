@@ -23,14 +23,26 @@
           class="flex flex-col gap-y-8 mt-6 lg:mt-4 lg:gap-y-6 xl:mt-6 xl:gap-y-8"
         >
           <div class="flex flex-col gap-y-4 lg:gap-y-3 xl:gap-y-4">
-            <app-custom-input label="Nom" placeholder="Doe" type="text" />
-            <app-custom-input label="Prénom" placeholder="John" type="text" />
             <app-custom-input
+              inputName="name"
+              label="Nom"
+              placeholder="Doe"
+              type="text"
+            />
+            <app-custom-input
+              inputName="firstname"
+              label="Prénom"
+              placeholder="John"
+              type="text"
+            />
+            <app-custom-input
+              inputName="mail"
               label="E-mail"
               placeholder="john.doe@gmail.com"
               type="mail"
             />
             <app-custom-input
+              inputName="password"
               label="Mot de passe"
               placeholder="********************"
               type="password"
