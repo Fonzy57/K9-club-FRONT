@@ -53,7 +53,9 @@
            TODO RENDRE LE BOUTON DISABLED TANT QUE LA CHECKBOX N'EST PAS COCHEE
           OU QUE LES CHAMPS NE SONT PAS BONS
           -->
-          <app-button>S'inscrire</app-button>
+          <app-button [routerLink]="AppRoutes.app.dashboardFull">
+            S'inscrire
+          </app-button>
         </div>
 
         <p class="mt-6">
