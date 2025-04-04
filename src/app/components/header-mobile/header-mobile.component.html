@@ -1,0 +1,50 @@
+<div
+  class="px-5 py-5 h-[70px] sm:px-10 bg-white border-b border-border flex items-center justify-center"
+>
+  <!-- LOGO -->
+  <div class="flex items-center justify-between w-full">
+    <div class="w-[120px] sm:w-[150px]">
+      <img src="/images/logos/k9-logo-dark.png" alt="Logo du K9 Club" />
+    </div>
+
+    <div
+      class="flex items-center gap-x-[10px] cursor-pointer"
+      (click)="toggleMenu()"
+    >
+      <p class="uppercase transition text-text text-xs sm:text-lg">menu</p>
+      <div class="flex flex-col gap-y-1 w-[14px] h-[14px]">
+        <span
+          class="w-full min-h-[2px] rounded-[20px] bg-gray-one transition-all duration-300 ease-in-out"
+          [ngClass]="{ 'translate-y-[6px] rotate-45': isOpen, '': !isOpen }"
+        ></span>
+        <span
+          class="w-full min-h-[2px] rounded-[20px] bg-gray-one transition-all duration-300 ease-in-out"
+          [ngClass]="{ 'opacity-0': isOpen, '': !isOpen }"
+        ></span>
+        <span
+          class="w-full min-h-[2px] rounded-[20px] bg-gray-one transition-all duration-300 ease-in-out"
+          [ngClass]="{ '-translate-y-[6px] -rotate-45': isOpen, '': !isOpen }"
+        ></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <div
+    class="w-full bg-white z-50 h-[calc(100vh-70px)] fixed inset-x-0 top-[70px] bottom-0 transition-all duration-300 ease-in-out"
+    [ngClass]="{ 'left-0': isOpen, '-left-full': !isOpen }"
+  >
+    <div class="flex flex-col h-full overflow-auto">
+      <div class="flex-1 px-5 pb-5 sm:px-10">
+        <div class="mt-8 flex flex-col gap-y-1">
+          @for (navItem of navItems; track $index) {
+          <app-nav-item [label]="navItem.label" [url]="navItem.url" />
+          }
+        </div>
+      </div>
+      <div class="py-5 px-5 sm:px-10 border-t border-border w-full">
+        <app-nav-item label="Mon compte" url="#" />
+      </div>
+    </div>
+  </div>
+</div>

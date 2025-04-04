@@ -32,6 +32,7 @@
   --color-main: #15803d;
   --color-text: #231f20;
   --color-bg-light: #ffffff;
+  --color-bg-content: #f8f8f8;
   --color-border: #dddddd;
   --color-ghost-active: #e8ebeb;
   --color-icon: #a4a4a4;
@@ -129,4 +130,10 @@ h6 {
 body {
   font-family: "Roboto", sans-serif;
   color: var(--color-text);
+}
+
+.no-scroll-mobile {
+  overflow: hidden !important;
+  position: fixed;
+  touch-action: none;
 }
