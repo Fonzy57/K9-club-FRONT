@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavItemComponent } from '@components/nav-item/nav-item.component';
+import { AppRoutes } from '@config/routes';
 import { navItems } from '@config/user/app-nav-items';
 
 @Component({
@@ -10,4 +11,5 @@ import { navItems } from '@config/user/app-nav-items';
 })
 export class SidebarComponent {
   navItems: any[] = navItems;
+  AppRoutes = AppRoutes;
 }
