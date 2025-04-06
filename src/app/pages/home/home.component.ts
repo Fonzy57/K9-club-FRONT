@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import { ButtonComponent } from '@components/button/button.component';
-import { CopyrightComponent } from '@components/copyright/copyright.component';
 import { AppRoutes } from '@config/routes';
 import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
 
 @Component({
   selector: 'app-home',
-  imports: [ButtonComponent, CopyrightComponent, CustomIconComponent],
+  imports: [ButtonComponent, CustomIconComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
 })
