@@ -2,6 +2,9 @@ export const AppRoutes = {
   home: '',
   legalNotice: 'mentions-legales',
   termsOfUse: 'conditions-generales-d-utilisation',
+  get termsOfUseFull() {
+    return `/${this.home}/${this.termsOfUse}`;
+  },
   auth: {
     root: 'auth',
     login: 'connexion',
