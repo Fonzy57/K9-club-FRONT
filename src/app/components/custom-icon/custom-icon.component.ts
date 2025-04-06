@@ -2,18 +2,19 @@ import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
-  ionHomeOutline,
-  ionPawOutline,
+  ionAddOutline,
   ionCalendarNumberOutline,
   ionCalendarClearOutline,
+  ionCheckmarkOutline,
+  ionChevronBackOutline,
+  ionHomeOutline,
+  ionInformationCircleOutline,
+  ionMoonOutline,
+  ionPawOutline,
   ionPersonOutline,
   ionPencilOutline,
-  ionTrashOutline,
-  ionInformationCircleOutline,
-  ionChevronBackOutline,
-  ionAddOutline,
   ionSunnyOutline,
-  ionMoonOutline,
+  ionTrashOutline,
 } from '@ng-icons/ionicons';
 
 @Component({
@@ -23,18 +24,19 @@ import {
   styleUrl: './custom-icon.component.css',
   viewProviders: [
     provideIcons({
-      ionHomeOutline,
-      ionPawOutline,
+      ionAddOutline,
       ionCalendarNumberOutline,
       ionCalendarClearOutline,
+      ionCheckmarkOutline,
+      ionChevronBackOutline,
+      ionHomeOutline,
+      ionInformationCircleOutline,
+      ionMoonOutline,
+      ionPawOutline,
       ionPersonOutline,
       ionPencilOutline,
-      ionTrashOutline,
-      ionInformationCircleOutline,
-      ionChevronBackOutline,
-      ionAddOutline,
       ionSunnyOutline,
-      ionMoonOutline,
+      ionTrashOutline,
     }),
   ],
 })
