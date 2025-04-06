@@ -9,6 +9,7 @@ import { AppLayoutComponent } from '@layouts/app-layout/app-layout.component';
 import { DashboardComponent } from '@pages/app/user/dashboard/dashboard.component';
 import { DogComponent } from '@pages/app/user/dog/dog.component';
 import { CourseComponent } from '@pages/app/user/course/course.component';
+import { UserAccountComponent } from '@pages/app/user/user-account/user-account.component';
 
 export const routes: Routes = [
   {
@@ -49,9 +50,15 @@ export const routes: Routes = [
     path: 'app',
     component: AppLayoutComponent,
     children: [
+      {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: AppRoutes.app.dashboard, // If user go to /app he'll be redirect to /app/dashboard
+      },
       { path: AppRoutes.app.dashboard, component: DashboardComponent },
       { path: AppRoutes.app.dog, component: DogComponent },
       { path: AppRoutes.app.course, component: CourseComponent },
+      { path: AppRoutes.app.account, component: UserAccountComponent },
       // d'autres routes protégées ici
     ],
   },
