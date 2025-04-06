@@ -18,6 +18,6 @@ export const navItems: any[] = [
     name: 'courses',
     label: 'Les cours',
     icon: 'ionCalendarNumberOutline',
-    url: '#',
+    url: AppRoutes.app.courseFull,
   },
 ];

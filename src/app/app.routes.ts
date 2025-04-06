@@ -8,6 +8,7 @@ import { LoginComponent } from '@pages/auth/login/login.component';
 import { AppLayoutComponent } from '@layouts/app-layout/app-layout.component';
 import { DashboardComponent } from '@pages/app/user/dashboard/dashboard.component';
 import { DogComponent } from '@pages/app/user/dog/dog.component';
+import { CourseComponent } from '@pages/app/user/course/course.component';
 
 export const routes: Routes = [
   {
@@ -50,6 +51,7 @@ export const routes: Routes = [
     children: [
       { path: AppRoutes.app.dashboard, component: DashboardComponent },
       { path: AppRoutes.app.dog, component: DogComponent },
+      { path: AppRoutes.app.course, component: CourseComponent },
       // d'autres routes protégées ici
     ],
   },
