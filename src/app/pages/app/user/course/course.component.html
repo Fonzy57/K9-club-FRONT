@@ -1,0 +1,34 @@
+<h1 class="text-2xl md:text-3xl font-semibold">Réserver un cours</h1>
+
+<!-- TODO REMPLACER PAR DES DROPDOWNS QUAND J'AURAIS LES COMPOSANTS -->
+<div class="flex flex-col gap-y-4 mt-8 sm:flex-row sm:gap-x-6 md:gap-x-3">
+  <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
+  <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
+</div>
+
+<!-- TODO VOIR POUR UN BOUTON "SEE MORE" pour afficher tous les cours -->
+<div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:mt-6">
+  @for (course of courses; track $index) {
+  <app-card-course [course]="course" />
+  }
+</div>
+
+<div class="mt-8 flex items-center justify-between">
+  <h2 class="font-semibold text-2xl">Les trois prochains cours réservés</h2>
+  <!-- TODO AJOUTER LA PROPRIETE ROUTERLINK QUAND J'AURAIS LA PAGE -->
+  <app-button class="hidden sm:block" type="ghost">
+    Voir tous les cours réservés
+  </app-button>
+</div>
+<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+  <!-- TODO VOIR SI JE GARDE LE SLICE OU SI A L'API JE METS JUSTE LES 3 PROCHAINS SELON LA DATE -->
+  @for (reservedCourse of reservedCourses.slice(0, 3); track $index) {
+  <app-card-reserved-course [course]="reservedCourse" />
+  }
+</div>
+
+<!-- TODO AJOUTER LA PROPRIETE ROUTERLINK QUAND J'AURAIS LA PAGE -->
+<!-- TODO AFFICHER LE BOUTON QUE S'IL Y A PLUS DE 3 COURS RESERVES -->
+<app-button class="mt-10 block sm:hidden" type="ghost">
+  Voir tous les cours réservés
+</app-button>

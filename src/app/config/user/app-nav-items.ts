@@ -9,15 +9,15 @@ export const navItems: any[] = [
     url: AppRoutes.app.dashboardFull,
   },
   {
+    name: 'courses',
+    label: 'Les cours',
+    icon: 'ionCalendarNumberOutline',
+    url: AppRoutes.app.courseFull,
+  },
+  {
     name: 'dog',
     label: 'Mes chiens',
     icon: 'ionPawOutline',
     url: AppRoutes.app.dogFull,
-  },
-  {
-    name: 'courses',
-    label: 'Les cours',
-    icon: 'ionCalendarNumberOutline',
-    url: '#',
   },
 ];
