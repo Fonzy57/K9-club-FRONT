@@ -6,8 +6,10 @@
       © {{ currentYear }} - K9 Club - Tous droits réservés. | v {{ version }}
     </p>
     <div class="flex flex-col gap-y-3 underline sm:flex-row sm:gap-x-5">
-      <a href="#">Mentions légales</a>
-      <a href="#">Conditions générales d’utilisation</a>
+      <a [routerLink]="AppRoutes.legalNotice">Mentions légales</a>
+      <a [routerLink]="AppRoutes.termsOfUse"
+        >Conditions générales d’utilisation</a
+      >
     </div>
   </div>
 </div>

@@ -1,5 +1,7 @@
 export const AppRoutes = {
   home: '',
+  legalNotice: 'mentions-legales',
+  termsOfUse: 'conditions-generales-d-utilisation',
   auth: {
     root: 'auth',
     login: 'connexion',

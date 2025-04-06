@@ -1,13 +1,16 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { AppRoutes } from '@config/routes';
 import { version } from '@config/version';
 
 @Component({
   selector: 'app-copyright',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './copyright.component.html',
   styleUrl: './copyright.component.css',
 })
 export class CopyrightComponent {
   currentYear: number = new Date().getFullYear();
   version: string = version.number;
+  AppRoutes = AppRoutes;
 }

@@ -10,12 +10,21 @@ import { DashboardComponent } from '@pages/app/user/dashboard/dashboard.componen
 import { DogComponent } from '@pages/app/user/dog/dog.component';
 import { CourseComponent } from '@pages/app/user/course/course.component';
 import { UserAccountComponent } from '@pages/app/user/user-account/user-account.component';
+import { LegalNoticeComponent } from '@pages/legal-notice/legal-notice.component';
+import { TermsOfUseComponent } from '@pages/terms-of-use/terms-of-use.component';
 
 export const routes: Routes = [
   {
     path: AppRoutes.home,
     component: MainLayoutComponent,
-    children: [{ path: '', component: HomeComponent }],
+    children: [
+      { path: '', component: HomeComponent },
+      { path: AppRoutes.legalNotice, component: LegalNoticeComponent },
+      {
+        path: AppRoutes.termsOfUse,
+        component: TermsOfUseComponent,
+      },
+    ],
   },
   {
     path: AppRoutes.auth.root,
