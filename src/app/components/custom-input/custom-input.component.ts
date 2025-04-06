@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CustomIconComponent } from '../custom-icon/custom-icon.component';
 
 @Component({
   selector: 'app-custom-input',
-  imports: [CommonModule],
+  imports: [CommonModule, CustomIconComponent],
   templateUrl: './custom-input.component.html',
   styleUrl: './custom-input.component.css',
 })
@@ -28,7 +29,7 @@ export class CustomInputComponent {
   // Trouver ici : https://medium.com/@hish.abdelshafouk/building-a-custom-input-component-with-form-validation-in-angular-fa3f93d5363e
   // control: FormControl = new FormControl("", Validators.required);
 
-  showPassword() {
+  togglePassword() {
     this.actualType = this.actualType === 'password' ? 'text' : 'password';
   }
 
