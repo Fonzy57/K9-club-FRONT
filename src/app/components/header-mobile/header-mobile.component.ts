@@ -2,6 +2,7 @@ import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, Inject, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NavItemComponent } from '@components/nav-item/nav-item.component';
+import { AppRoutes } from '@config/routes';
 import { navItems } from '@config/user/app-nav-items';
 import { filter } from 'rxjs';
 
@@ -13,6 +14,7 @@ import { filter } from 'rxjs';
 })
 export class HeaderMobileComponent {
   navItems: any[] = navItems;
+  AppRoutes = AppRoutes;
 
   isOpen = false;
 

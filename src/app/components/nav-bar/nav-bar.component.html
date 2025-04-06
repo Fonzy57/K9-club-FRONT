@@ -2,15 +2,17 @@
   <div
     class="flex items-center justify-between lg:max-w-[1166px] xl:max-w-[1474px] lg:mx-auto"
   >
-    <!-- TODO FAIRE UN LIEN SUR LES LOGOS -->
-    <div class="max-w-[70px] sm:hidden">
+    <div class="max-w-[70px] sm:hidden" [routerLink]="AppRoutes.home">
       <img
         src="/images/logos/k9-logo-dark-mobile.png"
         alt="Logo du K9 Club"
         srcset=""
       />
     </div>
-    <div class="max-w-[150px] hidden sm:block lg:max-w-[180px]">
+    <div
+      class="max-w-[150px] cursor-pointer hidden sm:block lg:max-w-[180px]"
+      [routerLink]="AppRoutes.home"
+    >
       <img
         src="/images/logos/k9-logo-dark.png"
         alt="Logo du K9 Club"

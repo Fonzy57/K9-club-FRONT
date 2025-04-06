@@ -31,32 +31,34 @@
     </div>
     <div class="flex flex-col gap-y-2 max-w-max mx-auto">
       <div class="flex items-center gap-x-3">
-        <div class="size-6">
-          <!-- TODO REMPLACER PAR DES ICONES https://ng-icons.github.io/ng-icons/#/ -->
-          <img src="/icons/icon-validation.png" alt="" srcset="" />
-        </div>
+        <app-custom-icon
+          name="ionCheckmarkOutline"
+          size="24"
+          class="text-main"
+        />
         <p class="text-sm xl:text-base">Des cours adaptés à chaque chien</p>
       </div>
       <div class="flex items-center gap-x-3">
-        <div class="size-6">
-          <!-- TODO REMPLACER PAR DES ICONES https://ng-icons.github.io/ng-icons/#/ -->
-          <img src="/icons/icon-validation.png" alt="" srcset="" />
-        </div>
+        <app-custom-icon
+          name="ionCheckmarkOutline"
+          size="24"
+          class="text-main"
+        />
         <p class="text-sm xl:text-base">
           Une gestion simple et rapide des inscriptions
         </p>
       </div>
       <div class="flex items-center gap-x-3">
-        <div class="size-6">
-          <!-- TODO REMPLACER PAR DES ICONES https://ng-icons.github.io/ng-icons/#/ -->
-          <img src="/icons/icon-validation.png" alt="" srcset="" />
-        </div>
+        <app-custom-icon
+          name="ionCheckmarkOutline"
+          size="24"
+          class="text-main"
+        />
         <p class="text-sm xl:text-base">
           Une interface fluide pour une expérience optimale
         </p>
       </div>
     </div>
-    <!-- TODO METTRE LES LIENS QUAND LES PAGES SERONT FINIES -->
     <div class="flex items-center justify-center gap-x-8">
       <app-button
         type="ghost"
@@ -149,7 +151,6 @@
     </div>
     }
   </div>
-  <!-- TODO METTRE LES LIENS QUAND LES PAGES SERONT FINIES -->
   <div class="flex items-center justify-center gap-x-8 mt-11 sm:mt-18">
     <app-button
       type="ghost"
@@ -189,28 +190,31 @@
     </div>
     <div class="flex flex-col gap-y-2 max-w-max mx-auto">
       <div class="flex items-center gap-x-3">
-        <div class="size-6">
-          <!-- TODO REMPLACER PAR DES ICONES https://ng-icons.github.io/ng-icons/#/ -->
-          <img src="/icons/icon-validation.png" alt="" srcset="" />
-        </div>
+        <app-custom-icon
+          name="ionCheckmarkOutline"
+          size="24"
+          class="text-main"
+        />
         <p class="text-sm xl:text-base">
           Une équipe de coachs expérimentés et passionnés
         </p>
       </div>
       <div class="flex items-center gap-x-3">
-        <div class="size-6">
-          <!-- TODO REMPLACER PAR DES ICONES https://ng-icons.github.io/ng-icons/#/ -->
-          <img src="/icons/icon-validation.png" alt="" srcset="" />
-        </div>
+        <app-custom-icon
+          name="ionCheckmarkOutline"
+          size="24"
+          class="text-main"
+        />
         <p class="text-sm xl:text-base">
           Des cours variés pour tous les niveaux et âges
         </p>
       </div>
       <div class="flex items-center gap-x-3">
-        <div class="size-6">
-          <!-- TODO REMPLACER PAR DES ICONES https://ng-icons.github.io/ng-icons/#/ -->
-          <img src="/icons/icon-validation.png" alt="" srcset="" />
-        </div>
+        <app-custom-icon
+          name="ionCheckmarkOutline"
+          size="24"
+          class="text-main"
+        />
         <p class="text-sm xl:text-base">
           Un suivi personnalisé pour chaque chien
         </p>
@@ -268,7 +272,6 @@
     }
   </div>
 
-  <!-- TODO METTRE LES LIENS QUAND LES PAGES SERONT FINIES -->
   <div class="flex items-center justify-center gap-x-8 mt-10 sm:mt-20">
     <app-button
       type="ghost"
@@ -326,29 +329,3 @@
     </div>
   </div>
 </div>
-
-<!-- -------------- -->
-<!-- COACHS SECTION -->
-<!-- -------------- -->
-<div class="py-10 border-t border-main sm:px-5 md:px-10 lg:px-0 lg:py-20">
-  <div
-    class="flex flex-col gap-y-10 sm:flex-row sm:justify-between lg:max-w-[1166px] lg:mx-auto xl:max-w-[1474px]"
-  >
-    <div class="flex items-center justify-center">
-      <img src="/images/logos/k9-logo-dark.png" alt="" />
-    </div>
-    <!-- TODO METTRE LES LIENS QUAND LES PAGES SERONT FINIES -->
-    <div class="flex items-center justify-center gap-x-8">
-      <app-button
-        type="ghost"
-        size="normal"
-        [routerLink]="AppRoutes.auth.registerFull"
-        >S'inscrire</app-button
-      >
-      <app-button size="normal" [routerLink]="AppRoutes.auth.loginFull"
-        >Se connecter</app-button
-      >
-    </div>
-  </div>
-</div>
-<app-copyright />

@@ -2,10 +2,13 @@
   <!-- TODO PREVOIR UN COMPOSANT RETOUR BUTTON POUR NE PAS ME REPETER -->
   <button
     [routerLink]="AppRoutes.home"
-    class="flex items-center gap-x-1 cursor-pointer hover:text-main active:text-main-500 transition-all duration-300 ease-in-out md:pl-20 lg:pl-0"
+    class="flex items-center py-1 px-0.5 gap-x-1 cursor-pointer group hover:text-main active:text-main-500 transition-all duration-300 ease-in-out md:pl-20 lg:pl-0"
   >
-    <!-- TODO CHANGER L'ICONE QUAND J'AURAIS UNE BIBLIOTHEQUE -->
-    <img src="/icons/chevron-left.png" alt="" />
+    <app-custom-icon
+      name="ionChevronBackOutline"
+      size="18"
+      class="text-text group-hover:text-main group-active:text-main-500 transition-all duration-300 ease-in-out"
+    />
     <p class="text-xs">Retour</p>
   </button>
 
