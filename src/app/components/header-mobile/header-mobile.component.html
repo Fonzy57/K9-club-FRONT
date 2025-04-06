@@ -31,8 +31,12 @@
 
   <!-- NAVIGATION -->
   <div
-    class="w-full bg-white z-50 h-[calc(100vh-70px)] fixed inset-x-0 top-[70px] bottom-0 transition-all duration-300 ease-in-out"
-    [ngClass]="{ 'left-0': isOpen, '-left-full': !isOpen }"
+    class="w-full bg-white z-50 h-[calc(100vh-70px)] fixed inset-x-0 top-[70px] bottom-0"
+    [ngClass]="{
+      'left-0': isOpen,
+      '-left-full': !isOpen,
+      'transition-all duration-300 ease-in-out': hasInteracted
+    }"
   >
     <div class="flex flex-col h-full overflow-auto">
       <div class="flex-1 px-5 pb-5 sm:px-10">
@@ -47,7 +51,7 @@
         </div>
       </div>
       <div class="py-5 px-5 sm:px-10 border-t border-border w-full">
-        <app-nav-item label="Mon compte" url="#" />
+        <app-nav-item label="Mon compte" url="#" iconName="ionPersonOutline" />
       </div>
     </div>
   </div>
