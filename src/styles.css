@@ -38,6 +38,7 @@
   --color-icon: #a4a4a4;
   --color-gray-one: #686868;
   --color-gray-two: #afafaf;
+  --color-tab-hover: #f5f7f7;
   --color-warning: #f59e0b;
   --color-success: #00c247;
   --color-error: #dc2626;
@@ -135,5 +136,6 @@ body {
 .no-scroll-mobile {
   overflow: hidden !important;
   position: fixed;
+  width: 100%;
   touch-action: none;
 }

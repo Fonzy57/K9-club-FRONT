@@ -1,7 +1,15 @@
 <button
-  class="p-3 flex items-center gap-x-3 bg-white border border-border rounded-lg w-full shadow-xs cursor-pointer"
+  class="px-3 py-2.5 flex items-center gap-x-3 group bg-white w-full cursor-pointer rounded-lg border border-white transition duration-300 ease-in-out hover:bg-tab-hover active:bg-ghost-active"
   [routerLink]="url"
+  routerLinkActive
+  #rla="routerLinkActive"
+  [routerLinkActiveOptions]="{ exact: true }"
+  [ngClass]="{ '!border-border !shadow-xs hover:!bg-white': rla.isActive }"
 >
-  <div class="size-6 bg-amber-200"></div>
-  <p class="font-medium">{{ label }}</p>
+  <app-custom-icon
+    [name]="iconName"
+    size="22"
+    [class]="rla.isActive ? 'text-main' : 'text-icon'"
+  />
+  <p class="font-medium pt-0.5">{{ label }}</p>
 </button>

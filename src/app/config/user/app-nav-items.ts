@@ -5,9 +5,19 @@ export const navItems: any[] = [
   {
     name: 'dashboard',
     label: 'Dasboard',
-    icon: 'home',
+    icon: 'ionHomeOutline',
     url: AppRoutes.app.dashboardFull,
   },
-  { name: 'dog', label: 'Mes chiens', icon: 'dog', url: AppRoutes.app.dogFull },
-  { name: 'courses', label: 'Les cours', icon: 'course', url: '#' },
+  {
+    name: 'dog',
+    label: 'Mes chiens',
+    icon: 'ionPawOutline',
+    url: AppRoutes.app.dogFull,
+  },
+  {
+    name: 'courses',
+    label: 'Les cours',
+    icon: 'ionCalendarNumberOutline',
+    url: '#',
+  },
 ];
