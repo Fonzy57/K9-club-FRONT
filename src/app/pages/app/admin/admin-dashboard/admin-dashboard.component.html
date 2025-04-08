@@ -4,14 +4,14 @@
 <!-- INFORMATIONS ROW -->
 <div class="mt-3 sm:mt-5">
   <h2 class="font-semibold text-xl md:text-2xl">Les dernières informations</h2>
-  <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
+  <div class="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
     @for (info of informations; track $index) {
     <app-card-info [information]="info" />
     }
   </div>
 </div>
 
-<!-- COURSES ROW -->
+<!-- CHARTS ROW -->
 <div class="mt-12 md:mt-5">
   <!-- TODO AJOUTER UN BOUTON "VOIR TOUS LES COURS" SI ON EN A PLUS DE 6 -->
   <!-- <h2 class="font-semibold text-xl md:text-2xl">
