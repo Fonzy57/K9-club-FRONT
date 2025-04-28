@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CustomIconComponent } from '../custom-icon/custom-icon.component';
 
+/* TODO VOIR NGMODEL POUR RECUP INFOS DES INPUTS */
+
 @Component({
   selector: 'app-custom-input',
   imports: [CommonModule, CustomIconComponent],

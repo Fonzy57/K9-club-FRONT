@@ -16,12 +16,16 @@ export const AppRoutes = {
       return `/${this.root}/${this.register}`;
     },
   },
+
+  // TODO REVOIR ICI LE SYSTEME, PEUT ÊTRE FAIRE DES OBJETS user, admin et coach
+  // SI CHANGEMENT FAIT IL FAUDRA REVOIR TOUS LES IMPORTS
   app: {
     root: 'app',
     dashboard: 'dashboard',
     dog: 'mes-chiens',
     course: 'les-cours',
     account: 'mon-compte',
+    adminDash: 'admin-dashboard',
     get dashboardFull() {
       return `/${this.root}/${this.dashboard}`;
     },
@@ -33,6 +37,9 @@ export const AppRoutes = {
     },
     get accountFull() {
       return `/${this.root}/${this.account}`;
+    },
+    get adminDashFull() {
+      return `/${this.root}/${this.adminDash}`;
     },
   },
 };

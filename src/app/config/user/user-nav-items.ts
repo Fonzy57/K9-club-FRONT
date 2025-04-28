@@ -1,7 +1,7 @@
 import { AppRoutes } from '@config/routes';
 
 /* TODO METTRE LES BONNES URL QUAND J'AURAIS LES PAGES DE FINIES */
-export const navItems: any[] = [
+export const userNavItems: any[] = [
   {
     name: 'dashboard',
     label: 'Dasboard',
@@ -19,5 +19,13 @@ export const navItems: any[] = [
     label: 'Mes chiens',
     icon: 'ionPawOutline',
     url: AppRoutes.app.dogFull,
+  },
+
+  // TODO JUSTE POUR LE TEST ADMIN DASHBOARD
+  {
+    name: 'dash',
+    label: 'ADMIN Dashboard',
+    icon: 'ionPawOutline',
+    url: AppRoutes.app.adminDashFull,
   },
 ];
