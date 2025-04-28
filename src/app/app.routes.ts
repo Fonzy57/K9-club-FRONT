@@ -12,6 +12,7 @@ import { CourseComponent } from '@pages/app/user/course/course.component';
 import { UserAccountComponent } from '@pages/app/user/user-account/user-account.component';
 import { LegalNoticeComponent } from '@pages/legal-notice/legal-notice.component';
 import { TermsOfUseComponent } from '@pages/terms-of-use/terms-of-use.component';
+import { AdminDashboardComponent } from '@pages/app/admin/admin-dashboard/admin-dashboard.component';
 
 export const routes: Routes = [
   {
@@ -68,6 +69,7 @@ export const routes: Routes = [
       { path: AppRoutes.app.dog, component: DogComponent },
       { path: AppRoutes.app.course, component: CourseComponent },
       { path: AppRoutes.app.account, component: UserAccountComponent },
+      { path: AppRoutes.app.adminDash, component: AdminDashboardComponent },
       // d'autres routes protégées ici
     ],
   },
