@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavItemComponent } from '@components/nav-item/nav-item.component';
 import { AppRoutes } from '@config/routes';
-import { navItems } from '@config/user/app-nav-items';
+import { userNavItems } from '@config/user/user-nav-items';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,6 +10,9 @@ import { navItems } from '@config/user/app-nav-items';
   styleUrl: './sidebar.component.css',
 })
 export class SidebarComponent {
-  navItems: any[] = navItems;
+  navItems: any[] = userNavItems;
   AppRoutes = AppRoutes;
+
+  // TODO ICI POUR SIMULER LE ROLE ET LES LIENS DANS LA SIDEBAR
+  userRole: 'ADMIN' | 'USER' | 'COACH' = 'USER';
 }

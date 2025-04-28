@@ -3,7 +3,7 @@ import { Component, Inject, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { NavItemComponent } from '@components/nav-item/nav-item.component';
 import { AppRoutes } from '@config/routes';
-import { navItems } from '@config/user/app-nav-items';
+import { userNavItems } from '@config/user/user-nav-items';
 import { filter } from 'rxjs';
 
 @Component({
@@ -13,7 +13,7 @@ import { filter } from 'rxjs';
   styleUrl: './header-mobile.component.css',
 })
 export class HeaderMobileComponent {
-  navItems: any[] = navItems;
+  navItems: any[] = userNavItems;
   AppRoutes = AppRoutes;
 
   isOpen = false;
