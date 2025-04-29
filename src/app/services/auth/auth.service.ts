@@ -6,8 +6,7 @@ import { Injectable } from '@angular/core';
 export class AuthService {
   isLogged: boolean = false;
 
-  // TODO REVOIR LE TYPE
-  userInfos: any | null = null;
+  userInfos: JwtUserInfos | null = null;
 
   constructor() {
     const jwt: string | null = localStorage.getItem('jwt');
@@ -23,7 +22,7 @@ export class AuthService {
 
     const jwtBody = atob(middleOfJwt);
 
-    const body = JSON.parse(jwtBody);
+    const body: JwtUserInfos = JSON.parse(jwtBody);
 
     this.userInfos = body;
     this.isLogged = true;
