@@ -17,6 +17,9 @@ import { CustomIconComponent } from '@components/custom-icon/custom-icon.compone
 // SERVICES
 import { AuthService } from '@services/auth/auth.service';
 
+// VALIDATORS
+import { customEmailValidator } from 'app/validators/email-validators';
+
 // CONFIG
 import { AppRoutes } from '@config/routes';
 import { apiRoute } from '@config/api/api';
@@ -45,7 +48,7 @@ export class LoginComponent {
 
   loginForm = this.formBuilder.group({
     // TODO SUPPRIMER LES INFOS QUAND TESTS FINIS
-    email: ['admin@k9club.fr', [Validators.required, Validators.email]],
+    email: ['admin@k9club.fr', [Validators.required, customEmailValidator()]],
     password: ['123456', [Validators.required]],
   });
 
@@ -115,8 +118,8 @@ export class LoginComponent {
       if (emailControl.errors?.['required']) {
         return 'Veuillez renseigner votre email.';
       }
-      if (emailControl.errors?.['email']) {
-        return 'Veuillez entrer un email valide.';
+      if (emailControl.errors?.['invalidEmail']) {
+        return 'Veuillez entrer une adresse email valide.';
       }
     }
 
