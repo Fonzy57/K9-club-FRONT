@@ -1,18 +1,23 @@
 <div class="flex flex-col gap-y-1">
   <label for="{{ inputName }}" class="text-sm">{{ label }}</label>
   <div
-    class="bg-white border border-border rounded-lg py-[11px] px-4 flex items-center gap-x-2 shadow-sm focus-within:border-main focus-within:ring-2 focus-within:ring-main/20"
+    class="bg-white border rounded-lg py-[11px] px-4 flex items-center gap-x-2 shadow-sm focus-within:ring-2"
+    [ngClass]="inputBorderStyle"
   >
     <input
-      [type]="actualType"
-      [name]="inputName"
+      [type]="actualType()"
       [id]="inputName"
+      [name]="inputName"
       [placeholder]="placeholder"
+      [value]="value()"
+      (input)="onInputChange($event)"
       class="focus:outline-none autofill:bg-none text-sm w-full h-full bg-transparent truncate placeholder:text-gray-two text-black disabled:text-gray-two"
     />
-    @if (isPassword) {
+    @if (type === "password") {
     <app-custom-icon
-      [name]="actualType === 'password' ? 'ionEyeOutline' : 'ionEyeOffOutline'"
+      [name]="
+        actualType() === 'password' ? 'ionEyeOutline' : 'ionEyeOffOutline'
+      "
       size="20"
       (click)="togglePassword()"
       class="cursor-pointer"

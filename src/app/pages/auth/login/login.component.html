@@ -21,7 +21,9 @@
         <p class="mt-1">Entrez vos identifiants pour accéder à votre compte.</p>
       </div>
 
-      <div
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onConnection()"
         class="flex flex-col gap-y-8 mt-6 lg:mt-4 lg:gap-y-6 xl:mt-11 xl:gap-y-8"
       >
         <div class="flex flex-col gap-y-4 lg:gap-y-3 xl:gap-y-4">
@@ -29,13 +31,19 @@
             inputName="mail"
             label="E-mail"
             placeholder="john.doe@gmail.com"
-            type="mail"
+            type="email"
+            formControlName="email"
+            [errorMessage]="displayErrors ? emailError : ''"
+            (valueChange)="onFieldChange()"
           />
           <app-custom-input
             inputName="password"
             label="Mot de passe"
             placeholder="********************"
             type="password"
+            formControlName="password"
+            [errorMessage]="displayErrors ? passwordError : ''"
+            (valueChange)="onFieldChange()"
           />
         </div>
 
@@ -46,10 +54,11 @@
           >
         </div>
 
-        <app-button [routerLink]="AppRoutes.app.dashboardFull">
+        <app-button type="submit">
+          <!-- [routerLink]="AppRoutes.app.user.dashboardFull" -->
           Se connecter
         </app-button>
-      </div>
+      </form>
 
       <p class="mt-6">
         Pas encore inscrit ?

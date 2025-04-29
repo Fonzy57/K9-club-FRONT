@@ -6,19 +6,19 @@ export const userNavItems: any[] = [
     name: 'dashboard',
     label: 'Dasboard',
     icon: 'ionHomeOutline',
-    url: AppRoutes.app.dashboardFull,
+    url: AppRoutes.app.user.dashboardFull,
   },
   {
     name: 'courses',
     label: 'Les cours',
     icon: 'ionCalendarNumberOutline',
-    url: AppRoutes.app.courseFull,
+    url: AppRoutes.app.user.courseFull,
   },
   {
     name: 'dog',
     label: 'Mes chiens',
     icon: 'ionPawOutline',
-    url: AppRoutes.app.dogFull,
+    url: AppRoutes.app.user.dogFull,
   },
 
   // TODO JUSTE POUR LE TEST ADMIN DASHBOARD
@@ -26,6 +26,6 @@ export const userNavItems: any[] = [
     name: 'dash',
     label: 'ADMIN Dashboard',
     icon: 'ionPawOutline',
-    url: AppRoutes.app.adminDashFull,
+    url: AppRoutes.app.admin.dashboardFull,
   },
 ];

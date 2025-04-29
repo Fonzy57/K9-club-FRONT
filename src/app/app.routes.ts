@@ -13,6 +13,9 @@ import { UserAccountComponent } from '@pages/app/user/user-account/user-account.
 import { LegalNoticeComponent } from '@pages/legal-notice/legal-notice.component';
 import { TermsOfUseComponent } from '@pages/terms-of-use/terms-of-use.component';
 import { AdminDashboardComponent } from '@pages/app/admin/admin-dashboard/admin-dashboard.component';
+import { loggedGuard } from './guards/logged.guard';
+import { ownerGuard } from './guards/owner.guard';
+import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
   {
@@ -59,17 +62,40 @@ export const routes: Routes = [
   {
     path: 'app',
     component: AppLayoutComponent,
+    canActivate: [loggedGuard],
     children: [
       {
+        // TODO VOIR CETTE REDIRECTION CAR SI C'EST UN OWNER, ADMIN OU COACH ON NE LES RENVOIE PAS
+        // AU MEME ENDROIT
         path: '',
         pathMatch: 'full',
-        redirectTo: AppRoutes.app.dashboard, // If user go to /app he'll be redirect to /app/dashboard
+        redirectTo: AppRoutes.app.user.dashboard, // If user go to /app he'll be redirect to /app/dashboard
       },
-      { path: AppRoutes.app.dashboard, component: DashboardComponent },
-      { path: AppRoutes.app.dog, component: DogComponent },
-      { path: AppRoutes.app.course, component: CourseComponent },
-      { path: AppRoutes.app.account, component: UserAccountComponent },
-      { path: AppRoutes.app.adminDash, component: AdminDashboardComponent },
+      {
+        path: AppRoutes.app.user.dashboard,
+        component: DashboardComponent,
+        canActivate: [ownerGuard],
+      },
+      {
+        path: AppRoutes.app.user.dog,
+        component: DogComponent,
+        canActivate: [ownerGuard],
+      },
+      {
+        path: AppRoutes.app.user.course,
+        component: CourseComponent,
+        canActivate: [ownerGuard],
+      },
+      {
+        path: AppRoutes.app.user.account,
+        component: UserAccountComponent,
+        canActivate: [ownerGuard],
+      },
+      {
+        path: AppRoutes.app.admin.dashboard,
+        component: AdminDashboardComponent,
+        canActivate: [adminGuard],
+      },
       // d'autres routes protégées ici
     ],
   },

@@ -1,43 +1,92 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CustomIconComponent } from '../custom-icon/custom-icon.component';
+// Import de modules Angular nécessaires
+import {
+  Component,
+  Input,
+  forwardRef,
+  signal,
+  computed,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
-/* TODO VOIR NGMODEL POUR RECUP INFOS DES INPUTS */
+// Import de l’interface à implémenter pour que le composant soit compatible avec Angular Forms
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { CustomIconComponent } from '../custom-icon/custom-icon.component';
 
 @Component({
   selector: 'app-custom-input',
+  standalone: true,
   imports: [CommonModule, CustomIconComponent],
   templateUrl: './custom-input.component.html',
   styleUrl: './custom-input.component.css',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR, // Fournit ce composant comme un contrôleur de formulaire custom
+      useExisting: forwardRef(() => CustomInputComponent), // Référence différée vers lui-même (circulaire)
+      multi: true, // Permet plusieurs value accessors (nécessaire ici)
+    },
+  ],
 })
-export class CustomInputComponent {
-  @Input() inputName: string = '';
-  @Input() label: string = '';
-  @Input() type: string = 'text';
-  @Input() placeholder: string = '';
-  @Input() hintMessage: string = '';
-  @Input() errorMessage: string = '';
+export class CustomInputComponent implements ControlValueAccessor {
+  // === INPUTS UTILISÉS DANS LE TEMPLATE ===
+  @Input() inputName = ''; // Attribut 'name' et 'id' de l’input
+  @Input() label = ''; // Texte du label affiché au-dessus
+  @Input() type = 'text'; // Type de l’input (text, password, etc.)
+  @Input() placeholder = ''; // Placeholder affiché dans l’input
+  @Input() hintMessage = ''; // Message informatif facultatif
+  @Input() errorMessage = ''; // Message d’erreur à afficher
 
-  @Output() valueChange = new EventEmitter();
+  @Output() valueChange = new EventEmitter<string>();
 
-  actualType: string = 'text'; // type réel utilisé par l'input
-  isPassword: boolean = false;
+  // === GESTION DE LA VALEUR DU CHAMP ===
+  private _value = signal(''); // Signal contenant la valeur de l’input (remplace une variable simple)
+  value = computed(() => this._value()); // Permet d’accéder à la valeur courante facilement
 
-  ngOnInit() {
-    this.actualType = this.type;
-    this.isPassword = this.type === 'password';
+  // === LOGIQUE MOT DE PASSE ===
+  actualType = signal('text'); // sera remplacé dans ngOnInit()
+  isPassword = computed(() => this.actualType() === 'password');
+
+  // === MÉTHODES REQUISES PAR ControlValueAccessor ===
+  private onChange = (_: any) => {}; // Callback à appeler quand la valeur change (fourni par Angular)
+  private onTouched = () => {}; // Callback à appeler quand le champ est touché (blur, etc.)
+
+  writeValue(value: string): void {
+    // Appelé par Angular pour mettre à jour la valeur externe dans le champ
+    this._value.set(value || '');
   }
 
-  // Trouver ici : https://medium.com/@hish.abdelshafouk/building-a-custom-input-component-with-form-validation-in-angular-fa3f93d5363e
-  // control: FormControl = new FormControl("", Validators.required);
-
-  togglePassword() {
-    this.actualType = this.actualType === 'password' ? 'text' : 'password';
+  registerOnChange(fn: any): void {
+    // Angular fournit une fonction à appeler quand la valeur change
+    this.onChange = fn;
   }
 
-  /* TODO FAIRE DES REGEX POUR VERIFIER ET EMPECHER DE TAPER N'IMPORTE QUOI DANS LES INPUTS SELON LE TYPE */
+  registerOnTouched(fn: any): void {
+    // Angular fournit une fonction à appeler quand le champ est touché
+    this.onTouched = fn;
+  }
 
-  /* TODO VOIR POUR FAIRE LES INPUTS FONCTIONNELS EN RECUPERANT LES VALEURS ET LE FORM CONTROL D'ANGULAR */
-  /* https://medium.com/angular-gems/angular-custom-form-controls-nested-form-groups-made-easy-2ac09e91cf67 */
-  /* https://stackblitz.com/edit/custom-form-controls-demo?file=src%2Fapp%2Fapp.component.ts */
+  onInputChange(event: Event): void {
+    const newValue = (event.target as HTMLInputElement).value;
+    this._value.set(newValue); // Met à jour le signal
+    this.onChange(newValue); // Notifie Angular Reactive Forms
+    this.valueChange.emit(newValue); // <<<<< NOTIFIE ton parent que la valeur a changé
+  }
+  togglePassword(): void {
+    // Alterne entre 'text' et 'password' pour afficher ou cacher le mot de passe
+    this.actualType.set(this.actualType() === 'password' ? 'text' : 'password');
+  }
+
+  ngOnInit(): void {
+    // Initialiser le type réel en fonction de l’@Input()
+    this.actualType.set(this.type);
+  }
+
+  get inputBorderStyle(): string {
+    if (this.errorMessage) {
+      return 'border-error focus-within:border-error focus-within:ring-error/20';
+    } else {
+      return 'border-border focus-within:border-main focus-within:ring-main/20';
+    }
+  }
 }
