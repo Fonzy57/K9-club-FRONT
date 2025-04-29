@@ -91,6 +91,8 @@ export class LoginComponent {
           }
         },
         error: (error) => {
+          // TODO ICI IL FAUT QUE JE GERE QQN QUI A MAUVAIS MDP ET EMAIL
+          // FAIRE UNE NOTIFICATION OU UN AUTRE SYSTEME
           if (error.status === 401) {
             console.log('Mauvais email ou mot de passe');
           }
