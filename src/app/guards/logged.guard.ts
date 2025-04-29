@@ -1,5 +1,6 @@
-import { Inject, inject } from '@angular/core';
+import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
+import { AppRoutes } from '@config/routes';
 import { AuthService } from '@services/auth/auth.service';
 
 export const loggedGuard: CanActivateFn = (route, state) => {
@@ -10,5 +11,5 @@ export const loggedGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  return router.parseUrl('/inscription');
+  return router.parseUrl(AppRoutes.auth.registerFull);
 };
