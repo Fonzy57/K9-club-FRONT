@@ -22,7 +22,7 @@ export type ButtonSize = 'normal' | 'tiny';
 })
 export class ButtonComponent implements AfterViewInit {
   // TODO REVOIR ICI LE TYPAGE POUR QUE MON IDE ME LE PROPOSE
-  @Input() type: ButtonType = 'primary';
+  @Input() typeButton: ButtonType = 'primary';
   @Input() size: ButtonSize = 'normal';
 
   @Input() routerLink?: any[] | string;
@@ -51,7 +51,7 @@ export class ButtonComponent implements AfterViewInit {
 
   /* TODO REVOIR LA TAILLE DES BOUTONS? LES NORMAUX NE SONT PAS ASSEZ GRAND */
   get bgColorClass(): string {
-    switch (this.type) {
+    switch (this.typeButton) {
       case 'ghost':
         return 'py-[7px] bg-white border border-border hover:border-text active:bg-ghost-active';
       case 'cancel':
@@ -63,7 +63,7 @@ export class ButtonComponent implements AfterViewInit {
   }
 
   get textColorClass(): string {
-    switch (this.type) {
+    switch (this.typeButton) {
       case 'ghost':
         return 'text-text';
       case 'primary':
