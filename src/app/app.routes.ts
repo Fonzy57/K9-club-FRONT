@@ -69,30 +69,30 @@ export const routes: Routes = [
         // AU MEME ENDROIT
         path: '',
         pathMatch: 'full',
-        redirectTo: AppRoutes.app.dashboard, // If user go to /app he'll be redirect to /app/dashboard
+        redirectTo: AppRoutes.app.user.dashboard, // If user go to /app he'll be redirect to /app/dashboard
       },
       {
-        path: AppRoutes.app.dashboard,
+        path: AppRoutes.app.user.dashboard,
         component: DashboardComponent,
         canActivate: [ownerGuard],
       },
       {
-        path: AppRoutes.app.dog,
+        path: AppRoutes.app.user.dog,
         component: DogComponent,
         canActivate: [ownerGuard],
       },
       {
-        path: AppRoutes.app.course,
+        path: AppRoutes.app.user.course,
         component: CourseComponent,
         canActivate: [ownerGuard],
       },
       {
-        path: AppRoutes.app.account,
+        path: AppRoutes.app.user.account,
         component: UserAccountComponent,
         canActivate: [ownerGuard],
       },
       {
-        path: AppRoutes.app.adminDash,
+        path: AppRoutes.app.admin.dashboard,
         component: AdminDashboardComponent,
         canActivate: [adminGuard],
       },
