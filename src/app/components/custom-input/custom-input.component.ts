@@ -1,5 +1,13 @@
 // Import de modules Angular nécessaires
-import { Component, Input, forwardRef, signal, computed } from '@angular/core';
+import {
+  Component,
+  Input,
+  forwardRef,
+  signal,
+  computed,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 
 // Import de l’interface à implémenter pour que le composant soit compatible avec Angular Forms
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
@@ -29,6 +37,8 @@ export class CustomInputComponent implements ControlValueAccessor {
   @Input() hintMessage = ''; // Message informatif facultatif
   @Input() errorMessage = ''; // Message d’erreur à afficher
 
+  @Output() valueChange = new EventEmitter<string>();
+
   // === GESTION DE LA VALEUR DU CHAMP ===
   private _value = signal(''); // Signal contenant la valeur de l’input (remplace une variable simple)
   value = computed(() => this._value()); // Permet d’accéder à la valeur courante facilement
@@ -57,12 +67,11 @@ export class CustomInputComponent implements ControlValueAccessor {
   }
 
   onInputChange(event: Event): void {
-    // Méthode appelée lors de la saisie dans l’input
     const newValue = (event.target as HTMLInputElement).value;
     this._value.set(newValue); // Met à jour le signal
-    this.onChange(newValue); // Notifie Angular que la valeur a changé
+    this.onChange(newValue); // Notifie Angular Reactive Forms
+    this.valueChange.emit(newValue); // <<<<< NOTIFIE ton parent que la valeur a changé
   }
-
   togglePassword(): void {
     // Alterne entre 'text' et 'password' pour afficher ou cacher le mot de passe
     this.actualType.set(this.actualType() === 'password' ? 'text' : 'password');
