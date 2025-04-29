@@ -7,7 +7,7 @@ export const coachGuard: CanActivateFn = (route, state) => {
   const auth: AuthService = inject(AuthService);
   const router: Router = inject(Router);
 
-  if (auth.isLogged && auth.userInfos.role === 'ROLE_COACH') {
+  if (auth.isLogged && auth.userInfos && auth.userInfos.role === 'ROLE_COACH') {
     return true;
   }
 

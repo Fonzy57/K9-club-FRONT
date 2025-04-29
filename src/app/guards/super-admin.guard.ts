@@ -7,7 +7,11 @@ export const superAdminGuard: CanActivateFn = (route, state) => {
   const auth: AuthService = inject(AuthService);
   const router: Router = inject(Router);
 
-  if (auth.isLogged && auth.userInfos.role === 'ROLE_SUPER_ADMIN') {
+  if (
+    auth.isLogged &&
+    auth.userInfos &&
+    auth.userInfos.role === 'ROLE_SUPER_ADMIN'
+  ) {
     return true;
   }
 
