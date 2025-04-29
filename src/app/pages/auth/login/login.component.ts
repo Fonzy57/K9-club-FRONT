@@ -1,9 +1,6 @@
+// ANGULAR
 import { Component, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { ButtonComponent } from '@components/button/button.component';
-import { CustomInputComponent } from '@components/custom-input/custom-input.component';
-import { AppRoutes } from '@config/routes';
-import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
 import { HttpClient } from '@angular/common/http';
 import {
   FormBuilder,
@@ -11,7 +8,18 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+
+// COMPONENTS
+import { ButtonComponent } from '@components/button/button.component';
+import { CustomInputComponent } from '@components/custom-input/custom-input.component';
+import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
+
+// SERVICES
 import { AuthService } from '@services/auth/auth.service';
+
+// CONFIG
+import { AppRoutes } from '@config/routes';
+import { apiRoute } from '@config/api/api';
 
 @Component({
   selector: 'app-login',
@@ -36,25 +44,62 @@ export class LoginComponent {
   auth: AuthService = inject(AuthService);
 
   loginForm = this.formBuilder.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]],
+    // TODO SUPPRIMER LES INFOS QUAND TESTS FINIS
+    email: ['admin@k9club.fr', [Validators.required, Validators.email]],
+    password: ['123456', [Validators.required]],
   });
 
-  onConnection() {
-    // TODO SUPPRIMER LES CONSOLE LOG QUAND TESTS FINIS
-    console.log('Je me connecte');
-    console.log('Valeur Formulaire : ', this.loginForm.value);
-
+  onConnection(): void {
     if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
       this.displayErrors = true; // Afficher les erreurs à la soumission
       return;
     }
+
+    this.http
+      .post(apiRoute + 'login', this.loginForm.value, {
+        responseType: 'text',
+      })
+      .subscribe({
+        next: (result) => {
+          this.auth.decodeJwt(result);
+
+          if (!this.auth.userInfos) {
+            console.error('Error : User informations not found.');
+            return;
+          }
+
+          const userRole = this.auth.userInfos.role;
+
+          switch (userRole) {
+            case 'ROLE_SUPER_ADMIN':
+              // TODO CHANGER QUAND LA PAGE SERA READY
+              this.router.navigateByUrl(AppRoutes.app.admin.dashboardFull);
+              break;
+            case 'ROLE_ADMIN':
+              this.router.navigateByUrl(AppRoutes.app.admin.dashboardFull);
+              break;
+            case 'ROLE_COACH':
+              // TODO CHANGER QUAND LA PAGE SERA READY
+              this.router.navigateByUrl(AppRoutes.app.admin.dashboardFull);
+              break;
+            case 'ROLE_OWNER':
+              this.router.navigateByUrl(AppRoutes.app.user.dashboardFull);
+              break;
+            default:
+              break;
+          }
+        },
+        error: (error) => {
+          if (error.status === 401) {
+            console.log('Mauvais email ou mot de passe');
+          }
+        },
+      });
   }
 
   onFieldChange() {
     this.displayErrors = false;
-    console.log('Valeur change');
   }
 
   get emailError(): string {
