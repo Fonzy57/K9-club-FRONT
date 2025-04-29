@@ -1,4 +1,4 @@
-// Import de modules Angular nécessaires
+// ANGULAR
 import {
   Component,
   Input,
@@ -12,7 +12,9 @@ import {
 // Import de l’interface à implémenter pour que le composant soit compatible avec Angular Forms
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { CustomIconComponent } from '../custom-icon/custom-icon.component';
+
+// COMPONENTS
+import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
 
 @Component({
   selector: 'app-custom-input',

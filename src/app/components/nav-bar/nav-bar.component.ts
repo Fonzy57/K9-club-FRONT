@@ -1,6 +1,11 @@
+// ANGULAR
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+
+// COMPONENTS
 import { ButtonComponent } from '@components/button/button.component';
+
+// CONFIG
 import { AppRoutes } from '@config/routes';
 
 @Component({

@@ -1,4 +1,7 @@
+// ANGULAR
 import { Component, Input } from '@angular/core';
+
+// COMPONENTS
 import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
 
 export type Info = {

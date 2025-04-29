@@ -1,10 +1,15 @@
+// ANGULAR
 import { CommonModule, DOCUMENT } from '@angular/common';
 import { Component, Inject, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { NavItemComponent } from '@components/nav-item/nav-item.component';
-import { AppRoutes } from '@config/routes';
-import { userNavItems } from '@config/user/user-nav-items';
 import { filter } from 'rxjs';
+
+// COMPONENTS
+import { NavItemComponent } from '@components/nav-item/nav-item.component';
+
+// CONFIG
+import { AppRoutes } from '@config/routes';
+import { userNavItems } from '@config/navigation/user-nav-items';
 
 @Component({
   selector: 'app-header-mobile',

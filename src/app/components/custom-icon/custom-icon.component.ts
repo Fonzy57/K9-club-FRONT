@@ -1,5 +1,8 @@
+// ANGULAR
 import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
+
+// NG ICONS
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   ionAddOutline,

@@ -1,5 +1,8 @@
+// ANGULAR
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
+
+// TYPES
 import {
   Tag,
   TAG_TYPE_COLOR_MAP,

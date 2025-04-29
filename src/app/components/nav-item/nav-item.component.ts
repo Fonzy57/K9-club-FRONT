@@ -1,6 +1,9 @@
+// ANGULAR
 import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+
+// COMPONENTS
 import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
 
 @Component({

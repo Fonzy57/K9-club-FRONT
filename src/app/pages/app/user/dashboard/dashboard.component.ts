@@ -4,7 +4,7 @@ import { CardDogComponent } from '@components/card/card-dog/card-dog.component';
 import { CardDog } from '@components/card/card-dog/card-dog.type';
 import { CardNextCourseComponent } from '@components/card/card-next-course/card-next-course.component';
 import { Tag } from '@components/tag-name/tag-name.type';
-import { apiRoute } from '@config/api/api';
+import { apiRoot } from '@config/api/api';
 
 /* TODO POUR LES TYPES FAIRE DES FICHIERS DANS LE REPO "models" */
 export interface NextCourse {
@@ -28,7 +28,7 @@ export class DashboardComponent {
   name: string = 'Doe';
 
   ngOnInit() {
-    this.http.get<any[]>(apiRoute + 'dogs').subscribe((dogsListFromApi) => {
+    this.http.get<any[]>(apiRoot + 'dogs').subscribe((dogsListFromApi) => {
       /* TODO MAP JUSTE POUR LES TESTS */
       this.dogs = dogsListFromApi.map((dog) => ({
         name: dog.name,

@@ -1,8 +1,13 @@
+// ANGULAR
 import { Component } from '@angular/core';
-import { ButtonComponent } from '../button/button.component';
-import { AppRoutes } from '@config/routes';
-import { CopyrightComponent } from '../copyright/copyright.component';
 import { RouterLink } from '@angular/router';
+
+// COMPONENTS
+import { ButtonComponent } from '../button/button.component';
+import { CopyrightComponent } from '../copyright/copyright.component';
+
+// CONFIG
+import { AppRoutes } from '@config/routes';
 
 @Component({
   selector: 'app-footer',
