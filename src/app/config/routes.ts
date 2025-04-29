@@ -1,3 +1,6 @@
+const appRoot = 'app';
+const authRoot = 'auth';
+
 export const AppRoutes = {
   home: '',
   legalNotice: 'mentions-legales',
@@ -6,40 +9,41 @@ export const AppRoutes = {
     return `/${this.home}/${this.termsOfUse}`;
   },
   auth: {
-    root: 'auth',
-    login: 'connexion',
+    root: authRoot,
     register: 'inscription',
-    get loginFull() {
-      return `/${this.root}/${this.login}`;
-    },
+    login: 'connexion',
     get registerFull() {
-      return `/${this.root}/${this.register}`;
+      return `/${authRoot}/${this.register}`;
+    },
+    get loginFull() {
+      return `/${authRoot}/${this.login}`;
     },
   },
-
-  // TODO REVOIR ICI LE SYSTEME, PEUT ÊTRE FAIRE DES OBJETS user, admin et coach
-  // SI CHANGEMENT FAIT IL FAUDRA REVOIR TOUS LES IMPORTS
   app: {
-    root: 'app',
-    dashboard: 'dashboard',
-    dog: 'mes-chiens',
-    course: 'les-cours',
-    account: 'mon-compte',
-    adminDash: 'admin-dashboard',
-    get dashboardFull() {
-      return `/${this.root}/${this.dashboard}`;
+    root: appRoot,
+    user: {
+      dashboard: 'dashboard',
+      dog: 'mes-chiens',
+      course: 'les-cours',
+      account: 'mon-compte',
+      get dashboardFull() {
+        return `/${appRoot}/${this.dashboard}`;
+      },
+      get dogFull() {
+        return `/${appRoot}/${this.dog}`;
+      },
+      get courseFull() {
+        return `/${appRoot}/${this.course}`;
+      },
+      get accountFull() {
+        return `/${appRoot}/${this.account}`;
+      },
     },
-    get dogFull() {
-      return `/${this.root}/${this.dog}`;
-    },
-    get courseFull() {
-      return `/${this.root}/${this.course}`;
-    },
-    get accountFull() {
-      return `/${this.root}/${this.account}`;
-    },
-    get adminDashFull() {
-      return `/${this.root}/${this.adminDash}`;
+    admin: {
+      dashboard: 'admin-dashboard',
+      get dashboardFull() {
+        return `/${appRoot}/${this.dashboard}`;
+      },
     },
   },
 };
