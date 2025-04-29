@@ -1,7 +1,8 @@
 <div class="flex flex-col gap-y-1">
   <label for="{{ inputName }}" class="text-sm">{{ label }}</label>
   <div
-    class="bg-white border border-border rounded-lg py-[11px] px-4 flex items-center gap-x-2 shadow-sm focus-within:border-main focus-within:ring-2 focus-within:ring-main/20"
+    class="bg-white border rounded-lg py-[11px] px-4 flex items-center gap-x-2 shadow-sm focus-within:ring-2"
+    [ngClass]="inputBorderStyle"
   >
     <input
       [type]="actualType()"

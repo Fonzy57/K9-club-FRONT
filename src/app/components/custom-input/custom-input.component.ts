@@ -81,4 +81,12 @@ export class CustomInputComponent implements ControlValueAccessor {
     // Initialiser le type réel en fonction de l’@Input()
     this.actualType.set(this.type);
   }
+
+  get inputBorderStyle(): string {
+    if (this.errorMessage) {
+      return 'border-error focus-within:border-error focus-within:ring-error/20';
+    } else {
+      return 'border-border focus-within:border-main focus-within:ring-main/20';
+    }
+  }
 }
