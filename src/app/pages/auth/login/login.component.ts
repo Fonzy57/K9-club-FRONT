@@ -98,6 +98,9 @@ export class LoginComponent {
           // TODO ICI IL FAUT QUE JE GERE QQN QUI A MAUVAIS MDP ET EMAIL
           // -----------------------------------------------------------
 
+          // TODO ALLER SUR CE LIEN TESTER CETTE LIBRARY
+          // https://primeng.org/installation
+
           // FAIRE UNE NOTIFICATION OU UN AUTRE SYSTEME
 
           if (error.status === 401) {
