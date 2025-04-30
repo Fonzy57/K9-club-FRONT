@@ -1,5 +1,6 @@
 const appRoot = 'app';
 const authRoot = 'auth';
+const adminRoot = 'admin';
 
 export const AppRoutes = {
   home: '',
@@ -40,13 +41,14 @@ export const AppRoutes = {
       },
     },
     admin: {
-      dashboard: 'admin-dashboard',
+      root: adminRoot,
+      dashboard: 'dashboard',
       account: 'mon-compte',
       get dashboardFull() {
-        return `/${appRoot}/${this.dashboard}`;
+        return `/${appRoot}/${this.root}/${this.dashboard}`;
       },
       get accountFull() {
-        return `/${appRoot}/${this.account}`;
+        return `/${appRoot}/${this.root}/${this.account}`;
       },
     },
   },
