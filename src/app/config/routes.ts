@@ -41,8 +41,12 @@ export const AppRoutes = {
     },
     admin: {
       dashboard: 'admin-dashboard',
+      account: 'mon-compte',
       get dashboardFull() {
         return `/${appRoot}/${this.dashboard}`;
+      },
+      get accountFull() {
+        return `/${appRoot}/${this.account}`;
       },
     },
   },
