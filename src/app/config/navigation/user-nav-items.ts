@@ -20,12 +20,4 @@ export const userNavItems: any[] = [
     icon: 'ionPawOutline',
     url: AppRoutes.app.user.dogFull,
   },
-
-  // TODO JUSTE POUR LE TEST ADMIN DASHBOARD
-  {
-    name: 'dash',
-    label: 'ADMIN Dashboard',
-    icon: 'ionPawOutline',
-    url: AppRoutes.app.admin.dashboardFull,
-  },
 ];

@@ -1,5 +1,10 @@
+// ANGULAR
 import { Component, Input } from '@angular/core';
-import { TagNameComponent } from '../../tag-name/tag-name.component';
+
+// COMPONENTS
+import { TagNameComponent } from '@components/tag-name/tag-name.component';
+
+// TYPES
 import { CardDog } from './card-dog.type';
 
 @Component({

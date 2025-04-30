@@ -1,3 +1,4 @@
+// ANGULAR
 import { Component, OnInit } from '@angular/core';
 import {
   ActivatedRoute,
@@ -5,8 +6,10 @@ import {
   Router,
   RouterOutlet,
 } from '@angular/router';
-import { version } from '@config/version';
 import { filter } from 'rxjs/operators';
+
+// CONFIG
+import { version } from '@config/version';
 
 @Component({
   selector: 'app-auth-layout',

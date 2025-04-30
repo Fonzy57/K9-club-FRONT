@@ -1,19 +1,32 @@
+// ANGULAR
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { Component, Inject, Renderer2 } from '@angular/core';
+import { Component, inject, Inject, Renderer2 } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import { NavItemComponent } from '@components/nav-item/nav-item.component';
-import { AppRoutes } from '@config/routes';
-import { userNavItems } from '@config/user/user-nav-items';
 import { filter } from 'rxjs';
+
+// COMPONENTS
+import { NavItemComponent } from '@components/nav-item/nav-item.component';
+import { DisconnectButtonComponent } from '../disconnect/disconnect-button/disconnect-button.component';
+
+// CONFIG
+import { AppRoutes } from '@config/routes';
+import { userNavItems } from '@config/navigation/user-nav-items';
+import { adminNavItems } from '@config/navigation/admin-nav-items';
+
+// SERVICES
+import { AuthService } from '@services/auth/auth.service';
 
 @Component({
   selector: 'app-header-mobile',
-  imports: [NavItemComponent, CommonModule],
+  imports: [NavItemComponent, CommonModule, DisconnectButtonComponent],
   templateUrl: './header-mobile.component.html',
   styleUrl: './header-mobile.component.css',
 })
 export class HeaderMobileComponent {
-  navItems: any[] = userNavItems;
+  auth: AuthService = inject(AuthService);
+
+  navItems: any[] = [];
+  accountLink: string = '';
   AppRoutes = AppRoutes;
 
   isOpen = false;
@@ -34,6 +47,39 @@ export class HeaderMobileComponent {
           this.closeMenu();
         }
       });
+  }
+
+  ngOnInit() {
+    const userRole = this.auth.userInfos?.role;
+
+    if (userRole) {
+      switch (userRole) {
+        case 'ROLE_SUPER_ADMIN':
+          // TODO CHANGER QUAND LA PAGE SERA READY
+          this.navItems = userNavItems;
+
+          // TODO FAIRE LA PAGE ET CHANGER LE LIEN QUAND C'EST FAIT
+          this.accountLink = AppRoutes.app.admin.accountFull;
+          break;
+        case 'ROLE_ADMIN':
+          this.navItems = adminNavItems;
+          // TODO FAIRE LA PAGE
+          this.accountLink = AppRoutes.app.admin.accountFull;
+          break;
+        case 'ROLE_COACH':
+          // TODO CHANGER QUAND LA PAGE SERA READY
+          this.navItems = userNavItems;
+          // TODO FAIRE LA PAGE ET CHANGER LE LIEN QUAND C'EST FAIT
+          this.accountLink = AppRoutes.app.admin.accountFull;
+          break;
+        case 'ROLE_OWNER':
+          this.navItems = userNavItems;
+          this.accountLink = AppRoutes.app.user.accountFull;
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   toggleMenu(): void {

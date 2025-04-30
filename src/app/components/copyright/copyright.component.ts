@@ -1,5 +1,8 @@
+// ANGULAR
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+
+// CONFIG
 import { AppRoutes } from '@config/routes';
 import { version } from '@config/version';
 

@@ -1,8 +1,13 @@
+// ANGULAR
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { version } from '@config/version';
+
+// COMPONENTS
 import { SidebarComponent } from '@components/sidebar/sidebar.component';
 import { HeaderMobileComponent } from '@components/header-mobile/header-mobile.component';
+
+// CONFIG
+import { version } from '@config/version';
 
 @Component({
   selector: 'app-app-layout',

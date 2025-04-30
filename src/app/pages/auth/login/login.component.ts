@@ -22,7 +22,7 @@ import { customEmailValidator } from 'app/validators/email-validators';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
-import { apiRoute } from '@config/api/api';
+import { apiRoot } from '@config/api/api';
 
 @Component({
   selector: 'app-login',
@@ -60,7 +60,7 @@ export class LoginComponent {
     }
 
     this.http
-      .post(apiRoute + 'login', this.loginForm.value, {
+      .post(apiRoot + 'login', this.loginForm.value, {
         responseType: 'text',
       })
       .subscribe({
@@ -94,8 +94,15 @@ export class LoginComponent {
           }
         },
         error: (error) => {
+          // -----------------------------------------------------------
           // TODO ICI IL FAUT QUE JE GERE QQN QUI A MAUVAIS MDP ET EMAIL
+          // -----------------------------------------------------------
+
+          // TODO ALLER SUR CE LIEN TESTER CETTE LIBRARY
+          // https://primeng.org/installation
+
           // FAIRE UNE NOTIFICATION OU UN AUTRE SYSTEME
+
           if (error.status === 401) {
             console.log('Mauvais email ou mot de passe');
           }
