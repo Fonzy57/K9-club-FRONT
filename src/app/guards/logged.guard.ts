@@ -11,5 +11,5 @@ export const loggedGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  return router.parseUrl(AppRoutes.auth.registerFull);
+  return router.parseUrl(AppRoutes.auth.loginFull);
 };
