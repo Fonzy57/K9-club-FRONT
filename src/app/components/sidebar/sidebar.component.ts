@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 // COMPONENTS
 import { NavItemComponent } from '@components/nav-item/nav-item.component';
-import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
+import { DisconnectButtonComponent } from '../disconnect/disconnect-button/disconnect-button.component';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
@@ -16,7 +16,7 @@ import { AuthService } from '@services/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [NavItemComponent, CustomIconComponent],
+  imports: [NavItemComponent, DisconnectButtonComponent],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
 })
@@ -59,10 +59,5 @@ export class SidebarComponent {
           break;
       }
     }
-  }
-
-  onDisconnection(event: MouseEvent) {
-    this.auth.logout();
-    this.router.navigate([this.AppRoutes.auth.login]);
   }
 }

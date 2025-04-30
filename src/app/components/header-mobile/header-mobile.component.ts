@@ -6,7 +6,7 @@ import { filter } from 'rxjs';
 
 // COMPONENTS
 import { NavItemComponent } from '@components/nav-item/nav-item.component';
-import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
+import { DisconnectButtonComponent } from '../disconnect/disconnect-button/disconnect-button.component';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
@@ -18,7 +18,7 @@ import { AuthService } from '@services/auth/auth.service';
 
 @Component({
   selector: 'app-header-mobile',
-  imports: [NavItemComponent, CommonModule, CustomIconComponent],
+  imports: [NavItemComponent, CommonModule, DisconnectButtonComponent],
   templateUrl: './header-mobile.component.html',
   styleUrl: './header-mobile.component.css',
 })
@@ -98,10 +98,5 @@ export class HeaderMobileComponent {
   closeMenu(): void {
     this.isOpen = false;
     this.renderer.removeClass(this.document.body, 'no-scroll-mobile');
-  }
-
-  onDisconnection(event: MouseEvent) {
-    this.auth.logout();
-    this.router.navigate([this.AppRoutes.auth.login]);
   }
 }
