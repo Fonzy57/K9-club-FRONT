@@ -12,6 +12,7 @@ export class AuthService {
     const jwt: string | null = localStorage.getItem('jwt');
 
     if (jwt !== null) {
+      this.decodeJwt(jwt);
     }
   }
 
