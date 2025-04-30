@@ -18,6 +18,7 @@ import { ownerGuard } from './guards/owner.guard';
 import { adminGuard } from './guards/admin.guard';
 
 export const routes: Routes = [
+  // --- PUBLIC SITE ---
   {
     path: AppRoutes.home,
     component: MainLayoutComponent,
@@ -30,6 +31,8 @@ export const routes: Routes = [
       },
     ],
   },
+
+  // --- AUTH (registration / login) ---
   {
     path: AppRoutes.auth.root,
     component: AuthLayoutComponent,
@@ -59,45 +62,63 @@ export const routes: Routes = [
       },
     ],
   },
+
+  // --- APP (admins, coaches, owners) ---
   {
-    path: 'app',
+    path: AppRoutes.app.root, // 'app'
     component: AppLayoutComponent,
     canActivate: [loggedGuard],
     children: [
+      // 1) /app redirects to home page
+      // TODO CHANGER ICI SELON LE ROLE, FAIRE UN GUARD QUI RENVOIE SUR LE BON DASHBOARD SELON LE ROLE
       {
-        // TODO VOIR CETTE REDIRECTION CAR SI C'EST UN OWNER, ADMIN OU COACH ON NE LES RENVOIE PAS
-        // AU MEME ENDROIT
         path: '',
         pathMatch: 'full',
-        redirectTo: AppRoutes.app.user.dashboard, // If user go to /app he'll be redirect to /app/dashboard
+        redirectTo: AppRoutes.home, // 'dashboard'
       },
+
+      // 2) “owner” routes (ROLE_OWNER / ROLE_COACH / ROLE_SUPER_ADMIN if desired)
       {
-        path: AppRoutes.app.user.dashboard,
-        component: DashboardComponent,
-        canActivate: [ownerGuard],
+        path: '',
+        canActivateChild: [ownerGuard],
+        children: [
+          {
+            path: AppRoutes.app.user.dashboard, // 'dashboard'
+            component: DashboardComponent,
+          },
+          {
+            path: AppRoutes.app.user.dog, // 'mes-chiens'
+            component: DogComponent,
+          },
+          {
+            path: AppRoutes.app.user.course, // 'les-cours'
+            component: CourseComponent,
+          },
+          {
+            path: AppRoutes.app.user.account, // 'mon-compte'
+            component: UserAccountComponent,
+          },
+        ],
       },
+
+      // 3) “admin” routes
       {
-        path: AppRoutes.app.user.dog,
-        component: DogComponent,
-        canActivate: [ownerGuard],
+        path: AppRoutes.app.admin.root, // 'admin'
+        canActivateChild: [adminGuard],
+        children: [
+          {
+            path: AppRoutes.app.admin.dashboard, // 'dashboard' (same segment)
+            component: AdminDashboardComponent,
+          },
+          /* {
+            path: AppRoutes.app.admin.account,    // 'mon-compte'
+            component: AdminAccountComponent,
+          }, */
+        ],
       },
-      {
-        path: AppRoutes.app.user.course,
-        component: CourseComponent,
-        canActivate: [ownerGuard],
-      },
-      {
-        path: AppRoutes.app.user.account,
-        component: UserAccountComponent,
-        canActivate: [ownerGuard],
-      },
-      {
-        path: AppRoutes.app.admin.dashboard,
-        component: AdminDashboardComponent,
-        canActivate: [adminGuard],
-      },
-      // d'autres routes protégées ici
     ],
   },
-  { path: '**', redirectTo: '' },
+
+  // --- CATCH ALL ---
+  { path: '**', redirectTo: AppRoutes.home },
 ];
