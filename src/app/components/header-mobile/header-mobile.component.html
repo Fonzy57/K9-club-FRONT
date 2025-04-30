@@ -60,6 +60,14 @@
           iconName="ionPersonOutline"
           [url]="AppRoutes.app.user.accountFull"
         />
+        <!-- TODO EN FAIRE UN COMPOSANT -->
+        <button
+          class="px-3 py-2.5 flex items-center gap-x-3 group bg-white w-full cursor-pointer rounded-lg border border-white transition duration-300 ease-in-out hover:bg-tab-hover active:bg-ghost-active"
+          (click)="onDisconnection($event)"
+        >
+          <app-custom-icon name="ionLogOutOutline" size="22" />
+          <p class="font-medium pt-0.5">Déconnexion</p>
+        </button>
       </div>
     </div>
   </div>
