@@ -9,10 +9,6 @@
     </div>
     <!-- NAVIGATION -->
     <div class="mt-8 flex flex-col gap-y-1">
-      <!--
-      TODO FAIRE CONDITION SELON LE ROLE
-      CHANGER LA VALEUR DE navItems DANS LE TS SELON LE ROLE 
-      -->
       @for (navItem of navItems; track $index) {
       <app-nav-item
         [label]="navItem.label"
