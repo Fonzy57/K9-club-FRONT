@@ -16,6 +16,7 @@ import { CustomIconComponent } from '@components/custom-icon/custom-icon.compone
 
 // SERVICES
 import { AuthService } from '@services/auth/auth.service';
+import { ToastMessageService } from '@services/toast/toast-message.service';
 
 // VALIDATORS
 import { customEmailValidator } from 'app/validators/email-validators';
@@ -26,10 +27,11 @@ import { apiRoot } from '@config/api/api';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   imports: [
+    RouterModule,
     ButtonComponent,
     CustomInputComponent,
-    RouterModule,
     CustomIconComponent,
     FormsModule,
     ReactiveFormsModule,
@@ -45,6 +47,7 @@ export class LoginComponent {
   formBuilder: FormBuilder = inject(FormBuilder);
   router: Router = inject(Router);
   auth: AuthService = inject(AuthService);
+  toast: ToastMessageService = inject(ToastMessageService);
 
   loginForm = this.formBuilder.group({
     // TODO SUPPRIMER LES INFOS QUAND TESTS FINIS
@@ -94,17 +97,13 @@ export class LoginComponent {
           }
         },
         error: (error) => {
-          // -----------------------------------------------------------
-          // TODO ICI IL FAUT QUE JE GERE QQN QUI A MAUVAIS MDP ET EMAIL
-          // -----------------------------------------------------------
-
-          // TODO ALLER SUR CE LIEN TESTER CETTE LIBRARY
-          // https://primeng.org/installation
-
-          // FAIRE UNE NOTIFICATION OU UN AUTRE SYSTEME
-
           if (error.status === 401) {
-            console.log('Mauvais email ou mot de passe');
+            this.toast.show({
+              severity: 'error',
+              title: 'Erreur',
+              content: 'E-mail ou mot de passe incorrect',
+              time: 5000,
+            });
           }
         },
       });
