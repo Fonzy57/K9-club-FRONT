@@ -1,4 +1,6 @@
-<div class="flex items-center justify-between">
+<div
+  class="flex flex-col gap-4 sm:flex-row sm:gap-0 items-center justify-between"
+>
   <h1 class="text-2xl md:text-3xl font-semibold">Les coachs du club</h1>
   <!-- TODO CHANGER LA ROUTE QUAND LA PAGE D'AJOUT D'UN COACH SERA FAITE -->
   <app-button [routerLink]="AppRoutes.app.admin.coachesFull"
@@ -8,7 +10,7 @@
 
 <!-- ARRAY OF COACHES -->
 <!-- TODO EN FAIRE UN COMPOSANT -->
-<div class="mt-3 sm:mt-5">
+<div class="mt-8">
   <div class="card">
     <p-toast />
     <p-table [value]="coaches" [tableStyle]="{ 'min-width': '50rem' }">
@@ -29,18 +31,27 @@
           <td>{{ coach.email }}</td>
           <td>{{ coach.createdAt | date : "dd MMMM YYYY" }}</td>
           <td>{{ coach.updatedAt | date : "dd MMMM YYYY à HH:mm:ss" }}</td>
-
-          <!-- 
-            TODO CHANGER LES ICONS ET EN METTRE 2
-            FAIRE UN COMPOSANT 
-          -->
-          <td>
-            <p-button
-              icon="pi pi-search"
-              (click)="selectCoach(coach)"
-              severity="secondary"
-              rounded
-            />
+          <td class="flex items-center gap-4">
+            <button
+              class="group cursor-pointer p-1.5 border border-transparent rounded-lg transition-colors duration-300 ease-in-out hover:bg-information-100 active:border-information-600"
+              (click)="onModifyCoach(coach)"
+            >
+              <app-custom-icon
+                name="ionPencilOutline"
+                size="18"
+                class="text-information-600"
+              />
+            </button>
+            <button
+              class="group cursor-pointer p-1.5 border border-transparent rounded-lg transition-colors duration-300 ease-in-out hover:bg-error-100 active:border-error-600"
+              (click)="onDeleteCoach(coach)"
+            >
+              <app-custom-icon
+                name="ionTrashOutline"
+                size="18"
+                class="text-error-600!"
+              />
+            </button>
           </td>
         </tr>
       </ng-template>
