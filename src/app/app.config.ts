@@ -2,6 +2,7 @@
 import {
   ApplicationConfig,
   importProvidersFrom,
+  LOCALE_ID,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -23,6 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideAnimationsAsync(),
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
 
     // TODO SI LIBRAIRIE POSE PROBLEME SUPPRIMER CE QU'IL Y A EN DESSOUS
     // VOIR POUR FAIRE LE DARK MODE
