@@ -4,6 +4,7 @@
   [class]="transitionClass"
   [ngClass]="[bgColorClass, textColorClass, sizeClass]"
   [routerLink]="routerLink"
+  (click)="handleClick($event)"
 >
   <ng-content />
 </button>
