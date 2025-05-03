@@ -7,11 +7,12 @@ import { ButtonComponent } from '@components/button/button.component';
 import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
 
 // PRIME NG
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 import { TableModule } from 'primeng/table';
+import { ConfirmDialog } from 'primeng/confirmdialog';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
@@ -38,10 +39,11 @@ interface CoachProps {
     DatePipe,
     UpperCasePipe,
     CustomIconComponent,
+    ConfirmDialog,
   ],
   templateUrl: './admin-coaches.component.html',
   styleUrl: './admin-coaches.component.css',
-  providers: [MessageService],
+  providers: [MessageService, ConfirmationService],
 })
 export class AdminCoachesComponent {
   AppRoutes = AppRoutes;
@@ -75,9 +77,12 @@ export class AdminCoachesComponent {
   ];
 
   // TODO A SUPPRIMER SI PAS UTILISÉ
-  selectedCoach!: CoachProps;
+  /* selectedCoach!: CoachProps; */
 
-  constructor(private messageService: MessageService) {}
+  constructor(
+    private confirmationService: ConfirmationService,
+    private messageService: MessageService
+  ) {}
 
   // TODO ICI POUR RECUPERER LA LISTE DES COACHS DE LA BDD
   /* ngOnInit() {
@@ -97,6 +102,30 @@ export class AdminCoachesComponent {
 
   onModifyCoach(coach: CoachProps) {
     console.log('Je modifie le coach : ', coach.firstname, coach.lastname);
+  }
+
+  onConfirmDelete(coach: CoachProps) {
+    this.confirmationService.confirm({
+      header: "Suppression d'un compte",
+      message: `${coach.firstname} ${coach.lastname.toUpperCase()}`,
+      accept: () => {
+        // DELETING THE COACH
+        this.onDeleteCoach(coach);
+
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Confirmed',
+          detail: 'You have accepted',
+        });
+      },
+      reject: () => {
+        this.messageService.add({
+          severity: 'info',
+          summary: 'Rejected',
+          detail: 'You have rejected',
+        });
+      },
+    });
   }
 
   onDeleteCoach(coach: CoachProps) {

@@ -13,6 +13,65 @@
 <div class="mt-8">
   <div class="card">
     <p-toast />
+
+    <!-- MODAL DELETE CONFIRMATION -->
+    <p-confirmdialog #cd>
+      <ng-template
+        #headless
+        let-message
+        let-onAccept="onAccept"
+        let-onReject="onReject"
+      >
+        <div class="flex flex-col items-center p-4 sm:p-8 bg-white rounded">
+          <div
+            class="rounded-full bg-primary text-text inline-flex justify-center items-center h-24 w-24 -mt-16 sm:-mt-20"
+          >
+            <div class="p-3 rounded-full bg-error-100">
+              <app-custom-icon
+                name="ionWarningOutline"
+                size="40"
+                class="text-error-600! pb-1"
+              />
+            </div>
+          </div>
+          <span
+            class="font-poppins font-bold text-xl sm:text-2xl block mt-2 sm:mt-6 text-error-600"
+          >
+            {{ message.header }}
+          </span>
+          <div
+            class="mb-0 mt-3 flex flex-col gap-y-2 max-w-[315px] sm:max-w-[350px] text-sm sm:text-base"
+          >
+            <p>
+              Voulez vous vraiment supprimer le compte du coach
+              <span class="font-bold">{{ message.message }}</span>
+              ?
+            </p>
+            <p>
+              Tous les cours associés à ce coach seront supprimés également !
+            </p>
+            <p class="text-center font-bold underline text-error-500">
+              Cette action est irréversible !
+            </p>
+          </div>
+          <div class="flex items-center gap-2 mt-6">
+            <p-button
+              label="Annuler"
+              [outlined]="true"
+              (onClick)="onReject()"
+              styleClass="w-32"
+            ></p-button>
+            <p-button
+              label="Supprimer"
+              (onClick)="onAccept()"
+              styleClass="w-32"
+            ></p-button>
+          </div>
+        </div>
+      </ng-template>
+    </p-confirmdialog>
+
+    <!-- COACHES TABLE -->
     <p-table [value]="coaches" [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template #header>
         <tr>
@@ -44,7 +103,7 @@
             </button>
             <button
               class="group cursor-pointer p-1.5 border border-transparent rounded-lg transition-colors duration-300 ease-in-out hover:bg-error-100 active:border-error-600"
-              (click)="onDeleteCoach(coach)"
+              (click)="onConfirmDelete(coach)"
             >
               <app-custom-icon
                 name="ionTrashOutline"
