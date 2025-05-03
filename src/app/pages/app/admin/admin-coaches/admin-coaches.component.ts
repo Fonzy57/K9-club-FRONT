@@ -1,5 +1,5 @@
 // ANGULAR
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 
 // COMPONENTS
@@ -16,6 +16,9 @@ import { ConfirmDialog } from 'primeng/confirmdialog';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
+
+// SERVICES
+import { ToastMessageService } from '@services/toast/toast-message.service';
 
 // TYPE
 interface CoachProps {
@@ -43,12 +46,21 @@ interface CoachProps {
   ],
   templateUrl: './admin-coaches.component.html',
   styleUrl: './admin-coaches.component.css',
-  providers: [MessageService, ConfirmationService],
+  providers: [ConfirmationService],
 })
 export class AdminCoachesComponent {
   AppRoutes = AppRoutes;
+  toastService: ToastMessageService = inject(ToastMessageService);
+
+  constructor(private confirmationService: ConfirmationService) {}
 
   // TODO ICI LES RECUPS DE LA BDD
+  // TODO ICI POUR RECUPERER LA LISTE DES COACHS DE LA BDD
+  /* ngOnInit() {
+    this.productService.getProductsMini().then((data) => {
+      this.products = data;
+    });
+  } */
   coaches: CoachProps[] = [
     {
       id: 1,
@@ -79,27 +91,6 @@ export class AdminCoachesComponent {
   // TODO A SUPPRIMER SI PAS UTILISÉ
   /* selectedCoach!: CoachProps; */
 
-  constructor(
-    private confirmationService: ConfirmationService,
-    private messageService: MessageService
-  ) {}
-
-  // TODO ICI POUR RECUPERER LA LISTE DES COACHS DE LA BDD
-  /* ngOnInit() {
-    this.productService.getProductsMini().then((data) => {
-      this.products = data;
-    });
-  } */
-
-  // TODO REVOIR LE SYSTEME DE TOAST CAR J'AI FAIT UN SERVICE
-  /* selectCoach(coach: CoachProps) {
-    this.messageService.add({
-      severity: 'info',
-      summary: 'coach Selected',
-      detail: coach.firstname,
-    });
-  } */
-
   onModifyCoach(coach: CoachProps) {
     console.log('Je modifie le coach : ', coach.firstname, coach.lastname);
   }
@@ -111,24 +102,32 @@ export class AdminCoachesComponent {
       accept: () => {
         // DELETING THE COACH
         this.onDeleteCoach(coach);
-
-        this.messageService.add({
-          severity: 'info',
-          summary: 'Confirmed',
-          detail: 'You have accepted',
-        });
       },
       reject: () => {
-        this.messageService.add({
+        this.toastService.show({
           severity: 'info',
-          summary: 'Rejected',
-          detail: 'You have rejected',
+          title: 'Suppression annulée',
+          content: `Le compte du coach ${
+            coach.firstname
+          } ${coach.lastname.toUpperCase()} n'a pas été supprimé.`,
+          time: 4000,
         });
       },
     });
   }
 
+  // TODO ICI CALL A L'API POUR SUPPRIMER UN COACH
   onDeleteCoach(coach: CoachProps) {
     console.log('Je supprime le coach : ', coach.firstname, coach.lastname);
+
+    // TODO AJOUTER LE TOAST AU RETOUR DE LA REQUÊTE
+    this.toastService.show({
+      severity: 'success',
+      title: 'Coach supprimé',
+      content: `Le compte du coach ${
+        coach.firstname
+      } ${coach.lastname.toUpperCase()} a bien été supprimé.`,
+      time: 5000,
+    });
   }
 }
