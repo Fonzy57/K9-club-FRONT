@@ -24,6 +24,7 @@ import {
   ionPencilOutline,
   ionSunnyOutline,
   ionTrashOutline,
+  ionWarningOutline,
 } from '@ng-icons/ionicons';
 
 @Component({
@@ -52,6 +53,7 @@ import {
       ionPencilOutline,
       ionSunnyOutline,
       ionTrashOutline,
+      ionWarningOutline,
     }),
   ],
 })
