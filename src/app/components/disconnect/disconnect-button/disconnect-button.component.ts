@@ -17,6 +17,6 @@ export class DisconnectButtonComponent {
 
   onDisconnection(event: MouseEvent) {
     this.auth.logout();
-    this.router.navigate([this.AppRoutes.auth.login]);
+    this.router.navigate([this.AppRoutes.auth.loginFull]);
   }
 }
