@@ -1,11 +1,15 @@
+// ANGULAR
 import { Routes } from '@angular/router';
-import { AppRoutes } from '@config/routes';
-import { AuthLayoutComponent } from '@layouts/auth-layout/auth-layout.component';
+
+// LAYOUTS
 import { MainLayoutComponent } from '@layouts/main-layout/main-layout.component';
+import { AuthLayoutComponent } from '@layouts/auth-layout/auth-layout.component';
+import { AppLayoutComponent } from '@layouts/app-layout/app-layout.component';
+
+// PAGES
 import { HomeComponent } from '@pages/home/home.component';
 import { RegisterComponent } from '@pages/auth/register/register.component';
 import { LoginComponent } from '@pages/auth/login/login.component';
-import { AppLayoutComponent } from '@layouts/app-layout/app-layout.component';
 import { DashboardComponent } from '@pages/app/user/dashboard/dashboard.component';
 import { DogComponent } from '@pages/app/user/dog/dog.component';
 import { CourseComponent } from '@pages/app/user/course/course.component';
@@ -13,9 +17,15 @@ import { UserAccountComponent } from '@pages/app/user/user-account/user-account.
 import { LegalNoticeComponent } from '@pages/legal-notice/legal-notice.component';
 import { TermsOfUseComponent } from '@pages/terms-of-use/terms-of-use.component';
 import { AdminDashboardComponent } from '@pages/app/admin/admin-dashboard/admin-dashboard.component';
+import { AdminCoachesComponent } from '@pages/app/admin/admin-coaches/admin-coaches.component';
+
+// GUARDS
 import { loggedGuard } from './guards/logged.guard';
 import { ownerGuard } from './guards/owner.guard';
 import { adminGuard } from './guards/admin.guard';
+
+// CONFIG
+import { AppRoutes } from '@config/routes';
 
 export const routes: Routes = [
   // --- PUBLIC SITE ---
@@ -109,6 +119,10 @@ export const routes: Routes = [
           {
             path: AppRoutes.app.admin.dashboard, // 'dashboard' (same segment)
             component: AdminDashboardComponent,
+          },
+          {
+            path: AppRoutes.app.admin.coaches, // 'coachs'
+            component: AdminCoachesComponent,
           },
           /* {
             path: AppRoutes.app.admin.account,    // 'mon-compte'
