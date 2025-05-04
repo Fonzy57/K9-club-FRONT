@@ -1,7 +1,8 @@
-type Coach = {
-  prenom: string;
-  nom: string;
-  specialite: string;
-  commentaire: string;
-  image: string;
+type CoachAdmin = {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
 };
