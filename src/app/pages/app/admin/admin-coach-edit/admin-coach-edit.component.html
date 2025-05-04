@@ -1,1 +1,65 @@
-<p>admin-coach-edit works!</p>
+<h1 class="text-2xl md:text-3xl font-semibold">Ajouter ou modifier un coach</h1>
+
+<div class="mt-8 sm:mt-10">
+  <form
+    [formGroup]="AddOrEditForm"
+    (ngSubmit)="onClick()"
+    class="sm:w-[500px] sm:mx-auto lg:mt-14"
+  >
+    <div class="flex flex-col gap-y-5">
+      <app-custom-input
+        inputName="firstname"
+        label="Prénom"
+        placeholder="John"
+        type="text"
+        formControlName="firstname"
+        [errorMessage]="displayErrors ? firstnameError : ''"
+        (valueChange)="onFieldChange()"
+      />
+      <app-custom-input
+        inputName="lastname"
+        label="Nom"
+        placeholder="Doe"
+        type="text"
+        formControlName="lastname"
+        [errorMessage]="displayErrors ? lastnameError : ''"
+        (valueChange)="onFieldChange()"
+      />
+      <!-- 
+        TODO VOIR POUR AJOUTER LE NUMERO DE TELEPHONE
+        SI JE LE FAIS IL FAUT L'AJOUTER AU MODEL EN BDD
+        -->
+      <!-- <app-custom-input
+        inputName="phone"
+        label="Prénom"
+        placeholder="John"
+        type="tel"
+      /> -->
+      <app-custom-input
+        inputName="mail"
+        label="E-mail"
+        placeholder="john.doe@gmail.com"
+        type="email"
+        formControlName="email"
+        [errorMessage]="displayErrors ? emailError : ''"
+        (valueChange)="onFieldChange()"
+      />
+      <!-- TODO POUR LE MOT DE PASSE LE COACH UTILISERA PLUTOT UN LIEN "MOT DE PASSE OUBLIE" -->
+      <!-- <app-custom-input
+        inputName="password"
+        label="Mot de passe"
+        placeholder="********************"
+        type="password"
+        formControlName="password"
+        [errorMessage]="displayErrors ? passwordError : ''"
+        (valueChange)="onFieldChange()"
+      /> -->
+      <!-- TODO PREVOIR UN INPUT POUR CHOISIR UN AVATAR -->
+    </div>
+
+    <!-- TODO DISABLED LE BOUTON SI PAS DE CHANGEMENT -->
+    <div class="mt-10">
+      <app-button> Modifier </app-button>
+    </div>
+  </form>
+</div>
