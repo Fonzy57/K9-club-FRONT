@@ -1,6 +1,7 @@
 // ANGULAR
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { DatePipe, UpperCasePipe } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 // COMPONENTS
 import { ButtonComponent } from '@components/button/button.component';
@@ -16,6 +17,7 @@ import { ConfirmDialog } from 'primeng/confirmdialog';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
+import { apiRoot } from '@config/api/api';
 
 // SERVICES
 import { ToastMessageService } from '@services/toast/toast-message.service';
@@ -48,45 +50,32 @@ interface CoachProps {
   styleUrl: './admin-coaches.component.css',
   providers: [ConfirmationService],
 })
-export class AdminCoachesComponent {
+export class AdminCoachesComponent implements OnInit {
   AppRoutes = AppRoutes;
   toastService: ToastMessageService = inject(ToastMessageService);
+  http: HttpClient = inject(HttpClient);
+
+  coaches: CoachProps[] = [];
 
   constructor(private confirmationService: ConfirmationService) {}
 
-  // TODO ICI LES RECUPS DE LA BDD
-  // TODO ICI POUR RECUPERER LA LISTE DES COACHS DE LA BDD
-  /* ngOnInit() {
-    this.productService.getProductsMini().then((data) => {
-      this.products = data;
+  ngOnInit() {
+    this.http.get<CoachProps[]>(apiRoot + 'coaches').subscribe({
+      next: (coaches) => {
+        this.coaches = coaches;
+      },
+      // TODO VOIR LA GESTION DES ERREURS : https://paul-chesa.medium.com/handling-errors-from-http-calls-in-angular-4dbc7f6b26ca
+      error: (error) => {
+        this.toastService.show({
+          severity: 'error',
+          title: 'Erreur de chargement',
+          content: 'Impossible de récupérer la liste des coachs.',
+          sticky: true,
+        });
+        console.error('ERREUR API : ', error);
+      },
     });
-  } */
-  coaches: CoachProps[] = [
-    {
-      id: 1,
-      firstname: 'Stéphane',
-      lastname: 'Scheeres',
-      email: 'super-admin@k9club.fr',
-      createdAt: '2025-05-03 13:35:03.000000',
-      updatedAt: '2025-05-03 13:35:03.000000',
-    },
-    {
-      id: 2,
-      firstname: 'Victor',
-      lastname: 'Monteragioni',
-      email: 'admin@k9club.fr',
-      createdAt: '2025-05-03 13:35:03.000000',
-      updatedAt: '2025-05-03 13:35:03.000000',
-    },
-    {
-      id: 1,
-      firstname: 'Tetiana',
-      lastname: 'Lombardi',
-      email: 'coach@k9club.fr',
-      createdAt: '2025-05-03 13:35:03.000000',
-      updatedAt: '2025-05-03 13:35:03.000000',
-    },
-  ];
+  }
 
   // TODO A SUPPRIMER SI PAS UTILISÉ
   /* selectedCoach!: CoachProps; */
