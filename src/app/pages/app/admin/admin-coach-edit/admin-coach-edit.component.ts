@@ -5,6 +5,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 // COMPONENTS
+import { BackButtonComponent } from '@components/back-button/back-button.component';
 import { CustomInputComponent } from '@components/custom-input/custom-input.component';
 import { ButtonComponent } from '@components/button/button.component';
 
@@ -26,6 +27,7 @@ import { apiRoot } from '@config/api/api';
     ButtonComponent,
     FormsModule,
     ReactiveFormsModule,
+    BackButtonComponent,
   ],
   templateUrl: './admin-coach-edit.component.html',
   styleUrl: './admin-coach-edit.component.css',
@@ -52,6 +54,21 @@ export class AdminCoachEditComponent implements OnInit {
   });
 
   ngOnInit() {
+    // Retrieve the password FormControl from the form group (using non-null assertion because it must exist)
+    const passwordControl = this.AddOrEditForm.get('password')!;
+
+    // If we're editing an existing coach, clear all validators so the password field becomes optional
+    if (this.isEdit) {
+      passwordControl.clearValidators();
+    } else {
+      // If we're adding a new coach, apply the full set of password validators (required, length, pattern, etc.)
+      passwordControl.setValidators(FormValidators.passwordValidator());
+    }
+
+    // Re-run validation immediately with the new validator configuration,
+    // and update the control's validity state (errors, status)
+    passwordControl.updateValueAndValidity();
+
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     // If there is an ID in URL we fill the form
     if (id) {
@@ -102,16 +119,17 @@ export class AdminCoachEditComponent implements OnInit {
       } else {
         // We add a new coach
         /*
-    TODO GERER L'AJOUT D'UN COACH, FAIRE LA VERIFICATION DE L'EMAIL BIEN UNIQUE
-    GERER CA AU NIVEAU DE L'API ET RENOYER UN MESSAGE CLAIR
-  */
+          TODO GERER L'AJOUT D'UN COACH, FAIRE LA VERIFICATION DE L'EMAIL BIEN UNIQUE
+          GERER CA AU NIVEAU DE L'API ET RENOYER UN MESSAGE CLAIR
+
+          TODO TESTER SI TOUT FONCTIONNE BIEN
+        */
         this.http
           .post<CoachAdmin>(`${apiRoot}/coach`, this.AddOrEditForm.value)
           .subscribe({
             next: () => {
               const lastname = this.AddOrEditForm.value.lastname;
               const firstname = this.AddOrEditForm.value.firstname;
-
               this.toastService.show({
                 severity: 'success',
                 title: 'Ajout réussi',
