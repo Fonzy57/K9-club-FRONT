@@ -2,13 +2,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { DatePipe, UpperCasePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { RouterLink } from '@angular/router';
 
 // COMPONENTS
 import { ButtonComponent } from '@components/button/button.component';
 import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
 
 // PRIME NG
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
@@ -45,6 +46,7 @@ interface CoachProps {
     UpperCasePipe,
     CustomIconComponent,
     ConfirmDialog,
+    RouterLink,
   ],
   templateUrl: './admin-coaches.component.html',
   styleUrl: './admin-coaches.component.css',

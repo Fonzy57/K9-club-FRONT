@@ -3,7 +3,12 @@
 >
   <h1 class="text-2xl md:text-3xl font-semibold">Les coachs du club</h1>
   <!-- TODO CHANGER LA ROUTE QUAND LA PAGE D'AJOUT D'UN COACH SERA FAITE -->
-  <app-button [routerLink]="AppRoutes.app.admin.coachesFull">
+  <app-button
+    [routerLink]="[
+      AppRoutes.app.admin.coachesFull,
+      AppRoutes.app.admin.addCoach
+    ]"
+  >
     Ajouter un coach
   </app-button>
 </div>
@@ -92,7 +97,11 @@
           <td class="flex items-center gap-4">
             <button
               class="group cursor-pointer p-1.5 border border-transparent rounded-lg transition-colors duration-300 ease-in-out hover:bg-information-100 active:border-information-600"
-              (click)="onModifyCoach(coach)"
+              [routerLink]="[
+                AppRoutes.app.admin.coachesFull,
+                AppRoutes.app.admin.updateCoach,
+                coach.id
+              ]"
             >
               <app-custom-icon
                 name="ionPencilOutline"
