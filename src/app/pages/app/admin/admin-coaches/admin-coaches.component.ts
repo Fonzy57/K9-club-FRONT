@@ -23,16 +23,6 @@ import { apiRoot } from '@config/api/api';
 // SERVICES
 import { ToastMessageService } from '@services/toast/toast-message.service';
 
-// TYPE
-interface CoachProps {
-  id: number;
-  firstname: string;
-  lastname: string;
-  email: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 @Component({
   selector: 'app-admin-coaches',
   standalone: true,
@@ -57,12 +47,12 @@ export class AdminCoachesComponent implements OnInit {
   toastService: ToastMessageService = inject(ToastMessageService);
   http: HttpClient = inject(HttpClient);
 
-  coaches: CoachProps[] = [];
+  coaches: CoachAdmin[] = [];
 
   constructor(private confirmationService: ConfirmationService) {}
 
   ngOnInit() {
-    this.http.get<CoachProps[]>(apiRoot + '/coaches').subscribe({
+    this.http.get<CoachAdmin[]>(apiRoot + '/coaches').subscribe({
       next: (coaches) => {
         this.coaches = coaches;
       },
@@ -79,11 +69,11 @@ export class AdminCoachesComponent implements OnInit {
     });
   }
 
-  onModifyCoach(coach: CoachProps) {
+  onModifyCoach(coach: CoachAdmin) {
     console.log('Je modifie le coach : ', coach.firstname, coach.lastname);
   }
 
-  onConfirmDelete(coach: CoachProps) {
+  onConfirmDelete(coach: CoachAdmin) {
     this.confirmationService.confirm({
       header: "Suppression d'un compte",
       message: `${coach.firstname} ${coach.lastname.toUpperCase()}`,
@@ -104,8 +94,8 @@ export class AdminCoachesComponent implements OnInit {
     });
   }
 
-  onDeleteCoach(coach: CoachProps) {
-    this.http.delete<CoachProps>(`${apiRoot}/coach/${coach.id}`).subscribe({
+  onDeleteCoach(coach: CoachAdmin) {
+    this.http.delete<CoachAdmin>(`${apiRoot}/coach/${coach.id}`).subscribe({
       next: () => {
         this.coaches = this.coaches.filter((c) => c.id !== coach.id);
 
