@@ -79,8 +79,8 @@
     <p-table [value]="coaches" [tableStyle]="{ 'min-width': '50rem' }">
       <ng-template #header>
         <tr>
-          <th>Prénom</th>
           <th>Nom</th>
+          <th>Prénom</th>
           <th>E-mail</th>
           <th>Ajouté le</th>
           <th>Modifié le</th>
@@ -89,8 +89,8 @@
       </ng-template>
       <ng-template #body let-coach>
         <tr>
-          <td>{{ coach.firstname }}</td>
           <td>{{ coach.lastname | uppercase }}</td>
+          <td>{{ coach.firstname }}</td>
           <td>{{ coach.email }}</td>
           <td>{{ coach.createdAt | date : "dd MMMM YYYY" }}</td>
           <td>{{ coach.updatedAt | date : "dd MMMM YYYY à HH:mm:ss" }}</td>
