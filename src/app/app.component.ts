@@ -30,10 +30,6 @@ export class AppComponent {
     this.primeng.ripple.set(true);
   }
 
-  handleClickPrimary() {
-    console.log('Bouton primary cliqué');
-  }
-
   /* TODO POUR LES TAGS */
   tagsTiny: Tag[] = [
     { name: 'agility' },
