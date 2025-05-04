@@ -69,10 +69,6 @@ export class AdminCoachesComponent implements OnInit {
     });
   }
 
-  onModifyCoach(coach: CoachAdmin) {
-    console.log('Je modifie le coach : ', coach.firstname, coach.lastname);
-  }
-
   onConfirmDelete(coach: CoachAdmin) {
     this.confirmationService.confirm({
       header: "Suppression d'un compte",
