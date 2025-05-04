@@ -1,4 +1,6 @@
-<h1 class="text-2xl md:text-3xl font-semibold">Ajouter ou modifier un coach</h1>
+<h1 class="text-2xl md:text-3xl font-semibold">
+  {{ coachToEdit ? "Modifier" : "Ajouter" }} un coach
+</h1>
 
 <div class="mt-8 sm:mt-10">
   <form
@@ -7,6 +9,15 @@
     class="sm:w-[500px] sm:mx-auto lg:mt-14"
   >
     <div class="flex flex-col gap-y-5">
+      <app-custom-input
+        inputName="lastname"
+        label="Nom"
+        placeholder="Doe"
+        type="text"
+        formControlName="lastname"
+        [errorMessage]="displayErrors ? lastnameError : ''"
+        (valueChange)="onFieldChange()"
+      />
       <app-custom-input
         inputName="firstname"
         label="Prénom"
@@ -17,12 +28,12 @@
         (valueChange)="onFieldChange()"
       />
       <app-custom-input
-        inputName="lastname"
-        label="Nom"
-        placeholder="Doe"
-        type="text"
-        formControlName="lastname"
-        [errorMessage]="displayErrors ? lastnameError : ''"
+        inputName="mail"
+        label="E-mail"
+        placeholder="john.doe@gmail.com"
+        type="email"
+        formControlName="email"
+        [errorMessage]="displayErrors ? emailError : ''"
         (valueChange)="onFieldChange()"
       />
       <!-- 
@@ -35,15 +46,7 @@
         placeholder="John"
         type="tel"
       /> -->
-      <app-custom-input
-        inputName="mail"
-        label="E-mail"
-        placeholder="john.doe@gmail.com"
-        type="email"
-        formControlName="email"
-        [errorMessage]="displayErrors ? emailError : ''"
-        (valueChange)="onFieldChange()"
-      />
+
       <!-- TODO POUR LE MOT DE PASSE LE COACH UTILISERA PLUTOT UN LIEN "MOT DE PASSE OUBLIE" -->
       <!-- <app-custom-input
         inputName="password"
