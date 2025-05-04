@@ -2,7 +2,11 @@
   {{ isEdit ? "Modifier" : "Ajouter" }} un coach
 </h1>
 
-<div class="mt-8 sm:mt-10">
+<div class="mt-6">
+  <app-back-button [routerLink]="AppRoutes.app.admin.coachesFull" />
+</div>
+
+<div class="mt-8 sm:mt-4">
   <form
     [formGroup]="AddOrEditForm"
     (ngSubmit)="onClick()"
