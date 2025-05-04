@@ -39,34 +39,33 @@ export class AdminCoachEditComponent implements OnInit {
   router: Router = inject(Router);
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   toastService: ToastMessageService = inject(ToastMessageService);
+  isEdit = !!this.activatedRoute.snapshot.paramMap.get('id');
 
   coachToEdit: CoachAdmin | null = null;
 
+  /* TODO IL FAUT QUE JE TRIM CHAQUE VALEUR DU FORMULAIRE */
   AddOrEditForm = this.formBuilder.group({
     firstname: ['', FormValidators.nameValidator()],
     lastname: ['', FormValidators.nameValidator()],
     email: ['', FormValidators.emailValidator()],
-    /* password:  ['', ValidationUtils.passwordValidators()], */
+    password: ['', FormValidators.passwordValidator()],
   });
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params) => {
-      // If there is an ID in URL we fill the form
-      if (params['id']) {
-        this.http
-          .get<CoachAdmin>(`${apiRoot}/coach/${params['id']}`)
-          .subscribe({
-            next: (coach) => {
-              this.AddOrEditForm.patchValue(coach);
-              this.coachToEdit = coach;
-            },
-            error: (error) => {
-              console.error('ERROR editing or adding coach', error);
-              this.router.navigate([this.AppRoutes.app.admin.coachesFull]);
-            },
-          });
-      }
-    });
+    const id = this.activatedRoute.snapshot.paramMap.get('id');
+    // If there is an ID in URL we fill the form
+    if (id) {
+      this.http.get<CoachAdmin>(`${apiRoot}/coach/${id}`).subscribe({
+        next: (coach) => {
+          this.AddOrEditForm.patchValue(coach);
+          this.coachToEdit = coach;
+        },
+        error: (error) => {
+          console.error('ERROR editing or adding coach', error);
+          this.router.navigate([this.AppRoutes.app.admin.coachesFull]);
+        },
+      });
+    }
   }
 
   onClick() {
@@ -90,8 +89,6 @@ export class AdminCoachEditComponent implements OnInit {
                 content: 'Les informations du coach ont bien été modifié',
                 time: 3000,
               });
-
-              // TODO FAIRE UNE REDIRECTION VERS LA PAGE COACHS
             },
             error: () => {
               this.toastService.show({
@@ -102,7 +99,38 @@ export class AdminCoachEditComponent implements OnInit {
               });
             },
           });
+      } else {
+        // We add a new coach
+        /*
+    TODO GERER L'AJOUT D'UN COACH, FAIRE LA VERIFICATION DE L'EMAIL BIEN UNIQUE
+    GERER CA AU NIVEAU DE L'API ET RENOYER UN MESSAGE CLAIR
+  */
+        this.http
+          .post<CoachAdmin>(`${apiRoot}/coach`, this.AddOrEditForm.value)
+          .subscribe({
+            next: () => {
+              const lastname = this.AddOrEditForm.value.lastname;
+              const firstname = this.AddOrEditForm.value.firstname;
+
+              this.toastService.show({
+                severity: 'success',
+                title: 'Ajout réussi',
+                content: `Le coach ${firstname} ${lastname} a bien été ajouté`,
+                time: 3000,
+              });
+            },
+            error: () => {
+              this.toastService.show({
+                severity: 'error',
+                title: 'Ajout échoué',
+                content: `Le coach n'a pas été ajouté`,
+                sticky: true,
+              });
+            },
+          });
       }
+
+      // TODO FAIRE UNE REDIRECTION VERS LA PAGE COACHS
     }
   }
 
@@ -147,6 +175,20 @@ export class AdminCoachEditComponent implements OnInit {
 
     if ((control.touched || control.dirty) && control.invalid) {
       return FormValidators.getEmailError(control);
+    }
+
+    return '';
+  }
+
+  get passwordError() {
+    const control = this.AddOrEditForm.get('password');
+
+    if (!control) {
+      return '';
+    }
+
+    if ((control.touched || control.dirty) && control.invalid) {
+      return FormValidators.getPasswordError(control);
     }
 
     return '';

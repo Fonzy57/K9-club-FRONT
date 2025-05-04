@@ -1,5 +1,5 @@
 <h1 class="text-2xl md:text-3xl font-semibold">
-  {{ coachToEdit ? "Modifier" : "Ajouter" }} un coach
+  {{ isEdit ? "Modifier" : "Ajouter" }} un coach
 </h1>
 
 <div class="mt-8 sm:mt-10">
@@ -48,7 +48,8 @@
       /> -->
 
       <!-- TODO POUR LE MOT DE PASSE LE COACH UTILISERA PLUTOT UN LIEN "MOT DE PASSE OUBLIE" -->
-      <!-- <app-custom-input
+      @if (!isEdit) {
+      <app-custom-input
         inputName="password"
         label="Mot de passe"
         placeholder="********************"
@@ -56,13 +57,14 @@
         formControlName="password"
         [errorMessage]="displayErrors ? passwordError : ''"
         (valueChange)="onFieldChange()"
-      /> -->
+      />
+      }
       <!-- TODO PREVOIR UN INPUT POUR CHOISIR UN AVATAR -->
     </div>
 
     <!-- TODO DISABLED LE BOUTON SI PAS DE CHANGEMENT -->
     <div class="mt-10">
-      <app-button> Modifier </app-button>
+      <app-button>{{ isEdit ? "Modifier" : "Ajouter" }}</app-button>
     </div>
   </form>
 </div>
