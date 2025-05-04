@@ -63,7 +63,7 @@ export class LoginComponent {
     }
 
     this.http
-      .post(apiRoot + 'login', this.loginForm.value, {
+      .post(apiRoot + '/login', this.loginForm.value, {
         responseType: 'text',
       })
       .subscribe({
