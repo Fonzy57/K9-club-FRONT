@@ -1,8 +1,8 @@
 // ANGULAR
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 // COMPONENTS
 import { CustomInputComponent } from '@components/custom-input/custom-input.component';
@@ -16,6 +16,7 @@ import { ToastMessageService } from '@services/toast/toast-message.service';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
+import { apiRoot } from '@config/api/api';
 
 @Component({
   selector: 'app-admin-coach-edit',
@@ -29,14 +30,17 @@ import { AppRoutes } from '@config/routes';
   templateUrl: './admin-coach-edit.component.html',
   styleUrl: './admin-coach-edit.component.css',
 })
-export class AdminCoachEditComponent {
+export class AdminCoachEditComponent implements OnInit {
   AppRoutes = AppRoutes;
   displayErrors = false;
 
   http: HttpClient = inject(HttpClient);
   formBuilder: FormBuilder = inject(FormBuilder);
   router: Router = inject(Router);
+  activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   toastService: ToastMessageService = inject(ToastMessageService);
+
+  coachToEdit: CoachAdmin | null = null;
 
   AddOrEditForm = this.formBuilder.group({
     firstname: ['', FormValidators.nameValidator()],
@@ -45,8 +49,24 @@ export class AdminCoachEditComponent {
     /* password:  ['', ValidationUtils.passwordValidators()], */
   });
 
-  onFieldChange() {
-    this.displayErrors = false;
+  ngOnInit() {
+    this.activatedRoute.params.subscribe((params) => {
+      // If there is an ID in URL we fill the form
+      if (params['id']) {
+        this.http
+          .get<CoachAdmin>(`${apiRoot}/coach/${params['id']}`)
+          .subscribe({
+            next: (coach) => {
+              this.AddOrEditForm.patchValue(coach);
+              this.coachToEdit = coach;
+            },
+            error: (error) => {
+              console.error('ERROR editing or adding coach', error);
+              this.router.navigate([this.AppRoutes.app.admin.coachesFull]);
+            },
+          });
+      }
+    });
   }
 
   onClick() {
@@ -54,8 +74,40 @@ export class AdminCoachEditComponent {
       this.AddOrEditForm.markAllAsTouched();
       this.displayErrors = true; // Afficher les erreurs à la soumission
       return;
+    } else {
+      // Checking if editing, if true API call whit PUT method
+      if (this.coachToEdit) {
+        this.http
+          .put<CoachAdmin>(
+            `${apiRoot}/coach/${this.coachToEdit.id}`,
+            this.AddOrEditForm.value
+          )
+          .subscribe({
+            next: () => {
+              this.toastService.show({
+                severity: 'success',
+                title: 'Modification réussie',
+                content: 'Les informations du coach ont bien été modifié',
+                time: 3000,
+              });
+
+              // TODO FAIRE UNE REDIRECTION VERS LA PAGE COACHS
+            },
+            error: () => {
+              this.toastService.show({
+                severity: 'error',
+                title: 'Modification échouée',
+                content: "Le coach n'a pas été modifié",
+                sticky: true,
+              });
+            },
+          });
+      }
     }
-    console.log("J'ai bien cliqué");
+  }
+
+  onFieldChange() {
+    this.displayErrors = false;
   }
 
   get firstnameError() {
