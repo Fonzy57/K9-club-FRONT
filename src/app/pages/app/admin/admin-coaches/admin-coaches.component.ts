@@ -60,7 +60,7 @@ export class AdminCoachesComponent implements OnInit {
   constructor(private confirmationService: ConfirmationService) {}
 
   ngOnInit() {
-    this.http.get<CoachProps[]>(apiRoot + 'coaches').subscribe({
+    this.http.get<CoachProps[]>(apiRoot + '/coaches').subscribe({
       next: (coaches) => {
         this.coaches = coaches;
       },
@@ -76,9 +76,6 @@ export class AdminCoachesComponent implements OnInit {
       },
     });
   }
-
-  // TODO A SUPPRIMER SI PAS UTILISÉ
-  /* selectedCoach!: CoachProps; */
 
   onModifyCoach(coach: CoachProps) {
     console.log('Je modifie le coach : ', coach.firstname, coach.lastname);
@@ -105,18 +102,31 @@ export class AdminCoachesComponent implements OnInit {
     });
   }
 
-  // TODO ICI CALL A L'API POUR SUPPRIMER UN COACH
   onDeleteCoach(coach: CoachProps) {
-    console.log('Je supprime le coach : ', coach.firstname, coach.lastname);
+    this.http.delete<CoachProps>(`${apiRoot}/coach/${coach.id}`).subscribe({
+      next: () => {
+        this.coaches = this.coaches.filter((c) => c.id !== coach.id);
 
-    // TODO AJOUTER LE TOAST AU RETOUR DE LA REQUÊTE
-    this.toastService.show({
-      severity: 'success',
-      title: 'Coach supprimé',
-      content: `Le compte du coach ${
-        coach.firstname
-      } ${coach.lastname.toUpperCase()} a bien été supprimé.`,
-      time: 5000,
+        this.toastService.show({
+          severity: 'success',
+          title: 'Coach supprimé',
+          content: `Le compte du coach ${
+            coach.firstname
+          } ${coach.lastname.toUpperCase()} a bien été supprimé.`,
+          time: 3000,
+        });
+      },
+      error: (err) => {
+        console.error('Erreur lors de la suppression :', err);
+        this.toastService.show({
+          severity: 'error',
+          title: 'Suppression échouée',
+          content: `Une erreur est survenue lors de la suppression du coach ${
+            coach.firstname
+          } ${coach.lastname.toUpperCase()}.`,
+          sticky: true,
+        });
+      },
     });
   }
 }
