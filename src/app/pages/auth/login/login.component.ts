@@ -12,7 +12,7 @@ import {
 // COMPONENTS
 import { ButtonComponent } from '@components/button/button.component';
 import { CustomInputComponent } from '@components/custom-input/custom-input.component';
-import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
+import { BackButtonComponent } from '@components/back-button/back-button.component';
 
 // SERVICES
 import { AuthService } from '@services/auth/auth.service';
@@ -32,9 +32,9 @@ import { apiRoot } from '@config/api/api';
     RouterModule,
     ButtonComponent,
     CustomInputComponent,
-    CustomIconComponent,
     FormsModule,
     ReactiveFormsModule,
+    BackButtonComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',

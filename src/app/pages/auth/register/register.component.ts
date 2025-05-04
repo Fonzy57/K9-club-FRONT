@@ -1,9 +1,16 @@
+// ANGULAR
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
+// COMPONENTS
 import { ButtonComponent } from '@components/button/button.component';
 import { CustomInputComponent } from '@components/custom-input/custom-input.component';
+import { BackButtonComponent } from '@components/back-button/back-button.component';
+
+// CONFIG
 import { AppRoutes } from '@config/routes';
-import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
+
+// SERVICES
 
 @Component({
   selector: 'app-register',
@@ -11,7 +18,7 @@ import { CustomIconComponent } from '@components/custom-icon/custom-icon.compone
     ButtonComponent,
     CustomInputComponent,
     RouterModule,
-    CustomIconComponent,
+    BackButtonComponent,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
