@@ -28,6 +28,7 @@ import { LoginComponent } from '@pages/auth/login/login.component';
 import { AdminDashboardComponent } from '@pages/app/admin/admin-dashboard/admin-dashboard.component';
 import { AdminCoachesComponent } from '@pages/app/admin/admin-coaches/admin-coaches.component';
 import { AdminCoachEditComponent } from '@pages/app/admin/admin-coach-edit/admin-coach-edit.component';
+import { AdminCoachAddComponent } from '@pages/app/admin/admin-coach-add/admin-coach-add.component';
 
 // APP - OWNER
 import { DashboardComponent } from '@pages/app/user/dashboard/dashboard.component';
@@ -134,7 +135,7 @@ export const routes: Routes = [
           },
           {
             path: `${AppRoutes.app.admin.coaches}/${AppRoutes.app.admin.addCoach}`, // 'coachs/ajouter'
-            component: AdminCoachEditComponent,
+            component: AdminCoachAddComponent,
           },
           {
             path: `${AppRoutes.app.admin.coaches}/${AppRoutes.app.admin.updateCoach}/:id`, // 'coachs/modifier/:id'
