@@ -45,36 +45,24 @@ export class AdminCoachEditComponent implements OnInit {
 
   coachToEdit: CoachAdmin | null = null;
 
-  /* TODO IL FAUT QUE JE TRIM CHAQUE VALEUR DU FORMULAIRE */
-  AddOrEditForm = this.formBuilder.group({
+  /* ---------------------------------------------------- */
+  /* 
+    TODO IL FAUT QUE JE TRIM CHAQUE VALEUR DU FORMULAIRE
+  */
+  /* ---------------------------------------------------- */
+  editForm = this.formBuilder.group({
     firstname: ['', FormValidators.nameValidator()],
     lastname: ['', FormValidators.nameValidator()],
     email: ['', FormValidators.emailValidator()],
-    password: ['', FormValidators.passwordValidator()],
   });
 
   ngOnInit() {
-    // Retrieve the password FormControl from the form group (using non-null assertion because it must exist)
-    const passwordControl = this.AddOrEditForm.get('password')!;
-
-    // If we're editing an existing coach, clear all validators so the password field becomes optional
-    if (this.isEdit) {
-      passwordControl.clearValidators();
-    } else {
-      // If we're adding a new coach, apply the full set of password validators (required, length, pattern, etc.)
-      passwordControl.setValidators(FormValidators.passwordValidator());
-    }
-
-    // Re-run validation immediately with the new validator configuration,
-    // and update the control's validity state (errors, status)
-    passwordControl.updateValueAndValidity();
-
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     // If there is an ID in URL we fill the form
     if (id) {
       this.http.get<CoachAdmin>(`${apiRoot}/coach/${id}`).subscribe({
         next: (coach) => {
-          this.AddOrEditForm.patchValue(coach);
+          this.editForm.patchValue(coach);
           this.coachToEdit = coach;
         },
         error: (error) => {
@@ -86,8 +74,8 @@ export class AdminCoachEditComponent implements OnInit {
   }
 
   onClick() {
-    if (this.AddOrEditForm.invalid) {
-      this.AddOrEditForm.markAllAsTouched();
+    if (this.editForm.invalid) {
+      this.editForm.markAllAsTouched();
       this.displayErrors = true; // Afficher les erreurs à la soumission
       return;
     } else {
@@ -96,7 +84,7 @@ export class AdminCoachEditComponent implements OnInit {
         this.http
           .put<CoachAdmin>(
             `${apiRoot}/coach/${this.coachToEdit.id}`,
-            this.AddOrEditForm.value
+            this.editForm.value
           )
           .subscribe({
             next: () => {
@@ -116,36 +104,6 @@ export class AdminCoachEditComponent implements OnInit {
               });
             },
           });
-      } else {
-        // We add a new coach
-        /*
-          TODO GERER L'AJOUT D'UN COACH, FAIRE LA VERIFICATION DE L'EMAIL BIEN UNIQUE
-          GERER CA AU NIVEAU DE L'API ET RENOYER UN MESSAGE CLAIR
-
-          TODO TESTER SI TOUT FONCTIONNE BIEN
-        */
-        this.http
-          .post<CoachAdmin>(`${apiRoot}/coach`, this.AddOrEditForm.value)
-          .subscribe({
-            next: () => {
-              const lastname = this.AddOrEditForm.value.lastname;
-              const firstname = this.AddOrEditForm.value.firstname;
-              this.toastService.show({
-                severity: 'success',
-                title: 'Ajout réussi',
-                content: `Le coach ${firstname} ${lastname} a bien été ajouté`,
-                time: 3000,
-              });
-            },
-            error: () => {
-              this.toastService.show({
-                severity: 'error',
-                title: 'Ajout échoué',
-                content: `Le coach n'a pas été ajouté`,
-                sticky: true,
-              });
-            },
-          });
       }
 
       // TODO FAIRE UNE REDIRECTION VERS LA PAGE COACHS
@@ -157,7 +115,7 @@ export class AdminCoachEditComponent implements OnInit {
   }
 
   get firstnameError() {
-    const control = this.AddOrEditForm.get('firstname');
+    const control = this.editForm.get('firstname');
 
     if (!control) {
       return '';
@@ -171,7 +129,7 @@ export class AdminCoachEditComponent implements OnInit {
   }
 
   get lastnameError() {
-    const control = this.AddOrEditForm.get('lastname');
+    const control = this.editForm.get('lastname');
 
     if (!control) {
       return '';
@@ -185,7 +143,7 @@ export class AdminCoachEditComponent implements OnInit {
   }
 
   get emailError() {
-    const control = this.AddOrEditForm.get('email');
+    const control = this.editForm.get('email');
 
     if (!control) {
       return '';
@@ -193,20 +151,6 @@ export class AdminCoachEditComponent implements OnInit {
 
     if ((control.touched || control.dirty) && control.invalid) {
       return FormValidators.getEmailError(control);
-    }
-
-    return '';
-  }
-
-  get passwordError() {
-    const control = this.AddOrEditForm.get('password');
-
-    if (!control) {
-      return '';
-    }
-
-    if ((control.touched || control.dirty) && control.invalid) {
-      return FormValidators.getPasswordError(control);
     }
 
     return '';
