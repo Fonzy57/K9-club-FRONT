@@ -56,11 +56,6 @@ export class AdminCoachEditComponent implements OnInit {
   /** Holds the coach data loaded from the backend */
   coachToEdit: CoachAdmin | null = null;
 
-  /* ---------------------------------------------------- */
-  /* 
-    TODO IL FAUT QUE JE TRIM CHAQUE VALEUR DU FORMULAIRE
-  */
-  /* ---------------------------------------------------- */
   /**
    * Reactive form definition:
    * - firstname: required, length 3–100, no whitespace-only
@@ -107,35 +102,41 @@ export class AdminCoachEditComponent implements OnInit {
       this.editForm.markAllAsTouched();
       this.displayErrors = true; // Afficher les erreurs à la soumission
       return;
-    } else {
-      // Checking if editing, if true API call whit PUT method
-      if (this.coachToEdit) {
-        this.http
-          .put<CoachAdmin>(
-            `${apiRoot}/coach/${this.coachToEdit.id}`,
-            this.editForm.value
-          )
-          .subscribe({
-            next: () => {
-              this.toastService.show({
-                severity: 'success',
-                title: 'Modification réussie',
-                content: 'Les informations du coach ont bien été modifié',
-                time: 3000,
-              });
-            },
-            error: () => {
-              this.toastService.show({
-                severity: 'error',
-                title: 'Modification échouée',
-                content: "Le coach n'a pas été modifié",
-                sticky: true,
-              });
-            },
-          });
-      }
+    }
 
-      // TODO FAIRE UNE REDIRECTION VERS LA PAGE COACHS
+    const formValueTrimed: CoachEditProps = {
+      firstname: this.editForm.value.firstname!.trim(),
+      lastname: this.editForm.value.lastname!.trim(),
+      email: this.editForm.value.email!.trim(),
+    };
+
+    // Checking if editing, if true API call whit PUT method
+    if (this.coachToEdit) {
+      this.http
+        .put<CoachAdmin>(
+          `${apiRoot}/coach/${this.coachToEdit.id}`,
+          formValueTrimed
+        )
+        .subscribe({
+          next: () => {
+            this.toastService.show({
+              severity: 'success',
+              title: 'Modification réussie',
+              content: 'Les informations du coach ont bien été modifié',
+              time: 3000,
+            });
+
+            this.router.navigateByUrl(AppRoutes.app.admin.coachesFull);
+          },
+          error: () => {
+            this.toastService.show({
+              severity: 'error',
+              title: 'Modification échouée',
+              content: "Le coach n'a pas été modifié",
+              sticky: true,
+            });
+          },
+        });
     }
   }
 

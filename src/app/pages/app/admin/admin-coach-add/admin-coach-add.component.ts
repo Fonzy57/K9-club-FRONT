@@ -52,11 +52,6 @@ export class AdminCoachAddComponent {
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   toastService: ToastMessageService = inject(ToastMessageService);
 
-  /* ---------------------------------------------------- */
-  /* 
-    TODO IL FAUT QUE JE TRIM CHAQUE VALEUR DU FORMULAIRE
-  */
-  /* ---------------------------------------------------- */
   /**
    * Reactive form group definition:
    * - firstname: required, length 3-100, no whitespace-only
@@ -82,33 +77,39 @@ export class AdminCoachAddComponent {
       this.addForm.markAllAsTouched();
       this.displayErrors = true; // Afficher les erreurs à la soumission
       return;
-    } else {
-      // We add a new coach
-      this.http
-        .post<CoachAdmin>(`${apiRoot}/coach`, this.addForm.value)
-        .subscribe({
-          next: () => {
-            const lastname = this.addForm.value.lastname;
-            const firstname = this.addForm.value.firstname;
-            this.toastService.show({
-              severity: 'success',
-              title: 'Ajout réussi',
-              content: `Le coach ${firstname} ${lastname} a bien été ajouté`,
-              time: 3000,
-            });
-          },
-          error: (error) => {
-            this.toastService.show({
-              severity: 'error',
-              title: "L'ajout a échoué",
-              content: error.error,
-              sticky: true,
-            });
-          },
+    }
+
+    const formValueTrimed: CoachAddProps = {
+      firstname: this.addForm.value.firstname!.trim(),
+      lastname: this.addForm.value.lastname!.trim(),
+      email: this.addForm.value.email!.trim(),
+      password: this.addForm.value.password!.trim(),
+    };
+
+    // We add a new coach
+    this.http.post<CoachAdmin>(`${apiRoot}/coach`, formValueTrimed).subscribe({
+      next: () => {
+        const lastname = formValueTrimed.lastname;
+        const firstname = formValueTrimed.firstname;
+
+        this.toastService.show({
+          severity: 'success',
+          title: 'Ajout réussi',
+          content: `Le coach ${firstname} ${lastname} a bien été ajouté`,
+          time: 3000,
         });
 
-      // TODO FAIRE UNE REDIRECTION VERS LA PAGE COACHS
-    }
+        this.router.navigateByUrl(AppRoutes.app.admin.coachesFull);
+      },
+      error: (error) => {
+        this.toastService.show({
+          severity: 'error',
+          title: "L'ajout a échoué",
+          content: error.error,
+          sticky: true,
+        });
+      },
+    });
   }
 
   /** Resets the error display flag when any form field value changes */
