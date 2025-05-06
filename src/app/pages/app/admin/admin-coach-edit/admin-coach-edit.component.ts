@@ -19,6 +19,14 @@ import { ToastMessageService } from '@services/toast/toast-message.service';
 import { AppRoutes } from '@config/routes';
 import { apiRoot } from '@config/api/api';
 
+/**
+ * AdminCoachEditComponent
+ *
+ * This standalone component handles editing an existing coach.
+ * - It initializes a reactive form with fields: firstname, lastname, email.
+ * - On init, it fetches coach data by ID (if present) and patches the form.
+ * - On submit, it validates the form, sends a PUT request, and shows toast feedback.
+ */
 @Component({
   selector: 'app-admin-coach-edit',
   standalone: true,
@@ -41,8 +49,11 @@ export class AdminCoachEditComponent implements OnInit {
   router: Router = inject(Router);
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   toastService: ToastMessageService = inject(ToastMessageService);
+
+  /** True if URL has an `id` parameter, indicating edit mode */
   isEdit = !!this.activatedRoute.snapshot.paramMap.get('id');
 
+  /** Holds the coach data loaded from the backend */
   coachToEdit: CoachAdmin | null = null;
 
   /* ---------------------------------------------------- */
@@ -50,12 +61,24 @@ export class AdminCoachEditComponent implements OnInit {
     TODO IL FAUT QUE JE TRIM CHAQUE VALEUR DU FORMULAIRE
   */
   /* ---------------------------------------------------- */
+  /**
+   * Reactive form definition:
+   * - firstname: required, length 3–100, no whitespace-only
+   * - lastname: same rules as firstname
+   * - email: required, valid email pattern
+   */
   editForm = this.formBuilder.group({
     firstname: ['', FormValidators.nameValidator()],
     lastname: ['', FormValidators.nameValidator()],
     email: ['', FormValidators.emailValidator()],
   });
 
+  /**
+   * On component initialization:
+   * - If an ID is present in the route, fetch coach data via GET
+   * - Patch the form with the retrieved values
+   * - Store the coach object in `coachToEdit`
+   */
   ngOnInit() {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     // If there is an ID in URL we fill the form
@@ -73,6 +96,12 @@ export class AdminCoachEditComponent implements OnInit {
     }
   }
 
+  /**
+   * Handles the form submission for editing a coach.
+   * - Marks all fields touched and shows errors if the form is invalid.
+   * - Sends a PUT request to update the coach if valid.
+   * - Displays success or error toasts based on server response.
+   */
   onClick() {
     if (this.editForm.invalid) {
       this.editForm.markAllAsTouched();
@@ -110,10 +139,15 @@ export class AdminCoachEditComponent implements OnInit {
     }
   }
 
+  /** Reset the error display flag whenever a form field value changes */
   onFieldChange() {
     this.displayErrors = false;
   }
 
+  /**
+   * Returns the validation error message for the 'firstname' control,
+   * or an empty string if the control is valid or untouched.
+   */
   get firstnameError() {
     const control = this.editForm.get('firstname');
 
@@ -128,6 +162,10 @@ export class AdminCoachEditComponent implements OnInit {
     return '';
   }
 
+  /**
+   * Returns the validation error message for the 'lastname' control,
+   * or an empty string if the control is valid or untouched.
+   */
   get lastnameError() {
     const control = this.editForm.get('lastname');
 
@@ -142,6 +180,10 @@ export class AdminCoachEditComponent implements OnInit {
     return '';
   }
 
+  /**
+   * Returns the validation error message for the 'email' control,
+   * or an empty string if the control is valid or untouched.
+   */
   get emailError() {
     const control = this.editForm.get('email');
 
