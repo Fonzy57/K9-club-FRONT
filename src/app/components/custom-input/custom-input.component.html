@@ -24,7 +24,7 @@
     />
     }
   </div>
-  @if (hintMessage) {
+  @if (hintMessage && !errorMessage) {
   <p class="text-xs text-gray-one">{{ hintMessage }}</p>
   } @if (errorMessage) {
   <p class="text-xs text-error">{{ errorMessage }}</p>
