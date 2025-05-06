@@ -19,6 +19,15 @@ import { ToastMessageService } from '@services/toast/toast-message.service';
 import { AppRoutes } from '@config/routes';
 import { apiRoot } from '@config/api/api';
 
+/**
+ * AdminCoachAddComponent
+ *
+ * Standalone component responsible for adding a new coach.
+ * - Initializes a reactive form with firstname, lastname, email, and password fields.
+ * - Applies validation rules via FormValidators.
+ * - Submits a POST request to create the coach on valid form submission.
+ * - Displays success or error notifications through ToastMessageService.
+ */
 @Component({
   selector: 'app-admin-coach-edit',
   standalone: true,
@@ -36,20 +45,25 @@ export class AdminCoachAddComponent {
   AppRoutes = AppRoutes;
   displayErrors = false;
 
+  // Injected services and utilities
   http: HttpClient = inject(HttpClient);
   formBuilder: FormBuilder = inject(FormBuilder);
   router: Router = inject(Router);
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   toastService: ToastMessageService = inject(ToastMessageService);
-  isEdit = !!this.activatedRoute.snapshot.paramMap.get('id');
-
-  coachToEdit: CoachAdmin | null = null;
 
   /* ---------------------------------------------------- */
   /* 
     TODO IL FAUT QUE JE TRIM CHAQUE VALEUR DU FORMULAIRE
   */
   /* ---------------------------------------------------- */
+  /**
+   * Reactive form group definition:
+   * - firstname: required, length 3-100, no whitespace-only
+   * - lastname: same rules as firstname
+   * - email: required, valid email pattern
+   * - password: required, length 8-40, contains uppercase, lowercase, digit, special
+   */
   addForm = this.formBuilder.group({
     firstname: ['', FormValidators.nameValidator()],
     lastname: ['', FormValidators.nameValidator()],
@@ -57,6 +71,12 @@ export class AdminCoachAddComponent {
     password: ['', FormValidators.passwordValidator()],
   });
 
+  /**
+   * Handles form submission.
+   * - Marks all fields as touched and shows errors if form is invalid.
+   * - Sends POST request to create a new coach if valid.
+   * - Displays toast notifications based on outcome.
+   */
   onClick() {
     if (this.addForm.invalid) {
       this.addForm.markAllAsTouched();
@@ -100,10 +120,15 @@ export class AdminCoachAddComponent {
     }
   }
 
+  /** Resets the error display flag when any form field value changes */
   onFieldChange() {
     this.displayErrors = false;
   }
 
+  /**
+   * Returns the validation error message for the 'firstname' field,
+   * or an empty string if the field is valid or untouched.
+   */
   get firstnameError() {
     const control = this.addForm.get('firstname');
 
@@ -118,6 +143,9 @@ export class AdminCoachAddComponent {
     return '';
   }
 
+  /**
+   * Returns the validation error message for the 'lastname' field.
+   */
   get lastnameError() {
     const control = this.addForm.get('lastname');
 
@@ -132,6 +160,9 @@ export class AdminCoachAddComponent {
     return '';
   }
 
+  /**
+   * Returns the validation error message for the 'email' field.
+   */
   get emailError() {
     const control = this.addForm.get('email');
 
@@ -146,6 +177,9 @@ export class AdminCoachAddComponent {
     return '';
   }
 
+  /**
+   * Returns the validation error message for the 'password' field.
+   */
   get passwordError() {
     const control = this.addForm.get('password');
 
@@ -160,27 +194,43 @@ export class AdminCoachAddComponent {
     return '';
   }
 
-  /** Valeur brute du mot de passe */
+  /* TODO EN FAIRE UN SERVICE OU UN UTILS */
+  /**
+   * Retrieves the current raw value of the password field,
+   * defaulting to an empty string if undefined.
+   */
   get passwordValue(): string {
     return this.addForm.get('password')?.value || '';
   }
 
-  /** Critères de mot de passe */
+  // Password strength criteria getters for real-time UI feedback
+
+  /** True if password length is at least 8 characters */
   get passMinLength(): boolean {
     return this.passwordValue.length >= 8;
   }
+
+  /** True if password length does not exceed 40 characters */
   get passMaxLength(): boolean {
     return this.passwordValue.length <= 40;
   }
+
+  /** True if password contains at least one lowercase letter */
   get passHasLower(): boolean {
     return /[a-z]/.test(this.passwordValue);
   }
+
+  /** True if password contains at least one uppercase letter */
   get passHasUpper(): boolean {
     return /[A-Z]/.test(this.passwordValue);
   }
+
+  /** True if password contains at least one digit */
   get passHasDigit(): boolean {
     return /\d/.test(this.passwordValue);
   }
+
+  /** True if password contains at least one special character */
   get passHasSpecial(): boolean {
     return /[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/.test(this.passwordValue);
   }
