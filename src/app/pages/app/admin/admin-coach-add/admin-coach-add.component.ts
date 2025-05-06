@@ -84,15 +84,6 @@ export class AdminCoachAddComponent {
       return;
     } else {
       // We add a new coach
-      /*
-
-          TODO GERER L'AJOUT D'UN COACH, FAIRE LA VERIFICATION DE L'EMAIL BIEN UNIQUE
-
-          GERER CA AU NIVEAU DE L'API ET RENOYER UN MESSAGE CLAIR
-
-          TODO TESTER SI TOUT FONCTIONNE BIEN
-
-        */
       this.http
         .post<CoachAdmin>(`${apiRoot}/coach`, this.addForm.value)
         .subscribe({
@@ -106,11 +97,11 @@ export class AdminCoachAddComponent {
               time: 3000,
             });
           },
-          error: () => {
+          error: (error) => {
             this.toastService.show({
               severity: 'error',
-              title: 'Ajout échoué',
-              content: `Le coach n'a pas été ajouté`,
+              title: "L'ajout a échoué",
+              content: error.error,
               sticky: true,
             });
           },
