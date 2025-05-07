@@ -12,14 +12,14 @@ import {
 // COMPONENTS
 import { ButtonComponent } from '@components/button/button.component';
 import { CustomInputComponent } from '@components/custom-input/custom-input.component';
-import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
+import { BackButtonComponent } from '@components/back-button/back-button.component';
 
 // SERVICES
 import { AuthService } from '@services/auth/auth.service';
 import { ToastMessageService } from '@services/toast/toast-message.service';
 
 // VALIDATORS
-import { customEmailValidator } from 'app/validators/email-validators';
+import { FormValidators } from 'app/validators/form-validators';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
@@ -32,9 +32,9 @@ import { apiRoot } from '@config/api/api';
     RouterModule,
     ButtonComponent,
     CustomInputComponent,
-    CustomIconComponent,
     FormsModule,
     ReactiveFormsModule,
+    BackButtonComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
@@ -51,7 +51,7 @@ export class LoginComponent {
 
   loginForm = this.formBuilder.group({
     // TODO SUPPRIMER LES INFOS QUAND TESTS FINIS
-    email: ['admin@k9club.fr', [Validators.required, customEmailValidator()]],
+    email: ['admin@k9club.fr', FormValidators.emailValidator()],
     password: ['123456', [Validators.required]],
   });
 
@@ -63,7 +63,7 @@ export class LoginComponent {
     }
 
     this.http
-      .post(apiRoot + 'login', this.loginForm.value, {
+      .post(apiRoot + '/login', this.loginForm.value, {
         responseType: 'text',
       })
       .subscribe({
@@ -113,20 +113,15 @@ export class LoginComponent {
     this.displayErrors = false;
   }
 
-  get emailError(): string {
-    const emailControl = this.loginForm.get('email');
+  get emailError() {
+    const control = this.loginForm.get('email');
 
-    if (!emailControl) {
+    if (!control) {
       return '';
     }
 
-    if ((emailControl.touched || emailControl.dirty) && emailControl.invalid) {
-      if (emailControl.errors?.['required']) {
-        return 'Veuillez renseigner votre email.';
-      }
-      if (emailControl.errors?.['invalidEmail']) {
-        return 'Veuillez entrer une adresse email valide.';
-      }
+    if ((control.touched || control.dirty) && control.invalid) {
+      return FormValidators.getEmailError(control);
     }
 
     return '';

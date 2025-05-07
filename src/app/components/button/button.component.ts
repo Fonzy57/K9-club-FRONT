@@ -27,6 +27,12 @@ export class ButtonComponent implements AfterViewInit {
 
   @Input() routerLink?: any[] | string;
 
+  @Output() onClick = new EventEmitter<MouseEvent>();
+
+  handleClick(event: MouseEvent) {
+    this.onClick.emit(event);
+  }
+
   // Workaround for unwanted button animation on route transitions.
   // Angular recreates the component on route change (router-outlet), triggering CSS transitions.
   // We delay applying transition classes until after the initial render to avoid visual flickering.
@@ -41,13 +47,6 @@ export class ButtonComponent implements AfterViewInit {
   get transitionClass(): string {
     return this.hasRendered ? 'transition duration-300 ease-in-out' : '';
   }
-
-  /* TODO VOIR SI CETTE FONCTION EST NECESSAIRE OU PAS */
-  /* @Output() onClick = new EventEmitter<void>();
-
-  handleClick() {
-    this.onClick.emit();
-  } */
 
   /* TODO REVOIR LA TAILLE DES BOUTONS? LES NORMAUX NE SONT PAS ASSEZ GRAND */
   get bgColorClass(): string {

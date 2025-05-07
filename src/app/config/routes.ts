@@ -43,10 +43,22 @@ export const AppRoutes = {
     admin: {
       root: adminRoot,
       dashboard: 'dashboard',
+      coaches: 'coachs',
+      addCoach: 'ajouter',
+      updateCoach: 'modifier',
       account: 'mon-compte',
       get dashboardFull() {
         return `/${appRoot}/${this.root}/${this.dashboard}`;
       },
+      get coachesFull() {
+        return `/${appRoot}/${this.root}/${this.coaches}`;
+      },
+      /* get addCoachFull() {
+        return `/${appRoot}/${this.root}/${this.addCoach}`;
+      },
+      get updateCoachFull() {
+        return `/${appRoot}/${this.root}/${this.updateCoach}`;
+      }, */
       get accountFull() {
         return `/${appRoot}/${this.root}/${this.account}`;
       },

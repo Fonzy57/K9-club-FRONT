@@ -6,21 +6,25 @@ import { Component, Input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   ionAddOutline,
+  ionBodyOutline,
   ionCalendarNumberOutline,
   ionCalendarClearOutline,
   ionCheckmarkOutline,
   ionChevronBackOutline,
   ionEyeOffOutline,
   ionEyeOutline,
+  ionFemaleOutline,
   ionHomeOutline,
   ionInformationCircleOutline,
   ionLogOutOutline,
+  ionMaleOutline,
   ionMoonOutline,
   ionPawOutline,
   ionPersonOutline,
   ionPencilOutline,
   ionSunnyOutline,
   ionTrashOutline,
+  ionWarningOutline,
 } from '@ng-icons/ionicons';
 
 @Component({
@@ -31,21 +35,25 @@ import {
   viewProviders: [
     provideIcons({
       ionAddOutline,
+      ionBodyOutline,
       ionCalendarNumberOutline,
       ionCalendarClearOutline,
       ionCheckmarkOutline,
       ionChevronBackOutline,
       ionEyeOffOutline,
       ionEyeOutline,
+      ionFemaleOutline,
       ionHomeOutline,
       ionInformationCircleOutline,
       ionLogOutOutline,
+      ionMaleOutline,
       ionMoonOutline,
       ionPawOutline,
       ionPersonOutline,
       ionPencilOutline,
       ionSunnyOutline,
       ionTrashOutline,
+      ionWarningOutline,
     }),
   ],
 })

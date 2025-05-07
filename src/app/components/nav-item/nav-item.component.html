@@ -3,7 +3,7 @@
   [routerLink]="url"
   routerLinkActive
   #rla="routerLinkActive"
-  [routerLinkActiveOptions]="{ exact: true }"
+  [routerLinkActiveOptions]="{ exact: false }"
   [ngClass]="{ '!border-border !shadow-xs hover:!bg-white': rla.isActive }"
 >
   <app-custom-icon

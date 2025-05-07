@@ -41,7 +41,7 @@ export class DashboardComponent {
     : '';
 
   ngOnInit() {
-    this.http.get<any[]>(apiRoot + 'dogs').subscribe((dogsListFromApi) => {
+    this.http.get<any[]>(apiRoot + '/dogs').subscribe((dogsListFromApi) => {
       /* TODO MAP JUSTE POUR LES TESTS */
       this.dogs = dogsListFromApi.map((dog) => ({
         name: dog.name,

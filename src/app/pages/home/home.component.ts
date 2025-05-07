@@ -69,7 +69,7 @@ export class HomeComponent {
     },
   ];
 
-  coachs: Coach[] = [
+  coachs: any[] = [
     {
       prenom: 'Hubert',
       nom: 'BONISSEUR DE LA BATH',
