@@ -1,10 +1,16 @@
-import { Injectable } from '@angular/core';
+// ANGULAR
+import { inject, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
+// CONFIG
+import { AppRoutes } from '@config/routes';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   isLogged: boolean = false;
+  router: Router = inject(Router);
 
   userInfos: JwtUserInfos | null = null;
 
@@ -33,5 +39,6 @@ export class AuthService {
     localStorage.removeItem('jwt');
     this.isLogged = false;
     this.userInfos = null;
+    this.router.navigateByUrl(AppRoutes.auth.loginFull);
   };
 }
