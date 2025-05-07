@@ -84,8 +84,9 @@ export class AdminCoachEditComponent implements OnInit {
           this.coachToEdit = coach;
         },
         error: (error) => {
-          console.error('ERROR editing or adding coach', error);
-          this.router.navigate([this.AppRoutes.app.admin.coachesFull]);
+          console.error('ERROR editing coach', error);
+          // TODO VOIR SI JE GARDE LA REDIRECTION
+          this.router.navigate([AppRoutes.app.admin.coachesFull]);
         },
       });
     }
