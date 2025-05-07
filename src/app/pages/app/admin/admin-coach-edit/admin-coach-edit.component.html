@@ -64,9 +64,10 @@
       <!-- TODO PREVOIR UN INPUT POUR CHOISIR UN AVATAR -->
     </div>
 
-    <!-- TODO DISABLED LE BOUTON SI PAS DE CHANGEMENT -->
     <div class="mt-10">
-      <app-button>Modifier</app-button>
+      <app-button [disabled]="!hasChanges || disableButton">
+        Modifier
+      </app-button>
     </div>
   </form>
 </div>
