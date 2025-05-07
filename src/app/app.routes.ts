@@ -121,6 +121,7 @@ export const routes: Routes = [
       },
 
       // 3) “admin” routes
+      // TODO FAIRE UNE REDIRECTION SI ON VA SUR /app
       {
         path: AppRoutes.app.admin.root, // 'admin'
         canActivateChild: [adminGuard],
