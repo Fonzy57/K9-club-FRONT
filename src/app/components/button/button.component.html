@@ -3,6 +3,7 @@
   class="rounded-lg cursor-pointer font-poppins w-full shadow-sm"
   [class]="transitionClass"
   [ngClass]="[bgColorClass, textColorClass, sizeClass]"
+  [disabled]="disabled"
   [routerLink]="routerLink"
   (click)="handleClick($event)"
 >
