@@ -43,6 +43,7 @@ import { apiRoot } from '@config/api/api';
 export class AdminCoachEditComponent implements OnInit {
   AppRoutes = AppRoutes;
   displayErrors = false;
+  disableButton = true;
 
   http: HttpClient = inject(HttpClient);
   formBuilder: FormBuilder = inject(FormBuilder);
@@ -54,7 +55,14 @@ export class AdminCoachEditComponent implements OnInit {
   isEdit = !!this.activatedRoute.snapshot.paramMap.get('id');
 
   /** Holds the coach data loaded from the backend */
-  coachToEdit: CoachAdmin | null = null;
+  coachToEdit: CoachAdmin = {
+    id: 0,
+    firstname: '',
+    lastname: '',
+    email: '',
+    createdAt: '',
+    updatedAt: '',
+  };
 
   /**
    * Reactive form definition:
@@ -84,8 +92,14 @@ export class AdminCoachEditComponent implements OnInit {
           this.coachToEdit = coach;
         },
         error: (error) => {
-          console.error('ERROR editing or adding coach', error);
-          this.router.navigate([this.AppRoutes.app.admin.coachesFull]);
+          console.error('ERROR editing coach', error);
+          this.toastService.show({
+            severity: 'error',
+            title: 'Erreur avec les données',
+            content:
+              'Il y a eu un problème lors de la récupération des données 😢 veuillez réessayer plus tard.',
+            sticky: true,
+          });
         },
       });
     }
@@ -101,6 +115,7 @@ export class AdminCoachEditComponent implements OnInit {
     if (this.editForm.invalid) {
       this.editForm.markAllAsTouched();
       this.displayErrors = true; // Afficher les erreurs à la soumission
+      this.disableButton = true;
       return;
     }
 
@@ -111,6 +126,8 @@ export class AdminCoachEditComponent implements OnInit {
     };
 
     // Checking if editing, if true API call whit PUT method
+    // TODO DEMANDER A FRANCK SI ADMIN CHANGE LE MAIL D'UN COACH,
+    // COMMENT FAIRE POUR DECONNECTER CE COACH AUTOMATIQUEMENT
     if (this.coachToEdit) {
       this.http
         .put<CoachAdmin>(
@@ -143,6 +160,16 @@ export class AdminCoachEditComponent implements OnInit {
   /** Reset the error display flag whenever a form field value changes */
   onFieldChange() {
     this.displayErrors = false;
+    this.disableButton = false;
+  }
+
+  get hasChanges(): boolean {
+    const { firstname, lastname, email } = this.editForm.value;
+    return (
+      firstname?.trim() !== this.coachToEdit.firstname ||
+      lastname?.trim() !== this.coachToEdit.lastname ||
+      email?.trim() !== this.coachToEdit.email
+    );
   }
 
   /**

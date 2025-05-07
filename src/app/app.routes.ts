@@ -29,6 +29,7 @@ import { AdminDashboardComponent } from '@pages/app/admin/admin-dashboard/admin-
 import { AdminCoachesComponent } from '@pages/app/admin/admin-coaches/admin-coaches.component';
 import { AdminCoachEditComponent } from '@pages/app/admin/admin-coach-edit/admin-coach-edit.component';
 import { AdminCoachAddComponent } from '@pages/app/admin/admin-coach-add/admin-coach-add.component';
+import { AdminAccountComponent } from '@pages/app/admin/admin-account/admin-account.component';
 
 // APP - OWNER
 import { DashboardComponent } from '@pages/app/user/dashboard/dashboard.component';
@@ -142,10 +143,10 @@ export const routes: Routes = [
             path: `${AppRoutes.app.admin.coaches}/${AppRoutes.app.admin.updateCoach}/:id`, // 'coachs/modifier/:id'
             component: AdminCoachEditComponent,
           },
-          /* {
-            path: AppRoutes.app.admin.account,    // 'mon-compte'
+          {
+            path: AppRoutes.app.admin.account, // 'mon-compte'
             component: AdminAccountComponent,
-          }, */
+          },
         ],
       },
     ],

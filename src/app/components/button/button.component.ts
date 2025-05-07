@@ -1,3 +1,4 @@
+// ANGULAR
 import { CommonModule } from '@angular/common';
 import {
   AfterViewInit,
@@ -8,9 +9,8 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-// TODO REVOIR ICI LE TYPAGE POUR QUE MON IDE ME LE PROPOSE
+// TYPES
 export type ButtonType = 'primary' | 'ghost' | 'cancel';
-// TODO AJOUTER AUSSI UN TYPE POUR LA TAILLE ET UN DISABLED
 export type ButtonSize = 'normal' | 'tiny';
 
 @Component({
@@ -24,6 +24,7 @@ export class ButtonComponent implements AfterViewInit {
   // TODO REVOIR ICI LE TYPAGE POUR QUE MON IDE ME LE PROPOSE
   @Input() typeButton: ButtonType = 'primary';
   @Input() size: ButtonSize = 'normal';
+  @Input() disabled = false;
 
   @Input() routerLink?: any[] | string;
 
@@ -52,19 +53,20 @@ export class ButtonComponent implements AfterViewInit {
   get bgColorClass(): string {
     switch (this.typeButton) {
       case 'ghost':
-        return 'py-[7px] bg-white border border-border hover:border-text active:bg-ghost-active';
+        return 'py-[7px] bg-white border border-border hover:border-text active:bg-ghost-active disabled:bg-white/20 disabled:hover:border-border disabled:shadow-none disabled:cursor-not-allowed';
+      /* TODO CHANGER STYLE DISABLED POUR CANCEL */
       case 'cancel':
         return 'py-2 bg-error hover:bg-error-700 active:bg-error active:ring-2 active:ring-error/50';
       case 'primary':
       default:
-        return 'py-2 bg-main hover:bg-main-900 active:bg-main active:ring-2 active:ring-main/50';
+        return 'py-2 bg-main hover:bg-main-900 active:bg-main active:ring-2 active:ring-main/50 disabled:bg-main/40 disabled:active:ring-0 disabled:cursor-not-allowed';
     }
   }
 
   get textColorClass(): string {
     switch (this.typeButton) {
       case 'ghost':
-        return 'text-text';
+        return 'text-text disabled:text-text/20';
       case 'primary':
       case 'cancel':
       default:
