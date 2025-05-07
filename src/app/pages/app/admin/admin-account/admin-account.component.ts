@@ -1,22 +1,24 @@
 // ANGULAR
-
-// COMPONENTS
-
-// SERVICES
-
-// CONFIG
 import { Component, inject } from '@angular/core';
-import { BackButtonComponent } from '@components/back-button/back-button.component';
-import { AppRoutes } from '@config/routes';
-import { ButtonComponent } from '@components/button/button.component';
-import { CustomInputComponent } from '@components/custom-input/custom-input.component';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ToastMessageService } from '@services/toast/toast-message.service';
+
+// COMPONENTS
+import { BackButtonComponent } from '@components/back-button/back-button.component';
+import { ButtonComponent } from '@components/button/button.component';
+import { CustomInputComponent } from '@components/custom-input/custom-input.component';
+
+// VALIDATORS
 import { FormValidators } from 'app/validators/form-validators';
-import { apiRoot } from '@config/api/api';
+
+// SERVICES
+import { ToastMessageService } from '@services/toast/toast-message.service';
 import { AuthService } from '@services/auth/auth.service';
+
+// CONFIG
+import { AppRoutes } from '@config/routes';
+import { apiRoot } from '@config/api/api';
 
 @Component({
   selector: 'app-admin-account',
@@ -25,12 +27,15 @@ import { AuthService } from '@services/auth/auth.service';
     ButtonComponent,
     FormsModule,
     ReactiveFormsModule,
+    BackButtonComponent,
   ],
   templateUrl: './admin-account.component.html',
   styleUrl: './admin-account.component.css',
 })
 export class AdminAccountComponent {
+  AppRoutes = AppRoutes;
   displayErrors = false;
+  disableButton = true;
 
   auth: AuthService = inject(AuthService);
   http: HttpClient = inject(HttpClient);
@@ -74,8 +79,10 @@ export class AdminAccountComponent {
 
   onClick() {
     if (this.editAdminForm.invalid) {
+      // Afficher les erreurs à la soumission
       this.editAdminForm.markAllAsTouched();
-      this.displayErrors = true; // Afficher les erreurs à la soumission
+      this.displayErrors = true;
+      this.disableButton = true;
       return;
     }
 
@@ -103,10 +110,11 @@ export class AdminAccountComponent {
                 'Vos informations ont bien été modifié, merci de vous reconnecter',
               time: 3000,
             });
+
             // if email has changed we logout the user
             this.auth.logout();
           } else {
-            // TODO Mettre un bouton retour
+            this.disableButton = true;
 
             this.toastService.show({
               severity: 'success',
@@ -130,6 +138,7 @@ export class AdminAccountComponent {
   /** Reset the error display flag whenever a form field value changes */
   onFieldChange() {
     this.displayErrors = false;
+    this.disableButton = false;
   }
 
   /**
