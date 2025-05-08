@@ -12,6 +12,7 @@ import { DisconnectButtonComponent } from '../disconnect/disconnect-button/disco
 import { AppRoutes } from '@config/routes';
 import { userNavItems } from '@config/navigation/user-nav-items';
 import { adminNavItems } from '@config/navigation/admin-nav-items';
+import { coachNavItems } from '@config/navigation/coach-nav-items';
 
 // SERVICES
 import { AuthService } from '@services/auth/auth.service';
@@ -27,6 +28,7 @@ export class HeaderMobileComponent {
 
   navItems: any[] = [];
   accountLink: string = '';
+  isCoach: boolean = this.auth.userInfos?.role === 'ROLE_COACH';
   AppRoutes = AppRoutes;
 
   isOpen = false;
@@ -63,14 +65,10 @@ export class HeaderMobileComponent {
           break;
         case 'ROLE_ADMIN':
           this.navItems = adminNavItems;
-          // TODO FAIRE LA PAGE
           this.accountLink = AppRoutes.app.admin.accountFull;
           break;
         case 'ROLE_COACH':
-          // TODO CHANGER QUAND LA PAGE SERA READY
-          this.navItems = userNavItems;
-          // TODO FAIRE LA PAGE ET CHANGER LE LIEN QUAND C'EST FAIT
-          this.accountLink = AppRoutes.app.admin.accountFull;
+          this.navItems = coachNavItems;
           break;
         case 'ROLE_OWNER':
           this.navItems = userNavItems;
