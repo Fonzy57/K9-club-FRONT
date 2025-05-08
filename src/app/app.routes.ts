@@ -5,6 +5,7 @@ import { Routes } from '@angular/router';
 import { loggedGuard } from './guards/logged.guard';
 import { ownerGuard } from './guards/owner.guard';
 import { adminGuard } from './guards/admin.guard';
+import { coachGuard } from './guards/coach.guard';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
@@ -30,6 +31,9 @@ import { AdminCoachesComponent } from '@pages/app/admin/admin-coaches/admin-coac
 import { AdminCoachEditComponent } from '@pages/app/admin/admin-coach-edit/admin-coach-edit.component';
 import { AdminCoachAddComponent } from '@pages/app/admin/admin-coach-add/admin-coach-add.component';
 import { AdminAccountComponent } from '@pages/app/admin/admin-account/admin-account.component';
+
+// APP - COACH
+import { CoachDashboardComponent } from '@pages/app/coach/coach-dashboard/coach-dashboard.component';
 
 // APP - OWNER
 import { DashboardComponent } from '@pages/app/user/dashboard/dashboard.component';
@@ -147,6 +151,31 @@ export const routes: Routes = [
             path: AppRoutes.app.admin.account, // 'mon-compte'
             component: AdminAccountComponent,
           },
+        ],
+      },
+
+      // 4) “coach” routes
+      // TODO FAIRE UNE REDIRECTION SI ON VA SUR /app
+      {
+        path: AppRoutes.app.coach.root, // 'coach'
+        canActivateChild: [coachGuard],
+        children: [
+          {
+            path: AppRoutes.app.coach.dashboard, // 'dashboard' (same segment)
+            component: CoachDashboardComponent,
+          },
+          /* {
+            path: AppRoutes.app.coach.courses, // 'cours'
+            component: ,
+          },
+          {
+            path: `${AppRoutes.app.coach.courses}/${AppRoutes.app.coach.addCourse}`, // 'cours/ajouter'
+            component: ,
+          },
+          {
+            path: `${AppRoutes.app.coach.courses}/${AppRoutes.app.coach.updateCourse}/:id`, // 'cours/modifier/:id'
+            component: ,
+          }, */
         ],
       },
     ],
