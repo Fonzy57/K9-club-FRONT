@@ -86,8 +86,7 @@ export class LoginComponent {
               this.router.navigateByUrl(AppRoutes.app.admin.dashboardFull);
               break;
             case 'ROLE_COACH':
-              // TODO CHANGER QUAND LA PAGE SERA READY
-              this.router.navigateByUrl(AppRoutes.app.admin.dashboardFull);
+              this.router.navigateByUrl(AppRoutes.app.coach.dashboardFull);
               break;
             case 'ROLE_OWNER':
               this.router.navigateByUrl(AppRoutes.app.user.dashboardFull);
