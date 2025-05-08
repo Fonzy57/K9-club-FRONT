@@ -1,6 +1,7 @@
 const appRoot = 'app';
 const authRoot = 'auth';
 const adminRoot = 'admin';
+const coachRoot = 'coach';
 
 export const AppRoutes = {
   home: '',
@@ -22,24 +23,6 @@ export const AppRoutes = {
   },
   app: {
     root: appRoot,
-    user: {
-      dashboard: 'dashboard',
-      dog: 'mes-chiens',
-      course: 'les-cours',
-      account: 'mon-compte',
-      get dashboardFull() {
-        return `/${appRoot}/${this.dashboard}`;
-      },
-      get dogFull() {
-        return `/${appRoot}/${this.dog}`;
-      },
-      get courseFull() {
-        return `/${appRoot}/${this.course}`;
-      },
-      get accountFull() {
-        return `/${appRoot}/${this.account}`;
-      },
-    },
     admin: {
       root: adminRoot,
       dashboard: 'dashboard',
@@ -61,6 +44,43 @@ export const AppRoutes = {
       }, */
       get accountFull() {
         return `/${appRoot}/${this.root}/${this.account}`;
+      },
+    },
+    coach: {
+      root: coachRoot,
+      dashboard: 'dashboard',
+      courses: 'cours',
+      addCourse: 'ajouter',
+      updateCourse: 'modifier',
+      get dashboardFull() {
+        return `/${appRoot}/${this.root}/${this.dashboard}`;
+      },
+      get coursesFull() {
+        return `/${appRoot}/${this.root}/${this.courses}`;
+      },
+      /* get addCoachFull() {
+        return `/${appRoot}/${this.root}/${this.addCoach}`;
+      },
+      get updateCoachFull() {
+        return `/${appRoot}/${this.root}/${this.updateCoach}`;
+      }, */
+    },
+    user: {
+      dashboard: 'dashboard',
+      dog: 'mes-chiens',
+      course: 'les-cours',
+      account: 'mon-compte',
+      get dashboardFull() {
+        return `/${appRoot}/${this.dashboard}`;
+      },
+      get dogFull() {
+        return `/${appRoot}/${this.dog}`;
+      },
+      get courseFull() {
+        return `/${appRoot}/${this.course}`;
+      },
+      get accountFull() {
+        return `/${appRoot}/${this.account}`;
       },
     },
   },
