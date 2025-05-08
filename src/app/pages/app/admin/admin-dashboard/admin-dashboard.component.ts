@@ -1,16 +1,49 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject } from '@angular/core';
 import {
   CardInfoComponent,
   Info,
 } from '@components/card/card-info/card-info.component';
+import { UserInfoService } from '@services/user/user-info.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-dashboard',
-  imports: [CardInfoComponent],
+  imports: [CardInfoComponent, CommonModule],
   templateUrl: './admin-dashboard.component.html',
   styleUrl: './admin-dashboard.component.css',
 })
 export class AdminDashboardComponent {
+  userInfoService: UserInfoService = inject(UserInfoService);
+  user$!: Observable<UserInfoDto>;
+
+  ngOnInit() {
+    this.user$ = this.userInfoService.getUserInfo();
+  }
+
+  /* TODO ANCIENNE METHODE */
+  /* userInfo: UserInfoDto = {
+    id: 0,
+    firstname: '',
+    lastname: '',
+    email: '',
+    createdAt: '',
+    updatedAt: '',
+  };
+
+  ngOnInit(): void {
+    this.userInfoService.getUserInfo().subscribe({
+      next: (user) => {
+        this.userInfo = user;
+        console.log('user :', user);
+      },
+      error: (error) => {
+        console.error('ERREUR : ', error);
+      },
+    });
+  } */
+
   informations: Info[] = [
     {
       name: "Nombre d'adhérents",
