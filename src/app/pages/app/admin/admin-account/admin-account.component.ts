@@ -15,6 +15,7 @@ import { FormValidators } from 'app/validators/form-validators';
 // SERVICES
 import { ToastMessageService } from '@services/toast/toast-message.service';
 import { AuthService } from '@services/auth/auth.service';
+import { UserInfoService } from '@services/user/user-info.service';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
@@ -38,6 +39,7 @@ export class AdminAccountComponent {
   disableButton = true;
 
   auth: AuthService = inject(AuthService);
+  userInfoService: UserInfoService = inject(UserInfoService);
   http: HttpClient = inject(HttpClient);
   formBuilder: FormBuilder = inject(FormBuilder);
   router: Router = inject(Router);
@@ -60,19 +62,13 @@ export class AdminAccountComponent {
   });
 
   ngOnInit() {
-    this.http.get<CoachAdmin>(`${apiRoot}/admin/me`).subscribe({
+    this.userInfoService.getUserInfo().subscribe({
       next: (admin) => {
         this.editAdminForm.patchValue(admin);
         this.adminToEdit = admin;
       },
       error: (error) => {
         console.error('ERROR fetching account data', error);
-        this.toastService.show({
-          severity: 'error',
-          title: 'Récupération des données',
-          content: "Les données de votre compte n'ont pas pu être récupéré",
-          sticky: true,
-        });
       },
     });
   }
