@@ -5,4 +5,5 @@ interface UserInfoDto {
   email: string;
   createdAt: string;
   updatedAt: string;
+  dogs: Dog[];
 }
