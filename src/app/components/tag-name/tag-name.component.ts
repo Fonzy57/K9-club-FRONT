@@ -21,14 +21,18 @@ export class TagNameComponent {
   @Input() tag!: Tag;
 
   get color(): string {
-    return this.tag.color ?? (TAG_TYPE_COLOR_MAP[this.tag.name] || 'gray');
+    const name = this.tag?.name;
+    return this.tag?.color ?? (name && TAG_TYPE_COLOR_MAP[name]) ?? 'gray';
   }
 
   get label(): string {
-    return TAG_TYPE_LABEL_MAP[this.tag.name] || this.tag.name;
+    if (!this.tag) {
+      return '';
+    }
+    return TAG_TYPE_LABEL_MAP[this.tag.name] ?? this.tag.name;
   }
 
   get size(): TagSize {
-    return this.tag.size ?? 'tiny'; // Par défaut, la taille est 'tiny' si non précisée
+    return this.tag?.size ?? 'tiny'; // Par défaut, la taille est 'tiny' si non précisée
   }
 }
