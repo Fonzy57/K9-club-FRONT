@@ -1,4 +1,4 @@
-// TODO REVOIR ICI LE TYPAGE POUR QUE MON IDE ME LE PROPOSE
+// TODO SUPPRIMMER QUAND L'ENTITEE SERA EN BDD AVEC LA COULEUR
 export type TagSize = 'normal' | 'tiny';
 
 export type TagType =
