@@ -44,16 +44,15 @@ export class DogComponent {
   ];
 
   // TODO RECUPERER LES INFOS DE LA BDD
-  dogs: CardDog[] = [
+  /* dogs: CardDog[] = [
     {
-      image: '/images/dogs/rex.png',
       name: 'Rex',
-      race: 'Berger allemand',
+      breed: 'Berger allemand',
       birthday: '2019-06-01',
       nbOfCourses: 2,
       nextCourse: '25 mars 2025',
       tag: { name: 'agility' },
-      inscriptionDate: '17 mars 2024',
+      createdAt: '17 mars 2024',
       badges: [
         { name: 'best dog', image: '/images/badges/best-dog.png' },
         { name: 'best dog', image: '/images/badges/best-dog.png' },
@@ -61,15 +60,14 @@ export class DogComponent {
       ],
     },
     {
-      image: '/images/dogs/simba.png',
       name: 'Simba',
-      race: 'Golden Retriver',
+      breed: 'Golden Retriver',
       birthday: '2020-11-20',
       nbOfCourses: 16,
       nextCourse: '20 avril 2025',
       tag: { name: 'canicross' },
-      inscriptionDate: '21 octobre 2024',
+      createdAt: '21 octobre 2024',
       badges: [{ name: 'best dog', image: '/images/badges/best-dog.png' }],
     },
-  ];
+  ]; */
 }
