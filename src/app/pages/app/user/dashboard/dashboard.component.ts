@@ -1,12 +1,15 @@
-import { TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+// ANGULAR
+import { CommonModule, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { Observable } from 'rxjs';
+
+// COMPONENTS
 import { CardDogComponent } from '@components/card/card-dog/card-dog.component';
-import { CardDog } from '@components/card/card-dog/card-dog.type';
 import { CardNextCourseComponent } from '@components/card/card-next-course/card-next-course.component';
 import { Tag } from '@components/tag-name/tag-name.type';
-import { apiRoot } from '@config/api/api';
-import { AuthService } from '@services/auth/auth.service';
+
+// SERVICES
+import { UserInfoService } from '@services/user/user-info.service';
 
 /* TODO POUR LES TYPES FAIRE DES FICHIERS DANS LE REPO "models" */
 export interface NextCourse {
@@ -24,77 +27,18 @@ export interface NextCourse {
     CardNextCourseComponent,
     TitleCasePipe,
     UpperCasePipe,
+    CommonModule,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
-  http = inject(HttpClient);
-  auth: AuthService = inject(AuthService);
-  dogsApi = [];
-
-  firstname: string | null = this.auth.userInfos
-    ? this.auth.userInfos.firstname
-    : '';
-  lastname: string | null = this.auth.userInfos
-    ? this.auth.userInfos.lastname
-    : '';
+  userInfoService: UserInfoService = inject(UserInfoService);
+  user$!: Observable<UserInfoDto>;
 
   ngOnInit() {
-    this.http.get<any[]>(apiRoot + '/dogs').subscribe((dogsListFromApi) => {
-      /* TODO MAP JUSTE POUR LES TESTS */
-      this.dogs = dogsListFromApi.map((dog) => ({
-        name: dog.name,
-        age: this.parseAge(dog.age), // Converti "4 ans" en 4
-        image: `/images/dogs/${dog.name.toLowerCase()}.png`,
-        race: 'Berger allemand', // Temporaire, valeur mock
-        nbOfCourses: 2, // Temporaire
-        nextCourse: '25 mars 2025', // Temporaire
-        tag: { name: 'agility' }, // Temporaire
-        inscriptionDate: '17 mars 2024', // Temporaire
-        badges: [
-          { name: 'best dog', image: '/images/badges/best-dog.png' },
-          { name: 'best dog', image: '/images/badges/best-dog.png' },
-          { name: 'best dog', image: '/images/badges/best-dog.png' },
-        ],
-      }));
-    });
+    this.user$ = this.userInfoService.getUserInfo();
   }
-
-  parseAge(ageString: string): number {
-    // "4 ans" => 4
-    const match = ageString.match(/\d+/);
-    return match ? parseInt(match[0], 10) : 0;
-  }
-
-  dogs: CardDog[] = [
-    /* {
-      image: '/images/dogs/rex.png',
-      name: 'Rex',
-      race: 'Berger allemand',
-      age: 5,
-      nbOfCourses: 2,
-      nextCourse: '25 mars 2025',
-      tag: { name: 'agility' },
-      inscriptionDate: '17 mars 2024',
-      badges: [
-        { name: 'best dog', image: '/images/badges/best-dog.png' },
-        { name: 'best dog', image: '/images/badges/best-dog.png' },
-        { name: 'best dog', image: '/images/badges/best-dog.png' },
-      ],
-    },
-    {
-      image: '/images/dogs/simba.png',
-      name: 'Simba',
-      race: 'Golden Retriver',
-      age: 2,
-      nbOfCourses: 16,
-      nextCourse: '20 avril 2025',
-      tag: { name: 'canicross' },
-      inscriptionDate: '21 octobre 2024',
-      badges: [{ name: 'best dog', image: '/images/badges/best-dog.png' }],
-    }, */
-  ];
 
   nextCourses: NextCourse[] = [
     {
@@ -106,7 +50,7 @@ export class DashboardComponent {
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
     },
     {
-      name: 'Recherche d’objets ou de personne',
+      name: 'Choux blanc donc',
       date: '20 avril 2025 9h45',
       tag: { name: 'detection' },
       dog: 'Simba',
