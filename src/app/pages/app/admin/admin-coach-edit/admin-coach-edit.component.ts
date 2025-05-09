@@ -38,7 +38,6 @@ import { apiRoot } from '@config/api/api';
     BackButtonComponent,
   ],
   templateUrl: './admin-coach-edit.component.html',
-  styleUrl: './admin-coach-edit.component.css',
 })
 export class AdminCoachEditComponent implements OnInit {
   AppRoutes = AppRoutes;

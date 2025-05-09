@@ -39,7 +39,6 @@ import { apiRoot } from '@config/api/api';
     BackButtonComponent,
   ],
   templateUrl: './admin-coach-add.component.html',
-  styleUrl: './admin-coach-add.component.css',
 })
 export class AdminCoachAddComponent {
   AppRoutes = AppRoutes;

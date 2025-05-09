@@ -4,8 +4,5 @@ import { Component } from '@angular/core';
   selector: 'app-coach-dashboard',
   imports: [],
   templateUrl: './coach-dashboard.component.html',
-  styleUrl: './coach-dashboard.component.css'
 })
-export class CoachDashboardComponent {
-
-}
+export class CoachDashboardComponent {}

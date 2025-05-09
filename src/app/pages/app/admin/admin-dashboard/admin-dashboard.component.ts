@@ -12,7 +12,6 @@ import { Observable } from 'rxjs';
   selector: 'app-admin-dashboard',
   imports: [CardInfoComponent, CommonModule],
   templateUrl: './admin-dashboard.component.html',
-  styleUrl: './admin-dashboard.component.css',
 })
 export class AdminDashboardComponent {
   userInfoService: UserInfoService = inject(UserInfoService);

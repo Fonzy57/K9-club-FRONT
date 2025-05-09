@@ -5,7 +5,6 @@ import { NextCourse } from '../dashboard/dashboard.component';
   selector: 'app-dog',
   imports: [],
   templateUrl: './dog.component.html',
-  styleUrl: './dog.component.css',
 })
 export class DogComponent {
   nextCourses: NextCourse[] = [

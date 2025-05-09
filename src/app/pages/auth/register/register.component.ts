@@ -21,7 +21,6 @@ import { AppRoutes } from '@config/routes';
     BackButtonComponent,
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
 })
 export class RegisterComponent {
   AppRoutes = AppRoutes;

@@ -31,7 +31,6 @@ import { apiRoot } from '@config/api/api';
     BackButtonComponent,
   ],
   templateUrl: './admin-account.component.html',
-  styleUrl: './admin-account.component.css',
 })
 export class AdminAccountComponent {
   AppRoutes = AppRoutes;

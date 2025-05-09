@@ -30,7 +30,6 @@ export interface NextCourse {
     CommonModule,
   ],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.css',
 })
 export class DashboardComponent {
   userInfoService: UserInfoService = inject(UserInfoService);

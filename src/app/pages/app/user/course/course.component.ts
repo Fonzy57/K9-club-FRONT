@@ -9,7 +9,6 @@ import { ButtonComponent } from '@components/button/button.component';
   selector: 'app-course',
   imports: [CardCourseComponent, CardReservedCourseComponent, ButtonComponent],
   templateUrl: './course.component.html',
-  styleUrl: './course.component.css',
 })
 export class CourseComponent {
   courses: CardCourse[] = [

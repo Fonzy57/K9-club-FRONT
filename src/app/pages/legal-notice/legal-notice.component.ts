@@ -4,8 +4,5 @@ import { Component } from '@angular/core';
   selector: 'app-legal-notice',
   imports: [],
   templateUrl: './legal-notice.component.html',
-  styleUrl: './legal-notice.component.css'
 })
-export class LegalNoticeComponent {
-
-}
+export class LegalNoticeComponent {}

@@ -39,7 +39,6 @@ import { ToastMessageService } from '@services/toast/toast-message.service';
     RouterLink,
   ],
   templateUrl: './admin-coaches.component.html',
-  styleUrl: './admin-coaches.component.css',
   providers: [ConfirmationService],
 })
 export class AdminCoachesComponent implements OnInit {
