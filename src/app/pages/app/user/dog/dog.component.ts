@@ -43,12 +43,13 @@ export class DogComponent {
     },
   ];
 
+  // TODO RECUPERER LES INFOS DE LA BDD
   dogs: CardDog[] = [
     {
       image: '/images/dogs/rex.png',
       name: 'Rex',
       race: 'Berger allemand',
-      age: 5,
+      birthday: '2019-06-01',
       nbOfCourses: 2,
       nextCourse: '25 mars 2025',
       tag: { name: 'agility' },
@@ -63,7 +64,7 @@ export class DogComponent {
       image: '/images/dogs/simba.png',
       name: 'Simba',
       race: 'Golden Retriver',
-      age: 2,
+      birthday: '2020-11-20',
       nbOfCourses: 16,
       nextCourse: '20 avril 2025',
       tag: { name: 'canicross' },
