@@ -121,33 +121,4 @@ export class AppComponent {
       coach: 'Raymond Pelletier',
     },
   ];
-
-  dogs: CardDog[] = [
-    {
-      image: '/images/dogs/rex.png',
-      name: 'Rex',
-      race: 'Berger allemand',
-      age: 5,
-      nbOfCourses: 2,
-      nextCourse: '25 mars 2025',
-      tag: { name: 'agility' },
-      inscriptionDate: '17 mars 2024',
-      badges: [
-        { name: 'best dog', image: '/images/badges/best-dog.png' },
-        { name: 'best dog', image: '/images/badges/best-dog.png' },
-        { name: 'best dog', image: '/images/badges/best-dog.png' },
-      ],
-    },
-    {
-      image: '/images/dogs/simba.png',
-      name: 'Simba',
-      race: 'Golden Retriver',
-      age: 2,
-      nbOfCourses: 16,
-      nextCourse: '20 avril 2025',
-      tag: { name: 'canicross' },
-      inscriptionDate: '21 octobre 2024',
-      badges: [{ name: 'best dog', image: '/images/badges/best-dog.png' }],
-    },
-  ];
 }
