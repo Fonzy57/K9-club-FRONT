@@ -6,7 +6,6 @@ import { RouterOutlet } from '@angular/router';
 import { Tag } from '@components/tag-name/tag-name.type';
 import { CardCourse } from '@components/card/card-course/card-course.type';
 import { ReservedCardCourse } from '@components/card/card-reserved-course/card-reserved-course.type';
-import { CardDog } from '@components/card/card-dog/card-dog.type';
 
 // PRIME NG
 import { PrimeNG } from 'primeng/config';

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NextCourse } from '../dashboard/dashboard.component';
-import { CardDog } from '@components/card/card-dog/card-dog.type';
 
 @Component({
   selector: 'app-dog',
