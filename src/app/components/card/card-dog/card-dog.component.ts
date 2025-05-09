@@ -1,6 +1,6 @@
 // ANGULAR
 import { Component, Input } from '@angular/core';
-import { LowerCasePipe } from '@angular/common';
+import { DatePipe, LowerCasePipe } from '@angular/common';
 
 // COMPONENTS
 import { TagNameComponent } from '@components/tag-name/tag-name.component';
@@ -10,7 +10,7 @@ import { AgePipe } from 'app/pipes/age.pipe';
 
 @Component({
   selector: 'app-card-dog',
-  imports: [TagNameComponent, LowerCasePipe, AgePipe],
+  imports: [TagNameComponent, LowerCasePipe, AgePipe, DatePipe],
   templateUrl: './card-dog.component.html',
   styleUrl: './card-dog.component.css',
 })
