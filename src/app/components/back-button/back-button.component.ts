@@ -7,7 +7,6 @@ import { CustomIconComponent } from '../custom-icon/custom-icon.component';
   selector: 'app-back-button',
   imports: [RouterLink, CustomIconComponent],
   templateUrl: './back-button.component.html',
-  styleUrl: './back-button.component.css',
 })
 export class BackButtonComponent {
   AppRoutes = AppRoutes;

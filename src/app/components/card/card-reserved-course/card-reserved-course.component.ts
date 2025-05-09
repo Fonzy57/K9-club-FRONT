@@ -12,7 +12,6 @@ import { ReservedCardCourse } from './card-reserved-course.type';
   selector: 'app-card-reserved-course',
   imports: [ButtonComponent, TagNameComponent],
   templateUrl: './card-reserved-course.component.html',
-  styleUrl: './card-reserved-course.component.css',
 })
 export class CardReservedCourseComponent {
   @Input() course!: ReservedCardCourse;

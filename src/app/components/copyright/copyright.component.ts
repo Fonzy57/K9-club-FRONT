@@ -10,7 +10,6 @@ import { version } from '@config/version';
   selector: 'app-copyright',
   imports: [RouterLink],
   templateUrl: './copyright.component.html',
-  styleUrl: './copyright.component.css',
 })
 export class CopyrightComponent {
   currentYear: number = new Date().getFullYear();

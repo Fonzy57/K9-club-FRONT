@@ -13,7 +13,6 @@ import { AppRoutes } from '@config/routes';
   selector: 'app-footer',
   imports: [ButtonComponent, CopyrightComponent, RouterLink],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.css',
 })
 export class FooterComponent {
   AppRoutes = AppRoutes;

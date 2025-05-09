@@ -9,7 +9,6 @@ import { NextCourse } from '@pages/app/user/dashboard/dashboard.component';
   selector: 'app-card-next-course',
   imports: [TagNameComponent],
   templateUrl: './card-next-course.component.html',
-  styleUrl: './card-next-course.component.css',
 })
 export class CardNextCourseComponent {
   @Input() nextCourse!: NextCourse;

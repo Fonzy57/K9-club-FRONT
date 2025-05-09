@@ -14,7 +14,6 @@ import {
   selector: 'app-tag-name',
   imports: [CommonModule],
   templateUrl: './tag-name.component.html',
-  styleUrl: './tag-name.component.css',
 })
 export class TagNameComponent {
   // TODO REVOIR ICI LE TYPAGE POUR QUE MON IDE ME LE PROPOSE

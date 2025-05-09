@@ -12,7 +12,6 @@ import { AgePipe } from 'app/pipes/age.pipe';
   selector: 'app-card-dog',
   imports: [TagNameComponent, LowerCasePipe, AgePipe, DatePipe],
   templateUrl: './card-dog.component.html',
-  styleUrl: './card-dog.component.css',
 })
 export class CardDogComponent {
   /* TODO REVOIR TYPAGE */
