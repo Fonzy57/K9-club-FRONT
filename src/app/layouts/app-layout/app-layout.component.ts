@@ -13,7 +13,6 @@ import { version } from '@config/version';
   selector: 'app-app-layout',
   imports: [RouterOutlet, SidebarComponent, HeaderMobileComponent],
   templateUrl: './app-layout.component.html',
-  styleUrl: './app-layout.component.css',
 })
 export class AppLayoutComponent {
   /* TODO VOIR POUR LE COMPOSANT COPYRIGHT ET EN FAIRE QU'UN SEUL PEUT ÊTRE */
