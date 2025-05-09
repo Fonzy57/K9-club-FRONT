@@ -13,7 +13,7 @@ interface CardDog {
   image: string;
   name: string;
   race: string;
-  age: number;
+  birthday: string;
   nbOfCourses: number;
   nextCourse: string; // TODO CHANGER EN DATE QUAND API OK
   tag: Tag;
