@@ -1,0 +1,25 @@
+.custom-checkbox .p-checkbox-box {
+  border: 1px solid #dddddd;
+  background: white;
+}
+
+.custom-checkbox .p-checkbox-checked .p-checkbox-box {
+  background-color: #15803d;
+  border-color: #15803d;
+}
+
+.custom-checkbox
+  .p-checkbox-checked:not(.p-disabled):has(.p-checkbox-input:hover)
+  .p-checkbox-box {
+  background-color: #14532c;
+  border-color: #14532c;
+}
+
+.custom-checkbox p-checkBox.ng-invalid.ng-dirty .p-checkbox-box,
+p-check-box.ng-invalid.ng-dirty .p-checkbox-box,
+p-checkbox.ng-invalid.ng-dirty .p-checkbox-box,
+p-check-box.ng-invalid.ng-touched .p-checkbox-box,
+p-checkbox.ng-invalid.ng-touched .p-checkbox-box {
+  border-color: #dc2626 !important;
+  background-color: #fee2e2;
+}
