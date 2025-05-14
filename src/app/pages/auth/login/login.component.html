@@ -38,9 +38,9 @@
 
         <div class="flex items-center gap-x-2">
           <p>Mot de passe oublié ?</p>
-          <a href="#" class="text-main underline"
-            >Réinitialiser le mot de passe</a
-          >
+          <a href="#" class="text-main underline hover:no-underline">
+            Réinitialiser le mot de passe
+          </a>
         </div>
 
         <app-button type="submit">Se connecter</app-button>
@@ -50,9 +50,10 @@
         Pas encore inscrit ?
         <a
           [routerLink]="AppRoutes.auth.registerFull"
-          class="text-main underline"
-          >Créez un compte gratuitement</a
+          class="text-main underline hover:no-underline"
         >
+          Créez un compte gratuitement
+        </a>
         et rejoignez la communauté K9 Club !
       </p>
     </div>
