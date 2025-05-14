@@ -33,7 +33,7 @@ export interface NextCourse {
 })
 export class DashboardComponent {
   userInfoService: UserInfoService = inject(UserInfoService);
-  user$!: Observable<UserInfoDto>;
+  user$!: Observable<OwnerInfoDto>;
 
   ngOnInit() {
     this.user$ = this.userInfoService.getUserInfo();

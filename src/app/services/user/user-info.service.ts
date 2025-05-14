@@ -14,8 +14,8 @@ export class UserInfoService {
   http: HttpClient = inject(HttpClient);
   toastService: ToastMessageService = inject(ToastMessageService);
 
-  getUserInfo(): Observable<UserInfoDto> {
-    return this.http.get<UserInfoDto>(`${apiRoot}/user/me`).pipe(
+  getUserInfo(): Observable<OwnerInfoDto> {
+    return this.http.get<OwnerInfoDto>(`${apiRoot}/user/me`).pipe(
       catchError((error) => {
         this.toastService.show({
           severity: 'error',

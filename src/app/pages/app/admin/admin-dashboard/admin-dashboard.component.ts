@@ -15,14 +15,14 @@ import { Observable } from 'rxjs';
 })
 export class AdminDashboardComponent {
   userInfoService: UserInfoService = inject(UserInfoService);
-  user$!: Observable<UserInfoDto>;
+  user$!: Observable<OwnerInfoDto>;
 
   ngOnInit() {
     this.user$ = this.userInfoService.getUserInfo();
   }
 
   /* TODO ANCIENNE METHODE */
-  /* userInfo: UserInfoDto = {
+  /* userInfo: OwnerInfoDto = {
     id: 0,
     firstname: '',
     lastname: '',
