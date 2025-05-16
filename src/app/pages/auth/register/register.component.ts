@@ -16,6 +16,7 @@ import { Checkbox, CheckboxModule } from 'primeng/checkbox';
 import { ButtonComponent } from '@components/button/button.component';
 import { CustomInputComponent } from '@components/custom-input/custom-input.component';
 import { BackButtonComponent } from '@components/back-button/back-button.component';
+import { LinkTextComponent } from '@components/link-text/link-text.component';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
@@ -26,6 +27,7 @@ import { FormValidators } from 'app/validators/form-validators';
 // SERVICES
 import { AuthService } from '@services/auth/auth.service';
 import { ToastMessageService } from '@services/toast/toast-message.service';
+import { apiRoot } from '@config/api/api';
 
 @Component({
   selector: 'app-register',
@@ -38,6 +40,7 @@ import { ToastMessageService } from '@services/toast/toast-message.service';
     ReactiveFormsModule,
     Checkbox,
     CheckboxModule,
+    LinkTextComponent,
   ],
   templateUrl: './register.component.html',
 })
@@ -61,27 +64,49 @@ export class RegisterComponent {
 
   onClick() {
     if (this.registrationForm.invalid) {
-      // TODO SUPPRIMER QUAND TEST FINIS
-      console.log('FORMULAIRE NON VALIDE !');
-      console.log('Form PAS trim : ', this.registrationForm.value);
-
       this.registrationForm.markAllAsTouched();
-      this.displayErrors = true; // Afficher les erreurs à la soumission
+      this.displayErrors = true; // Show errors on submit
       return;
     }
 
-    const formValueTrimed: any = {
+    const formValueTrimed: OwnerRegistrationDto = {
       firstname: this.registrationForm.value.firstname!.trim(),
       lastname: this.registrationForm.value.lastname!.trim(),
       email: this.registrationForm.value.email!.trim(),
       password: this.registrationForm.value.password!.trim(),
-      cgv: this.registrationForm.value.cgv,
     };
 
-    // TODO SUPPRIMER QUAND TEST FINIS
-    console.log('Form PAS trim : ', this.registrationForm.value);
-    console.log('Form PAS trim SANS VALUE : ', this.registrationForm);
-    console.log('Form valeur trim : ', formValueTrimed);
+    if (this.registrationForm.value.cgv) {
+      this.http
+        .post<OwnerRegistrationDto>(apiRoot + '/registration', formValueTrimed)
+        .subscribe({
+          next: () => {
+            // TODO
+            // TODO ENVOYER LE MAIL A LA PERSONNE QUI VIENT DE CREER SON COMPTE
+            // TODO
+            this.router.navigateByUrl(AppRoutes.auth.loginFull);
+            this.toast.show({
+              severity: 'success',
+              title: 'Compte créé',
+              content:
+                'Votre compte a été créé avec succès ! Veuillez vous connecter pour accéder à votre dashboard.',
+              sticky: true,
+            });
+          },
+          error: (error) => {
+            if (error.status === 409) {
+              this.toast.show({
+                severity: 'error',
+                title: "Erreur lors de l'inscription",
+                content: 'Cet email est déjà associé à un compte.',
+                sticky: true,
+              });
+            }
+
+            console.error("ERREUR lors de l'inscription : ", error);
+          },
+        });
+    }
   }
 
   onFieldChange() {

@@ -1,4 +1,4 @@
-<div class="px-4 pt-4 pb-4 h-full">
+<div class="px-4 pt-4 pb-4 h-full lg:pt-3 lg:pb-3 xl:pt-4 xl:pb-4">
   <app-back-button [routerLink]="AppRoutes.home" />
 
   <div class="flex items-center justify-center h-full">
@@ -6,14 +6,15 @@
       <div>
         <h2 class="text-2xl font-bold text-main">Créer votre compte</h2>
         <p class="mt-1">
-          Remplissez les informations ci-dessous pour créer votre compte.
+          Remplissez les informations ci-dessous pour créer votre compte. Tous
+          les champs sont obligatoires.
         </p>
       </div>
 
       <form
         [formGroup]="registrationForm"
         (ngSubmit)="onClick()"
-        class="flex flex-col gap-y-8 mt-6 lg:mt-4 lg:gap-y-6 xl:mt-6 xl:gap-y-8"
+        class="flex flex-col gap-y-8 mt-6 lg:mt-4 lg:gap-y-4 xl:mt-6 xl:gap-y-8"
       >
         <div class="flex flex-col gap-y-4 lg:gap-y-3 xl:gap-y-4">
           <app-custom-input
@@ -55,7 +56,7 @@
           />
         </div>
 
-        <div class="flex flex-col gap-y-3">
+        <div class="flex flex-col gap-y-2">
           <div class="flex items-end gap-x-2.5">
             <p-checkbox
               formControlName="cgv"
@@ -64,7 +65,7 @@
               class="custom-checkbox"
               (onChange)="onFieldChange()"
             />
-            <label for="cgv" class="block text-sm">
+            <label for="cgv" class="block text-sm cursor-pointer">
               J’accepte les conditions générales de K9 Club
             </label>
           </div>
@@ -73,12 +74,9 @@
             Vous devez accepter les conditions générales pour créer un compte
           </p>
           }
-          <a
-            [routerLink]="AppRoutes.termsOfUseFull"
-            class="text-main underline block text-sm"
-          >
+          <app-link-text [routerLink]="AppRoutes.termsOfUseFull">
             Voir les conditions générales
-          </a>
+          </app-link-text>
         </div>
 
         <!--
@@ -90,9 +88,9 @@
 
       <p class="mt-6">
         Déjà membre ?
-        <a [routerLink]="AppRoutes.auth.loginFull" class="text-main underline"
-          >Connectez-vous</a
-        >
+        <app-link-text [routerLink]="AppRoutes.auth.loginFull">
+          Connectez-vous
+        </app-link-text>
       </p>
     </div>
   </div>

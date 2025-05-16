@@ -13,6 +13,7 @@ import {
 import { ButtonComponent } from '@components/button/button.component';
 import { CustomInputComponent } from '@components/custom-input/custom-input.component';
 import { BackButtonComponent } from '@components/back-button/back-button.component';
+import { LinkTextComponent } from '@components/link-text/link-text.component';
 
 // SERVICES
 import { AuthService } from '@services/auth/auth.service';
@@ -35,6 +36,7 @@ import { apiRoot } from '@config/api/api';
     FormsModule,
     ReactiveFormsModule,
     BackButtonComponent,
+    LinkTextComponent,
   ],
   templateUrl: './login.component.html',
 })

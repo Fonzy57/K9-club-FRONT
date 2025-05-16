@@ -38,6 +38,8 @@
 
         <div class="flex items-center gap-x-2">
           <p>Mot de passe oublié ?</p>
+
+          <!-- TODO UTILISER COMPOSANT LINK TEXT si je fais un (click) -->
           <a href="#" class="text-main underline hover:no-underline">
             Réinitialiser le mot de passe
           </a>
@@ -48,12 +50,9 @@
 
       <p class="mt-6">
         Pas encore inscrit ?
-        <a
-          [routerLink]="AppRoutes.auth.registerFull"
-          class="text-main underline hover:no-underline"
-        >
+        <app-link-text [routerLink]="AppRoutes.auth.registerFull">
           Créez un compte gratuitement
-        </a>
+        </app-link-text>
         et rejoignez la communauté K9 Club !
       </p>
     </div>
