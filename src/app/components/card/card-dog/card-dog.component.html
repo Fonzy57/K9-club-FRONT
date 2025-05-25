@@ -20,21 +20,25 @@
       </div>
     </div>
     <div class="border border-main py-2 px-3 rounded-lg shadow-xs">
-      <p class="text-main text-sm font-medium">{{ dog.birthday | age }}</p>
+      <p class="text-main text-sm font-medium">{{ dog.birthdate | age }}</p>
     </div>
   </div>
 
+  <!-- 
+    TODO REVOIR LE STYLE DES GRIDS POUR LES DEUX CAR LE PROCHAIN COURS PRENDRONT PLUS DE PLACE
+    BIEN FAIRE LE RESPONSIVE
+  -->
   <!-- SECOND ROW -->
   <div class="grid grid-cols-1 xs:grid-cols-2">
     <div class="flex flex-col gap-y-1">
       <p class="font-poppins font-semibold md:text-lg">Cours suivis</p>
-      <p class="text-gray-one text-sm md:text-base">{{ dog.nbOfCourses }}</p>
+      <p class="text-gray-one text-sm md:text-base">{{ nbOfCourses }}</p>
     </div>
     <div class="flex flex-col gap-y-1">
       <p class="font-poppins font-semibold md:text-lg">Prochain cours</p>
       <div class="flex items-end gap-x-2 flex-wrap gap-y-1 xs:justify-between">
-        <p class="text-gray-one text-sm md:text-base">{{ dog.nextCourse }}</p>
-        <app-tag-name [tag]="dog.tag" />
+        <p class="text-gray-one text-sm md:text-base">{{ nextCourseName }}</p>
+        <app-tag-name [tag]="tag" />
       </div>
     </div>
   </div>
@@ -50,12 +54,12 @@
     <div class="flex flex-col gap-y-1">
       <p class="font-poppins font-semibold md:text-lg">Badges</p>
       <div class="flex items-center gap-2 flex-wrap">
-        @for (badge of dog.badges; track $index) {
+        <!-- @for (badge of dog.badges; track $index) { -->
         <!-- TODO GERER LES BADGES -->
-        <div class="w-6 h-6 bg-amber-800">
+        <!-- <div class="w-6 h-6 bg-amber-800">
           <img src="{{ badge.image }}" alt="{{ badge.name }}" srcset="" />
         </div>
-        }
+        } -->
       </div>
     </div>
   </div>
