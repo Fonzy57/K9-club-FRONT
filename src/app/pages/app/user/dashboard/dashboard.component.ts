@@ -1,24 +1,15 @@
 // ANGULAR
 import { CommonModule, TitleCasePipe, UpperCasePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 // COMPONENTS
 import { CardDogComponent } from '@components/card/card-dog/card-dog.component';
 import { CardNextCourseComponent } from '@components/card/card-next-course/card-next-course.component';
-import { Tag } from '@components/tag-name/tag-name.type';
 
 // SERVICES
 import { UserInfoService } from '@services/user/user-info.service';
-
-/* TODO POUR LES TYPES FAIRE DES FICHIERS DANS LE REPO "models" */
-export interface NextCourse {
-  name: string;
-  date: string;
-  tag: Tag;
-  description: string;
-  dog: string;
-}
+import { DogService } from '@services/user/dog.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -33,44 +24,59 @@ export interface NextCourse {
 })
 export class DashboardComponent {
   userInfoService: UserInfoService = inject(UserInfoService);
+  dogService: DogService = inject(DogService);
+
   user$!: Observable<OwnerInfoDto>;
+  dogs$!: Observable<any[]>;
+
+  nextCourses$!: Observable<NextCourseDto[]>;
 
   ngOnInit() {
     this.user$ = this.userInfoService.getUserInfo();
+
+    this.dogService.getAllDogs();
+
+    this.dogs$ = this.dogService.dogs$;
+
+    this.nextCourses$ = this.dogs$.pipe(
+      map((dogs) => this.computeNextCourses(dogs))
+    );
   }
 
-  nextCourses: NextCourse[] = [
-    {
-      name: 'Franchissement d’obstacles',
-      date: '21 octobre 2025 10h30',
-      tag: { name: 'agility' },
-      dog: 'Rex',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
-    },
-    {
-      name: 'Choux blanc donc',
-      date: '20 avril 2025 9h45',
-      tag: { name: 'detection' },
-      dog: 'Simba',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
-    },
-    {
-      name: 'Sociabilité',
-      date: '18 juin 2025 14h00',
-      tag: { name: 'basic' },
-      dog: 'Simba',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
-    },
-    {
-      name: 'Initiation au matériel',
-      date: '17 mars 2025',
-      tag: { name: 'canicross' },
-      dog: 'Simba',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
-    },
-  ];
+  private computeNextCourses(dogs: any[]): NextCourseDto[] {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    let upcomingCourses: NextCourseDto[] = [];
+
+    dogs.forEach((dog: DogDto) => {
+      if (!dog.registrations || dog.registrations.length === 0) {
+        // Rien à faire, on skip ce chien
+        return;
+      }
+
+      dog.registrations
+        .filter((registration: CourseRegistrationDto) => {
+          const courseDate = new Date(registration.course.startDate);
+          return courseDate >= today && registration.status === 'CONFIRMED';
+        })
+        .forEach((registration: CourseRegistrationDto) => {
+          upcomingCourses.push({
+            name: registration.course.name,
+            date: registration.course.startDate,
+            tag: registration.course.courseType,
+            description: registration.course.description,
+            dog: dog.name,
+          });
+        });
+    });
+
+    upcomingCourses = upcomingCourses.sort(
+      (a: NextCourseDto, b: NextCourseDto) => {
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      }
+    );
+
+    return upcomingCourses.slice(0, 6);
+  }
 }
