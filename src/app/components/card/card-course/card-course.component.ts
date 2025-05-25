@@ -15,7 +15,7 @@ import { CardCourse } from './card-course.type';
   templateUrl: './card-course.component.html',
 })
 export class CardCourseComponent {
-  @Input() course!: CardCourse;
+  @Input() course!: any;
 
   get placesColor(): string {
     const placesAvailableInPercent = this.course.places / this.course.maxPlaces;

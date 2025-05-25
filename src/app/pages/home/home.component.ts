@@ -11,7 +11,7 @@ import { CustomIconComponent } from '@components/custom-icon/custom-icon.compone
 export class HomeComponent {
   AppRoutes = AppRoutes;
 
-  courses: Course[] = [
+  courses: any[] = [
     {
       image: 'course-slalom.jpg',
       title: 'Rappel parfait',

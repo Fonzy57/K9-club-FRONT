@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NextCourse } from '../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-dog',
@@ -7,7 +6,7 @@ import { NextCourse } from '../dashboard/dashboard.component';
   templateUrl: './dog.component.html',
 })
 export class DogComponent {
-  nextCourses: NextCourse[] = [
+  /* nextCourses: NextCourse[] = [
     {
       name: 'Franchissement d’obstacles',
       date: '21 octobre 2025 10h30',
@@ -40,8 +39,7 @@ export class DogComponent {
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
     },
-  ];
-
+  ]; */
   // TODO RECUPERER LES INFOS DE LA BDD
   /* dogs: CardDog[] = [
     {

@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 // COMPONENTS
-import { Tag } from '@components/tag-name/tag-name.type';
 import { CardCourse } from '@components/card/card-course/card-course.type';
 import { ReservedCardCourse } from '@components/card/card-reserved-course/card-reserved-course.type';
 
@@ -30,7 +29,7 @@ export class AppComponent {
   }
 
   /* TODO POUR LES TAGS */
-  tagsTiny: Tag[] = [
+  /*  tagsTiny: Tag[] = [
     { name: 'agility' },
     { name: 'detection' },
     { name: 'basic' },
@@ -91,11 +90,11 @@ export class AppComponent {
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
     },
-  ];
+  ]; */
 
   // TODO VOIR POUR FAIRE UNE CONDITION AVEC DES ELEMENTS NON OBLIGATOIRE
   // COMME CA UNE SEULE CARD POUR LE COURS RESERVES OU NON
-  reservedCourses: ReservedCardCourse[] = [
+  /* reservedCourses: ReservedCardCourse[] = [
     {
       name: 'Franchissement d’obstacles',
       date: '21 octobre 2025 10h30',
@@ -120,5 +119,5 @@ export class AppComponent {
       tag: { name: 'canicross' },
       coach: 'Raymond Pelletier',
     },
-  ];
+  ]; */
 }
