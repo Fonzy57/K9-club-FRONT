@@ -3,31 +3,21 @@
 <div
   class="w-max rounded-lg"
   [ngClass]="{
-    'bg-[#FAD7CC]': color === 'red',
-    'bg-[#FAE7CC]': color === 'orange',
-    'bg-[#FEF8C5]': color === 'yellow',
-    'bg-[#CCF2D2]': color === 'green',
-    'bg-[#CCEFFA]': color === 'blue',
-    'bg-[#E6CCFA]': color === 'purple',
-    'bg-[#F4F4F4]': color === 'gray',
     'py-1 px-2': size === 'tiny',
     'py-2.5 px-[18px]': size === 'normal',
+  }"
+  [ngStyle]="{
+    'background-color': tag.backgroundColor,
+    color: tag.textColor
   }"
 >
   <p
     class="font-poppins"
     [ngClass]="{
-    'text-[#831F00]': color === 'red',
-    'text-[#724300]': color === 'orange',
-    'text-[#635900]': color === 'yellow',
-    'text-[#006E11]': color === 'green',
-    'text-[#005671]': color === 'blue',
-    'text-[#420075]': color === 'purple',
-    'text-text': color === 'gray',
     'text-xs': size === 'tiny',
     'text-sm': size === 'normal',
   }"
   >
-    {{ label }}
+    {{ tag.name }}
   </p>
 </div>
