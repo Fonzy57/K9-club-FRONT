@@ -14,7 +14,6 @@ import { AgePipe } from 'app/pipes/age.pipe';
   templateUrl: './card-dog.component.html',
 })
 export class CardDogComponent {
-  /* TODO REVOIR TYPAGE */
   private _dog!: DogDto;
 
   nbOfCourses: number = 0;
@@ -37,8 +36,6 @@ export class CardDogComponent {
   }
 
   computeCoursesInfo() {
-    console.log('DOG COMPONENT : ', this._dog);
-
     if (this._dog.registrations.length === 0) {
       this.nbOfCourses = 0;
       this.nextCourseName = '-';
@@ -68,7 +65,7 @@ export class CardDogComponent {
     const nextCourse = this._dog.registrations
       .filter((registration: CourseRegistrationDto) => {
         const courseDate = new Date(registration.course.startDate);
-        return courseDate > today && registration.status === 'CONFIRMED';
+        return courseDate >= today && registration.status === 'CONFIRMED';
       })
       .sort((a: CourseRegistrationDto, b: CourseRegistrationDto) => {
         return (
