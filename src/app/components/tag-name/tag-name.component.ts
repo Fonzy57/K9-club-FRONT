@@ -1,10 +1,10 @@
 // ANGULAR
-import { CommonModule } from '@angular/common';
+import { CommonModule, TitleCasePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-tag-name',
-  imports: [CommonModule],
+  imports: [CommonModule, TitleCasePipe],
   templateUrl: './tag-name.component.html',
 })
 export class TagNameComponent {
