@@ -1,18 +1,19 @@
 interface DogDto {
   id: number;
   name: string;
-  birthday: string;
+  birthdate: string;
   gender: string;
   createdAt: string;
   updatedAt: string | null;
   breed: BreedDto;
+  registrations: CourseRegistrationDto[];
 }
 
 /* TODO REVOIR CE TYPAGE */
 interface CardDog {
   name: string;
   breed: BreedDto;
-  birthday: string;
+  birthdate: string;
   nbOfCourses: number;
   nextCourse: string; // TODO CHANGER EN DATE QUAND API OK
   tag: Tag;

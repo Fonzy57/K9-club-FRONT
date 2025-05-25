@@ -1,3 +1,13 @@
+interface CoachDto {
+  id: number;
+  firstname: string;
+  lastname: string;
+  email: string;
+  dogs: DogDto[];
+  createdAt: string;
+  updatedAt: string;
+}
+
 interface CoachAdmin {
   id: number;
   firstname: string;
