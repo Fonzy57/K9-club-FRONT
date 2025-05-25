@@ -1,9 +1,7 @@
-import { Tag } from '../../tag-name/tag-name.type';
-
 export interface CardCourse {
   name: string;
   date: string;
-  tag: Tag;
+  tag: TagDto;
   coach: string;
   places: number;
   maxPlaces: number;
