@@ -1,6 +1,5 @@
-<!-- TODO AJOUTER AUSSI L'ICONE SI BESOIN -->
 <button
-  class="rounded-lg cursor-pointer font-poppins w-full shadow-sm"
+  class="rounded-lg cursor-pointer font-poppins w-full shadow-sm flex items-center gap-x-2"
   [class]="transitionClass"
   [ngClass]="[bgColorClass, textColorClass, sizeClass]"
   [disabled]="disabled"
@@ -8,4 +7,8 @@
   (click)="handleClick($event)"
 >
   <ng-content />
+
+  @if (iconName) {
+  <app-custom-icon [name]="iconName" [size]="iconSize" [class]="iconClass" />
+  }
 </button>

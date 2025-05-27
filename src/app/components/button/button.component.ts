@@ -9,6 +9,9 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
+// COMPONENTS
+import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
+
 // TYPES
 export type ButtonType = 'primary' | 'ghost' | 'cancel';
 export type ButtonSize = 'normal' | 'tiny';
@@ -16,7 +19,7 @@ export type ButtonSize = 'normal' | 'tiny';
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, CustomIconComponent],
   templateUrl: './button.component.html',
 })
 export class ButtonComponent implements AfterViewInit {
@@ -24,6 +27,12 @@ export class ButtonComponent implements AfterViewInit {
   @Input() typeButton: ButtonType = 'primary';
   @Input() size: ButtonSize = 'normal';
   @Input() disabled = false;
+
+  // FOR ICON
+  /* TODO GERER LA COULEUR DE L'ICON SELON LE TYPE DE BOUTON */
+  @Input() iconName?: string; // Le nom de l’icône
+  @Input() iconSize: string = '18'; // Tu peux mettre ce que tu veux par défaut
+  @Input() iconClass: string = ''; // Pour passer des classes utilitaires (optionnel)
 
   @Input() routerLink?: any[] | string;
 
