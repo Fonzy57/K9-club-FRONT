@@ -2,9 +2,11 @@
 
 <!-- TODO RECUPERER LES INFOS DE LA BDD (VOIR SI JE FAIS DE L'OFFUSQUATION) -->
 
-<!-- TODO SUREMENT MODIFIER LA DIV PAR UNE BALISE FORM -->
-<div class="mt-8 sm:mt-10">
-  <div class="sm:w-[500px] sm:mx-auto lg:mt-14">
+<div
+  class="mt-8 sm:mt-10 lg:flex lg:items-center lg:justify-center lg:gap-x-40"
+>
+  <!-- TODO FAIRE LE FORMULAIRE FONCTIONNEL -->
+  <div class="sm:w-[500px] sm:mx-auto lg:mt-14 lg:mx-0">
     <div class="flex flex-col gap-y-5">
       <app-custom-input
         inputName="name"
@@ -44,5 +46,67 @@
       <app-button> Modifier </app-button>
     </div>
   </div>
-  <div>TODO ICI METTRE UN QR CODE</div>
+  <div class="mt-10 sm:w-[500px] sm:mx-auto lg:hidden">
+    <h2 class="text-center text-xl">Découvrez notre application mobile :</h2>
+    <div class="mt-4 flex items-center justify-center gap-x-4">
+      <div class="w-[135px]">
+        <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+        <img
+          src="/images/store/google-badge.svg"
+          alt=""
+          srcset=""
+          class="w-full"
+        />
+      </div>
+      <div class="w-[125px]">
+        <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+        <img
+          src="/images/store/apple-badge.svg"
+          alt=""
+          srcset=""
+          class="w-full"
+        />
+      </div>
+    </div>
+    <div class="mt-4 text-text">
+      <p>
+        Vous pouvez télécharger l'application mobile sur l'App Store ou sur
+        Google Play !
+      </p>
+      <p>L'expérience mobile sera bien meilleure que sur le site 😉</p>
+    </div>
+  </div>
+
+  <!-- QR CODE FOR BIG SCREEENS -->
+  <div class="hidden lg:flex lg:flex-col lg:items-center lg:gap-y-4">
+    <div class="w-[250px] xl:w-[280px]">
+      <!-- TODO CHANGER LE QR CODE UNE FOIS FINIE -->
+      <img
+        src="/images/account/Rickrolling_QR_code.png"
+        alt=""
+        srcset=""
+        class="w-full"
+      />
+    </div>
+    <div class="mt-4 flex items-center justify-center gap-x-4">
+      <div class="w-[135px]">
+        <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+        <img
+          src="/images/store/google-badge.svg"
+          alt=""
+          srcset=""
+          class="w-full"
+        />
+      </div>
+      <div class="w-[125px]">
+        <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+        <img
+          src="/images/store/apple-badge.svg"
+          alt=""
+          srcset=""
+          class="w-full"
+        />
+      </div>
+    </div>
+  </div>
 </div>
