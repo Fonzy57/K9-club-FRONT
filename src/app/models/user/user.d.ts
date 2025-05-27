@@ -5,7 +5,6 @@ interface OwnerInfoDto {
   email: string;
   createdAt: string;
   updatedAt: string;
-  dogs: Dog[];
 }
 
 interface OwnerRegistrationDto {
