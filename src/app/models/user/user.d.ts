@@ -1,4 +1,4 @@
-interface OwnerInfoDto {
+interface UserInfoDto {
   id: number;
   firstname: string;
   lastname: string;
