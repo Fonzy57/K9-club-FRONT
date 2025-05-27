@@ -16,10 +16,10 @@ export class UserInfoService {
   http: HttpClient = inject(HttpClient);
   toastService: ToastMessageService = inject(ToastMessageService);
 
-  readonly user$ = new BehaviorSubject<any>({});
+  readonly user$ = new BehaviorSubject<UserInfoDto | null>(null);
 
   getUserInfos() {
-    this.http.get(k9Config.apiRoot + '/user/me').subscribe({
+    this.http.get<UserInfoDto>(k9Config.apiRoot + '/user/me').subscribe({
       next: (user) => {
         this.user$.next(user);
       },

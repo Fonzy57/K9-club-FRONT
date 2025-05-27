@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
 })
 export class AdminDashboardComponent {
   userInfoService: UserInfoService = inject(UserInfoService);
-  user$!: Observable<OwnerInfoDto>;
+  user$!: Observable<UserInfoDto | null>;
 
   ngOnInit() {
     this.userInfoService.getUserInfos();
