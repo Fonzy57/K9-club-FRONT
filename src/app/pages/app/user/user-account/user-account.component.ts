@@ -6,6 +6,7 @@ import { ButtonComponent } from '@components/button/button.component';
   selector: 'app-user-account',
   imports: [CustomInputComponent, ButtonComponent],
   templateUrl: './user-account.component.html',
-  styleUrl: './user-account.component.css',
 })
-export class UserAccountComponent {}
+export class UserAccountComponent {
+  /* TODO RECUPERER LE CODE DE LA PAGE ACCOUNT LOGIN */
+}

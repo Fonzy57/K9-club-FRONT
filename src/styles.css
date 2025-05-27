@@ -7,6 +7,7 @@
 /* --------------------------------- */
 @import "./styles/prime-ng-overrides/toast.css";
 @import "./styles/prime-ng-overrides/table.css";
+@import "./styles/prime-ng-overrides/checkbox.css";
 
 /* ----------------------------- */
 /* --- TAILWIND THEME CONFIG --- */

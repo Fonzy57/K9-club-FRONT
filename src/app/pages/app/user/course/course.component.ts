@@ -9,10 +9,9 @@ import { ButtonComponent } from '@components/button/button.component';
   selector: 'app-course',
   imports: [CardCourseComponent, CardReservedCourseComponent, ButtonComponent],
   templateUrl: './course.component.html',
-  styleUrl: './course.component.css',
 })
 export class CourseComponent {
-  courses: CardCourse[] = [
+  /* courses: CardCourse[] = [
     {
       name: 'Franchissement d’obstacles',
       date: '21 octobre 2025 10h30',
@@ -53,11 +52,10 @@ export class CourseComponent {
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
     },
-  ];
-
+  ]; */
   // TODO VOIR POUR FAIRE UNE CONDITION AVEC DES ELEMENTS NON OBLIGATOIRE
   // COMME CA UNE SEULE CARD POUR LE COURS RESERVES OU NON
-  reservedCourses: ReservedCardCourse[] = [
+  /* reservedCourses: ReservedCardCourse[] = [
     {
       name: 'Franchissement d’obstacles',
       date: '21 octobre 2025 10h30',
@@ -82,5 +80,5 @@ export class CourseComponent {
       tag: { name: 'canicross' },
       coach: 'Raymond Pelletier',
     },
-  ];
+  ]; */
 }

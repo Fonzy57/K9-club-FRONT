@@ -9,7 +9,7 @@ import {
 import { filter } from 'rxjs/operators';
 
 // CONFIG
-import { version } from '@config/version';
+import { k9Config } from '@config/global';
 
 @Component({
   selector: 'app-auth-layout',
@@ -20,7 +20,7 @@ import { version } from '@config/version';
 export class AuthLayoutComponent implements OnInit {
   /* TODO VOIR POUR LE COMPOSANT COPYRIGHT ET EN FAIRE QU'UN SEUL PEUT ÊTRE */
   currentYear: number = new Date().getFullYear();
-  version: string = version.number;
+  version: string = k9Config.version;
 
   title: string = '';
   subtitle: string = '';

@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
-import { NextCourse } from '../dashboard/dashboard.component';
-import { CardDog } from '@components/card/card-dog/card-dog.type';
 
 @Component({
   selector: 'app-dog',
   imports: [],
   templateUrl: './dog.component.html',
-  styleUrl: './dog.component.css',
 })
 export class DogComponent {
-  nextCourses: NextCourse[] = [
+  /* nextCourses: NextCourse[] = [
     {
       name: 'Franchissement d’obstacles',
       date: '21 octobre 2025 10h30',
@@ -42,18 +39,17 @@ export class DogComponent {
       description:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
     },
-  ];
-
-  dogs: CardDog[] = [
+  ]; */
+  // TODO RECUPERER LES INFOS DE LA BDD
+  /* dogs: CardDog[] = [
     {
-      image: '/images/dogs/rex.png',
       name: 'Rex',
-      race: 'Berger allemand',
-      age: 5,
+      breed: 'Berger allemand',
+      birthday: '2019-06-01',
       nbOfCourses: 2,
       nextCourse: '25 mars 2025',
       tag: { name: 'agility' },
-      inscriptionDate: '17 mars 2024',
+      createdAt: '17 mars 2024',
       badges: [
         { name: 'best dog', image: '/images/badges/best-dog.png' },
         { name: 'best dog', image: '/images/badges/best-dog.png' },
@@ -61,15 +57,14 @@ export class DogComponent {
       ],
     },
     {
-      image: '/images/dogs/simba.png',
       name: 'Simba',
-      race: 'Golden Retriver',
-      age: 2,
+      breed: 'Golden Retriver',
+      birthday: '2020-11-20',
       nbOfCourses: 16,
       nextCourse: '20 avril 2025',
       tag: { name: 'canicross' },
-      inscriptionDate: '21 octobre 2024',
+      createdAt: '21 octobre 2024',
       badges: [{ name: 'best dog', image: '/images/badges/best-dog.png' }],
     },
-  ];
+  ]; */
 }

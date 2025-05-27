@@ -5,54 +5,76 @@
   <div class="flex items-center justify-between flex-wrap gap-x-4 gap-y-2">
     <div class="flex items-center gap-x-3">
       <div class="w-[52px] h-[52px] rounded-full shadow-md">
+        <!-- TODO REVOIR LE LIEN DES IMAGES -->
+        <!-- TODO PREVOIR DES AVATARS 4 OU 5 DE BASE QUE L'UTILISATEUR PEUT CHOISIR -->
         <img
-          src="{{ dog.image }}"
+          src="images/dogs/{{ dog.name | lowercase }}.png"
           alt="Dog image"
           srcset=""
           class="rounded-full"
         />
       </div>
       <div class="flex flex-col gap-y-1 md:gap-y-0">
-        <p class="font-poppins font-semibold md:text-lg">{{ dog.name }}</p>
-        <p class="text-gray-one text-sm md:text-base">{{ dog.race }}</p>
+        <div class="flex items-center gap-x-2">
+          <p class="font-poppins font-semibold md:text-lg">{{ dog.name }}</p>
+          <app-custom-icon
+            [name]="
+              dog.gender.toLowerCase() === 'male'
+                ? 'ionMaleOutline'
+                : 'ionFemaleOutline'
+            "
+            size="20"
+            class="text-text-600"
+          />
+        </div>
+        <p class="text-gray-one text-sm md:text-base">{{ dog.breed.name }}</p>
       </div>
     </div>
     <div class="border border-main py-2 px-3 rounded-lg shadow-xs">
-      <p class="text-main text-sm font-medium">{{ dog.age }} ans</p>
+      <p class="text-main text-sm font-medium">{{ dog.birthdate | age }}</p>
     </div>
   </div>
 
   <!-- SECOND ROW -->
-  <div class="grid grid-cols-1 xs:grid-cols-2">
-    <div class="flex flex-col gap-y-1">
+  <div class="grid grid-cols-1 sm:grid-cols-12">
+    <div class="flex flex-col gap-y-1 col-span-5">
       <p class="font-poppins font-semibold md:text-lg">Cours suivis</p>
-      <p class="text-gray-one text-sm md:text-base">{{ dog.nbOfCourses }}</p>
+      <p class="text-gray-one text-sm md:text-base">{{ nbOfCourses }}</p>
     </div>
-    <div class="flex flex-col gap-y-1">
+    <div class="flex flex-col gap-y-1 col-span-7">
       <p class="font-poppins font-semibold md:text-lg">Prochain cours</p>
-      <div class="flex items-end gap-x-2 flex-wrap gap-y-1 xs:justify-between">
-        <p class="text-gray-one text-sm md:text-base">{{ dog.nextCourse }}</p>
-        <app-tag-name [tag]="dog.tag" />
+      <div
+        class="flex items-end gap-x-2 flex-wrap gap-y-1 xs:justify-start xs:gap-x-3"
+      >
+        <p
+          class="text-gray-one text-sm md:text-base lg:max-w-[170px] md:truncate"
+        >
+          {{ nextCourseName }}
+        </p>
+        <app-tag-name [tag]="tag" />
       </div>
     </div>
   </div>
 
   <!-- THIRD ROW -->
-  <div class="grid grid-cols-1 xs:grid-cols-2">
-    <div class="flex flex-col gap-y-1">
+  <div class="grid grid-cols-1 xs:grid-cols-12">
+    <div class="flex flex-col gap-y-1 col-span-5">
       <p class="font-poppins font-semibold md:text-lg">Inscrit depuis</p>
       <p class="text-gray-one text-sm md:text-base">
-        {{ dog.inscriptionDate }}
+        {{ dog.createdAt | date : "dd MMMM YYYY" }}
       </p>
     </div>
-    <div class="flex flex-col gap-y-1">
+    <div class="flex flex-col gap-y-1 col-span-7">
       <p class="font-poppins font-semibold md:text-lg">Badges</p>
       <div class="flex items-center gap-2 flex-wrap">
-        @for (badge of dog.badges; track $index) {
-        <div class="w-6 h-6 bg-amber-800">
+        <!-- TODO SUPPRIMER UNE FOIS BADGES GERE -->
+        <img src="/images/badges/best-dog.png" alt="dog badge" srcset="" />
+        <!-- @for (badge of dog.badges; track $index) { -->
+        <!-- TODO GERER LES BADGES -->
+        <!-- <div class="w-6 h-6 bg-amber-800">
           <img src="{{ badge.image }}" alt="{{ badge.name }}" srcset="" />
         </div>
-        }
+        } -->
       </div>
     </div>
   </div>

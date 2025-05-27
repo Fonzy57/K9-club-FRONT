@@ -18,7 +18,6 @@ export type ButtonSize = 'normal' | 'tiny';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './button.component.html',
-  styleUrl: './button.component.css',
 })
 export class ButtonComponent implements AfterViewInit {
   // TODO REVOIR ICI LE TYPAGE POUR QUE MON IDE ME LE PROPOSE

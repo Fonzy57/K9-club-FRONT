@@ -17,7 +17,7 @@ import { ToastMessageService } from '@services/toast/toast-message.service';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
-import { apiRoot } from '@config/api/api';
+import { k9Config } from '@config/global';
 
 /**
  * AdminCoachAddComponent
@@ -39,7 +39,6 @@ import { apiRoot } from '@config/api/api';
     BackButtonComponent,
   ],
   templateUrl: './admin-coach-add.component.html',
-  styleUrl: './admin-coach-add.component.css',
 })
 export class AdminCoachAddComponent {
   AppRoutes = AppRoutes;
@@ -87,29 +86,31 @@ export class AdminCoachAddComponent {
     };
 
     // We add a new coach
-    this.http.post<CoachAdmin>(`${apiRoot}/coach`, formValueTrimed).subscribe({
-      next: () => {
-        const lastname = formValueTrimed.lastname;
-        const firstname = formValueTrimed.firstname;
+    this.http
+      .post<CoachAdmin>(`${k9Config.apiRoot}/coach`, formValueTrimed)
+      .subscribe({
+        next: () => {
+          const lastname = formValueTrimed.lastname;
+          const firstname = formValueTrimed.firstname;
 
-        this.toastService.show({
-          severity: 'success',
-          title: 'Ajout réussi',
-          content: `Le coach ${firstname} ${lastname} a bien été ajouté`,
-          time: 3000,
-        });
+          this.toastService.show({
+            severity: 'success',
+            title: 'Ajout réussi',
+            content: `Le coach ${firstname} ${lastname} a bien été ajouté`,
+            time: 3000,
+          });
 
-        this.router.navigateByUrl(AppRoutes.app.admin.coachesFull);
-      },
-      error: (error) => {
-        this.toastService.show({
-          severity: 'error',
-          title: "L'ajout a échoué",
-          content: error.error,
-          sticky: true,
-        });
-      },
-    });
+          this.router.navigateByUrl(AppRoutes.app.admin.coachesFull);
+        },
+        error: (error) => {
+          this.toastService.show({
+            severity: 'error',
+            title: "L'ajout a échoué",
+            content: error.error,
+            sticky: true,
+          });
+        },
+      });
   }
 
   /** Resets the error display flag when any form field value changes */
@@ -117,6 +118,7 @@ export class AdminCoachAddComponent {
     this.displayErrors = false;
   }
 
+  // TODO VOIR POUR FAIRE UN PIPE POUR GERER LES ERREURS DE TOUS LES FORMULAIRES
   /**
    * Returns the validation error message for the 'firstname' field,
    * or an empty string if the field is valid or untouched.
@@ -186,44 +188,45 @@ export class AdminCoachAddComponent {
     return '';
   }
 
+  /* TODO EN DESSOUS SI JAMAIS JE DOIS CHANGER DYNAMIQUEMENT LES ERREURS DU MDP */
   /* TODO EN FAIRE UN SERVICE OU UN UTILS */
   /**
    * Retrieves the current raw value of the password field,
    * defaulting to an empty string if undefined.
    */
-  get passwordValue(): string {
+  /* get passwordValue(): string {
     return this.addForm.get('password')?.value || '';
-  }
+  } */
 
   // Password strength criteria getters for real-time UI feedback
 
   /** True if password length is at least 8 characters */
-  get passMinLength(): boolean {
+  /* get passMinLength(): boolean {
     return this.passwordValue.length >= 8;
-  }
+  } */
 
   /** True if password length does not exceed 40 characters */
-  get passMaxLength(): boolean {
+  /* get passMaxLength(): boolean {
     return this.passwordValue.length <= 40;
-  }
+  } */
 
   /** True if password contains at least one lowercase letter */
-  get passHasLower(): boolean {
+  /* get passHasLower(): boolean {
     return /[a-z]/.test(this.passwordValue);
-  }
+  } */
 
   /** True if password contains at least one uppercase letter */
-  get passHasUpper(): boolean {
+  /* get passHasUpper(): boolean {
     return /[A-Z]/.test(this.passwordValue);
-  }
+  } */
 
   /** True if password contains at least one digit */
-  get passHasDigit(): boolean {
+  /* get passHasDigit(): boolean {
     return /\d/.test(this.passwordValue);
-  }
+  } */
 
   /** True if password contains at least one special character */
-  get passHasSpecial(): boolean {
+  /* get passHasSpecial(): boolean {
     return /[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/.test(this.passwordValue);
-  }
+  } */
 }

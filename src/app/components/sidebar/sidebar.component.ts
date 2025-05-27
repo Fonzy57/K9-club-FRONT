@@ -19,7 +19,6 @@ import { AuthService } from '@services/auth/auth.service';
   selector: 'app-sidebar',
   imports: [NavItemComponent, DisconnectButtonComponent],
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.css',
 })
 export class SidebarComponent {
   auth: AuthService = inject(AuthService);

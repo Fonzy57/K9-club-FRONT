@@ -1,16 +1,33 @@
 // ANGULAR
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import {
+  FormBuilder,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+// PRIME NG
+import { Checkbox, CheckboxModule } from 'primeng/checkbox';
 
 // COMPONENTS
 import { ButtonComponent } from '@components/button/button.component';
 import { CustomInputComponent } from '@components/custom-input/custom-input.component';
 import { BackButtonComponent } from '@components/back-button/back-button.component';
+import { LinkTextComponent } from '@components/link-text/link-text.component';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
+import { k9Config } from '@config/global';
+
+// VALIDATORS
+import { FormValidators } from 'app/validators/form-validators';
 
 // SERVICES
+import { AuthService } from '@services/auth/auth.service';
+import { ToastMessageService } from '@services/toast/toast-message.service';
 
 @Component({
   selector: 'app-register',
@@ -19,10 +36,185 @@ import { AppRoutes } from '@config/routes';
     CustomInputComponent,
     RouterModule,
     BackButtonComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    Checkbox,
+    CheckboxModule,
+    LinkTextComponent,
   ],
   templateUrl: './register.component.html',
-  styleUrl: './register.component.css',
 })
 export class RegisterComponent {
   AppRoutes = AppRoutes;
+  displayErrors = false;
+
+  http: HttpClient = inject(HttpClient);
+  formBuilder: FormBuilder = inject(FormBuilder);
+  router: Router = inject(Router);
+  auth: AuthService = inject(AuthService);
+  toast: ToastMessageService = inject(ToastMessageService);
+
+  registrationForm = this.formBuilder.group({
+    firstname: ['John', FormValidators.nameValidator()],
+    lastname: ['Doe', FormValidators.nameValidator()],
+    email: ['john.doe@gmail.com', FormValidators.emailValidator()],
+    password: ['motDePasse!57000', FormValidators.passwordValidator()],
+    cgv: [false, Validators.requiredTrue],
+  });
+
+  onClick() {
+    if (this.registrationForm.invalid) {
+      this.registrationForm.markAllAsTouched();
+      this.displayErrors = true; // Show errors on submit
+      return;
+    }
+
+    const formValueTrimed: OwnerRegistrationDto = {
+      firstname: this.registrationForm.value.firstname!.trim(),
+      lastname: this.registrationForm.value.lastname!.trim(),
+      email: this.registrationForm.value.email!.trim(),
+      password: this.registrationForm.value.password!.trim(),
+    };
+
+    if (this.registrationForm.value.cgv) {
+      this.http
+        .post<OwnerRegistrationDto>(
+          k9Config.apiRoot + '/registration',
+          formValueTrimed
+        )
+        .subscribe({
+          next: () => {
+            // TODO
+            // TODO ENVOYER LE MAIL A LA PERSONNE QUI VIENT DE CREER SON COMPTE
+            // TODO
+            this.router.navigateByUrl(AppRoutes.auth.loginFull);
+            this.toast.show({
+              severity: 'success',
+              title: 'Compte créé',
+              content:
+                'Votre compte a été créé avec succès ! Veuillez vous connecter pour accéder à votre dashboard.',
+              sticky: true,
+            });
+          },
+          error: (error) => {
+            if (error.status === 409) {
+              this.toast.show({
+                severity: 'error',
+                title: "Erreur lors de l'inscription",
+                content: 'Cet email est déjà associé à un compte.',
+                sticky: true,
+              });
+            }
+
+            console.error("ERREUR lors de l'inscription : ", error);
+          },
+        });
+    }
+  }
+
+  onFieldChange() {
+    this.displayErrors = false;
+  }
+
+  // TODO VOIR POUR FAIRE UN PIPE POUR GERER LES ERREURS DE TOUS LES FORMULAIRES
+  get firstnameError() {
+    const control = this.registrationForm.get('firstname');
+
+    if (!control) {
+      return '';
+    }
+
+    if ((control.touched || control.dirty) && control.invalid) {
+      return FormValidators.getNameError(control, 'prénom');
+    }
+
+    return '';
+  }
+
+  get lastnameError() {
+    const control = this.registrationForm.get('lastname');
+
+    if (!control) {
+      return '';
+    }
+
+    if ((control.touched || control.dirty) && control.invalid) {
+      return FormValidators.getNameError(control, 'nom');
+    }
+
+    return '';
+  }
+
+  get emailError() {
+    const control = this.registrationForm.get('email');
+
+    if (!control) {
+      return '';
+    }
+
+    if ((control.touched || control.dirty) && control.invalid) {
+      return FormValidators.getEmailError(control);
+    }
+
+    return '';
+  }
+
+  get passwordError() {
+    const control = this.registrationForm.get('password');
+
+    if (!control) {
+      return '';
+    }
+
+    if ((control.touched || control.dirty) && control.invalid) {
+      return FormValidators.getPasswordError(control);
+    }
+
+    return '';
+  }
+
+  get cgvError(): boolean {
+    const control = this.registrationForm.get('cgv');
+    if (!control) {
+      return false;
+    }
+
+    if (
+      control.touched ||
+      this.displayErrors ||
+      control.hasError('requiredTrue')
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  /* TODO EN DESSOUS SI JAMAIS JE DOIS CHANGER DYNAMIQUEMENT LES ERREURS DU MDP */
+  /*  get passwordValue(): string {
+    return this.registrationForm.get('password')?.value || '';
+  }
+
+  get passMinLength(): boolean {
+    return this.passwordValue.length >= 8;
+  }
+
+  get passMaxLength(): boolean {
+    return this.passwordValue.length <= 40;
+  }
+
+  get passHasLower(): boolean {
+    return /[a-z]/.test(this.passwordValue);
+  }
+
+  get passHasUpper(): boolean {
+    return /[A-Z]/.test(this.passwordValue);
+  }
+
+  get passHasDigit(): boolean {
+    return /\d/.test(this.passwordValue);
+  }
+
+  get passHasSpecial(): boolean {
+    return /[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/.test(this.passwordValue);
+  } */
 }

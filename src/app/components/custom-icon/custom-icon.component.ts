@@ -31,7 +31,6 @@ import {
   selector: 'app-custom-icon',
   imports: [NgIcon, NgClass],
   templateUrl: './custom-icon.component.html',
-  styleUrl: './custom-icon.component.css',
   viewProviders: [
     provideIcons({
       ionAddOutline,

@@ -10,7 +10,6 @@ import { CustomIconComponent } from '@components/custom-icon/custom-icon.compone
   selector: 'app-nav-item',
   imports: [RouterLink, CustomIconComponent, RouterLinkActive, NgClass],
   templateUrl: './nav-item.component.html',
-  styleUrl: './nav-item.component.css',
 })
 export class NavItemComponent {
   @Input() label: string = '';

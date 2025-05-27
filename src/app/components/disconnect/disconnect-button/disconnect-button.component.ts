@@ -8,7 +8,6 @@ import { CustomIconComponent } from '@components/custom-icon/custom-icon.compone
   selector: 'app-disconnect-button',
   imports: [CustomIconComponent],
   templateUrl: './disconnect-button.component.html',
-  styleUrl: './disconnect-button.component.css',
 })
 export class DisconnectButtonComponent {
   auth: AuthService = inject(AuthService);

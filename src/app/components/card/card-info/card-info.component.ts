@@ -14,7 +14,6 @@ export type Info = {
   selector: 'app-card-info',
   imports: [CustomIconComponent],
   templateUrl: './card-info.component.html',
-  styleUrl: './card-info.component.css',
 })
 export class CardInfoComponent {
   @Input() information!: Info;

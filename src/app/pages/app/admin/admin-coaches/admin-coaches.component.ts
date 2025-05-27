@@ -18,7 +18,7 @@ import { ConfirmDialog } from 'primeng/confirmdialog';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
-import { apiRoot } from '@config/api/api';
+import { k9Config } from '@config/global';
 
 // SERVICES
 import { ToastMessageService } from '@services/toast/toast-message.service';
@@ -39,7 +39,6 @@ import { ToastMessageService } from '@services/toast/toast-message.service';
     RouterLink,
   ],
   templateUrl: './admin-coaches.component.html',
-  styleUrl: './admin-coaches.component.css',
   providers: [ConfirmationService],
 })
 export class AdminCoachesComponent implements OnInit {
@@ -52,7 +51,7 @@ export class AdminCoachesComponent implements OnInit {
   constructor(private confirmationService: ConfirmationService) {}
 
   ngOnInit() {
-    this.http.get<CoachAdmin[]>(apiRoot + '/coaches').subscribe({
+    this.http.get<CoachAdmin[]>(k9Config.apiRoot + '/coaches').subscribe({
       next: (coaches) => {
         this.coaches = coaches;
       },
@@ -91,30 +90,32 @@ export class AdminCoachesComponent implements OnInit {
   }
 
   onDeleteCoach(coach: CoachAdmin) {
-    this.http.delete<CoachAdmin>(`${apiRoot}/coach/${coach.id}`).subscribe({
-      next: () => {
-        this.coaches = this.coaches.filter((c) => c.id !== coach.id);
+    this.http
+      .delete<CoachAdmin>(`${k9Config.apiRoot}/coach/${coach.id}`)
+      .subscribe({
+        next: () => {
+          this.coaches = this.coaches.filter((c) => c.id !== coach.id);
 
-        this.toastService.show({
-          severity: 'success',
-          title: 'Coach supprimé',
-          content: `Le compte du coach ${
-            coach.firstname
-          } ${coach.lastname.toUpperCase()} a bien été supprimé.`,
-          time: 3000,
-        });
-      },
-      error: (err) => {
-        console.error('Erreur lors de la suppression :', err);
-        this.toastService.show({
-          severity: 'error',
-          title: 'Suppression échouée',
-          content: `Une erreur est survenue lors de la suppression du coach ${
-            coach.firstname
-          } ${coach.lastname.toUpperCase()}.`,
-          sticky: true,
-        });
-      },
-    });
+          this.toastService.show({
+            severity: 'success',
+            title: 'Coach supprimé',
+            content: `Le compte du coach ${
+              coach.firstname
+            } ${coach.lastname.toUpperCase()} a bien été supprimé.`,
+            time: 3000,
+          });
+        },
+        error: (err) => {
+          console.error('Erreur lors de la suppression :', err);
+          this.toastService.show({
+            severity: 'error',
+            title: 'Suppression échouée',
+            content: `Une erreur est survenue lors de la suppression du coach ${
+              coach.firstname
+            } ${coach.lastname.toUpperCase()}.`,
+            sticky: true,
+          });
+        },
+      });
   }
 }

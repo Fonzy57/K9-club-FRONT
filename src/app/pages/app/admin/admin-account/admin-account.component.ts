@@ -15,10 +15,11 @@ import { FormValidators } from 'app/validators/form-validators';
 // SERVICES
 import { ToastMessageService } from '@services/toast/toast-message.service';
 import { AuthService } from '@services/auth/auth.service';
+import { UserInfoService } from '@services/user/user-info.service';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
-import { apiRoot } from '@config/api/api';
+import { k9Config } from '@config/global';
 
 @Component({
   selector: 'app-admin-account',
@@ -30,7 +31,6 @@ import { apiRoot } from '@config/api/api';
     BackButtonComponent,
   ],
   templateUrl: './admin-account.component.html',
-  styleUrl: './admin-account.component.css',
 })
 export class AdminAccountComponent {
   AppRoutes = AppRoutes;
@@ -38,6 +38,7 @@ export class AdminAccountComponent {
   disableButton = true;
 
   auth: AuthService = inject(AuthService);
+  userInfoService: UserInfoService = inject(UserInfoService);
   http: HttpClient = inject(HttpClient);
   formBuilder: FormBuilder = inject(FormBuilder);
   router: Router = inject(Router);
@@ -60,19 +61,13 @@ export class AdminAccountComponent {
   });
 
   ngOnInit() {
-    this.http.get<CoachAdmin>(`${apiRoot}/admin/me`).subscribe({
+    this.userInfoService.getUserInfo().subscribe({
       next: (admin) => {
         this.editAdminForm.patchValue(admin);
         this.adminToEdit = admin;
       },
       error: (error) => {
         console.error('ERROR fetching account data', error);
-        this.toastService.show({
-          severity: 'error',
-          title: 'Récupération des données',
-          content: "Les données de votre compte n'ont pas pu être récupéré",
-          sticky: true,
-        });
       },
     });
   }
@@ -97,7 +92,7 @@ export class AdminAccountComponent {
 
     this.http
       .put<CoachAdmin>(
-        `${apiRoot}/admin/${this.adminToEdit.id}`,
+        `${k9Config.apiRoot}/admin/${this.adminToEdit.id}`,
         formValueTrimed
       )
       .subscribe({

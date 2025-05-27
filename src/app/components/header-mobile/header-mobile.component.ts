@@ -21,7 +21,6 @@ import { AuthService } from '@services/auth/auth.service';
   selector: 'app-header-mobile',
   imports: [NavItemComponent, CommonModule, DisconnectButtonComponent],
   templateUrl: './header-mobile.component.html',
-  styleUrl: './header-mobile.component.css',
 })
 export class HeaderMobileComponent {
   auth: AuthService = inject(AuthService);

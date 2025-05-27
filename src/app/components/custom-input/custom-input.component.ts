@@ -21,7 +21,6 @@ import { CustomIconComponent } from '@components/custom-icon/custom-icon.compone
   standalone: true,
   imports: [CommonModule, CustomIconComponent],
   templateUrl: './custom-input.component.html',
-  styleUrl: './custom-input.component.css',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR, // Fournit ce composant comme un contrôleur de formulaire custom

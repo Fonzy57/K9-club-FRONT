@@ -1,4 +1,4 @@
-<div class="px-4 pt-4 pb-4 h-full">
+<div class="px-4 pt-4 pb-4 h-full lg:pt-3 lg:pb-3 xl:pt-4 xl:pb-4">
   <app-back-button [routerLink]="AppRoutes.home" />
 
   <div class="flex items-center justify-center h-full">
@@ -6,69 +6,91 @@
       <div>
         <h2 class="text-2xl font-bold text-main">Créer votre compte</h2>
         <p class="mt-1">
-          Remplissez les informations ci-dessous pour créer votre compte.
+          Remplissez les informations ci-dessous pour créer votre compte. Tous
+          les champs sont obligatoires.
         </p>
       </div>
 
-      <div
-        class="flex flex-col gap-y-8 mt-6 lg:mt-4 lg:gap-y-6 xl:mt-6 xl:gap-y-8"
+      <form
+        [formGroup]="registrationForm"
+        (ngSubmit)="onClick()"
+        class="flex flex-col gap-y-8 mt-6 lg:mt-4 lg:gap-y-4 xl:mt-6 xl:gap-y-8"
       >
         <div class="flex flex-col gap-y-4 lg:gap-y-3 xl:gap-y-4">
           <app-custom-input
-            inputName="name"
+            inputName="lastname"
             label="Nom"
             placeholder="Doe"
             type="text"
+            formControlName="lastname"
+            [errorMessage]="displayErrors ? lastnameError : ''"
+            (valueChange)="onFieldChange()"
           />
           <app-custom-input
             inputName="firstname"
             label="Prénom"
             placeholder="John"
             type="text"
+            formControlName="firstname"
+            [errorMessage]="displayErrors ? firstnameError : ''"
+            (valueChange)="onFieldChange()"
           />
           <app-custom-input
             inputName="mail"
             label="E-mail"
             placeholder="john.doe@gmail.com"
-            type="mail"
+            type="email"
+            formControlName="email"
+            [errorMessage]="displayErrors ? emailError : ''"
+            (valueChange)="onFieldChange()"
           />
           <app-custom-input
             inputName="password"
             label="Mot de passe"
             placeholder="********************"
             type="password"
+            formControlName="password"
+            [errorMessage]="displayErrors ? passwordError : ''"
+            (valueChange)="onFieldChange()"
+            hintMessage="Le mot de passe doit contenir entre 8 et 40 caractères, au minimum 1 minuscule, 1 majuscule, 1 chiffre et un caractère spécial"
           />
         </div>
 
-        <div class="flex items-start gap-x-2">
-          <input type="checkbox" name="cgv" id="cgv" class="mt-1" />
-          <div class="flex flex-col gap-y-1">
-            <label for="cgv" class="block text-sm">
+        <div class="flex flex-col gap-y-2">
+          <div class="flex items-end gap-x-2.5">
+            <p-checkbox
+              formControlName="cgv"
+              inputId="cgv"
+              binary="true"
+              class="custom-checkbox"
+              (onChange)="onFieldChange()"
+            />
+            <label for="cgv" class="block text-sm cursor-pointer">
               J’accepte les conditions générales de K9 Club
             </label>
-            <a
-              [routerLink]="AppRoutes.termsOfUseFull"
-              class="text-main underline block text-xs"
-            >
-              Voir les conditions générales
-            </a>
           </div>
+          @if (displayErrors && cgvError) {
+          <p class="text-xs text-error">
+            Vous devez accepter les conditions générales pour créer un compte
+          </p>
+          }
+          <app-link-text [routerLink]="AppRoutes.termsOfUseFull">
+            Voir les conditions générales
+          </app-link-text>
         </div>
 
         <!--
            TODO RENDRE LE BOUTON DISABLED TANT QUE LA CHECKBOX N'EST PAS COCHEE
           OU QUE LES CHAMPS NE SONT PAS BONS
           -->
-        <app-button [routerLink]="AppRoutes.app.user.dashboardFull">
-          S'inscrire
-        </app-button>
-      </div>
+        <app-button>S'inscrire</app-button>
+      </form>
 
       <p class="mt-6">
         Déjà membre ?
-        <a [routerLink]="AppRoutes.auth.loginFull" class="text-main underline"
-          >Connectez-vous</a
-        >
+        <app-link-text [routerLink]="AppRoutes.auth.loginFull">
+          Connectez-vous
+        </app-link-text>
       </p>
     </div>
   </div>

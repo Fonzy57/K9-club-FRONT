@@ -12,7 +12,6 @@ import { AppRoutes } from '@config/routes';
   selector: 'app-nav-bar',
   imports: [ButtonComponent, RouterLink],
   templateUrl: './nav-bar.component.html',
-  styleUrl: './nav-bar.component.css',
 })
 export class NavBarComponent {
   AppRoutes = AppRoutes;

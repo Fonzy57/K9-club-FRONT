@@ -13,6 +13,7 @@ import {
 import { ButtonComponent } from '@components/button/button.component';
 import { CustomInputComponent } from '@components/custom-input/custom-input.component';
 import { BackButtonComponent } from '@components/back-button/back-button.component';
+import { LinkTextComponent } from '@components/link-text/link-text.component';
 
 // SERVICES
 import { AuthService } from '@services/auth/auth.service';
@@ -23,7 +24,7 @@ import { FormValidators } from 'app/validators/form-validators';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
-import { apiRoot } from '@config/api/api';
+import { k9Config } from '@config/global';
 
 @Component({
   selector: 'app-login',
@@ -35,9 +36,9 @@ import { apiRoot } from '@config/api/api';
     FormsModule,
     ReactiveFormsModule,
     BackButtonComponent,
+    LinkTextComponent,
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css',
 })
 export class LoginComponent {
   AppRoutes = AppRoutes;
@@ -63,7 +64,7 @@ export class LoginComponent {
     }
 
     this.http
-      .post(apiRoot + '/login', this.loginForm.value, {
+      .post(k9Config.apiRoot + '/login', this.loginForm.value, {
         responseType: 'text',
       })
       .subscribe({

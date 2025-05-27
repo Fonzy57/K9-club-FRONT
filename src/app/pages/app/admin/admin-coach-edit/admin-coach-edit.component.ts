@@ -17,7 +17,7 @@ import { ToastMessageService } from '@services/toast/toast-message.service';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
-import { apiRoot } from '@config/api/api';
+import { k9Config } from '@config/global';
 
 /**
  * AdminCoachEditComponent
@@ -38,7 +38,6 @@ import { apiRoot } from '@config/api/api';
     BackButtonComponent,
   ],
   templateUrl: './admin-coach-edit.component.html',
-  styleUrl: './admin-coach-edit.component.css',
 })
 export class AdminCoachEditComponent implements OnInit {
   AppRoutes = AppRoutes;
@@ -86,7 +85,7 @@ export class AdminCoachEditComponent implements OnInit {
     const id = this.activatedRoute.snapshot.paramMap.get('id');
     // If there is an ID in URL we fill the form
     if (id) {
-      this.http.get<CoachAdmin>(`${apiRoot}/coach/${id}`).subscribe({
+      this.http.get<CoachAdmin>(`${k9Config.apiRoot}/coach/${id}`).subscribe({
         next: (coach) => {
           this.editForm.patchValue(coach);
           this.coachToEdit = coach;
@@ -131,7 +130,7 @@ export class AdminCoachEditComponent implements OnInit {
     if (this.coachToEdit) {
       this.http
         .put<CoachAdmin>(
-          `${apiRoot}/coach/${this.coachToEdit.id}`,
+          `${k9Config.apiRoot}/coach/${this.coachToEdit.id}`,
           formValueTrimed
         )
         .subscribe({

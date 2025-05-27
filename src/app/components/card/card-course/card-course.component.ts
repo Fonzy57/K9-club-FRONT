@@ -13,10 +13,9 @@ import { CardCourse } from './card-course.type';
   selector: 'app-card-course',
   imports: [ButtonComponent, TagNameComponent, NgClass],
   templateUrl: './card-course.component.html',
-  styleUrl: './card-course.component.css',
 })
 export class CardCourseComponent {
-  @Input() course!: CardCourse;
+  @Input() course!: any;
 
   get placesColor(): string {
     const placesAvailableInPercent = this.course.places / this.course.maxPlaces;

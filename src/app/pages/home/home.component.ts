@@ -7,12 +7,11 @@ import { CustomIconComponent } from '@components/custom-icon/custom-icon.compone
   selector: 'app-home',
   imports: [ButtonComponent, CustomIconComponent],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
 })
 export class HomeComponent {
   AppRoutes = AppRoutes;
 
-  courses: Course[] = [
+  courses: any[] = [
     {
       image: 'course-slalom.jpg',
       title: 'Rappel parfait',
