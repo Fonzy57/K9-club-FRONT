@@ -3,7 +3,7 @@ import { Component, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs';
+import { filter, take } from 'rxjs';
 
 // COMPONENTS
 import { BackButtonComponent } from '@components/back-button/back-button.component';
@@ -65,12 +65,15 @@ export class AdminAccountComponent {
     // Déclenche la récupération des infos (remplit le BehaviorSubject)
     this.userInfoService.getUserInfos();
 
-    this.userInfoService.user$.pipe(take(1)).subscribe((admin) => {
-      if (admin && admin.id) {
+    this.userInfoService.user$
+      .pipe(
+        filter((admin) => !!admin),
+        take(1)
+      )
+      .subscribe((admin) => {
         this.editAdminForm.patchValue(admin);
         this.adminToEdit = admin;
-      }
-    });
+      });
   }
 
   onClick() {
