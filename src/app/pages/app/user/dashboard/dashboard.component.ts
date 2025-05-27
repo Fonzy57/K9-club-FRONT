@@ -27,7 +27,7 @@ export class DashboardComponent {
   dogService: DogService = inject(DogService);
 
   user$!: Observable<UserInfoDto | null>;
-  dogs$!: Observable<any[]>;
+  dogs$!: Observable<DogDto[]>;
 
   nextCourses$!: Observable<NextCourseDto[]>;
 
