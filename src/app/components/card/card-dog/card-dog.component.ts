@@ -4,13 +4,20 @@ import { DatePipe, LowerCasePipe } from '@angular/common';
 
 // COMPONENTS
 import { TagNameComponent } from '@components/tag-name/tag-name.component';
+import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
 
 // CUSTOM PIPES
 import { AgePipe } from 'app/pipes/age.pipe';
 
 @Component({
   selector: 'app-card-dog',
-  imports: [TagNameComponent, LowerCasePipe, AgePipe, DatePipe],
+  imports: [
+    TagNameComponent,
+    LowerCasePipe,
+    AgePipe,
+    DatePipe,
+    CustomIconComponent,
+  ],
   templateUrl: './card-dog.component.html',
 })
 export class CardDogComponent {
