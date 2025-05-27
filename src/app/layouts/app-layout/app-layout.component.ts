@@ -7,7 +7,7 @@ import { SidebarComponent } from '@components/sidebar/sidebar.component';
 import { HeaderMobileComponent } from '@components/header-mobile/header-mobile.component';
 
 // CONFIG
-import { version } from '@config/version';
+import { k9Config } from '@config/global';
 
 @Component({
   selector: 'app-app-layout',
@@ -17,5 +17,5 @@ import { version } from '@config/version';
 export class AppLayoutComponent {
   /* TODO VOIR POUR LE COMPOSANT COPYRIGHT ET EN FAIRE QU'UN SEUL PEUT ÊTRE */
   currentYear: number = new Date().getFullYear();
-  version: string = version.number;
+  version: string = k9Config.version;
 }

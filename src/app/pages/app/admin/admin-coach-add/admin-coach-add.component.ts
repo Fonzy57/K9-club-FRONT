@@ -17,7 +17,7 @@ import { ToastMessageService } from '@services/toast/toast-message.service';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
-import { apiRoot } from '@config/api/api';
+import { k9Config } from '@config/global';
 
 /**
  * AdminCoachAddComponent
@@ -86,29 +86,31 @@ export class AdminCoachAddComponent {
     };
 
     // We add a new coach
-    this.http.post<CoachAdmin>(`${apiRoot}/coach`, formValueTrimed).subscribe({
-      next: () => {
-        const lastname = formValueTrimed.lastname;
-        const firstname = formValueTrimed.firstname;
+    this.http
+      .post<CoachAdmin>(`${k9Config.apiRoot}/coach`, formValueTrimed)
+      .subscribe({
+        next: () => {
+          const lastname = formValueTrimed.lastname;
+          const firstname = formValueTrimed.firstname;
 
-        this.toastService.show({
-          severity: 'success',
-          title: 'Ajout réussi',
-          content: `Le coach ${firstname} ${lastname} a bien été ajouté`,
-          time: 3000,
-        });
+          this.toastService.show({
+            severity: 'success',
+            title: 'Ajout réussi',
+            content: `Le coach ${firstname} ${lastname} a bien été ajouté`,
+            time: 3000,
+          });
 
-        this.router.navigateByUrl(AppRoutes.app.admin.coachesFull);
-      },
-      error: (error) => {
-        this.toastService.show({
-          severity: 'error',
-          title: "L'ajout a échoué",
-          content: error.error,
-          sticky: true,
-        });
-      },
-    });
+          this.router.navigateByUrl(AppRoutes.app.admin.coachesFull);
+        },
+        error: (error) => {
+          this.toastService.show({
+            severity: 'error',
+            title: "L'ajout a échoué",
+            content: error.error,
+            sticky: true,
+          });
+        },
+      });
   }
 
   /** Resets the error display flag when any form field value changes */

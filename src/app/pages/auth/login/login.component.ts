@@ -24,7 +24,7 @@ import { FormValidators } from 'app/validators/form-validators';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
-import { apiRoot } from '@config/api/api';
+import { k9Config } from '@config/global';
 
 @Component({
   selector: 'app-login',
@@ -64,7 +64,7 @@ export class LoginComponent {
     }
 
     this.http
-      .post(apiRoot + '/login', this.loginForm.value, {
+      .post(k9Config.apiRoot + '/login', this.loginForm.value, {
         responseType: 'text',
       })
       .subscribe({

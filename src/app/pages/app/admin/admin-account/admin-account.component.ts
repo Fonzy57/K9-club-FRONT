@@ -19,7 +19,7 @@ import { UserInfoService } from '@services/user/user-info.service';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
-import { apiRoot } from '@config/api/api';
+import { k9Config } from '@config/global';
 
 @Component({
   selector: 'app-admin-account',
@@ -92,7 +92,7 @@ export class AdminAccountComponent {
 
     this.http
       .put<CoachAdmin>(
-        `${apiRoot}/admin/${this.adminToEdit.id}`,
+        `${k9Config.apiRoot}/admin/${this.adminToEdit.id}`,
         formValueTrimed
       )
       .subscribe({

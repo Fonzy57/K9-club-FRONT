@@ -1,7 +1,7 @@
 // ANGULAR
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { apiRoot } from '@config/api/api';
+import { k9Config } from '@config/global';
 
 // TYPES
 
@@ -19,7 +19,7 @@ export class DogService {
   readonly dogs$ = new BehaviorSubject<any[]>([]);
 
   getAllDogs() {
-    this.http.get<any[]>(apiRoot + '/owner/dogs').subscribe({
+    this.http.get<any[]>(k9Config.apiRoot + '/owner/dogs').subscribe({
       next: (dogs) => {
         this.dogs$.next(dogs);
       },
@@ -35,4 +35,6 @@ export class DogService {
       },
     });
   }
+
+  /* TODO AJOUTER LES AUTRES PARTIES DU CRUD */
 }

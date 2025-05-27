@@ -20,6 +20,7 @@ import { LinkTextComponent } from '@components/link-text/link-text.component';
 
 // CONFIG
 import { AppRoutes } from '@config/routes';
+import { k9Config } from '@config/global';
 
 // VALIDATORS
 import { FormValidators } from 'app/validators/form-validators';
@@ -27,7 +28,6 @@ import { FormValidators } from 'app/validators/form-validators';
 // SERVICES
 import { AuthService } from '@services/auth/auth.service';
 import { ToastMessageService } from '@services/toast/toast-message.service';
-import { apiRoot } from '@config/api/api';
 
 @Component({
   selector: 'app-register',
@@ -78,7 +78,10 @@ export class RegisterComponent {
 
     if (this.registrationForm.value.cgv) {
       this.http
-        .post<OwnerRegistrationDto>(apiRoot + '/registration', formValueTrimed)
+        .post<OwnerRegistrationDto>(
+          k9Config.apiRoot + '/registration',
+          formValueTrimed
+        )
         .subscribe({
           next: () => {
             // TODO
