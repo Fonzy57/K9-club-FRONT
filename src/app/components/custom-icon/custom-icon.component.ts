@@ -23,6 +23,7 @@ import {
   ionPersonOutline,
   ionPencilOutline,
   ionSunnyOutline,
+  ionTennisballOutline,
   ionTrashOutline,
   ionWarningOutline,
 } from '@ng-icons/ionicons';
@@ -51,6 +52,7 @@ import {
       ionPersonOutline,
       ionPencilOutline,
       ionSunnyOutline,
+      ionTennisballOutline,
       ionTrashOutline,
       ionWarningOutline,
     }),
