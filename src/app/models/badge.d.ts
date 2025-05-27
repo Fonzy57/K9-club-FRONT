@@ -1,4 +1,4 @@
-export interface BadgeDTO {
+export interface BadgeDto {
   name: string;
   image: string;
 }
