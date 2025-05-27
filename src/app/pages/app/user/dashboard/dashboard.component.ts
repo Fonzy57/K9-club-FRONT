@@ -32,10 +32,10 @@ export class DashboardComponent {
   nextCourses$!: Observable<NextCourseDto[]>;
 
   ngOnInit() {
-    this.user$ = this.userInfoService.getUserInfo();
-
+    this.userInfoService.getUserInfos();
     this.dogService.getAllDogs();
 
+    this.user$ = this.userInfoService.user$;
     this.dogs$ = this.dogService.dogs$;
 
     this.nextCourses$ = this.dogs$.pipe(
