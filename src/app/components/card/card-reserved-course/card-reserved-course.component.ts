@@ -12,5 +12,5 @@ import { TagNameComponent } from '@components/tag-name/tag-name.component';
   templateUrl: './card-reserved-course.component.html',
 })
 export class CardReservedCourseComponent {
-  @Input() course!: NextReservedCardCourse;
+  @Input() course!: NextReservedCardCourseDto;
 }

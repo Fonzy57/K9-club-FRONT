@@ -35,7 +35,7 @@ export class CourseComponent {
   dogs$!: Observable<DogDto[]>;
   selectedDog: DogDto | undefined;
 
-  nextCoursesReservedForSelectedDog: NextReservedCardCourse[] = [];
+  nextCoursesReservedForSelectedDog: NextReservedCardCourseDto[] = [];
 
   ngOnInit() {
     // Get all dogs from owner
@@ -62,8 +62,10 @@ export class CourseComponent {
     }
   }
 
-  // TODO REVOIR LE TYPAGE
-  getNextCoursesForDog(dog: DogDto, max: number = 3): NextReservedCardCourse[] {
+  getNextCoursesForDog(
+    dog: DogDto,
+    max: number = 3
+  ): NextReservedCardCourseDto[] {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
