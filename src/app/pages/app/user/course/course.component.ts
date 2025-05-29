@@ -6,9 +6,7 @@ import { FormsModule } from '@angular/forms';
 
 // COMPONENTS
 import { CardCourseComponent } from '@components/card/card-course/card-course.component';
-import { CardCourse } from '@components/card/card-course/card-course.type';
 import { CardReservedCourseComponent } from '@components/card/card-reserved-course/card-reserved-course.component';
-import { ReservedCardCourse } from '@components/card/card-reserved-course/card-reserved-course.type';
 import { ButtonComponent } from '@components/button/button.component';
 import { TagNameComponent } from '@components/tag-name/tag-name.component';
 
@@ -18,6 +16,7 @@ import { SelectModule } from 'primeng/select';
 // SERVICES
 import { DogService } from '@services/user/dog.service';
 import { CourseTypeService } from '@services/course-type/course-type.service';
+import { CoursesService } from '@services/courses/courses.service';
 
 @Component({
   selector: 'app-course',
@@ -35,12 +34,16 @@ import { CourseTypeService } from '@services/course-type/course-type.service';
 export class CourseComponent {
   dogService: DogService = inject(DogService);
   courseTypeService: CourseTypeService = inject(CourseTypeService);
+  courseService: CoursesService = inject(CoursesService);
 
   dogs$!: Observable<DogDto[]>;
   selectedDog: DogDto | undefined;
 
   courseTypes$!: Observable<CourseTypeDto[]>;
   selectedCourseType: CourseTypeDto | undefined;
+
+  courses$!: Observable<CourseDto[]>;
+  nextCoursesAvailable$!: Observable<CourseDto[]>;
 
   nextCoursesReservedForSelectedDog: NextReservedCardCourseDto[] = [];
 
@@ -49,24 +52,31 @@ export class CourseComponent {
     this.dogService.getAllDogs();
     this.dogs$ = this.dogService.dogs$;
 
+    // Get all course types
     this.courseTypeService.getAllCourseTypes();
     this.courseTypes$ = this.courseTypeService.courseTypes$;
+
+    // Get all courses
+    this.courseService.getAllCourse();
+    this.courses$ = this.courseService.courses$;
+    // Filter courses
+    this.nextCoursesAvailable$ = this.courses$.pipe(
+      map((courses) => this.getNextCoursesAvailable(courses, 6))
+    );
 
     this.dogs$.subscribe((dogs) => {
       if (dogs && dogs.length > 0) {
         this.selectedDog = dogs[0];
-        this.nextCoursesReservedForSelectedDog = this.getNextCoursesForDog(
-          dogs[0]
-        );
+        this.nextCoursesReservedForSelectedDog =
+          this.getNextReservedCoursesForDog(dogs[0]);
       }
     });
   }
 
   onSelectDogChange() {
     if (this.selectedDog) {
-      this.nextCoursesReservedForSelectedDog = this.getNextCoursesForDog(
-        this.selectedDog
-      );
+      this.nextCoursesReservedForSelectedDog =
+        this.getNextReservedCoursesForDog(this.selectedDog);
     } else {
       this.nextCoursesReservedForSelectedDog = [];
     }
@@ -77,7 +87,9 @@ export class CourseComponent {
     // TODO ICI FILTRER LES COURS
   }
 
-  getNextCoursesForDog(
+  // TODO REFACTORISER POUR AVOIR UNE SEULE FONCTION QUI TRIE SELON LA DATE,
+  // IL FAUT QUE JE PUISSE PASSER UN TABLEAU OU JUSTE UN ELEMENT
+  getNextReservedCoursesForDog(
     dog: DogDto,
     max: number = 3
   ): NextReservedCardCourseDto[] {
@@ -88,7 +100,7 @@ export class CourseComponent {
       return [];
     }
 
-    const upcomingCourses = dog.registrations
+    const upcomingReservedCourses = dog.registrations
       .filter((registration: CourseRegistrationDto) => {
         const courseDate = new Date(registration.course.startDate);
         return courseDate >= today && registration.status === 'CONFIRMED';
@@ -102,77 +114,34 @@ export class CourseComponent {
       .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
       .slice(0, max);
 
+    return upcomingReservedCourses;
+  }
+
+  getNextCoursesAvailable(courses: CourseDto[], max: number): any[] {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (!courses || courses.length === 0) {
+      return [];
+    }
+
+    const upcomingCourses = courses
+      .filter((courses: CourseDto) => {
+        const courseDate = new Date(courses.startDate);
+        return courseDate >= today;
+      })
+      /* .map((courses: CourseDto) => ({
+        name: courses.name,
+        date: courses.startDate,
+        tag: courses.courseType,
+        coach: courses.coach,
+      })) */
+      .sort(
+        (a, b) =>
+          new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
+      )
+      .slice(0, max);
+
     return upcomingCourses;
   }
 }
-
-/* courses: CardCourse[] = [
-    {
-      name: 'Franchissement d’obstacles',
-      date: '21 octobre 2025 10h30',
-      tag: { name: 'agility' },
-      coach: 'Armand LESIGNAC',
-      places: 8,
-      maxPlaces: 10,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
-    },
-    {
-      name: 'Recherche d’objets ou de personne',
-      date: '20 avril 2025 9h45',
-      tag: { name: 'detection' },
-      coach: 'Larmina El Akmar',
-      places: 4,
-      maxPlaces: 10,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
-    },
-    {
-      name: 'Sociabilité',
-      date: '18 juin 2025 14h00',
-      tag: { name: 'basic' },
-      coach: 'Hubert BONISSEUR DE LA BATH',
-      places: 1,
-      maxPlaces: 10,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
-    },
-    {
-      name: 'Initiation au matériel',
-      date: '17 mars 2025',
-      tag: { name: 'canicross' },
-      coach: 'Raymond Pelletier',
-      places: 6,
-      maxPlaces: 10,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
-    },
-  ]; */
-// TODO VOIR POUR FAIRE UNE CONDITION AVEC DES ELEMENTS NON OBLIGATOIRE
-// COMME CA UNE SEULE CARD POUR LE COURS RESERVES OU NON
-/* reservedCourses: ReservedCardCourse[] = [
-    {
-      name: 'Franchissement d’obstacles',
-      date: '21 octobre 2025 10h30',
-      tag: { name: 'agility' },
-      coach: 'Armand LESIGNAC',
-    },
-    {
-      name: 'Recherche d’objets ou de personne',
-      date: '20 avril 2025 9h45',
-      tag: { name: 'detection' },
-      coach: 'Larmina El Akmar',
-    },
-    {
-      name: 'Sociabilité',
-      date: '18 juin 2025 14h00',
-      tag: { name: 'basic' },
-      coach: 'Hubert BONISSEUR DE LA BATH',
-    },
-    {
-      name: 'Initiation au matériel',
-      date: '17 mars 2025',
-      tag: { name: 'canicross' },
-      coach: 'Raymond Pelletier',
-    },
-  ]; */

@@ -42,9 +42,13 @@
 
 <!-- TODO VOIR POUR UN BOUTON "SEE MORE" pour afficher tous les cours -->
 <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:mt-6">
-  <!--  @for (course of courses; track $index) {
+  @if ( nextCoursesAvailable$ | async; as nextCourse ) { @for (course of
+  nextCourse; track $index) {
   <app-card-course [course]="course" />
-  } -->
+  } } @else {
+  <!-- TODO FAIRE UN LOADER -->
+  <p>Pas de cours pour le moment...</p>
+  }
 </div>
 
 <div class="mt-8 flex items-center justify-between">
