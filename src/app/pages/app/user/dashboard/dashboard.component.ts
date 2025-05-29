@@ -43,6 +43,7 @@ export class DashboardComponent {
     );
   }
 
+  // TODO REFACTORISER CAR UTILISER A PLUSIEURS ENDROITS
   private computeNextCourses(dogs: any[]): NextCourseDto[] {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
