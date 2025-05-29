@@ -24,6 +24,25 @@ export class CardCourseComponent {
     return this.course?.registrations?.length ?? 0;
   }
 
+  get courseDuration() {
+    const start = new Date(this.course.startDate);
+    const end = new Date(this.course.endDate);
+
+    const durationMs = end.getTime() - start.getTime();
+
+    // Hour and minutes conversion
+    const hours = Math.floor(durationMs / (1000 * 60 * 60));
+    const minutes = Math.floor((durationMs / (1000 * 60)) % 60);
+
+    if (hours > 0 && minutes > 0) {
+      return `${hours}h ${minutes}min`;
+    }
+    if (hours > 0) {
+      return `${hours}h`;
+    }
+    return `${minutes}min`;
+  }
+
   get placesColor(): string {
     const placesAvailableInPercent =
       this.reservedPlaces / this.course.maxParticipants;
