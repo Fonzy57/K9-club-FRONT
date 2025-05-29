@@ -9,12 +9,35 @@
     optionLabel="name"
     placeholder="Sélectionner un chien"
     [checkmark]="true"
-    (onChange)="onSelectChange()"
+    (onChange)="onSelectDogChange()"
     class="w-full md:w-56"
   />
-  }
+  } @else {
   <!-- TODO ICI METTRE UN LOADER -->
   <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
+  } @if (courseTypes$ | async; as courseTypes) {
+  <p-select
+    [options]="courseTypes"
+    [(ngModel)]="selectedCourseType"
+    optionLabel="name"
+    (onChange)="onSelectCourseTypeChange()"
+    [checkmark]="true"
+    placeholder="Type de cours"
+    class="w-full md:w-56"
+  >
+    <ng-template #selectedItem let-selectedOption>
+      <app-tag-name [tag]="selectedOption" class="w-full" />
+    </ng-template>
+    <ng-template let-type #item>
+      <div class="w-full">
+        <app-tag-name [tag]="type" class="w-full" />
+      </div>
+    </ng-template>
+  </p-select>
+  } @else {
+  <!-- TODO ICI METTRE UN LOADER -->
+  <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
+  }
 </div>
 
 <!-- TODO VOIR POUR UN BOUTON "SEE MORE" pour afficher tous les cours -->

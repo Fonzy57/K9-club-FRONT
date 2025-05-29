@@ -10,12 +10,14 @@ import { CardCourse } from '@components/card/card-course/card-course.type';
 import { CardReservedCourseComponent } from '@components/card/card-reserved-course/card-reserved-course.component';
 import { ReservedCardCourse } from '@components/card/card-reserved-course/card-reserved-course.type';
 import { ButtonComponent } from '@components/button/button.component';
+import { TagNameComponent } from '@components/tag-name/tag-name.component';
 
 // PRIME NG
 import { SelectModule } from 'primeng/select';
 
 // SERVICES
 import { DogService } from '@services/user/dog.service';
+import { CourseTypeService } from '@services/course-type/course-type.service';
 
 @Component({
   selector: 'app-course',
@@ -26,14 +28,19 @@ import { DogService } from '@services/user/dog.service';
     CommonModule,
     FormsModule,
     SelectModule,
+    TagNameComponent,
   ],
   templateUrl: './course.component.html',
 })
 export class CourseComponent {
   dogService: DogService = inject(DogService);
+  courseTypeService: CourseTypeService = inject(CourseTypeService);
 
   dogs$!: Observable<DogDto[]>;
   selectedDog: DogDto | undefined;
+
+  courseTypes$!: Observable<CourseTypeDto[]>;
+  selectedCourseType: CourseTypeDto | undefined;
 
   nextCoursesReservedForSelectedDog: NextReservedCardCourseDto[] = [];
 
@@ -41,6 +48,9 @@ export class CourseComponent {
     // Get all dogs from owner
     this.dogService.getAllDogs();
     this.dogs$ = this.dogService.dogs$;
+
+    this.courseTypeService.getAllCourseTypes();
+    this.courseTypes$ = this.courseTypeService.courseTypes$;
 
     this.dogs$.subscribe((dogs) => {
       if (dogs && dogs.length > 0) {
@@ -52,7 +62,7 @@ export class CourseComponent {
     });
   }
 
-  onSelectChange() {
+  onSelectDogChange() {
     if (this.selectedDog) {
       this.nextCoursesReservedForSelectedDog = this.getNextCoursesForDog(
         this.selectedDog
@@ -60,6 +70,11 @@ export class CourseComponent {
     } else {
       this.nextCoursesReservedForSelectedDog = [];
     }
+  }
+
+  onSelectCourseTypeChange() {
+    console.log('selected course type : ', this.selectedCourseType);
+    // TODO ICI FILTRER LES COURS
   }
 
   getNextCoursesForDog(
