@@ -2,7 +2,19 @@
 
 <!-- TODO REMPLACER PAR DES DROPDOWNS QUAND J'AURAIS LES COMPOSANTS -->
 <div class="flex flex-col gap-y-4 mt-8 sm:flex-row sm:gap-x-6 md:gap-x-3">
-  <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
+  @if (dogs$ | async; as dogs) {
+  <p-select
+    [options]="dogs"
+    [(ngModel)]="selectedDog"
+    [ngModel]="selectedDog ?? dogs[0]"
+    optionLabel="name"
+    placeholder="Sélectionner un chien"
+    [checkmark]="true"
+    (onChange)="onSelectChange()"
+    class="w-full md:w-56"
+  />
+  }
+  <!-- TODO ICI METTRE UN LOADER -->
   <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
 </div>
 
@@ -21,10 +33,9 @@
   </app-button>
 </div>
 <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-  <!-- TODO VOIR SI JE GARDE LE SLICE OU SI A L'API JE METS JUSTE LES 3 PROCHAINS SELON LA DATE -->
-  <!-- @for (reservedCourse of reservedCourses.slice(0, 3); track $index) {
+  @for (reservedCourse of nextCoursesReservedForSelectedDog; track $index) {
   <app-card-reserved-course [course]="reservedCourse" />
-  } -->
+  }
 </div>
 
 <!-- TODO AJOUTER LA PROPRIETE ROUTERLINK QUAND J'AURAIS LA PAGE -->

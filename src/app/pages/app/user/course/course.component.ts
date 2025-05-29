@@ -1,17 +1,95 @@
-import { Component } from '@angular/core';
+// ANGULAR
+import { CommonModule } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+
+// COMPONENTS
 import { CardCourseComponent } from '@components/card/card-course/card-course.component';
 import { CardCourse } from '@components/card/card-course/card-course.type';
 import { CardReservedCourseComponent } from '@components/card/card-reserved-course/card-reserved-course.component';
 import { ReservedCardCourse } from '@components/card/card-reserved-course/card-reserved-course.type';
 import { ButtonComponent } from '@components/button/button.component';
 
+// PRIME NG
+import { SelectModule } from 'primeng/select';
+
+// SERVICES
+import { DogService } from '@services/user/dog.service';
+
 @Component({
   selector: 'app-course',
-  imports: [CardCourseComponent, CardReservedCourseComponent, ButtonComponent],
+  imports: [
+    CardCourseComponent,
+    CardReservedCourseComponent,
+    ButtonComponent,
+    CommonModule,
+    FormsModule,
+    SelectModule,
+  ],
   templateUrl: './course.component.html',
 })
 export class CourseComponent {
-  /* courses: CardCourse[] = [
+  dogService: DogService = inject(DogService);
+
+  dogs$!: Observable<DogDto[]>;
+  selectedDog: DogDto | undefined;
+
+  nextCoursesReservedForSelectedDog: NextReservedCardCourse[] = [];
+
+  ngOnInit() {
+    // Get all dogs from owner
+    this.dogService.getAllDogs();
+    this.dogs$ = this.dogService.dogs$;
+
+    this.dogs$.subscribe((dogs) => {
+      if (dogs && dogs.length > 0) {
+        this.selectedDog = dogs[0];
+        this.nextCoursesReservedForSelectedDog = this.getNextCoursesForDog(
+          dogs[0]
+        );
+      }
+    });
+  }
+
+  onSelectChange() {
+    if (this.selectedDog) {
+      this.nextCoursesReservedForSelectedDog = this.getNextCoursesForDog(
+        this.selectedDog
+      );
+    } else {
+      this.nextCoursesReservedForSelectedDog = [];
+    }
+  }
+
+  // TODO REVOIR LE TYPAGE
+  getNextCoursesForDog(dog: DogDto, max: number = 3): NextReservedCardCourse[] {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (!dog.registrations || dog.registrations.length === 0) {
+      return [];
+    }
+
+    const upcomingCourses = dog.registrations
+      .filter((registration: CourseRegistrationDto) => {
+        const courseDate = new Date(registration.course.startDate);
+        return courseDate >= today && registration.status === 'CONFIRMED';
+      })
+      .map((registration: CourseRegistrationDto) => ({
+        name: registration.course.name,
+        date: registration.course.startDate,
+        tag: registration.course.courseType,
+        coach: registration.course.coach,
+      }))
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      .slice(0, max);
+
+    return upcomingCourses;
+  }
+}
+
+/* courses: CardCourse[] = [
     {
       name: 'Franchissement d’obstacles',
       date: '21 octobre 2025 10h30',
@@ -53,9 +131,9 @@ export class CourseComponent {
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
     },
   ]; */
-  // TODO VOIR POUR FAIRE UNE CONDITION AVEC DES ELEMENTS NON OBLIGATOIRE
-  // COMME CA UNE SEULE CARD POUR LE COURS RESERVES OU NON
-  /* reservedCourses: ReservedCardCourse[] = [
+// TODO VOIR POUR FAIRE UNE CONDITION AVEC DES ELEMENTS NON OBLIGATOIRE
+// COMME CA UNE SEULE CARD POUR LE COURS RESERVES OU NON
+/* reservedCourses: ReservedCardCourse[] = [
     {
       name: 'Franchissement d’obstacles',
       date: '21 octobre 2025 10h30',
@@ -81,4 +159,3 @@ export class CourseComponent {
       coach: 'Raymond Pelletier',
     },
   ]; */
-}
