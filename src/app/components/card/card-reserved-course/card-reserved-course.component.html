@@ -8,15 +8,17 @@
       <div
         class="mt-1 flex items-center justify-between font-medium text-sm text-main"
       >
-        <p>{{ course.date }}</p>
+        <p>{{ course.date | date }}</p>
       </div>
       <div
-        class="mt-1.5 flex flex-col-reverse gap-y-2 lg:flex-row lg:items-center lg:justify-between"
+        class="mt-1.5 flex flex-col-reverse gap-y-2 lg:flex-row lg:items-center lg:gap-x-3"
       >
         <app-tag-name [tag]="course.tag">
           {{ course.tag.name }}
         </app-tag-name>
-        <p class="font-poppins font-medium text-xs">{{ course.coach }}</p>
+        <p class="font-poppins font-medium text-xs">
+          {{ course.coach.firstname }} {{ course.coach.lastname | uppercase }}
+        </p>
       </div>
     </div>
     <div>
