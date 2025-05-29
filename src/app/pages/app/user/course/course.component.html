@@ -22,6 +22,7 @@
     optionLabel="name"
     (onChange)="onSelectCourseTypeChange()"
     [checkmark]="true"
+    [showClear]="true"
     placeholder="Type de cours"
     class="w-full md:w-56"
   >
@@ -42,12 +43,36 @@
 
 <!-- TODO VOIR POUR UN BOUTON "SEE MORE" pour afficher tous les cours -->
 <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:mt-6">
-  @if ( nextCoursesAvailable$ | async; as nextCourse ) { @for (course of
-  nextCourse; track $index) {
+  @if (nextCoursesAvailable$ | async; as nextCourse) { @if (nextCourse.length >
+  0) { @for (course of nextCourse; track $index) {
   <app-card-course [course]="course" />
   } } @else {
-  <!-- TODO FAIRE UN LOADER -->
-  <p>Pas de cours pour le moment...</p>
+  <!-- TODO REFAIRE UNE CARD SPECIALE, EN FAIRE UN COMPOSANT -->
+  <div
+    class="col-span-full flex flex-col items-center justify-center p-8 rounded-lg border border-dashed border-gray-300 bg-gray-50 text-gray-400"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="w-10 h-10 mb-3"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M9.75 9.75v4.5m4.5-4.5v4.5M3 12a9 9 0 1118 0 9 9 0 01-18 0z"
+      />
+    </svg>
+    <span class="font-semibold text-lg"
+      >Aucun cours n’est disponible pour ce chien ou ce type de cours
+      actuellement.</span
+    >
+  </div>
+  } } @else {
+  <!-- TODO faire un loader -->
+  <p>Chargement des cours...</p>
   }
 </div>
 
@@ -59,8 +84,23 @@
   </app-button>
 </div>
 <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-  @for (reservedCourse of nextCoursesReservedForSelectedDog; track $index) {
+  @if (nextCoursesReservedForSelectedDog.length > 0) { @for (reservedCourse of
+  nextCoursesReservedForSelectedDog; track $index) {
   <app-card-reserved-course [course]="reservedCourse" />
+  } } @else {
+  <div
+    class="col-span-full flex flex-col items-center justify-center bg-gray-50 rounded-lg p-6 border border-gray-200 shadow-sm"
+  >
+    <img
+      src="/assets/no-reservation.svg"
+      class="w-20 h-20 mb-4 opacity-70"
+      alt="Aucune réservation"
+    />
+    <p class="text-lg font-medium text-gray-600 mb-1">Aucune réservation</p>
+    <span class="text-sm text-gray-400"
+      >Vous n’avez encore réservé aucun cours pour ce chien.</span
+    >
+  </div>
   }
 </div>
 
