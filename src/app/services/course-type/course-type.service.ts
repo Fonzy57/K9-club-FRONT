@@ -24,7 +24,6 @@ export class CourseTypeService {
       .subscribe({
         next: (courseTypes) => {
           this.courseTypes$.next(courseTypes);
-          console.log('courseTypes : ', courseTypes);
         },
         error: (error) => {
           console.error('Erreur fetching course types : ', error);
