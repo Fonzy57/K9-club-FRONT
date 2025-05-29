@@ -6,7 +6,7 @@ interface NextCourseDto {
   description: string;
 }
 
-interface NextReservedCardCourse {
+interface NextReservedCardCourseDto {
   name: string;
   date: string;
   tag: TagDto;
