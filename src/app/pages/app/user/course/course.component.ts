@@ -1,25 +1,27 @@
 // ANGULAR
-import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { map, Observable, BehaviorSubject, combineLatest } from 'rxjs';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from "@angular/common";
+import { Component, inject } from "@angular/core";
+import { map, Observable, BehaviorSubject, combineLatest } from "rxjs";
+import { FormsModule } from "@angular/forms";
 
 // COMPONENTS
-import { CardCourseComponent } from '@components/card/card-course/card-course.component';
-import { CardReservedCourseComponent } from '@components/card/card-reserved-course/card-reserved-course.component';
-import { ButtonComponent } from '@components/button/button.component';
-import { TagNameComponent } from '@components/tag-name/tag-name.component';
+import { CardCourseComponent } from "@components/card/card-course/card-course.component";
+import { CardReservedCourseComponent } from "@components/card/card-reserved-course/card-reserved-course.component";
+import { ButtonComponent } from "@components/button/button.component";
+import { TagNameComponent } from "@components/tag-name/tag-name.component";
+import { CardEmptyCourseComponent } from "@components/card/card-empty-course/card-empty-course.component";
+import { CardEmptyReservedCourseComponent } from "@components/card/card-empty-reserved-course/card-empty-reserved-course.component";
 
 // PRIME NG
-import { SelectModule } from 'primeng/select';
+import { SelectModule } from "primeng/select";
 
 // SERVICES
-import { DogService } from '@services/user/dog.service';
-import { CourseTypeService } from '@services/course-type/course-type.service';
-import { CoursesService } from '@services/courses/courses.service';
+import { DogService } from "@services/user/dog.service";
+import { CourseTypeService } from "@services/course-type/course-type.service";
+import { CoursesService } from "@services/courses/courses.service";
 
 @Component({
-  selector: 'app-course',
+  selector: "app-course",
   imports: [
     CardCourseComponent,
     CardReservedCourseComponent,
@@ -28,8 +30,10 @@ import { CoursesService } from '@services/courses/courses.service';
     FormsModule,
     SelectModule,
     TagNameComponent,
+    CardEmptyCourseComponent,
+    CardEmptyReservedCourseComponent,
   ],
-  templateUrl: './course.component.html',
+  templateUrl: "./course.component.html",
 })
 export class CourseComponent {
   dogService: DogService = inject(DogService);
@@ -134,7 +138,7 @@ export class CourseComponent {
     const upcomingReservedCoursesFiltered = dog.registrations
       .filter((registration: CourseRegistrationDto) => {
         const courseDate = new Date(registration.course.startDate);
-        return courseDate >= today && registration.status === 'CONFIRMED';
+        return courseDate >= today && registration.status === "CONFIRMED";
       })
       .map((registration: CourseRegistrationDto) => ({
         name: registration.course.name,
@@ -204,8 +208,8 @@ export class CourseComponent {
         const alreadyHasARegistration = course.registrations.some(
           (registration: any) =>
             registration.dog?.id === selectedDog.id &&
-            (registration.status === 'CONFIRMED' ||
-              registration.status === 'PENDING')
+            (registration.status === "CONFIRMED" ||
+              registration.status === "PENDING")
         );
         if (alreadyHasARegistration) {
           return false;

@@ -1,26 +1,28 @@
 // ANGULAR
-import { CommonModule, TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { CommonModule, TitleCasePipe, UpperCasePipe } from "@angular/common";
+import { Component, inject } from "@angular/core";
+import { map, Observable } from "rxjs";
 
 // COMPONENTS
-import { CardDogComponent } from '@components/card/card-dog/card-dog.component';
-import { CardNextCourseComponent } from '@components/card/card-next-course/card-next-course.component';
+import { CardDogComponent } from "@components/card/card-dog/card-dog.component";
+import { CardNextCourseComponent } from "@components/card/card-next-course/card-next-course.component";
 
 // SERVICES
-import { UserInfoService } from '@services/user/user-info.service';
-import { DogService } from '@services/user/dog.service';
+import { UserInfoService } from "@services/user/user-info.service";
+import { DogService } from "@services/user/dog.service";
+import { CardEmptyDogComponent } from "@components/card/card-empty-dog/card-empty-dog.component";
 
 @Component({
-  selector: 'app-dashboard',
+  selector: "app-dashboard",
   imports: [
     CardDogComponent,
     CardNextCourseComponent,
     TitleCasePipe,
     UpperCasePipe,
     CommonModule,
+    CardEmptyDogComponent,
   ],
-  templateUrl: './dashboard.component.html',
+  templateUrl: "./dashboard.component.html",
 })
 export class DashboardComponent {
   userInfoService: UserInfoService = inject(UserInfoService);
@@ -59,7 +61,7 @@ export class DashboardComponent {
       dog.registrations
         .filter((registration: CourseRegistrationDto) => {
           const courseDate = new Date(registration.course.startDate);
-          return courseDate >= today && registration.status === 'CONFIRMED';
+          return courseDate >= today && registration.status === "CONFIRMED";
         })
         .forEach((registration: CourseRegistrationDto) => {
           upcomingCourses.push({
