@@ -25,7 +25,8 @@ export class CardCourseComponent {
   }
 
   get placesColor(): string {
-    const placesAvailableInPercent = 0 / this.course.maxParticipants;
+    const placesAvailableInPercent =
+      this.reservedPlaces / this.course.maxParticipants;
 
     if (placesAvailableInPercent > 0.7) {
       return 'text-error';

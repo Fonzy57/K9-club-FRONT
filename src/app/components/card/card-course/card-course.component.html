@@ -6,7 +6,7 @@
     <div class="md:min-w-[260px]">
       <h6 class="font-semibold lg:text-lg">{{ course.name }}</h6>
       <div class="mt-1 flex items-center gap-x-5 font-medium text-sm">
-        <p>{{ course.startDate | date }}</p>
+        <p>{{ course.startDate | date : "dd MMMM YYYY à HH:mm" }}</p>
         <p [ngClass]="placesColor">
           {{ reservedPlaces }} /{{ course.maxParticipants }}
         </p>
