@@ -54,6 +54,8 @@ export class CourseComponent {
   // Stores the next three reserved courses for the selected dog
   nextCoursesReservedForSelectedDog: NextReservedCardCourseDto[] = [];
 
+  totalReservedCoursesCount: number = 0;
+
   // Stream of available courses filtered according to dog/dog age/type selection
   nextCoursesAvailable$!: Observable<CourseDto[]>;
 
@@ -129,7 +131,7 @@ export class CourseComponent {
     }
 
     // Filter registrations: only confirmed and in the future
-    const upcomingReservedCourses = dog.registrations
+    const upcomingReservedCoursesFiltered = dog.registrations
       .filter((registration: CourseRegistrationDto) => {
         const courseDate = new Date(registration.course.startDate);
         return courseDate >= today && registration.status === 'CONFIRMED';
@@ -140,10 +142,12 @@ export class CourseComponent {
         tag: registration.course.courseType,
         coach: registration.course.coach,
       }))
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-      .slice(0, max);
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
 
-    return upcomingReservedCourses;
+    // Update total registrations number
+    this.totalReservedCoursesCount = upcomingReservedCoursesFiltered.length;
+
+    return upcomingReservedCoursesFiltered.slice(0, max);
   }
 
   /**

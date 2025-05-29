@@ -78,10 +78,12 @@
 
 <div class="mt-8 flex items-center justify-between">
   <h2 class="font-semibold text-2xl">Les trois prochains cours réservés</h2>
-  <!-- TODO AJOUTER LA PROPRIETE ROUTERLINK QUAND J'AURAIS LA PAGE -->
+  <!-- TODO REVOIR LE STYLE CAR LEGER SAUT EN CHANGEANT DE CHIEN -->
+  @if (totalReservedCoursesCount > 3) {
   <app-button class="hidden sm:block" typeButton="ghost">
     Voir tous les cours réservés
   </app-button>
+  }
 </div>
 <div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
   @if (nextCoursesReservedForSelectedDog.length > 0) { @for (reservedCourse of
