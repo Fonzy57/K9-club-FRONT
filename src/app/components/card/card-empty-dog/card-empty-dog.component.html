@@ -5,12 +5,16 @@
   <div class="flex flex-col items-center gap-y-4">
     <app-custom-icon name="ionPawOutline" size="48" class="text-information" />
     <div class="flex flex-col gap-y-2 max-w-4/5">
-      <p>Aucun compagnon à quatre pattes n’a encore rejoint votre profil.</p>
-      <p>Ajoutez-le pour profiter de toutes les fonctionnalités du club.</p>
+      <p>Aucun compagnon à quatre pattes n’a encore rejoint votre profil !</p>
+      <p>
+        Ajoutez-le pour profiter de toutes les fonctionnalités du club et suivre
+        ses progrès !
+      </p>
     </div>
   </div>
   <div class="w-max mx-auto mt-5">
-    <!-- TODO AJOUTER LE LIEN POUR LA PAGE AJOUT D'UN CHIEN QUAND ELLE SERA FAITE -->
-    <app-button> Ajouter un chien </app-button>
+    <app-button [routerLink]="AppRoutes.app.user.dogFull">
+      Ajouter un chien
+    </app-button>
   </div>
 </div>
