@@ -1,7 +1,7 @@
-<!-- TODO AJOUTER LES COULEURS EN BDD DIRECTEMENT -->
-
 <div
-  class="w-max rounded-lg"
+  class="rounded-lg"
+  [class.w-max]="!class"
+  [class]="class"
   [ngClass]="{
     'py-1 px-2': size === 'tiny',
     'py-2.5 px-[18px]': size === 'normal',
@@ -12,7 +12,7 @@
   }"
 >
   <p
-    class="font-poppins"
+    class="font-poppins text-center"
     [ngClass]="{
     'text-xs': size === 'tiny',
     'text-sm': size === 'normal',
