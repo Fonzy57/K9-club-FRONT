@@ -2,10 +2,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-// COMPONENTS
-import { CardCourse } from '@components/card/card-course/card-course.type';
-import { ReservedCardCourse } from '@components/card/card-reserved-course/card-reserved-course.type';
-
 // PRIME NG
 import { PrimeNG } from 'primeng/config';
 import { Toast } from 'primeng/toast';
