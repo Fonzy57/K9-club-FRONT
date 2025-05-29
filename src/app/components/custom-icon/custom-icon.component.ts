@@ -6,6 +6,7 @@ import { Component, Input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import {
   ionAddOutline,
+  ionAlertCircleOutline,
   ionBodyOutline,
   ionCalendarNumberOutline,
   ionCalendarClearOutline,
@@ -37,6 +38,7 @@ import {
   viewProviders: [
     provideIcons({
       ionAddOutline,
+      ionAlertCircleOutline,
       ionBodyOutline,
       ionCalendarNumberOutline,
       ionCalendarClearOutline,
