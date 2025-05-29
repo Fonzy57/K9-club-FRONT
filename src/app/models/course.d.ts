@@ -8,4 +8,5 @@ interface CourseDto {
   coach: CoachDto;
   courseType: CourseTypeDto;
   ageRange: AgeRangeDto;
+  registrations: BasicCourseRegistrationDto[];
 }
