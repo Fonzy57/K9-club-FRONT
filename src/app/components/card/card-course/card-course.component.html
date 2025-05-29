@@ -5,19 +5,17 @@
   <div class="lg:flex lg:items-start lg:justify-between">
     <div class="md:min-w-[260px]">
       <h6 class="font-semibold lg:text-lg">{{ course.name }}</h6>
-      <div class="mt-1 flex items-center justify-between font-medium text-sm">
-        <p>{{ course.date }}</p>
+      <div class="mt-1 flex items-center gap-x-5 font-medium text-sm">
+        <p>{{ course.startDate | date }}</p>
         <p [ngClass]="placesColor">
-          {{ course.places }}/{{ course.maxPlaces }}
+          {{ reservedPlaces }} /{{ course.maxParticipants }}
         </p>
       </div>
-      <div
-        class="mt-1.5 flex items-center justify-between flex-wrap-reverse gap-y-1.5"
-      >
-        <app-tag-name [tag]="course.tag">
-          {{ course.tag.name }}
-        </app-tag-name>
-        <p class="font-poppins font-medium text-xs">{{ course.coach }}</p>
+      <div class="mt-1.5 flex items-center gap-x-5 flex-wrap-reverse gap-y-1.5">
+        <app-tag-name [tag]="course.courseType" />
+        <p class="font-poppins font-medium text-xs">
+          {{ course.coach.firstname }} {{ course.coach.lastname | uppercase }}
+        </p>
       </div>
     </div>
     <app-button size="tiny" class="hidden lg:block">Réserver</app-button>
