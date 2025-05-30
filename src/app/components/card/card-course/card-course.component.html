@@ -1,9 +1,10 @@
 <div
-  class="relative h-full p-4 border bg-white border-border rounded-lg shadow-sm flex flex-col gap-2.5 lg:p-5"
+  class="relative h-full p-4 border bg-white border-border rounded-lg shadow-sm flex flex-col gap-2.5 lg:p-5 overflow-hidden"
 >
+  <!-- Overlay if course is full -->
   @if (isCourseFull) {
   <div
-    class="absolute top-0 left-0 right-0 bottom-0 bg-gray-two/50 rounded-lg flex items-center justify-center z-10"
+    class="absolute top-0 left-0 right-0 bottom-0 bg-gray-two/50 flex items-center justify-center z-10"
   >
     <div class="bg-white p-4 rounded-md shadow-lg mx-4 text-center max-w-3/4">
       <p class="text-sm font-medium text-text-950">
