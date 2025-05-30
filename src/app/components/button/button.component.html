@@ -9,6 +9,12 @@
   <ng-content />
 
   @if (iconName) {
-  <app-custom-icon [name]="iconName" [size]="iconSize" [class]="iconClass" />
+  <app-custom-icon
+    class="text-inherit"
+    [name]="iconName"
+    [size]="iconSize"
+    [class]="iconClass"
+    [ngClass]="[textColorClass]"
+  />
   }
 </button>
