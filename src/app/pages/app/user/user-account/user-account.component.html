@@ -7,111 +7,117 @@
 <div
   class="mt-8 sm:mt-14 lg:flex lg:items-center lg:justify-center lg:gap-x-40"
 >
-  <div class="">
-    <form
-      [formGroup]="editUserForm"
-      (ngSubmit)="onClick()"
-      class="sm:w-[500px] sm:mx-auto"
-    >
-      <div class="flex flex-col gap-y-5">
-        <app-custom-input
-          inputName="lastname"
-          label="Nom"
-          placeholder="Doe"
-          type="text"
-          formControlName="lastname"
-          [errorMessage]="displayErrors ? lastnameError : ''"
-          (valueChange)="onFieldChange()"
-        />
-        <app-custom-input
-          inputName="firstname"
-          label="Prénom"
-          placeholder="John"
-          type="text"
-          formControlName="firstname"
-          [errorMessage]="displayErrors ? firstnameError : ''"
-          (valueChange)="onFieldChange()"
-        />
-        <app-custom-input
-          inputName="mail"
-          label="E-mail"
-          placeholder="john.doe@gmail.com"
-          type="email"
-          formControlName="email"
-          [errorMessage]="displayErrors ? emailError : ''"
-          (valueChange)="onFieldChange()"
-          hintMessage="Si vous changer d'e-mail vous devrez vous reconnecter avec le nouvel e-mail"
-        />
-      </div>
-      <div class="mt-10">
-        <app-button [disabled]="!hasChanges || disableButton">
-          Modifier
-        </app-button>
-      </div>
-    </form>
-  </div>
+  <app-card-wrapper>
+    <div class="">
+      <form
+        [formGroup]="editUserForm"
+        (ngSubmit)="onClick()"
+        class="sm:w-[500px]"
+      >
+        <div class="flex flex-col gap-y-5">
+          <app-custom-input
+            inputName="lastname"
+            label="Nom"
+            placeholder="Doe"
+            type="text"
+            formControlName="lastname"
+            [errorMessage]="displayErrors ? lastnameError : ''"
+            (valueChange)="onFieldChange()"
+          />
+          <app-custom-input
+            inputName="firstname"
+            label="Prénom"
+            placeholder="John"
+            type="text"
+            formControlName="firstname"
+            [errorMessage]="displayErrors ? firstnameError : ''"
+            (valueChange)="onFieldChange()"
+          />
+          <app-custom-input
+            inputName="mail"
+            label="E-mail"
+            placeholder="john.doe@gmail.com"
+            type="email"
+            formControlName="email"
+            [errorMessage]="displayErrors ? emailError : ''"
+            (valueChange)="onFieldChange()"
+            hintMessage="Si vous changer d'e-mail vous devrez vous reconnecter avec le nouvel e-mail"
+          />
+        </div>
+        <div class="mt-10">
+          <app-button [disabled]="!hasChanges || disableButton">
+            Modifier
+          </app-button>
+        </div>
+      </form>
+    </div>
+  </app-card-wrapper>
 
-  <div class="mt-10 sm:w-[500px] sm:mx-auto lg:hidden">
-    <h2 class="text-center text-xl">Découvrez notre application mobile :</h2>
-    <div class="mt-4 flex items-center justify-center gap-x-4">
-      <div class="w-[135px]">
-        <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
-        <img
-          src="/images/store/google-badge.svg"
-          alt=""
-          srcset=""
-          class="w-full"
-        />
+  <app-card-wrapper class="mt-10 lg:hidden">
+    <div class="sm:w-[500px] sm:mx-auto lg:hidden">
+      <h2 class="text-center text-xl">Découvrez notre application mobile :</h2>
+      <div class="mt-4 flex items-center justify-center gap-x-4">
+        <div class="w-[135px]">
+          <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+          <img
+            src="/images/store/google-badge.svg"
+            alt=""
+            srcset=""
+            class="w-full"
+          />
+        </div>
+        <div class="w-[125px]">
+          <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+          <img
+            src="/images/store/apple-badge.svg"
+            alt=""
+            srcset=""
+            class="w-full"
+          />
+        </div>
       </div>
-      <div class="w-[125px]">
-        <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
-        <img
-          src="/images/store/apple-badge.svg"
-          alt=""
-          srcset=""
-          class="w-full"
-        />
+      <div class="mt-4 text-text">
+        <p>
+          Vous pouvez télécharger l'application mobile sur l'App Store ou sur
+          Google Play !
+        </p>
+        <p>L'expérience mobile sera bien meilleure que sur le site 😉</p>
       </div>
     </div>
-    <div class="mt-4 text-text">
-      <p>
-        Vous pouvez télécharger l'application mobile sur l'App Store ou sur
-        Google Play !
-      </p>
-      <p>L'expérience mobile sera bien meilleure que sur le site 😉</p>
-    </div>
-  </div>
+  </app-card-wrapper>
 
   <!-- QR CODE FOR BIG SCREEENS -->
-  <div class="hidden lg:flex lg:flex-col lg:items-center lg:gap-y-4">
-    <div class="w-[250px] xl:w-[280px]">
-      <!-- TODO CHANGER LE QR CODE UNE FOIS FINIE -->
-      <img
-        src="/images/account/Rickrolling_QR_code.png"
-        alt=""
-        srcset=""
-        class="w-full"
-      />
-    </div>
-    <div class="mt-4 flex items-center justify-center gap-x-4">
-      <div class="w-[135px]">
-        <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+  <app-card-wrapper class="hidden lg:block">
+    <div class="lg:flex lg:flex-col lg:items-center lg:gap-y-4">
+      <div class="w-[250px] xl:w-[280px]">
+        <!-- TODO CHANGER LE QR CODE UNE FOIS FINIE -->
         <img
-          src="/images/store/google-badge.svg"
+          src="/images/account/Rickrolling_QR_code.png"
           alt=""
           srcset=""
           class="w-full"
         />
       </div>
-      <div class="w-[125px]">
-        <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
-        <img
-          src="/images/store/apple-badge.svg"
-          alt=""
-          srcset=""
-          class="w-full"
-        />
+      <div class="flex items-center justify-center gap-x-4">
+        <div class="w-[135px]">
+          <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+          <img
+            src="/images/store/google-badge.svg"
+            alt=""
+            srcset=""
+            class="w-full"
+          />
+        </div>
+        <div class="w-[125px]">
+          <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+          <img
+            src="/images/store/apple-badge.svg"
+            alt=""
+            srcset=""
+            class="w-full"
+          />
+        </div>
       </div>
     </div>
-  </div>
+  </app-card-wrapper>
 </div>
