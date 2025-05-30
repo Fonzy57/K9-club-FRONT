@@ -1,23 +1,24 @@
 // ANGULAR
-import { Component, inject, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject, OnInit } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { FormBuilder, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
 
 // COMPONENTS
-import { BackButtonComponent } from '@components/back-button/back-button.component';
-import { CustomInputComponent } from '@components/custom-input/custom-input.component';
-import { ButtonComponent } from '@components/button/button.component';
+import { BackButtonComponent } from "@components/back-button/back-button.component";
+import { CustomInputComponent } from "@components/custom-input/custom-input.component";
+import { ButtonComponent } from "@components/button/button.component";
 
 // VALIDATORS
-import { FormValidators } from 'app/validators/form-validators';
+import { FormValidators } from "app/validators/form-validators";
 
 // SERVICES
-import { ToastMessageService } from '@services/toast/toast-message.service';
+import { ToastMessageService } from "@services/toast/toast-message.service";
 
 // CONFIG
-import { AppRoutes } from '@config/routes';
-import { k9Config } from '@config/global';
+import { AppRoutes } from "@config/routes";
+import { k9Config } from "@config/global";
+import { CardWrapperComponent } from "../../../../components/card/card-wrapper/card-wrapper.component";
 
 /**
  * AdminCoachAddComponent
@@ -29,7 +30,7 @@ import { k9Config } from '@config/global';
  * - Displays success or error notifications through ToastMessageService.
  */
 @Component({
-  selector: 'app-admin-coach-edit',
+  selector: "app-admin-coach-edit",
   standalone: true,
   imports: [
     CustomInputComponent,
@@ -37,8 +38,9 @@ import { k9Config } from '@config/global';
     FormsModule,
     ReactiveFormsModule,
     BackButtonComponent,
+    CardWrapperComponent,
   ],
-  templateUrl: './admin-coach-add.component.html',
+  templateUrl: "./admin-coach-add.component.html",
 })
 export class AdminCoachAddComponent {
   AppRoutes = AppRoutes;
@@ -59,10 +61,10 @@ export class AdminCoachAddComponent {
    * - password: required, length 8-40, contains uppercase, lowercase, digit, special
    */
   addForm = this.formBuilder.group({
-    firstname: ['', FormValidators.nameValidator()],
-    lastname: ['', FormValidators.nameValidator()],
-    email: ['', FormValidators.emailValidator()],
-    password: ['', FormValidators.passwordValidator()],
+    firstname: ["", FormValidators.nameValidator()],
+    lastname: ["", FormValidators.nameValidator()],
+    email: ["", FormValidators.emailValidator()],
+    password: ["", FormValidators.passwordValidator()],
   });
 
   /**
@@ -94,8 +96,8 @@ export class AdminCoachAddComponent {
           const firstname = formValueTrimed.firstname;
 
           this.toastService.show({
-            severity: 'success',
-            title: 'Ajout réussi',
+            severity: "success",
+            title: "Ajout réussi",
             content: `Le coach ${firstname} ${lastname} a bien été ajouté`,
             time: 3000,
           });
@@ -104,7 +106,7 @@ export class AdminCoachAddComponent {
         },
         error: (error) => {
           this.toastService.show({
-            severity: 'error',
+            severity: "error",
             title: "L'ajout a échoué",
             content: error.error,
             sticky: true,
@@ -124,68 +126,68 @@ export class AdminCoachAddComponent {
    * or an empty string if the field is valid or untouched.
    */
   get firstnameError() {
-    const control = this.addForm.get('firstname');
+    const control = this.addForm.get("firstname");
 
     if (!control) {
-      return '';
+      return "";
     }
 
     if ((control.touched || control.dirty) && control.invalid) {
-      return FormValidators.getNameError(control, 'prénom');
+      return FormValidators.getNameError(control, "prénom");
     }
 
-    return '';
+    return "";
   }
 
   /**
    * Returns the validation error message for the 'lastname' field.
    */
   get lastnameError() {
-    const control = this.addForm.get('lastname');
+    const control = this.addForm.get("lastname");
 
     if (!control) {
-      return '';
+      return "";
     }
 
     if ((control.touched || control.dirty) && control.invalid) {
-      return FormValidators.getNameError(control, 'nom');
+      return FormValidators.getNameError(control, "nom");
     }
 
-    return '';
+    return "";
   }
 
   /**
    * Returns the validation error message for the 'email' field.
    */
   get emailError() {
-    const control = this.addForm.get('email');
+    const control = this.addForm.get("email");
 
     if (!control) {
-      return '';
+      return "";
     }
 
     if ((control.touched || control.dirty) && control.invalid) {
       return FormValidators.getEmailError(control);
     }
 
-    return '';
+    return "";
   }
 
   /**
    * Returns the validation error message for the 'password' field.
    */
   get passwordError() {
-    const control = this.addForm.get('password');
+    const control = this.addForm.get("password");
 
     if (!control) {
-      return '';
+      return "";
     }
 
     if ((control.touched || control.dirty) && control.invalid) {
       return FormValidators.getPasswordError(control);
     }
 
-    return '';
+    return "";
   }
 
   /* TODO EN DESSOUS SI JAMAIS JE DOIS CHANGER DYNAMIQUEMENT LES ERREURS DU MDP */
