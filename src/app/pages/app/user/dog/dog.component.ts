@@ -1,70 +1,167 @@
-import { Component } from '@angular/core';
+import { Component, inject } from "@angular/core";
+import { CustomInputComponent } from "@components/custom-input/custom-input.component";
+import { CardWrapperComponent } from "@components/card/card-wrapper/card-wrapper.component";
+import { AppRoutes } from "@config/routes";
+import { HttpClient } from "@angular/common/http";
+import { FormBuilder, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { ToastMessageService } from "@services/toast/toast-message.service";
+import { FormValidators } from "app/validators/form-validators";
+import { k9Config } from "@config/global";
+import { ButtonComponent } from "../../../../components/button/button.component";
 
 @Component({
-  selector: 'app-dog',
-  imports: [],
-  templateUrl: './dog.component.html',
+  selector: "app-dog",
+  imports: [
+    CustomInputComponent,
+    CardWrapperComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    ButtonComponent,
+  ],
+  templateUrl: "./dog.component.html",
 })
 export class DogComponent {
-  /* nextCourses: NextCourse[] = [
-    {
-      name: 'Franchissement d’obstacles',
-      date: '21 octobre 2025 10h30',
-      tag: { name: 'agility' },
-      dog: 'Rex',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
-    },
-    {
-      name: 'Recherche d’objets ou de personne',
-      date: '20 avril 2025 9h45',
-      tag: { name: 'detection' },
-      dog: 'Simba',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
-    },
-    {
-      name: 'Sociabilité',
-      date: '18 juin 2025 14h00',
-      tag: { name: 'basic' },
-      dog: 'Simba',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
-    },
-    {
-      name: 'Initiation au matériel',
-      date: '17 mars 2025',
-      tag: { name: 'canicross' },
-      dog: 'Simba',
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",
-    },
-  ]; */
-  // TODO RECUPERER LES INFOS DE LA BDD
-  /* dogs: CardDog[] = [
-    {
-      name: 'Rex',
-      breed: 'Berger allemand',
-      birthday: '2019-06-01',
-      nbOfCourses: 2,
-      nextCourse: '25 mars 2025',
-      tag: { name: 'agility' },
-      createdAt: '17 mars 2024',
-      badges: [
-        { name: 'best dog', image: '/images/badges/best-dog.png' },
-        { name: 'best dog', image: '/images/badges/best-dog.png' },
-        { name: 'best dog', image: '/images/badges/best-dog.png' },
-      ],
-    },
-    {
-      name: 'Simba',
-      breed: 'Golden Retriver',
-      birthday: '2020-11-20',
-      nbOfCourses: 16,
-      nextCourse: '20 avril 2025',
-      tag: { name: 'canicross' },
-      createdAt: '21 octobre 2024',
-      badges: [{ name: 'best dog', image: '/images/badges/best-dog.png' }],
-    },
-  ]; */
+  AppRoutes = AppRoutes;
+  displayErrors = false;
+
+  // -------------------------------------------------------------------------------------------------------
+
+  // ----------------------- TODO JE SUIS LA, GERER LE FORMULAIRE D'AJOUT D'UN CHIEN -----------------------
+
+  // -------------------------------------------------------------------------------------------------------
+
+  // Injected services and utilities
+  http: HttpClient = inject(HttpClient);
+  formBuilder: FormBuilder = inject(FormBuilder);
+  router: Router = inject(Router);
+  activatedRoute: ActivatedRoute = inject(ActivatedRoute);
+  toastService: ToastMessageService = inject(ToastMessageService);
+
+  addDogForm = this.formBuilder.group({
+    name: ["", FormValidators.nameValidator()],
+    birthdate: ["", FormValidators.emailValidator()],
+    gender: ["", FormValidators.passwordValidator()], // TODO ICI FAIRE UN RADIO BUTTON, CHANGER BOOLEAN DANS BDD ou string
+    breed: [""], // Faire un validateur
+    avatar: [""], // Faire un validateur
+  });
+
+  onClick() {
+    if (this.addDogForm.invalid) {
+      this.addDogForm.markAllAsTouched();
+      this.displayErrors = true; // Afficher les erreurs à la soumission
+      return;
+    }
+
+    const formValueTrimed: any = {
+      name: this.addDogForm.value.name!.trim(),
+      birthdate: this.addDogForm.value.birthdate!.trim(),
+      gender: this.addDogForm.value.gender!.trim(),
+      breed: this.addDogForm.value.breed!.trim(),
+      ownerId: 0, // TODO ici lui passer l'id
+    };
+
+    // We add a new coach
+    /* this.http
+      .post<CoachAdmin>(`${k9Config.apiRoot}/coach`, formValueTrimed)
+      .subscribe({
+        next: () => {
+          const lastname = formValueTrimed.lastname;
+          const firstname = formValueTrimed.firstname;
+
+          this.toastService.show({
+            severity: "success",
+            title: "Ajout réussi",
+            content: `Le coach ${firstname} ${lastname} a bien été ajouté`,
+            time: 3000,
+          });
+
+          this.router.navigateByUrl(AppRoutes.app.admin.coachesFull);
+        },
+        error: (error) => {
+          this.toastService.show({
+            severity: "error",
+            title: "L'ajout a échoué",
+            content: error.error,
+            sticky: true,
+          });
+        },
+      }); */
+  }
+
+  /** Resets the error display flag when any form field value changes */
+  onFieldChange() {
+    this.displayErrors = false;
+  }
+
+  /* TODO REFAIRE LES METHODES POUR AVOIR LES BONNES ERREURS */
+  get nameError() {
+    const control = this.addDogForm.get("name");
+
+    if (!control) {
+      return "";
+    }
+
+    if ((control.touched || control.dirty) && control.invalid) {
+      return FormValidators.getNameError(control, "nom");
+    }
+
+    return "";
+  }
+
+  get birthdateError() {
+    const control = this.addDogForm.get("email");
+
+    if (!control) {
+      return "";
+    }
+
+    if ((control.touched || control.dirty) && control.invalid) {
+      return FormValidators.getEmailError(control);
+    }
+
+    return "";
+  }
+
+  get genderError() {
+    const control = this.addDogForm.get("password");
+
+    if (!control) {
+      return "";
+    }
+
+    if ((control.touched || control.dirty) && control.invalid) {
+      return FormValidators.getPasswordError(control);
+    }
+
+    return "";
+  }
+
+  get breedError() {
+    const control = this.addDogForm.get("password");
+
+    if (!control) {
+      return "";
+    }
+
+    if ((control.touched || control.dirty) && control.invalid) {
+      return FormValidators.getPasswordError(control);
+    }
+
+    return "";
+  }
+
+  get avatarError() {
+    const control = this.addDogForm.get("avatar");
+
+    if (!control) {
+      return "";
+    }
+
+    if ((control.touched || control.dirty) && control.invalid) {
+      return FormValidators.getPasswordError(control);
+    }
+
+    return "";
+  }
 }
