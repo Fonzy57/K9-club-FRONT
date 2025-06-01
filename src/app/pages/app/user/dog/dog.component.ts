@@ -3,13 +3,15 @@ import { Component, inject } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import {
   FormBuilder,
+  FormControl,
+  FormGroup,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { CommonModule } from "@angular/common";
-import { Observable } from "rxjs";
+import { BehaviorSubject, Observable } from "rxjs";
 
 // PRIME NG
 import { DatePickerModule } from "primeng/datepicker";
@@ -31,6 +33,20 @@ import { FormValidators } from "app/validators/form-validators";
 // CONFIG
 import { AppRoutes } from "@config/routes";
 import { k9Config } from "@config/global";
+import { UserInfoService } from "@services/user/user-info.service";
+import { DogService } from "@services/user/dog.service";
+import { DogAvatarDto } from "@models/dog/dog-avatar";
+import { DateUtils } from "app/utils/date.utils";
+
+// TYPES
+// Définir l'interface pour le formulaire
+interface DogForm {
+  name: FormControl<string | null>;
+  selectedAvatar: FormControl<DogAvatarDto | null>;
+  birthdate: FormControl<Date | null>;
+  gender: FormControl<string | null>;
+  selectedBreed: FormControl<BreedDto | null>;
+}
 
 @Component({
   selector: "app-dog",
@@ -58,76 +74,94 @@ export class DogComponent {
   activatedRoute: ActivatedRoute = inject(ActivatedRoute);
   toastService: ToastMessageService = inject(ToastMessageService);
   breedService: BreedService = inject(BreedService);
+  userInfoService: UserInfoService = inject(UserInfoService);
+  dogService: DogService = inject(DogService);
 
   breeds$!: Observable<BreedDto[]>;
+  user$ = new BehaviorSubject<UserInfoDto | null>(null);
 
   birthdate: Date | undefined;
 
   avatars = k9Config.dogAvatars;
-  selectedAvatar: any | undefined = undefined;
+  selectedAvatar: DogAvatarDto | undefined = undefined;
 
   genders = k9Config.dogGender;
   selectedGender: any;
 
-  addDogForm = this.formBuilder.group({
-    name: ["", FormValidators.dogNameValidator()],
-    selectedAvatar: [undefined, Validators.required],
-    birthdate: [undefined, [Validators.required, FormValidators.notInFuture()]],
-    gender: [null, Validators.required],
-    selectedBreed: [undefined, Validators.required],
+  addDogForm: FormGroup<DogForm> = this.formBuilder.group({
+    name: new FormControl<string | null>("", FormValidators.dogNameValidator()),
+    selectedAvatar: new FormControl<DogAvatarDto | null>(
+      null,
+      Validators.required
+    ),
+    birthdate: new FormControl<Date | null>(null, [
+      Validators.required,
+      FormValidators.notInFuture(),
+    ]),
+    gender: new FormControl<string | null>(null, Validators.required),
+    selectedBreed: new FormControl<BreedDto | null>(null, Validators.required),
   });
 
   ngOnInit() {
     this.breedService.getAllBreeds();
     this.breeds$ = this.breedService.breeds$;
+
+    this.userInfoService.getUserInfos();
+    this.user$ = this.userInfoService.user$;
   }
 
   onSubmitDogForm() {
     if (this.addDogForm.invalid) {
       this.addDogForm.markAllAsTouched();
-      this.displayErrors = true; // Afficher les erreurs à la soumission
+      this.displayErrors = true;
       return;
     }
 
-    const formValueTrimed: any = {
-      name: this.addDogForm.value.name!.trim(),
-      avatar: this.addDogForm.value.selectedAvatar,
-      gender: this.addDogForm.value.gender,
-      breed: this.addDogForm.value.selectedBreed,
-      // TODO ici lui passer l'id
-      ownerId: 0,
-    };
+    const userId = this.userInfoService.user$.getValue()?.id;
+    if (!userId) {
+      this.toastService.show({
+        severity: "error",
+        title: "Erreur",
+        content: "Impossible de récupérer votre identifiant utilisateur.",
+        sticky: true,
+      });
+      return;
+    }
 
     const formValue = this.addDogForm.value;
-    console.log("Form values :", formValue);
-    console.log("Form values trimed : ", formValueTrimed);
 
-    // We add a new coach
-    /* this.http
-      .post<CoachAdmin>(`${k9Config.apiRoot}/coach`, formValueTrimed)
-      .subscribe({
-        next: () => {
-          const lastname = formValueTrimed.lastname;
-          const firstname = formValueTrimed.firstname;
+    const birthdate = formValue.birthdate
+      ? DateUtils.toLocalDateString(formValue.birthdate)
+      : "";
 
-          this.toastService.show({
-            severity: "success",
-            title: "Ajout réussi",
-            content: `Le coach ${firstname} ${lastname} a bien été ajouté`,
-            time: 3000,
-          });
+    const dogData: AddDogFormDto = {
+      name: formValue.name!.trim(),
+      avatarUrl: formValue.selectedAvatar!.url,
+      birthdate: birthdate,
+      gender: formValue.gender!,
+      breedId: formValue.selectedBreed!.id,
+      ownerId: userId,
+    };
 
-          this.router.navigateByUrl(AppRoutes.app.admin.coachesFull);
-        },
-        error: (error) => {
-          this.toastService.show({
-            severity: "error",
-            title: "L'ajout a échoué",
-            content: error.error,
-            sticky: true,
-          });
-        },
-      }); */
+    this.dogService.addDog(dogData, userId).subscribe({
+      next: (response) => {
+        this.toastService.show({
+          severity: "success",
+          title: "Succès",
+          content: "Chien ajouté avec succès!",
+        });
+        // TODO FAIRE REDIRECTION
+      },
+      error: (error) => {
+        console.error("Erreur lors de l'ajout du chien:", error);
+        this.toastService.show({
+          severity: "error",
+          title: "Erreur",
+          content: "Erreur lors de l'ajout du chien.",
+          sticky: true,
+        });
+      },
+    });
   }
 
   /** Resets the error display flag when any form field value changes */
