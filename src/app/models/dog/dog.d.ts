@@ -8,3 +8,12 @@ interface DogDto {
   breed: BreedDto;
   registrations: CourseRegistrationDto[];
 }
+
+interface AddDogFormDto {
+  name: string;
+  birthdate: string;
+  gender: string;
+  avatarUrl: string;
+  ownerId: number;
+  breedId: number;
+}
