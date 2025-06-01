@@ -1,7 +1,5 @@
+// ANGULAR
 import { Component, inject } from "@angular/core";
-import { CustomInputComponent } from "@components/custom-input/custom-input.component";
-import { CardWrapperComponent } from "@components/card/card-wrapper/card-wrapper.component";
-import { AppRoutes } from "@config/routes";
 import { HttpClient } from "@angular/common/http";
 import {
   FormBuilder,
@@ -10,16 +8,29 @@ import {
   Validators,
 } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
-import { ToastMessageService } from "@services/toast/toast-message.service";
-import { FormValidators } from "app/validators/form-validators";
-import { k9Config } from "@config/global";
-import { ButtonComponent } from "../../../../components/button/button.component";
+import { CommonModule } from "@angular/common";
+import { Observable } from "rxjs";
+
+// PRIME NG
 import { DatePickerModule } from "primeng/datepicker";
 import { SelectModule } from "primeng/select";
-import { BreedService } from "@services/breed/breed.service";
-import { BehaviorSubject, Observable } from "rxjs";
-import { CommonModule } from "@angular/common";
 import { RadioButton } from "primeng/radiobutton";
+
+// COMPONENTS
+import { CustomInputComponent } from "@components/custom-input/custom-input.component";
+import { CardWrapperComponent } from "@components/card/card-wrapper/card-wrapper.component";
+import { ButtonComponent } from "@components/button/button.component";
+
+// SERVICES
+import { ToastMessageService } from "@services/toast/toast-message.service";
+import { BreedService } from "@services/breed/breed.service";
+
+// VALIDATORS
+import { FormValidators } from "app/validators/form-validators";
+
+// CONFIG
+import { AppRoutes } from "@config/routes";
+import { k9Config } from "@config/global";
 
 @Component({
   selector: "app-dog",
@@ -49,7 +60,6 @@ export class DogComponent {
   breedService: BreedService = inject(BreedService);
 
   breeds$!: Observable<BreedDto[]>;
-  selectedBreed$ = new BehaviorSubject<BreedDto | undefined>(undefined);
 
   birthdate: Date | undefined;
 
@@ -59,13 +69,12 @@ export class DogComponent {
   genders = k9Config.dogGender;
   selectedGender: any;
 
-  /* TODO GERER LES ERREURS */
   addDogForm = this.formBuilder.group({
-    name: [""],
-    birthdate: [undefined],
-    selectedBreed: [undefined],
-    selectedAvatar: [undefined],
-    gender: [null],
+    name: ["", FormValidators.dogNameValidator()],
+    selectedAvatar: [undefined, Validators.required],
+    birthdate: [undefined, [Validators.required, FormValidators.notInFuture()]],
+    gender: [null, Validators.required],
+    selectedBreed: [undefined, Validators.required],
   });
 
   ngOnInit() {
@@ -85,10 +94,13 @@ export class DogComponent {
       avatar: this.addDogForm.value.selectedAvatar,
       gender: this.addDogForm.value.gender,
       breed: this.addDogForm.value.selectedBreed,
-      ownerId: 0, // TODO ici lui passer l'id
+      // TODO ici lui passer l'id
+      ownerId: 0,
     };
 
-    console.log("Form values : ", formValueTrimed);
+    const formValue = this.addDogForm.value;
+    console.log("Form values :", formValue);
+    console.log("Form values trimed : ", formValueTrimed);
 
     // We add a new coach
     /* this.http
@@ -123,82 +135,48 @@ export class DogComponent {
     this.displayErrors = false;
   }
 
-  onSelectBreedChange() {
-    console.log("Race change : ", this.selectedBreed$);
-  }
-
-  onSelectAvatarChange() {
-    console.log("Changement d'avatar : ");
-  }
-
-  /* TODO REFAIRE LES METHODES POUR AVOIR LES BONNES ERREURS */
   get nameError() {
     const control = this.addDogForm.get("name");
-
-    if (!control) {
-      return "";
-    }
-
+    if (!control) return "";
     if ((control.touched || control.dirty) && control.invalid) {
-      return FormValidators.getNameError(control, "nom");
+      return FormValidators.getDogNameError(control);
     }
-
-    return "";
-  }
-
-  get birthdateError() {
-    const control = this.addDogForm.get("email");
-
-    if (!control) {
-      return "";
-    }
-
-    if ((control.touched || control.dirty) && control.invalid) {
-      return FormValidators.getEmailError(control);
-    }
-
-    return "";
-  }
-
-  get genderError() {
-    const control = this.addDogForm.get("password");
-
-    if (!control) {
-      return "";
-    }
-
-    if ((control.touched || control.dirty) && control.invalid) {
-      return FormValidators.getPasswordError(control);
-    }
-
-    return "";
-  }
-
-  get breedError() {
-    const control = this.addDogForm.get("password");
-
-    if (!control) {
-      return "";
-    }
-
-    if ((control.touched || control.dirty) && control.invalid) {
-      return FormValidators.getPasswordError(control);
-    }
-
     return "";
   }
 
   get avatarError() {
-    const control = this.addDogForm.get("avatar");
-
-    if (!control) {
-      return "";
-    }
-
+    const control = this.addDogForm.get("selectedAvatar");
+    if (!control) return "";
     if ((control.touched || control.dirty) && control.invalid) {
-      return FormValidators.getPasswordError(control);
+      return "Veuillez sélectionner un avatar.";
     }
+    return "";
+  }
 
+  get birthdateError() {
+    const control = this.addDogForm.get("birthdate");
+    if (!control) return "";
+    if ((control.touched || control.dirty) && control.invalid) {
+      return FormValidators.getBirthdateError(control);
+    }
+    return "";
+  }
+
+  get genderError() {
+    const control = this.addDogForm.get("gender");
+    if (!control) return "";
+    if ((control.touched || control.dirty) && control.invalid) {
+      return "Veuillez sélectionner le genre de votre chien.";
+    }
+    return "";
+  }
+
+  get breedError() {
+    const control = this.addDogForm.get("selectedBreed");
+    if (!control) return "";
+    if ((control.touched || control.dirty) && control.invalid) {
+      return "Veuillez sélectionner une race.";
+    }
     return "";
   }
 }

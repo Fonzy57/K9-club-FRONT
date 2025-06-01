@@ -7,7 +7,7 @@
     class="sm:w-[500px]"
   >
     <div class="flex flex-col gap-y-5">
-      <!-- NAME -->
+      <!-- DOG NAME -->
       <app-custom-input
         inputName="name"
         label="Nom"
@@ -23,7 +23,7 @@
         PLUS PROPRE QUE LE SELECT
       -->
       <div class="flex flex-col gap-y-1">
-        <label for="selectedAvatar" class="text-sm">Choisisser un avatar</label>
+        <label for="selectedAvatar" class="text-sm">Choisir un avatar</label>
         <p-select
           [options]="avatars"
           formControlName="selectedAvatar"
@@ -47,6 +47,9 @@
             </div>
           </ng-template>
         </p-select>
+        @if (displayErrors && avatarError) {
+        <p class="text-xs text-error">{{ avatarError }}</p>
+        }
       </div>
 
       <!-- BIRTHDATE -->
@@ -58,17 +61,24 @@
           [showIcon]="true"
           inputId="icondisplay"
         />
+        @if (displayErrors && birthdateError) {
+        <p class="text-xs text-error">{{ birthdateError }}</p>
+        }
       </div>
 
       <!-- GENDER -->
-      <div class="">
+      <div class="flex flex-col gap-y-1">
         @for (gender of genders; track $index) {
-        <p-radiobutton
-          [inputId]="gender.label"
-          [value]="gender.value"
-          formControlName="gender"
-        />
-        <label [for]="gender.label" class="ml-2">{{ gender.label }}</label>
+        <div class="felx items-center gap-1">
+          <p-radiobutton
+            [inputId]="gender.label"
+            [value]="gender.value"
+            formControlName="gender"
+          />
+          <label [for]="gender.label" class="ml-2">{{ gender.label }}</label>
+        </div>
+        } @if (displayErrors && genderError) {
+        <p class="text-xs text-error">{{ genderError }}</p>
         }
       </div>
 
@@ -80,7 +90,6 @@
           [options]="breeds"
           formControlName="selectedBreed"
           optionLabel="name"
-          (onChange)="onSelectBreedChange()"
           filterBy="name"
           [filter]="true"
           [showClear]="true"
@@ -100,6 +109,8 @@
         } @else {
         <!-- TODO ICI METTRE UN LOADER -->
         <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
+        } @if (displayErrors && breedError) {
+        <p class="text-xs text-error">{{ breedError }}</p>
         }
       </div>
     </div>
