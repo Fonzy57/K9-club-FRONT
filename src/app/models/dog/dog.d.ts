@@ -7,6 +7,7 @@ interface DogDto {
   updatedAt: string | null;
   breed: BreedDto;
   registrations: CourseRegistrationDto[];
+  avatarUrl: string;
 }
 
 interface AddDogFormDto {
