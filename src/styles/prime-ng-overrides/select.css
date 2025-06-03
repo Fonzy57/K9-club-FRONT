@@ -2,6 +2,10 @@
   box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
 }
 
+.custom-select .p-select-label {
+  padding: 9px 12px;
+}
+
 .custom-select.p-select:not(.p-disabled):hover {
   border-color: var(--color-main);
 }
