@@ -1,10 +1,9 @@
 <h1 class="text-2xl md:text-3xl font-semibold">Mes chiens</h1>
+<!-- 
 
-<!--  -->
-
-<!-- TODO REVOIR STYLE DU FORMULAIRE -->
-
-<!--  -->
+  TODO 
+  CHANGER LE FORMULAIRE ET LE METTRE SUR UNE PAGE addDog
+-->
 
 <app-card-wrapper class="mt-8 sm:mt-4 lg:mt-14">
   <form
@@ -23,6 +22,87 @@
         [errorMessage]="displayErrors ? nameError : ''"
         (valueChange)="onFieldChange()"
       />
+
+      <div
+        class="flex flex-col gap-5 items-start justify-between sm:flex-row sm:items-center"
+      >
+        <!-- BIRTHDATE -->
+        <div class="flex flex-col gap-y-1 w-full">
+          <label for="birthdate" class="text-sm">Date de naissance</label>
+          <p-datepicker
+            formControlName="birthdate"
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            inputId="icondisplay"
+            styleClass="custom-date-picker"
+            onchange="onSelectDate"
+            [maxDate]="maxDate"
+            [ngClass]="{
+              'ng-invalid ng-dirty p-invalid':
+                displayErrors && addDogForm.get('birthdate')?.invalid
+            }"
+          />
+          @if (displayErrors && birthdateError) {
+          <p class="text-xs text-error">{{ birthdateError }}</p>
+          }
+        </div>
+
+        <!-- RACE -->
+        <div class="flex flex-col gap-y-1 w-full">
+          <label for="birthdate" class="text-sm">Race</label>
+          @if (breeds$ | async; as breeds) {
+          <p-select
+            [options]="breeds"
+            formControlName="selectedBreed"
+            optionLabel="name"
+            filterBy="name"
+            [filter]="true"
+            [showClear]="true"
+            [checkmark]="true"
+            placeholder="Race de votre chien"
+            class="w-full md:w-56"
+            emptyMessage="Pas de races disponible"
+            emptyFilterMessage="Aucun résultat trouvé"
+            styleClass="custom-select"
+            [ngClass]="{
+              'ng-invalid ng-dirty p-invalid':
+                displayErrors && addDogForm.get('selectedBreed')?.invalid
+            }"
+          >
+            <ng-template #selectedItem let-selectedOption>
+              <div>{{ selectedOption.name | titlecase }}</div>
+            </ng-template>
+            <ng-template let-breed #item>
+              <div>{{ breed.name | titlecase }}</div>
+            </ng-template>
+          </p-select>
+          } @else {
+          <!-- TODO ICI METTRE UN LOADER -->
+          <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
+          } @if (displayErrors && breedError) {
+          <p class="text-xs text-error">{{ breedError }}</p>
+          }
+        </div>
+      </div>
+
+      <!-- GENDER -->
+      <div class="flex flex-col gap-y-1 xs:flex-row xs:gap-x-6">
+        @for (gender of genders; track $index) {
+        <div class="flex items-center gap-x-2">
+          <p-radiobutton
+            [inputId]="gender.label"
+            [value]="gender.value"
+            formControlName="gender"
+            styleClass="custom-radio"
+          />
+          <label [for]="gender.label">
+            {{ gender.label | titlecase }}
+          </label>
+        </div>
+        } @if (displayErrors && genderError) {
+        <p class="text-xs text-error">{{ genderError }}</p>
+        }
+      </div>
 
       <!-- 
         TODO POUR L'AVATAR PEUT ETRE FAIRE UNE MODAL QUI S'OUVRE ET QUAND IL CLIQUE DESSUS CA LE CHOISI
@@ -61,70 +141,6 @@
         </p-select>
         @if (displayErrors && avatarError) {
         <p class="text-xs text-error">{{ avatarError }}</p>
-        }
-      </div>
-
-      <!-- BIRTHDATE -->
-      <div class="flex flex-col gap-y-1">
-        <label for="birthdate" class="text-sm">Date de naissance</label>
-        <p-datepicker
-          formControlName="birthdate"
-          [iconDisplay]="'input'"
-          [showIcon]="true"
-          inputId="icondisplay"
-        />
-        @if (displayErrors && birthdateError) {
-        <p class="text-xs text-error">{{ birthdateError }}</p>
-        }
-      </div>
-
-      <!-- GENDER -->
-      <!-- TODO AJOUTER TITLE PIPE -->
-      <div class="flex flex-col gap-y-1">
-        @for (gender of genders; track $index) {
-        <div class="felx items-center gap-1">
-          <p-radiobutton
-            [inputId]="gender.label"
-            [value]="gender.value"
-            formControlName="gender"
-          />
-          <label [for]="gender.label" class="ml-2">{{ gender.label }}</label>
-        </div>
-        } @if (displayErrors && genderError) {
-        <p class="text-xs text-error">{{ genderError }}</p>
-        }
-      </div>
-
-      <!-- RACE -->
-      <!-- TODO AJOUTER TITLE PIPE -->
-      <div class="flex flex-col gap-y-1">
-        <label for="birthdate" class="text-sm">Race</label>
-        @if (breeds$ | async; as breeds) {
-        <p-select
-          [options]="breeds"
-          formControlName="selectedBreed"
-          optionLabel="name"
-          filterBy="name"
-          [filter]="true"
-          [showClear]="true"
-          [checkmark]="true"
-          placeholder="Race de votre chien"
-          class="w-full md:w-56"
-          emptyMessage="Pas de races disponible"
-          styleClass="custom-select"
-        >
-          <ng-template #selectedItem let-selectedOption>
-            <div>{{ selectedOption.name }}</div>
-          </ng-template>
-          <ng-template let-breed #item>
-            <div>{{ breed.name }}</div>
-          </ng-template>
-        </p-select>
-        } @else {
-        <!-- TODO ICI METTRE UN LOADER -->
-        <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
-        } @if (displayErrors && breedError) {
-        <p class="text-xs text-error">{{ breedError }}</p>
         }
       </div>
     </div>

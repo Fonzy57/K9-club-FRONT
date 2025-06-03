@@ -102,12 +102,18 @@ export class DogComponent {
     selectedBreed: new FormControl<BreedDto | null>(null, Validators.required),
   });
 
+  maxDate: Date | undefined;
+
   ngOnInit() {
     this.breedService.getAllBreeds();
     this.breeds$ = this.breedService.breeds$;
 
     this.userInfoService.getUserInfos();
     this.user$ = this.userInfoService.user$;
+
+    /* NOT ALLOWING SELECTION AFTER TODAY FOR DATE PICKER*/
+    const today = new Date();
+    this.maxDate = new Date(today);
   }
 
   onSubmitDogForm() {
@@ -166,6 +172,10 @@ export class DogComponent {
 
   /** Resets the error display flag when any form field value changes */
   onFieldChange() {
+    this.displayErrors = false;
+  }
+
+  onSelectDate() {
     this.displayErrors = false;
   }
 
