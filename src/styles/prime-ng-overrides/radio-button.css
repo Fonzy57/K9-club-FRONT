@@ -1,0 +1,15 @@
+.custom-radio.p-radiobutton {
+  display: block;
+}
+.custom-radio .p-radiobutton-box {
+  border-color: var(--color-border);
+}
+
+.custom-radio.p-radiobutton-checked .p-radiobutton-box,
+.custom-radio.p-radiobutton-checked:not(.p-disabled):has(
+    .p-radiobutton-input:hover
+  )
+  .p-radiobutton-box {
+  border-color: var(--color-main);
+  background: var(--color-main);
+}

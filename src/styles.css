@@ -10,6 +10,7 @@
 @import "./styles/prime-ng-overrides/checkbox.css";
 @import "./styles/prime-ng-overrides/select.css";
 @import "./styles/prime-ng-overrides/date-picker.css";
+@import "./styles/prime-ng-overrides/radio-button.css";
 
 /* ----------------------------- */
 /* --- TAILWIND THEME CONFIG --- */
