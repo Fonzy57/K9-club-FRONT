@@ -1,0 +1,80 @@
+/* ERROR */
+.custom-date-picker
+  p-datePicker.ng-invalid.ng-dirty
+  .p-datepicker.p-inputwrapper
+  .p-inputtext,
+p-datepicker.ng-invalid.ng-dirty .p-datepicker.p-inputwrapper .p-inputtext {
+  border-color: var(--color-error) !important;
+}
+
+p-datepicker.ng-invalid.ng-dirty
+  .p-datepicker.p-inputwrapper
+  .p-inputtext:focus {
+  box-shadow: 0px 0px 0px 2px rgba(220, 38, 38, 0.2);
+}
+
+/* DATE PICKER INPUT */
+.custom-date-picker.p-datepicker {
+  width: 100%;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  border-radius: 8px;
+}
+
+.custom-date-picker .p-inputtext {
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.custom-date-picker .p-inputtext:enabled:hover {
+  border-color: var(--color-main);
+}
+
+.custom-date-picker .p-inputtext:enabled:focus {
+  border-color: var(--color-main);
+  box-shadow: 0px 0px 0px 2px rgba(21, 128, 61, 0.2);
+}
+
+.custom-date-picker .p-datepicker-input-icon-container {
+  color: var(--color-icon);
+}
+
+/* DATE PICKER MODAL */
+.custom-date-picker .p-datepicker-panel,
+.custom-date-picker .p-datepicker-header,
+.custom-date-picker .p-datepicker-select-month,
+.custom-date-picker .p-datepicker-select-year,
+.custom-date-picker .p-datepicker-weekday,
+.custom-date-picker .p-datepicker-day,
+.custom-date-picker .p-datepicker-select-month:enabled:hover,
+.custom-date-picker .p-datepicker-select-year:enabled:hover {
+  color: var(--color-text);
+}
+
+.custom-date-picker .p-button-text {
+  color: var(--color-main);
+}
+
+/* HOVER */
+.custom-date-picker .p-button-text:not(:disabled):hover {
+  background: var(--color-main-100);
+  color: var(--color-main);
+}
+
+.custom-date-picker .p-button-text:not(:disabled):active {
+  background: var(--color-main-100);
+  color: var(--color-main);
+  border-color: var(--color-main);
+}
+
+.custom-date-picker
+  .p-datepicker-day:not(.p-datepicker-day-selected):not(.p-disabled):hover {
+  background: var(--color-main-100);
+}
+
+/* SELECTED */
+.custom-date-picker .p-datepicker-day-selected,
+.custom-date-picker .p-datepicker-month-selected,
+.custom-date-picker .p-datepicker-year-selected {
+  background: var(--color-main-600);
+  color: white;
+}

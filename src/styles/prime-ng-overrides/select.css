@@ -1,10 +1,14 @@
+.custom-select.p-select {
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+}
+
 .custom-select.p-select:not(.p-disabled):hover {
   border-color: var(--color-main);
 }
 
 .custom-select.p-select:not(.p-disabled).p-focus {
   border-color: var(--color-main);
-  box-shadow: 0px 0px 0px 2px rgba(21, 128, 61, 0.5);
+  box-shadow: 0px 0px 0px 2px rgba(21, 128, 61, 0.2);
 }
 
 .custom-select .p-select-label.p-placeholder {
@@ -18,3 +22,15 @@
 .custom-select .p-select-dropdown {
   color: var(--color-icon);
 }
+
+/* 
+.custom-select.p-select .ng-invalid,
+.custom-select.p-select:not(.p-disabled).ng-invalid.p-focus,
+.custom-select.p-select.ng-invalid:hover {
+  border-color: red;
+}
+
+.custom-select.p-select.ng-invalid.p-focus {
+  box-shadow: 0px 0px 0px 2px rgba(220, 38, 38, 0.2);
+}
+ */
