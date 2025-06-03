@@ -4,11 +4,10 @@
   <!-- FIRST ROW -->
   <div class="flex items-center justify-between flex-wrap gap-x-4 gap-y-2">
     <div class="flex items-center gap-x-3">
-      <div class="w-[52px] h-[52px] rounded-full shadow-md">
-        <!-- TODO REVOIR LE LIEN DES IMAGES -->
-        <!-- TODO PREVOIR DES AVATARS 4 OU 5 DE BASE QUE L'UTILISATEUR PEUT CHOISIR -->
+      <!-- TODO REVOIR STYLE IMAGE DOG CARD -->
+      <div class="size-[52px] rounded-full drop-shadow-lg">
         <img
-          src="images/dogs/{{ dog.name | lowercase }}.png"
+          src="/images/dog-avatar/{{ dog.avatarUrl }}"
           alt="Dog image"
           srcset=""
           class="rounded-full"
@@ -16,7 +15,9 @@
       </div>
       <div class="flex flex-col gap-y-1 md:gap-y-0">
         <div class="flex items-center gap-x-2">
-          <p class="font-poppins font-semibold md:text-lg">{{ dog.name }}</p>
+          <p class="font-poppins font-semibold md:text-lg">
+            {{ dog.name | titlecase }}
+          </p>
           <app-custom-icon
             [name]="
               dog.gender.toLowerCase() === 'male'
