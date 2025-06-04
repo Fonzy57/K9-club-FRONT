@@ -18,8 +18,8 @@ import { routes } from "./app.routes";
 
 // PRIME NG
 import { providePrimeNG } from "primeng/config";
-import Aura from "@primeng/themes/aura";
 import { MessageService } from "primeng/api";
+import { MyPreset } from "@config/my-theme";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -36,7 +36,7 @@ export const appConfig: ApplicationConfig = {
     MessageService,
     providePrimeNG({
       theme: {
-        preset: Aura,
+        preset: MyPreset,
         options: {
           prefix: "my",
           darkModeSelector: false || "none",

@@ -5,12 +5,13 @@
 /* --------------------------------- */
 /* --- PRIME NG OVERRIDES STYLES --- */
 /* --------------------------------- */
-@import "./styles/prime-ng-overrides/toast.css";
+/* TODO SUPPRIMER SI STYLE BON AVEC LE TS */
+/* @import "./styles/prime-ng-overrides/toast.css";
 @import "./styles/prime-ng-overrides/table.css";
 @import "./styles/prime-ng-overrides/checkbox.css";
 @import "./styles/prime-ng-overrides/select.css";
 @import "./styles/prime-ng-overrides/date-picker.css";
-@import "./styles/prime-ng-overrides/radio-button.css";
+@import "./styles/prime-ng-overrides/radio-button.css"; */
 
 /* ----------------------------- */
 /* --- TAILWIND THEME CONFIG --- */
@@ -40,7 +41,6 @@
   /* ---------------------- */
   /* ---- CUSTOM COLOR ---- */
   /* ---------------------- */
-
   --color-main: #15803d;
   --color-text: #231f20;
   --color-bg-light: #ffffff;
