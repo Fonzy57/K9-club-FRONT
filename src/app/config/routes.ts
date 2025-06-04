@@ -1,19 +1,19 @@
-const appRoot = 'app';
-const authRoot = 'auth';
-const adminRoot = 'admin';
-const coachRoot = 'coach';
+const appRoot = "app";
+const authRoot = "auth";
+const adminRoot = "admin";
+const coachRoot = "coach";
 
 export const AppRoutes = {
-  home: '',
-  legalNotice: 'mentions-legales',
-  termsOfUse: 'conditions-generales-d-utilisation',
+  home: "",
+  legalNotice: "mentions-legales",
+  termsOfUse: "conditions-generales-d-utilisation",
   get termsOfUseFull() {
     return `/${this.home}/${this.termsOfUse}`;
   },
   auth: {
     root: authRoot,
-    register: 'inscription',
-    login: 'connexion',
+    register: "inscription",
+    login: "connexion",
     get registerFull() {
       return `/${authRoot}/${this.register}`;
     },
@@ -25,11 +25,11 @@ export const AppRoutes = {
     root: appRoot,
     admin: {
       root: adminRoot,
-      dashboard: 'dashboard',
-      coaches: 'coachs',
-      addCoach: 'ajouter',
-      updateCoach: 'modifier',
-      account: 'mon-compte',
+      dashboard: "dashboard",
+      coaches: "coachs",
+      addCoach: "ajouter",
+      updateCoach: "modifier",
+      account: "mon-compte",
       get dashboardFull() {
         return `/${appRoot}/${this.root}/${this.dashboard}`;
       },
@@ -48,10 +48,10 @@ export const AppRoutes = {
     },
     coach: {
       root: coachRoot,
-      dashboard: 'dashboard',
-      courses: 'cours',
-      addCourse: 'ajouter',
-      updateCourse: 'modifier',
+      dashboard: "dashboard",
+      courses: "cours",
+      addCourse: "ajouter",
+      updateCourse: "modifier",
       get dashboardFull() {
         return `/${appRoot}/${this.root}/${this.dashboard}`;
       },
@@ -66,10 +66,11 @@ export const AppRoutes = {
       }, */
     },
     user: {
-      dashboard: 'dashboard',
-      dog: 'mes-chiens',
-      course: 'les-cours',
-      account: 'mon-compte',
+      dashboard: "dashboard",
+      dog: "mes-chiens",
+      addDog: "ajouter",
+      course: "les-cours",
+      account: "mon-compte",
       get dashboardFull() {
         return `/${appRoot}/${this.dashboard}`;
       },

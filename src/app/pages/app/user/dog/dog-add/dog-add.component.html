@@ -1,0 +1,164 @@
+<h1 class="text-2xl md:text-3xl font-semibold">Mes chiens</h1>
+
+<!--  -->
+
+<!-- 
+  TODO 
+  CHANGER LE FORMULAIRE ET LE METTRE SUR UNE PAGE addDog
+-->
+
+<!--  -->
+
+<app-card-wrapper class="mt-8 sm:mt-4 lg:mt-14">
+  <form
+    [formGroup]="addDogForm"
+    (ngSubmit)="onSubmitDogForm()"
+    class="sm:w-[500px]"
+  >
+    <div class="flex flex-col gap-y-5">
+      <!-- DOG NAME -->
+      <app-custom-input
+        inputName="name"
+        label="Nom"
+        placeholder="Rex"
+        type="text"
+        formControlName="name"
+        [errorMessage]="displayErrors ? nameError : ''"
+        (valueChange)="onFieldChange()"
+      />
+
+      <div class="flex flex-col gap-5 items-start justify-between sm:flex-row">
+        <!-- BIRTHDATE -->
+        <div class="flex flex-col gap-y-1 w-full">
+          <label for="birthdate" class="text-sm">Date de naissance</label>
+          <p-datepicker
+            formControlName="birthdate"
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            inputId="icondisplay"
+            styleClass="custom-date-picker"
+            onchange="onSelectDate"
+            [maxDate]="maxDate"
+            [ngClass]="{
+              'ng-invalid ng-dirty p-invalid':
+                displayErrors && addDogForm.get('birthdate')?.invalid
+            }"
+          />
+          @if (displayErrors && birthdateError) {
+          <p class="text-xs text-error">{{ birthdateError }}</p>
+          }
+        </div>
+
+        <!-- RACE -->
+        <!--
+        TODO REVOIR LE STYLE DU SELECT SELON LES ERREURS
+        SURTOUT POUR UNE ERREUR OU QUAND ON CLEAN LE SELECT
+        -->
+        <div class="flex flex-col gap-y-1 w-full">
+          <label for="birthdate" class="text-sm">Race</label>
+          @if (breeds$ | async; as breeds) {
+          <p-select
+            [options]="breeds"
+            formControlName="selectedBreed"
+            optionLabel="name"
+            filterBy="name"
+            [filter]="true"
+            [showClear]="true"
+            [checkmark]="true"
+            placeholder="Race de votre chien"
+            class="w-full md:w-56"
+            emptyMessage="Pas de races disponible"
+            emptyFilterMessage="Aucun résultat trouvé"
+            styleClass="custom-select"
+            [ngClass]="{
+              'ng-invalid ng-dirty p-invalid':
+                displayErrors && addDogForm.get('selectedBreed')?.invalid
+            }"
+          >
+            <ng-template #selectedItem let-selectedOption>
+              <div>{{ selectedOption.name | titlecase }}</div>
+            </ng-template>
+            <ng-template let-breed #item>
+              <div>{{ breed.name | titlecase }}</div>
+            </ng-template>
+          </p-select>
+          } @else {
+          <!-- TODO ICI METTRE UN LOADER -->
+          <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
+          } @if (displayErrors && breedError) {
+          <p class="text-xs text-error">{{ breedError }}</p>
+          }
+        </div>
+      </div>
+
+      <!-- GENDER -->
+      <div class="flex flex-col gap-y-1 xs:flex-row xs:gap-x-6">
+        @for (gender of genders; track $index) {
+        <div class="flex items-center gap-x-2">
+          <p-radiobutton
+            [inputId]="gender.label"
+            [value]="gender.value"
+            formControlName="gender"
+            styleClass="custom-radio"
+          />
+          <label [for]="gender.label">
+            {{ gender.label | titlecase }}
+          </label>
+        </div>
+        } @if (displayErrors && genderError) {
+        <p class="text-xs text-error">{{ genderError }}</p>
+        }
+      </div>
+
+      <!-- 
+        TODO POUR L'AVATAR PEUT ETRE FAIRE UNE MODAL QUI S'OUVRE ET QUAND IL CLIQUE DESSUS CA LE CHOISI
+        PLUS PROPRE QUE LE SELECT
+      -->
+      <div class="flex flex-col gap-y-1">
+        <!-- <div class="w-max">
+          <app-button typeButton="ghost" (click)="onConfirmAvatar()">
+            Choisir un avatar
+          </app-button>
+        </div> -->
+
+        <label for="selectedAvatar" class="text-sm">Choisir un avatar</label>
+        <p-select
+          [options]="avatars"
+          formControlName="selectedAvatar"
+          optionLabel="name"
+          [showClear]="true"
+          placeholder="Choix de l'avatar"
+          class="w-full md:w-56"
+          emptyMessage="Pas d'avatars disponible"
+          styleClass="custom-select"
+        >
+          <ng-template #selectedItem let-selectedOption>
+            <div class="flex items-center gap-2">
+              <div class="flex items-center gap-2">
+                <img
+                  [src]="'/images/dog-avatar/' + selectedOption.url"
+                  style="width: 20px"
+                />
+              </div>
+            </div>
+          </ng-template>
+          <ng-template let-avatar #item>
+            <div class="flex items-center gap-2">
+              <img
+                [src]="'/images/dog-avatar/' + avatar.url"
+                style="width: 50px"
+              />
+            </div>
+          </ng-template>
+        </p-select>
+        @if (displayErrors && avatarError) {
+        <p class="text-xs text-error">{{ avatarError }}</p>
+        }
+      </div>
+    </div>
+
+    <div class="mt-10">
+      <app-button>Ajouter</app-button>
+    </div>
+  </form>
+</app-card-wrapper>
