@@ -1,155 +1,44 @@
-<h1 class="text-2xl md:text-3xl font-semibold">Mes chiens</h1>
-<!-- 
+@if (dogs$ | async; as dogs) {
+<h1 class="text-2xl md:text-3xl font-semibold">
+  {{ dogs.length > 1 ? "Mes chiens" : "Mon chien" }}
+</h1>
 
-  TODO 
-  CHANGER LE FORMULAIRE ET LE METTRE SUR UNE PAGE addDog
--->
-
-<app-card-wrapper class="mt-8 sm:mt-4 lg:mt-14">
-  <form
-    [formGroup]="addDogForm"
-    (ngSubmit)="onSubmitDogForm()"
-    class="sm:w-[500px]"
-  >
-    <div class="flex flex-col gap-y-5">
-      <!-- DOG NAME -->
-      <app-custom-input
-        inputName="name"
-        label="Nom"
-        placeholder="Rex"
-        type="text"
-        formControlName="name"
-        [errorMessage]="displayErrors ? nameError : ''"
-        (valueChange)="onFieldChange()"
-      />
-
-      <div
-        class="flex flex-col gap-5 items-start justify-between sm:flex-row sm:items-center"
-      >
-        <!-- BIRTHDATE -->
-        <div class="flex flex-col gap-y-1 w-full">
-          <label for="birthdate" class="text-sm">Date de naissance</label>
-          <p-datepicker
-            formControlName="birthdate"
-            [iconDisplay]="'input'"
-            [showIcon]="true"
-            inputId="icondisplay"
-            styleClass="custom-date-picker"
-            onchange="onSelectDate"
-            [maxDate]="maxDate"
-            [ngClass]="{
-              'ng-invalid ng-dirty p-invalid':
-                displayErrors && addDogForm.get('birthdate')?.invalid
-            }"
-          />
-          @if (displayErrors && birthdateError) {
-          <p class="text-xs text-error">{{ birthdateError }}</p>
-          }
+<div class="mt-3 sm:mt-5">
+  <p-tabs [value]="dogs[0].id">
+    <p-tablist>
+      @for (dog of dogs; track dog.id) {
+      <p-tab [value]="dog.id">
+        <div class="flex items-center gap-2">
+          <div class="size-[44px] rounded-full drop-shadow-lg">
+            <img
+              src="/images/dog-avatar/{{ dog.avatarUrl }}"
+              alt="Dog image"
+              srcset=""
+              class="rounded-full"
+            />
+          </div>
+          <p class="text-2xl">
+            {{ dog.name }}
+          </p>
         </div>
+      </p-tab>
+      }
+    </p-tablist>
 
-        <!-- RACE -->
-        <div class="flex flex-col gap-y-1 w-full">
-          <label for="birthdate" class="text-sm">Race</label>
-          @if (breeds$ | async; as breeds) {
-          <p-select
-            [options]="breeds"
-            formControlName="selectedBreed"
-            optionLabel="name"
-            filterBy="name"
-            [filter]="true"
-            [showClear]="true"
-            [checkmark]="true"
-            placeholder="Race de votre chien"
-            class="w-full md:w-56"
-            emptyMessage="Pas de races disponible"
-            emptyFilterMessage="Aucun résultat trouvé"
-            styleClass="custom-select"
-            [ngClass]="{
-              'ng-invalid ng-dirty p-invalid':
-                displayErrors && addDogForm.get('selectedBreed')?.invalid
-            }"
-          >
-            <ng-template #selectedItem let-selectedOption>
-              <div>{{ selectedOption.name | titlecase }}</div>
-            </ng-template>
-            <ng-template let-breed #item>
-              <div>{{ breed.name | titlecase }}</div>
-            </ng-template>
-          </p-select>
-          } @else {
-          <!-- TODO ICI METTRE UN LOADER -->
-          <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
-          } @if (displayErrors && breedError) {
-          <p class="text-xs text-error">{{ breedError }}</p>
-          }
-        </div>
-      </div>
-
-      <!-- GENDER -->
-      <div class="flex flex-col gap-y-1 xs:flex-row xs:gap-x-6">
-        @for (gender of genders; track $index) {
-        <div class="flex items-center gap-x-2">
-          <p-radiobutton
-            [inputId]="gender.label"
-            [value]="gender.value"
-            formControlName="gender"
-            styleClass="custom-radio"
-          />
-          <label [for]="gender.label">
-            {{ gender.label | titlecase }}
-          </label>
-        </div>
-        } @if (displayErrors && genderError) {
-        <p class="text-xs text-error">{{ genderError }}</p>
-        }
-      </div>
-
-      <!-- 
-        TODO POUR L'AVATAR PEUT ETRE FAIRE UNE MODAL QUI S'OUVRE ET QUAND IL CLIQUE DESSUS CA LE CHOISI
-        PLUS PROPRE QUE LE SELECT
-      -->
-      <div class="flex flex-col gap-y-1">
-        <label for="selectedAvatar" class="text-sm">Choisir un avatar</label>
-        <p-select
-          [options]="avatars"
-          formControlName="selectedAvatar"
-          optionLabel="name"
-          [showClear]="true"
-          placeholder="Choix de l'avatar"
-          class="w-full md:w-56"
-          emptyMessage="Pas d'avatars disponible"
-          styleClass="custom-select"
-        >
-          <ng-template #selectedItem let-selectedOption>
-            <div class="flex items-center gap-2">
-              <div class="flex items-center gap-2">
-                <img
-                  [src]="'/images/dog-avatar/' + selectedOption.url"
-                  style="width: 20px"
-                />
-              </div>
-            </div>
-          </ng-template>
-          <ng-template let-avatar #item>
-            <div class="flex items-center gap-2">
-              <img
-                [src]="'/images/dog-avatar/' + avatar.url"
-                style="width: 50px"
-              />
-            </div>
-          </ng-template>
-        </p-select>
-        @if (displayErrors && avatarError) {
-        <p class="text-xs text-error">{{ avatarError }}</p>
-        }
-      </div>
-    </div>
-
-    <div class="mt-10">
-      <app-button>Ajouter</app-button>
-    </div>
-  </form>
-</app-card-wrapper>
+    <p-tabpanels>
+      @for (dog of dogs; track dog.id) {
+      <p-tabpanel [value]="dog.id">
+        <p class="m-0">{{ dog.name }}</p>
+        <p class="m-0">{{ dog.gender }}</p>
+      </p-tabpanel>
+      }
+    </p-tabpanels>
+  </p-tabs>
+</div>
+} @else {
+<!-- TODO ICI FAIRE LOADER -->
+<p>Loading</p>
+}
 
 <!-- TODO DECOMMENTER QUAND TESTS FINIS ET QUE MON CHOIX SERA FAIT SUR COMMENT LES AFFICHER -->
 <!-- IDEE
@@ -159,23 +48,6 @@
    - DATE D'ANNIVERSAIRE OU COMBIEN DE JOURS AVANT SON ANNIVERSAIRE
    - TROUVER D'AUTRES IDEES SUR L'AFFICHAGE
    -->
-<!--  @for (dog of dogs; track $index) {
-  <div
-    class="py-3.5 px-4 bg-white border border-border rounded-lg shadow-sm flex items-center justify-between"
-  >
-    <div class="flex items-baseline gap-x-3.5">
-      <h2 class="font-semibold text-lg">{{ dog.name }}</h2>
-      <p class="text-base">{{ dog.breed }}</p>
-    </div>
-    <div class="flex items-center gap-x-2">
-      <p>Modifier</p>
-      <p>Supprimer</p>
-    </div>
-  </div>
-  } -->
 
 <!-- TODO FAIRE UN GRAPHIQUE EN MODE PES AVEC LES INFOS -->
-<!-- 
-   -->
-
 <!-- TODO FAIRE UNE SECTION DE BADGES -->
