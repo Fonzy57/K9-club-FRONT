@@ -4,6 +4,7 @@ import Aura from "@primeng/themes/aura";
 export const MyPreset = definePreset(Aura, {
   semantic: {
     radius: {
+      sm: "4px",
       base: "6px",
       lg: "8px",
     },
@@ -228,6 +229,49 @@ export const MyPreset = definePreset(Aura, {
             color: "{colors.global.white}",
             checkedColor: "{colors.global.white}",
             checkedHoverColor: "{colors.global.white}",
+          },
+        },
+      },
+    },
+    datepicker: {
+      colorScheme: {
+        light: {
+          panel: {
+            background: "{colors.global.white}",
+            borderColor: "{colors.global.border}",
+            color: "{colors.global.text}",
+            shadow: "{shadow.lg}",
+          },
+          header: {
+            borderColor: "{colors.global.border}",
+            color: "{colors.global.text}",
+          },
+          inputIcon: {
+            color: "{colors.global.icon}",
+          },
+          selectMonth: {
+            hoverBackground: "{colors.primary.200}",
+            color: "{colors.global.text}",
+            hoverColor: "{colors.global.text}",
+          },
+          selectYear: {
+            hoverBackground: "{colors.primary.200}",
+            color: "{colors.global.text}",
+            hoverColor: "{colors.global.text}",
+          },
+          weekDay: {
+            color: "{colors.global.main}",
+          },
+          date: {
+            hoverBackground: "{colors.primary.200}",
+            selectedBackground: "{colors.global.main}",
+            color: "{colors.global.text}",
+            hoverColor: "{colors.global.text}",
+            selectedColor: "{colors.global.white}",
+          },
+          today: {
+            background: "{colors.global.grayTwo}",
+            color: "{colors.global.text}",
           },
         },
       },
