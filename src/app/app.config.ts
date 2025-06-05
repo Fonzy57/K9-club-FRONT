@@ -11,7 +11,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { provideRouter } from "@angular/router";
 
 // INTERCEPTORS
-import { jwtInterceptor } from "./interceptos/jwt.interceptor";
+import { jwtInterceptor } from "./interceptor/jwt.interceptor";
 
 // ROUTING
 import { routes } from "./app.routes";
