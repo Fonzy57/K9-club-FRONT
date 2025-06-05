@@ -5,8 +5,9 @@
 /* --------------------------------- */
 /* --- PRIME NG OVERRIDES STYLES --- */
 /* --------------------------------- */
-@import "./styles/prime-ng-overrides/toast.css";
 @import "./styles/prime-ng-overrides/date-picker.css";
+@import "./styles/prime-ng-overrides/table.css";
+@import "./styles/prime-ng-overrides/toast.css";
 
 /* ----------------------------- */
 /* --- TAILWIND THEME CONFIG --- */
