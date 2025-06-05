@@ -5,11 +5,7 @@
 /* --------------------------------- */
 /* --- PRIME NG OVERRIDES STYLES --- */
 /* --------------------------------- */
-
-/* TODO SUPPRIMER SI STYLE BON AVEC LE TS */
-
-/* @import "./styles/prime-ng-overrides/toast.css";
-@import "./styles/prime-ng-overrides/table.css"; */
+@import "./styles/prime-ng-overrides/toast.css";
 @import "./styles/prime-ng-overrides/date-picker.css";
 
 /* ----------------------------- */
