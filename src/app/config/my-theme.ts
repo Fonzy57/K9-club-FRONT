@@ -198,10 +198,36 @@ export const MyPreset = definePreset(Aura, {
             checkedBackground: "{colors.global.main}",
             checkedHoverBackground: "{colors.primary.500}",
             borderColor: "{colors.global.border}",
+            hoverBorderColor: "{colors.global.main}",
             checkedBorderColor: "{colors.global.main}",
             checkedHoverBorderColor: "{colors.primary.500}",
             checkedFocusBorderColor: "{colors.global.main}",
             invalidBorderColor: "{colors.global.error}",
+          },
+          icon: {
+            color: "{colors.global.white}",
+          },
+        },
+      },
+    },
+    checkbox: {
+      colorScheme: {
+        light: {
+          root: {
+            background: "{colors.global.white}",
+            checkedBackground: "{colors.global.main}",
+            checkedHoverBackground: "{colors.primary.500}",
+            borderColor: "{colors.global.border}",
+            hoverBorderColor: "{colors.global.main}",
+            checkedBorderColor: "{colors.global.main}",
+            checkedHoverBorderColor: "{colors.primary.500}",
+            checkedFocusBorderColor: "{colors.global.main}",
+            invalidBorderColor: "{colors.global.error}",
+          },
+          icon: {
+            color: "{colors.global.white}",
+            checkedColor: "{colors.global.white}",
+            checkedHoverColor: "{colors.global.white}",
           },
         },
       },
