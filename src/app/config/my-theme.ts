@@ -270,7 +270,7 @@ export const MyPreset = definePreset(Aura, {
             selectedColor: "{colors.global.white}",
           },
           today: {
-            background: "{colors.global.grayTwo}",
+            background: "{colors.global.border}",
             color: "{colors.global.text}",
           },
         },
