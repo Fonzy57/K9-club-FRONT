@@ -13,7 +13,7 @@ export const MyPreset = definePreset(Aura, {
       md: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
       lg: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
       xl: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
-      xl2: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
+      xxl: "0 25px 50px -12px rgb(0 0 0 / 0.25)",
     },
     colors: {
       global: {
@@ -42,7 +42,7 @@ export const MyPreset = definePreset(Aura, {
         400: "#4ade81",
         500: "#22c55f",
         600: "#16a34b",
-        700: "#15803d",
+        700: "#15803d", // Basic color
         800: "#166534",
         900: "#14532c",
         950: "#052e14",
@@ -58,7 +58,7 @@ export const MyPreset = definePreset(Aura, {
         700: "#584c50",
         800: "#4b4144",
         900: "#41393b",
-        950: "#231f20",
+        950: "#231f20", // Basic color
       },
       warning: {
         50: "#fff8eb",
@@ -66,7 +66,7 @@ export const MyPreset = definePreset(Aura, {
         200: "#fdd28a",
         300: "#fcbb4d",
         400: "#fbab24",
-        500: "#f59e0b",
+        500: "#f59e0b", // Basic color
         600: "#d98b06",
         700: "#b47409",
         800: "#92610e",
@@ -80,7 +80,7 @@ export const MyPreset = definePreset(Aura, {
         300: "#76ffa7",
         400: "#33f579",
         500: "#09de56",
-        600: "#00c247",
+        600: "#00c247", // Basic color
         700: "#049139",
         800: "#0a7131",
         900: "#0a5d2b",
@@ -93,7 +93,7 @@ export const MyPreset = definePreset(Aura, {
         300: "#fca5a5",
         400: "#f87171",
         500: "#ef4444",
-        600: "#dc2626",
+        600: "#dc2626", // Basic color
         700: "#b91c1c",
         800: "#991b1b",
         900: "#7f1d1d",
@@ -105,7 +105,7 @@ export const MyPreset = definePreset(Aura, {
         200: "#bfd7fe",
         300: "#93bbfd",
         400: "#609afa",
-        500: "#3b82f6",
+        500: "#3b82f6", // Basic color
         600: "#2570eb",
         700: "#1d64d8",
         800: "#1e55af",
@@ -143,24 +143,65 @@ export const MyPreset = definePreset(Aura, {
             hoverBorderColor: "{colors.global.main}",
             focusBorderColor: "{colors.global.main}",
             invalidBorderColor: "{colors.global.error}",
-            color: "{colors.global.text.950}",
+            color: "{colors.text.950}",
             disabledColor: "{colors.global.grayTwo}",
             placeholderColor: "{colors.global.grayTwo}",
             invalidPlaceholderColor: "{colors.global.grayTwo}",
             shadow: "{shadow.sm}",
             borderRadius: "{radius.base}",
-
-            /* TODO VOIR FOCUS RING */
             focusRing: {
               width: "2px",
-              style: "{form.field.focus.ring.style}",
-              color: "{global.black}",
-              offset: "2px",
-              shadow: "{form.field.focus.ring.shadow}",
+              style: "solid",
+              color: "rgba(21, 128, 61, 0.2)",
             },
           },
           dropdown: {
             color: "{colors.global.icon}",
+          },
+          overlay: {
+            background: "{colors.global.white}",
+            borderColor: "{colors.global.border}",
+            borderRadius: "{radius.base}",
+            shadow: "{shadow.lg}",
+          },
+          option: {
+            selectedBackground: "{colors.primary.100}",
+            selectedFocusBackground: "{colors.primary.100}",
+          },
+          checkmark: {
+            color: "{colors.global.main}",
+          },
+        },
+      },
+    },
+    inputtext: {
+      colorScheme: {
+        light: {
+          root: {
+            borderColor: "{colors.global.border}",
+            hoverBorderColor: "{colors.global.main}",
+            focusBorderColor: "{colors.global.main}",
+            focusRing: {
+              width: "2px",
+              style: "solid",
+              color: "rgba(21, 128, 61, 0.2)",
+            },
+          },
+        },
+      },
+    },
+    radiobutton: {
+      colorScheme: {
+        light: {
+          root: {
+            background: "{colors.global.white}",
+            checkedBackground: "{colors.global.main}",
+            checkedHoverBackground: "{colors.primary.500}",
+            borderColor: "{colors.global.border}",
+            checkedBorderColor: "{colors.global.main}",
+            checkedHoverBorderColor: "{colors.primary.500}",
+            checkedFocusBorderColor: "{colors.global.main}",
+            invalidBorderColor: "{colors.global.error}",
           },
         },
       },
