@@ -26,18 +26,6 @@ import { AgePipe } from "app/pipes/age.pipe";
 // CONFIG
 import { AppRoutes } from "@config/routes";
 
-// TYPES
-import { DogAvatarDto } from "@models/dog/dog-avatar";
-
-// Définir l'interface pour le formulaire
-interface DogForm {
-  name: FormControl<string | null>;
-  selectedAvatar: FormControl<DogAvatarDto | null>;
-  birthdate: FormControl<Date | null>;
-  gender: FormControl<string | null>;
-  selectedBreed: FormControl<BreedDto | null>;
-}
-
 @Component({
   selector: "app-dog",
   imports: [
@@ -63,14 +51,47 @@ export class DogComponent {
   user$!: Observable<UserInfoDto | null>;
   dogs$!: Observable<DogDto[]>;
 
+  selectedDogId: number | string = "";
+
   nextCourses$!: Observable<NextCourseDto[]>;
 
   ngOnInit() {
     this.userInfoService.getUserInfos();
-    this.dogService.getAllDogs();
-
     this.user$ = this.userInfoService.user$;
+
+    this.dogService.getAllDogs();
     this.dogs$ = this.dogService.dogs$;
+
+    this.dogs$.subscribe((dogs) => {
+      if (dogs && dogs.length > 0) {
+        this.selectedDogId = dogs[0].id;
+      }
+    });
+  }
+
+  /**
+   * Calcule le nombre de cours déjà passés pour un chien donné
+   * Un cours est considéré comme passé s'il est confirmé et que sa date est antérieure à maintenant
+   */
+
+  /* TODO VERIFIER ICI LES COURS DEJA RESERVE ET CONFIRMED */
+  getCompletedCoursesCount(dog: DogDto): number {
+    if (!dog.registrations || dog.registrations.length === 0) {
+      return 0;
+    }
+
+    const now = new Date();
+
+    return dog.registrations.filter((registration) => {
+      // Vérifier que la réservation est confirmée
+      const isConfirmed = registration.status.toLowerCase() === "confirmed";
+
+      // Vérifier que la date du cours est passée
+      const courseDate = new Date(registration.course.startDate); // Adaptez selon le nom de votre propriété
+      const isPast = courseDate < now;
+
+      return isConfirmed && isPast;
+    }).length;
   }
 
   daysToNextBirthday(birthdate: string): number {
@@ -100,6 +121,7 @@ export class DogComponent {
     return diffDays;
   }
 
+  /* TODO FAIRE MODAL DE CONFIRMATION DE SUPPRESSION */
   onConfirmDelete(dog: any) {
     console.log("Je supprime le chien : ", dog.id, dog.name);
     /* this.confirmationService.confirm({
