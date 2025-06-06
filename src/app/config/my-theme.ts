@@ -276,5 +276,29 @@ export const MyPreset = definePreset(Aura, {
         },
       },
     },
+
+    /* TODO J'SUIS EN TRAIN DE PERSONNALISER LES TABS DES CHIENS */
+    tabs: {
+      colorScheme: {
+        light: {
+          tablist: {
+            background: "{colors.global.white}",
+            borderColor: "{colors.global.border}",
+          },
+          tab: {
+            borderColor: "{colors.global.border}",
+            hoverBorderColor: "{colors.global.border}",
+            activeBorderColor: "{colors.global.main}",
+            color: "{colors.global.text}",
+            hoverColor: "{colors.primary.500}",
+            activeColor: "{colors.global.main}",
+          },
+          tabpanel: {
+            background: "{colors.global.white}",
+            color: "{colors.global.text}",
+          },
+        },
+      },
+    },
   },
 });
