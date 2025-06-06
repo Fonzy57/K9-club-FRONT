@@ -1,13 +1,8 @@
 <h1 class="text-2xl md:text-3xl font-semibold">Mes chiens</h1>
 
-<!--  -->
-
-<!-- 
-  TODO 
-  CHANGER LE FORMULAIRE ET LE METTRE SUR UNE PAGE addDog
--->
-
-<!--  -->
+<div class="mt-6">
+  <app-back-button [routerLink]="AppRoutes.app.user.dogFull" />
+</div>
 
 <app-card-wrapper class="mt-8 sm:mt-4 lg:mt-14">
   <form
@@ -50,10 +45,6 @@
         </div>
 
         <!-- RACE -->
-        <!--
-        TODO REVOIR LE STYLE DU SELECT SELON LES ERREURS
-        SURTOUT POUR UNE ERREUR OU QUAND ON CLEAN LE SELECT
-        -->
         <div class="flex flex-col gap-y-1 w-full">
           <label for="birthdate" class="text-sm">Race</label>
           @if (breeds$ | async; as breeds) {
