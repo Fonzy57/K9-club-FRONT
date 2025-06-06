@@ -1,45 +1,28 @@
 // ANGULAR
 import { Component, inject } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule,
-  Validators,
-} from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { CommonModule } from "@angular/common";
-import { BehaviorSubject, Observable } from "rxjs";
+import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { CommonModule, DatePipe } from "@angular/common";
+import { Observable } from "rxjs";
 
 // PRIME NG
 import { DatePickerModule } from "primeng/datepicker";
 import { SelectModule } from "primeng/select";
-import { RadioButton } from "primeng/radiobutton";
 import { TabsModule } from "primeng/tabs";
+import { ButtonModule } from "primeng/button";
 
 // COMPONENTS
-import { CustomInputComponent } from "@components/custom-input/custom-input.component";
-import { CardWrapperComponent } from "@components/card/card-wrapper/card-wrapper.component";
 import { ButtonComponent } from "@components/button/button.component";
 
 // SERVICES
-import { ToastMessageService } from "@services/toast/toast-message.service";
-import { BreedService } from "@services/breed/breed.service";
-
-// VALIDATORS
-import { FormValidators } from "app/validators/form-validators";
+import { UserInfoService } from "@services/user/user-info.service";
+import { DogService } from "@services/user/dog.service";
 
 // CONFIG
 import { AppRoutes } from "@config/routes";
-import { k9Config } from "@config/global";
-import { UserInfoService } from "@services/user/user-info.service";
-import { DogService } from "@services/user/dog.service";
-import { DogAvatarDto } from "@models/dog/dog-avatar";
-import { DateUtils } from "app/utils/date.utils";
 
 // TYPES
+import { DogAvatarDto } from "@models/dog/dog-avatar";
+
 // Définir l'interface pour le formulaire
 interface DogForm {
   name: FormControl<string | null>;
@@ -53,15 +36,17 @@ interface DogForm {
   selector: "app-dog",
   imports: [
     CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
     DatePickerModule,
     SelectModule,
     TabsModule,
+    DatePipe,
+    ButtonModule,
+    ButtonComponent,
   ],
   templateUrl: "./dog.component.html",
 })
 export class DogComponent {
+  AppRoutes = AppRoutes;
   userInfoService: UserInfoService = inject(UserInfoService);
   dogService: DogService = inject(DogService);
 
@@ -76,5 +61,13 @@ export class DogComponent {
 
     this.user$ = this.userInfoService.user$;
     this.dogs$ = this.dogService.dogs$;
+
+    /* TODO SUPPRIMER APRES TESTS */
+    this.dogs$.subscribe({
+      next: (response) => {
+        console.log("response : ", response);
+        return response;
+      },
+    });
   }
 }
