@@ -1,12 +1,13 @@
 // ANGULAR
-import { NgClass } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { NgClass } from "@angular/common";
+import { Component, Input } from "@angular/core";
 
 // NG ICONS
-import { NgIcon, provideIcons } from '@ng-icons/core';
+import { NgIcon, provideIcons } from "@ng-icons/core";
 import {
   ionAddOutline,
   ionAlertCircleOutline,
+  ionBalloonOutline,
   ionBodyOutline,
   ionCalendarNumberOutline,
   ionCalendarClearOutline,
@@ -25,20 +26,22 @@ import {
   ionPersonAddOutline,
   ionPersonOutline,
   ionPersonRemoveOutline,
+  ionRocketOutline,
   ionSunnyOutline,
   ionTennisballOutline,
   ionTrashOutline,
   ionWarningOutline,
-} from '@ng-icons/ionicons';
+} from "@ng-icons/ionicons";
 
 @Component({
-  selector: 'app-custom-icon',
+  selector: "app-custom-icon",
   imports: [NgIcon, NgClass],
-  templateUrl: './custom-icon.component.html',
+  templateUrl: "./custom-icon.component.html",
   viewProviders: [
     provideIcons({
       ionAddOutline,
       ionAlertCircleOutline,
+      ionBalloonOutline,
       ionBodyOutline,
       ionCalendarNumberOutline,
       ionCalendarClearOutline,
@@ -57,6 +60,7 @@ import {
       ionPersonAddOutline,
       ionPersonOutline,
       ionPersonRemoveOutline,
+      ionRocketOutline,
       ionSunnyOutline,
       ionTennisballOutline,
       ionTrashOutline,
@@ -66,6 +70,6 @@ import {
 })
 export class CustomIconComponent {
   @Input() name!: string;
-  @Input() size: string = '24';
-  @Input() class: string = '';
+  @Input() size: string = "24";
+  @Input() class: string = "";
 }
