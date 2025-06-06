@@ -13,7 +13,9 @@
     </div>
   </div>
   <div class="w-max mx-auto mt-5">
-    <app-button [routerLink]="AppRoutes.app.user.dogFull">
+    <app-button
+      [routerLink]="[AppRoutes.app.user.dogFull, AppRoutes.app.user.addDog]"
+    >
       Ajouter un chien
     </app-button>
   </div>
