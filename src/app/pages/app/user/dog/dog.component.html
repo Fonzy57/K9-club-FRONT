@@ -39,9 +39,8 @@
     <p-tabpanels>
       @for (dog of dogs; track dog.id) {
       <p-tabpanel [value]="dog.id">
-        <!-- <h2 class="text-2xl">Informations :</h2> -->
-
         <div class="border border-border rounded-lg w-1/2 shadow-sm">
+          <!-- CARD IMAGE -->
           <div class="bg-main-50 rounded-t-lg border-b border-main-400">
             <div class="flex items-center justify-center">
               <img
@@ -52,22 +51,27 @@
             </div>
           </div>
           <div class="p-10">
+            <!-- CARD HEADER -->
             <div
-              class="flex items-start justify-between pb-2 border-b border-border"
+              class="flex items-start justify-between pb-4 border-b border-border"
             >
               <div class="">
                 <div class="flex items-center gap-x-3">
                   <h2 class="font-bold text-2xl">{{ dog.name }}</h2>
-                  <div class="">
+                  <div>
                     <app-custom-icon
                       [name]="
                         dog.gender.toLowerCase() === 'male'
                           ? 'ionMaleOutline'
                           : 'ionFemaleOutline'
                       "
+                      class="text-gray-one!"
                       size="24"
                     />
                   </div>
+                  <p class="text-main font-medium">
+                    {{ dog.birthdate | age }}
+                  </p>
                 </div>
                 <p class="text-lg">{{ dog.breed.name }}</p>
               </div>
@@ -95,32 +99,35 @@
                 </button>
               </div>
             </div>
+
+            <!-- CARD CONTENT -->
+            <div class="py-4 border-b border-border">
+              <div class="flex items-center gap-x-2">
+                <p>
+                  Anniversaire dans :
+                  {{ daysToNextBirthday(dog.birthdate) }} jour{{
+                    daysToNextBirthday(dog.birthdate) > 1 ? "s" : ""
+                  }}
+                </p>
+                <app-custom-icon
+                  name="ionBalloonOutline"
+                  size="20"
+                  class="text-information-600!"
+                />
+                <p>({{ dog.birthdate | date : "dd MMMM" }})</p>
+              </div>
+              <p>Nombre de cours suivis : FAIRE LE CALCUL</p>
+            </div>
+
+            <!-- CARD FOOTER -->
+            <div class="flex items-center gap-x-4 pt-4 text-gray-one">
+              <p class="">Inscription : {{ dog.createdAt | date }}</p>
+              @if (dog.updatedAt ) {
+              <p class="">Modification : {{ dog.updatedAt | date }}</p>
+              }
+            </div>
           </div>
         </div>
-
-        <p>
-          <span class="font-bold">Date de naissance :</span>
-          {{ dog.birthdate | date }}
-        </p>
-        <p>
-          <span class="font-bold">Prochain anniversaire :</span> FAIRE LE CALCUL
-        </p>
-        <p>
-          <span class="font-bold">Inscrit depuis :</span>
-          {{ dog.createdAt }}
-        </p>
-        <p>
-          <span class="font-bold">Nombre de cours suivis :</span> FAIRE LE
-          CALCUL
-        </p>
-        <p><span class="font-bold">Prochain cours :</span> FAIRE LE CALCUL</p>
-
-        @if (dog.updatedAt !== null) {
-        <p>
-          <span class="font-bold">Dernière modification du profil :</span>
-          {{ dog.updatedAt }}
-        </p>
-        }
       </p-tabpanel>
       }
     </p-tabpanels>
