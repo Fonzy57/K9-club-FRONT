@@ -142,7 +142,7 @@ export class DogAddComponent {
     const formValue = this.addDogForm.value;
 
     const birthdate = formValue.birthdate
-      ? DateUtils.toLocalDateString(formValue.birthdate)
+      ? DateUtils.formatDateForBackend(formValue.birthdate)
       : "";
 
     const dogData: AddDogFormDto = {
