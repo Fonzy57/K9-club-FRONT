@@ -74,7 +74,11 @@ export class DogComponent {
    * Un cours est considéré comme passé s'il est confirmé et que sa date est antérieure à maintenant
    */
 
+  /*  */
+  /* J'EN SUIS LA  */
   /* TODO VERIFIER ICI LES COURS DEJA RESERVE ET CONFIRMED */
+  /*  */
+
   getCompletedCoursesCount(dog: DogDto): number {
     if (!dog.registrations || dog.registrations.length === 0) {
       return 0;
