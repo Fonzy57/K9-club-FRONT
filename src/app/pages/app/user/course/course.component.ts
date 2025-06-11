@@ -1,7 +1,15 @@
 // ANGULAR
 import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
-import { map, Observable, BehaviorSubject, combineLatest } from "rxjs";
+import {
+  map,
+  Observable,
+  BehaviorSubject,
+  combineLatest,
+  delayWhen,
+  timer,
+  filter,
+} from "rxjs";
 import { FormsModule } from "@angular/forms";
 /* TODO REVOIR LES ANIMATIONS PLUS TARD */
 /* import {
@@ -132,6 +140,8 @@ export class CourseComponent {
       this.selectedDog$,
       this.selectedCourseType$,
     ]).pipe(
+      /* TODO TEST POUR RETARDER LES DATAS POUR FAIRE UN LOADER */
+      /* delayWhen(() => timer(5000)), */
       map(([courses, selectedDog, selectedCourseType]) =>
         this.getNextCoursesAvailable(
           courses,
