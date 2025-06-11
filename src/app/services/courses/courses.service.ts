@@ -40,4 +40,13 @@ export class CoursesService {
   registerCourse(course: any) {
     return this.http.post(k9Config.apiRoot + "/course-registration", course);
   }
+
+  /* TODO REVOIR, PEUT ÊTRE FAIRE UN SUBSCRIBE ICI */
+  /* TODO REVOIR TYPAGE */
+  ownerCancelRegistration(registrationId: number) {
+    return this.http.patch<void>(
+      k9Config.apiRoot + `/course-registration/${registrationId}/cancel`,
+      {}
+    );
+  }
 }
