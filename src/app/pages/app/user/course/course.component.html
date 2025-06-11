@@ -11,9 +11,12 @@
     [checkmark]="true"
     (onChange)="onSelectDogChange()"
     class="w-full md:w-56"
+    emptyMessage="Pas de chien enregistré"
   />
   } @else {
+
   <!-- TODO ICI METTRE UN LOADER -->
+
   <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
   } @if (courseTypes$ | async; as courseTypes) {
   <p-select
@@ -21,10 +24,10 @@
     [(ngModel)]="selectedCourseType"
     optionLabel="name"
     (onChange)="onSelectCourseTypeChange()"
-    [checkmark]="true"
     [showClear]="true"
     placeholder="Type de cours"
     class="w-full md:w-56"
+    emptyMessage="Pas de type de cours"
   >
     <ng-template #selectedItem let-selectedOption>
       <app-tag-name [tag]="selectedOption" class="w-full" />
@@ -41,8 +44,17 @@
   }
 </div>
 
-<!-- TODO VOIR POUR UN BOUTON "SEE MORE" pour afficher tous les cours -->
+<!-- 
+
+
+TODO VOIR POUR UN BOUTON "SEE MORE" pour afficher tous les cours
+COMME J'AVAIS FAIT POUR LE SITE DE PE AVEC LA GALERIE DE TATTOOS
+ 
+
+-->
+
 <!-- TODO AFFICHER LA CARD DU EMPTY DOG SI PAS DE CHIEN ICI -->
+
 <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:mt-6">
   @if (nextCoursesAvailable$ | async; as nextCourse) { @if (nextCourse.length >
   0) { @for (course of nextCourse; track $index) {
@@ -59,7 +71,9 @@
 
 <div class="mt-8 flex items-center justify-between">
   <h2 class="font-semibold text-2xl">Les trois prochains cours réservés</h2>
+
   <!-- TODO REVOIR LE STYLE CAR LEGER SAUT EN CHANGEANT DE CHIEN -->
+
   @if (totalReservedCoursesCount > 3) {
   <app-button class="hidden sm:block" typeButton="ghost">
     Voir tous les cours réservés
