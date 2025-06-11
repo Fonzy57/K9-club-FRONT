@@ -261,7 +261,7 @@ export class CourseComponent {
         return courseDate >= today && registration.status === "CONFIRMED";
       })
       .map((registration: CourseRegistrationDto) => ({
-        id: registration.course.id,
+        id: registration.id,
         name: registration.course.name,
         date: registration.course.startDate,
         tag: registration.course.courseType,
