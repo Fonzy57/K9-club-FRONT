@@ -6,6 +6,11 @@ import { RouterOutlet } from "@angular/router";
 import { PrimeNG } from "primeng/config";
 import { Toast } from "primeng/toast";
 
+// DATE FNS
+// TODO DECOMMENTER SI SOUCIS AVEC DATE FNS
+/* import { setDefaultOptions } from "date-fns";
+import { fr } from "date-fns/locale"; */
+
 // TODO voir https://angular.dev/guide/animations pour les animations
 
 @Component({
@@ -18,7 +23,10 @@ import { Toast } from "primeng/toast";
 export class AppComponent {
   title = "k9-club";
 
-  constructor(private primeng: PrimeNG) {}
+  constructor(private primeng: PrimeNG) {
+    // TODO DECOMMENTER SI SOUCIS AVEC DATE FNS
+    /* setDefaultOptions({ locale: fr }); */
+  }
 
   ngOnInit() {
     this.primeng.ripple.set(true);
