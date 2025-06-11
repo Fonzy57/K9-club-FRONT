@@ -17,8 +17,6 @@ export class CardReservedCourseComponent {
   @Output() cancelCourse = new EventEmitter<any>();
 
   onCancelClick() {
-    /* TODO SUPPRIMER APRES TESTS */
-    console.log("Je clique sur cancel", this.course.id, this.course);
     this.cancelCourse.emit(this.course.id);
   }
 }

@@ -149,8 +149,6 @@ export class CourseComponent {
   }
 
   onReserveCourse(course: any) {
-    /* TODO SUPPRIMER APRES LES TESTS */
-    console.log("Dans la page : ", course);
     if (!this.selectedDog) {
       this.toastService.show({
         severity: "error",
@@ -193,9 +191,6 @@ export class CourseComponent {
   }
 
   onCancelCourse(registrationId: number) {
-    /* TODO SUPPRIMER APRES TESTS */
-    console.log("Parent je clique", registrationId);
-
     this.courseService.ownerCancelRegistration(registrationId).subscribe({
       next: () => {
         // Re-fetch all courses to update data
