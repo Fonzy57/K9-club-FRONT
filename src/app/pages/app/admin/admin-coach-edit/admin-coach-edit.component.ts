@@ -51,6 +51,7 @@ export class AdminCoachEditComponent implements OnInit {
   toastService: ToastMessageService = inject(ToastMessageService);
 
   /** True if URL has an `id` parameter, indicating edit mode */
+  // TODO SUPPRIMER CAR PLUS UTILISÉ
   isEdit = !!this.activatedRoute.snapshot.paramMap.get('id');
 
   /** Holds the coach data loaded from the backend */

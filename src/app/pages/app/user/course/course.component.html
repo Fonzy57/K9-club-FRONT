@@ -1,34 +1,168 @@
 <h1 class="text-2xl md:text-3xl font-semibold">Réserver un cours</h1>
 
-<!-- TODO REMPLACER PAR DES DROPDOWNS QUAND J'AURAIS LES COMPOSANTS -->
-<div class="flex flex-col gap-y-4 mt-8 sm:flex-row sm:gap-x-6 md:gap-x-3">
+<div
+  class="flex flex-col gap-y-4 mt-8 sm:flex-row sm:gap-x-6 md:gap-x-3 xl:mt-4"
+>
+  @if (dogs$ | async; as dogs) {
+  <p-select
+    [options]="dogs"
+    [(ngModel)]="selectedDog"
+    [ngModel]="selectedDog ?? dogs[0]"
+    optionLabel="name"
+    placeholder="Sélectionner un chien"
+    [checkmark]="true"
+    (onChange)="onSelectDogChange()"
+    class="w-full md:w-56"
+    emptyMessage="Pas de chien enregistré"
+  />
+  } @else {
+
+  <!-- TODO ICI METTRE UN LOADER -->
+
   <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
+  } @if (courseTypes$ | async; as courseTypes) {
+  <p-select
+    [options]="courseTypes"
+    [(ngModel)]="selectedCourseType"
+    optionLabel="name"
+    (onChange)="onSelectCourseTypeChange()"
+    [showClear]="true"
+    placeholder="Type de cours"
+    class="w-full md:w-56"
+    emptyMessage="Pas de type de cours"
+  >
+    <ng-template #selectedItem let-selectedOption>
+      <app-tag-name [tag]="selectedOption" class="w-full" />
+    </ng-template>
+    <ng-template let-type #item>
+      <div class="w-full">
+        <app-tag-name [tag]="type" class="w-full" />
+      </div>
+    </ng-template>
+  </p-select>
+  } @else {
+  <!-- TODO ICI METTRE UN LOADER -->
   <div class="w-full h-10 bg-blue-400 rounded-lg md:w-56"></div>
+  }
 </div>
 
-<!-- TODO VOIR POUR UN BOUTON "SEE MORE" pour afficher tous les cours -->
-<div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:mt-6">
-  <!--  @for (course of courses; track $index) {
-  <app-card-course [course]="course" />
-  } -->
+<!-- TODO AFFICHER LA CARD DU EMPTY DOG SI PAS DE CHIEN ICI -->
+<!-- 460 px -->
+<div
+  class="relative mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:mt-6"
+  [ngClass]="{
+    'max-h-[535px] lg:max-h-[470px] overflow-hidden': !showAllCourses,
+    'max-h-none': showAllCourses
+  }"
+>
+  @if (nextCoursesAvailable$ | async; as nextCourse) { @if (nextCourse.length >
+  0) { @for (course of nextCourse; track $index) {
+  <app-card-course [course]="course" (reserve)="onReserveCourse($event)" />
+  } } @else {
+  <div class="col-span-full">
+    <app-card-empty-course />
+  </div>
+  } } @else {
+  <!-- TODO faire un loader -->
+  <p>Chargement des cours...</p>
+  }
 </div>
 
-<div class="mt-8 flex items-center justify-between">
-  <h2 class="font-semibold text-2xl">Les trois prochains cours réservés</h2>
-  <!-- TODO AJOUTER LA PROPRIETE ROUTERLINK QUAND J'AURAIS LA PAGE -->
-  <app-button class="hidden sm:block" typeButton="ghost">
-    Voir tous les cours réservés
+@if (nextCoursesAvailable$ | async; as nextCourse) { @if (nextCourse.length > 6)
+{
+<div class="mt-4 text-center w-max mx-auto">
+  <app-button class="" typeButton="ghost" (click)="toggleShowAllCourses()">
+    {{ showAllCourses ? "Voir moins" : "Voir tous les cours" }}
   </app-button>
 </div>
-<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
-  <!-- TODO VOIR SI JE GARDE LE SLICE OU SI A L'API JE METS JUSTE LES 3 PROCHAINS SELON LA DATE -->
-  <!-- @for (reservedCourse of reservedCourses.slice(0, 3); track $index) {
-  <app-card-reserved-course [course]="reservedCourse" />
-  } -->
+} }
+
+<div class="mt-8 xl:mt-4">
+  <h2 class="font-semibold text-2xl">Les prochains cours réservés</h2>
+</div>
+<div
+  class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3"
+  [ngClass]="{
+    'max-h-[380px] sm:max-h-[180px] lg:max-h-[105px] overflow-hidden':
+      nextCoursesReservedForSelectedDog.length > 0 && !showAllReservedCourses,
+    'max-h-none': showAllReservedCourses
+  }"
+>
+  @if (nextCoursesReservedForSelectedDog.length > 0) { @for (reservedCourse of
+  nextCoursesReservedForSelectedDog; track $index) {
+  <app-card-reserved-course
+    [course]="reservedCourse"
+    (cancelCourse)="onConfirmCancel($event)"
+  />
+  } } @else {
+  <div>
+    <app-card-empty-reserved-course />
+  </div>
+  }
 </div>
 
-<!-- TODO AJOUTER LA PROPRIETE ROUTERLINK QUAND J'AURAIS LA PAGE -->
-<!-- TODO AFFICHER LE BOUTON QUE S'IL Y A PLUS DE 3 COURS RESERVES -->
-<app-button class="mt-10 block sm:hidden" typeButton="ghost">
-  Voir tous les cours réservés
-</app-button>
+@if (nextCoursesReservedForSelectedDog.length > 3) {
+<div class="mt-4 text-center w-max mx-auto">
+  <app-button
+    class=""
+    typeButton="ghost"
+    (click)="toggleShowAllReservedCourses()"
+  >
+    {{ showAllReservedCourses ? "Voir moins" : "Voir tous les cours réservés" }}
+  </app-button>
+</div>
+}
+
+<!-- MODAL DELETE CONFIRMATION -->
+<p-confirmdialog #confirmCancelCourse>
+  <ng-template
+    #headless
+    let-message
+    let-onAccept="onAccept"
+    let-onReject="onReject"
+  >
+    <div class="flex flex-col items-center p-4 sm:p-8 bg-white rounded">
+      <!-- WARNING LOGO -->
+      <div
+        class="rounded-full bg-primary inline-flex justify-center items-center h-24 w-24 -mt-16 sm:-mt-20"
+      >
+        <div class="p-3 rounded-full bg-error-100">
+          <app-custom-icon
+            name="ionWarningOutline"
+            size="40"
+            class="text-error-600! pb-1"
+          />
+        </div>
+      </div>
+      <!-- HEADER -->
+      <span
+        class="font-poppins font-bold text-xl sm:text-2xl block mt-2 sm:mt-3 text-error-600"
+      >
+        {{ message.header }}
+      </span>
+      <!-- CONTENT -->
+      <div
+        class="mb-0 mt-4 text-text flex flex-col gap-y-2 max-w-[315px] sm:max-w-[350px] text-sm sm:text-base"
+      >
+        <p>
+          Voulez vous vraiment annuler le cours
+          <span class="font-bold">{{ message.message }}</span>
+          ?
+        </p>
+        <p>
+          Vous pourrez de nouveau inscrire votre chien s'il reste de la place à
+          ce cours.
+        </p>
+      </div>
+      <!-- BUTTONS ROW -->
+      <div class="flex items-center gap-4 mt-6">
+        <app-button typeButton="ghost" (onClick)="onReject()">
+          Retour
+        </app-button>
+        <app-button typeButton="cancel" (onClick)="onAccept()">
+          Annuler la réservation
+        </app-button>
+      </div>
+    </div>
+  </ng-template>
+</p-confirmdialog>

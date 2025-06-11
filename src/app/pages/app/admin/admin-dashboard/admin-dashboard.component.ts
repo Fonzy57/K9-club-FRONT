@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import {
   CardInfoComponent,
@@ -15,33 +14,12 @@ import { Observable } from 'rxjs';
 })
 export class AdminDashboardComponent {
   userInfoService: UserInfoService = inject(UserInfoService);
-  user$!: Observable<OwnerInfoDto>;
+  user$!: Observable<UserInfoDto | null>;
 
   ngOnInit() {
-    this.user$ = this.userInfoService.getUserInfo();
+    this.userInfoService.getUserInfos();
+    this.user$ = this.userInfoService.user$;
   }
-
-  /* TODO ANCIENNE METHODE */
-  /* userInfo: OwnerInfoDto = {
-    id: 0,
-    firstname: '',
-    lastname: '',
-    email: '',
-    createdAt: '',
-    updatedAt: '',
-  };
-
-  ngOnInit(): void {
-    this.userInfoService.getUserInfo().subscribe({
-      next: (user) => {
-        this.userInfo = user;
-        console.log('user :', user);
-      },
-      error: (error) => {
-        console.error('ERREUR : ', error);
-      },
-    });
-  } */
 
   informations: Info[] = [
     {

@@ -5,3 +5,8 @@ interface CourseRegistrationDto {
   updatedAt: string;
   course: CourseDto;
 }
+
+interface BasicCourseRegistrationDto {
+  id: number;
+  status: string;
+}

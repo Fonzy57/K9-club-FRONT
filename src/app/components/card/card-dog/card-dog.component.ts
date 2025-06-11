@@ -1,35 +1,35 @@
 // ANGULAR
-import { Component, Input } from '@angular/core';
-import { DatePipe, LowerCasePipe } from '@angular/common';
+import { Component, Input } from "@angular/core";
+import { DatePipe, TitleCasePipe } from "@angular/common";
 
 // COMPONENTS
-import { TagNameComponent } from '@components/tag-name/tag-name.component';
-import { CustomIconComponent } from '@components/custom-icon/custom-icon.component';
+import { TagNameComponent } from "@components/tag-name/tag-name.component";
+import { CustomIconComponent } from "@components/custom-icon/custom-icon.component";
 
 // CUSTOM PIPES
-import { AgePipe } from 'app/pipes/age.pipe';
+import { AgePipe } from "app/pipes/age.pipe";
 
 @Component({
-  selector: 'app-card-dog',
+  selector: "app-card-dog",
   imports: [
     TagNameComponent,
-    LowerCasePipe,
+    TitleCasePipe,
     AgePipe,
     DatePipe,
     CustomIconComponent,
   ],
-  templateUrl: './card-dog.component.html',
+  templateUrl: "./card-dog.component.html",
 })
 export class CardDogComponent {
   private _dog!: DogDto;
 
   nbOfCourses: number = 0;
-  nextCourseName: string = '-';
+  nextCourseName: string = "-";
   tag: TagDto = {
     id: 0,
-    name: '',
-    textColor: '',
-    backgroundColor: '',
+    name: "",
+    textColor: "",
+    backgroundColor: "",
   };
 
   @Input()
@@ -45,12 +45,12 @@ export class CardDogComponent {
   computeCoursesInfo() {
     if (this._dog.registrations.length === 0) {
       this.nbOfCourses = 0;
-      this.nextCourseName = '-';
+      this.nextCourseName = "-";
       this.tag = {
         id: 0,
-        name: '',
-        textColor: '',
-        backgroundColor: '',
+        name: "",
+        textColor: "",
+        backgroundColor: "",
       };
       return;
     }
@@ -62,7 +62,7 @@ export class CardDogComponent {
     const pastCourses = this._dog.registrations.filter(
       (registration: CourseRegistrationDto) => {
         const courseDate = new Date(registration.course.startDate);
-        return courseDate < today && registration.status === 'CONFIRMED';
+        return courseDate < today && registration.status === "CONFIRMED";
       }
     );
 
@@ -72,7 +72,7 @@ export class CardDogComponent {
     const nextCourse = this._dog.registrations
       .filter((registration: CourseRegistrationDto) => {
         const courseDate = new Date(registration.course.startDate);
-        return courseDate >= today && registration.status === 'CONFIRMED';
+        return courseDate >= today && registration.status === "CONFIRMED";
       })
       .sort((a: CourseRegistrationDto, b: CourseRegistrationDto) => {
         return (
@@ -87,15 +87,15 @@ export class CardDogComponent {
       this.nextCourseName = next.course.name;
       this.tag = {
         ...next.course.courseType,
-        size: 'tiny',
+        size: "tiny",
       };
     } else {
-      this.nextCourseName = '-';
+      this.nextCourseName = "-";
       this.tag = {
         id: 0,
-        name: '',
-        textColor: '',
-        backgroundColor: '',
+        name: "",
+        textColor: "",
+        backgroundColor: "",
       };
     }
   }

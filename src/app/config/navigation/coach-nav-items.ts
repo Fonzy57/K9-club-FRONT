@@ -9,7 +9,7 @@ export const coachNavItems: any[] = [
   },
   {
     name: 'courses',
-    label: 'Les cours',
+    label: 'Cours',
     icon: 'ionCalendarNumberOutline',
     url: AppRoutes.app.coach.coursesFull,
   },

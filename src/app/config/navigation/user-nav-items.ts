@@ -10,13 +10,13 @@ export const userNavItems: any[] = [
   },
   {
     name: 'courses',
-    label: 'Les cours',
+    label: 'Cours',
     icon: 'ionCalendarNumberOutline',
     url: AppRoutes.app.user.courseFull,
   },
   {
     name: 'dog',
-    label: 'Mes chiens',
+    label: 'Chiens',
     icon: 'ionPawOutline',
     url: AppRoutes.app.user.dogFull,
   },

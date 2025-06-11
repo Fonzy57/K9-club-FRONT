@@ -1,35 +1,149 @@
-<h1 class="text-2xl md:text-3xl font-semibold">Mes chiens</h1>
+@if (dogs$ | async; as dogs) { @if (dogs && dogs.length > 0) {
+<div
+  class="flex flex-col gap-4 sm:flex-row sm:gap-0 items-center justify-between"
+>
+  <h1 class="text-2xl md:text-3xl font-semibold">
+    {{ dogs.length > 1 ? "Mes chiens" : "Mon chien" }}
+  </h1>
+  <app-button
+    [routerLink]="[AppRoutes.app.user.dogFull, AppRoutes.app.user.addDog]"
+    iconName="ionPawOutline"
+    iconClass="text-white"
+  >
+    Ajouter un chien
+  </app-button>
+</div>
 
-<div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-  <!-- TODO FAIRE LES DIV CLIQUABLES ET METTRE UNE COULEUR VERTE -->
-  <!-- TODO AFFICHER EN DESSOUS LES INFOS D'UN CHIEN QUI EST SELECTIONNÉ VOIR LE WIREFRAME -->
+<div class="mt-10 sm:mt-5 shadow-lg">
+  <p-tabs [value]="selectedDogId" scrollable>
+    <p-tablist>
+      @for (dog of dogs; track dog.id) {
+      <p-tab [value]="dog.id">
+        <div class="flex items-center gap-2">
+          <p class="text-2xl">
+            {{ dog.name }}
+          </p>
+        </div>
+      </p-tab>
+      }
+    </p-tablist>
 
-  <!-- TODO DECOMMENTER QUAND TESTS FINIS ET QUE MON CHOIX SERA FAIT SUR COMMENT LES AFFICHER -->
-  <!-- IDEE
+    <p-tabpanels>
+      @for (dog of dogs; track dog.id) {
+      <p-tabpanel [value]="dog.id">
+        <div class="border border-border rounded-lg w-1/2 shadow-sm">
+          <!-- CARD IMAGE -->
+          <div class="bg-main-50 rounded-t-lg border-b border-main-400">
+            <div class="flex items-center justify-center">
+              <img
+                src="/images/dog-avatar/{{ dog.avatarUrl }}"
+                alt="{{ dog.name }} image"
+                class=""
+              />
+            </div>
+          </div>
+          <div class="p-10">
+            <!-- CARD HEADER -->
+            <div
+              class="flex items-start justify-between pb-4 border-b border-border"
+            >
+              <div class="">
+                <div class="flex items-center gap-x-3">
+                  <h2 class="font-bold text-2xl">{{ dog.name }}</h2>
+                  <div>
+                    <app-custom-icon
+                      [name]="
+                        dog.gender.toLowerCase() === 'male'
+                          ? 'ionMaleOutline'
+                          : 'ionFemaleOutline'
+                      "
+                      class="text-gray-one!"
+                      size="24"
+                    />
+                  </div>
+                  <p class="text-main font-medium">
+                    {{ dog.birthdate | age }}
+                  </p>
+                </div>
+                <p class="text-lg">{{ dog.breed.name }}</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <!-- TODO METTRE LA ROUTE POUR LA MODIFICATION VERS LE FORM QUAND LA PAGE SERA FINIE -->
+                <button
+                  class="group cursor-pointer p-1.5 border border-transparent rounded-lg transition-colors duration-300 ease-in-out hover:bg-information-100 active:border-information-600"
+                  [routerLink]="[]"
+                >
+                  <app-custom-icon
+                    name="ionPencilOutline"
+                    size="18"
+                    class="text-information-600"
+                  />
+                </button>
+                <button
+                  class="group cursor-pointer p-1.5 border border-transparent rounded-lg transition-colors duration-300 ease-in-out hover:bg-error-100 active:border-error-600"
+                  (click)="onConfirmDelete(dog)"
+                >
+                  <app-custom-icon
+                    name="ionTrashOutline"
+                    size="18"
+                    class="text-error-600!"
+                  />
+                </button>
+              </div>
+            </div>
+
+            <!-- CARD CONTENT -->
+            <div class="py-4 border-b border-border">
+              <div class="flex items-center gap-x-2">
+                <p>
+                  Anniversaire dans :
+                  {{ daysToNextBirthday(dog.birthdate) }} jour{{
+                    daysToNextBirthday(dog.birthdate) > 1 ? "s" : ""
+                  }}
+                </p>
+                <app-custom-icon
+                  name="ionBalloonOutline"
+                  size="20"
+                  class="text-information-600!"
+                />
+                <p>({{ dog.birthdate | date : "dd MMMM" }})</p>
+              </div>
+              <p>
+                Nombre de cours suivis : {{ getCompletedCoursesCount(dog) }}
+              </p>
+            </div>
+
+            <!-- CARD FOOTER -->
+            <div class="flex items-center gap-x-4 pt-4 text-gray-one">
+              <p class="">Inscription : {{ dog.createdAt | date }}</p>
+              @if (dog.updatedAt ) {
+              <p class="">Modification : {{ dog.updatedAt | date }}</p>
+              }
+            </div>
+          </div>
+        </div>
+      </p-tabpanel>
+      }
+    </p-tabpanels>
+  </p-tabs>
+</div>
+} @else {
+<div class="flex items-center justify-center h-full">
+  <app-card-empty-dog />
+</div>
+} } @else {
+<!-- TODO ICI FAIRE LOADER -->
+<p>Loading</p>
+}
+
+<!-- TODO DECOMMENTER QUAND TESTS FINIS ET QUE MON CHOIX SERA FAIT SUR COMMENT LES AFFICHER -->
+<!-- IDEE
    FAIRE UN TAB AVEC LE NOM DES CHIENS ET AFFICHER LES INFOS, UN PEU STATISTIQUES GENRE :
    - NOMBRE DE COURS SUIVIS DEJA
    - UN GRAPHIQUE AVEC LES DIFFERENTS TYPES DE COURS SUIVIS genre bar chart avec agility 2, detection: 0, canicross 3 etc
    - DATE D'ANNIVERSAIRE OU COMBIEN DE JOURS AVANT SON ANNIVERSAIRE
    - TROUVER D'AUTRES IDEES SUR L'AFFICHAGE
    -->
-  <!--  @for (dog of dogs; track $index) {
-  <div
-    class="py-3.5 px-4 bg-white border border-border rounded-lg shadow-sm flex items-center justify-between"
-  >
-    <div class="flex items-baseline gap-x-3.5">
-      <h2 class="font-semibold text-lg">{{ dog.name }}</h2>
-      <p class="text-base">{{ dog.breed }}</p>
-    </div>
-    <div class="flex items-center gap-x-2">
-      <p>Modifier</p>
-      <p>Supprimer</p>
-    </div>
-  </div>
-  } -->
 
-  <!-- TODO FAIRE UN GRAPHIQUE EN MODE PES AVEC LES INFOS -->
-  <!-- 
-   -->
-
-  <!-- TODO FAIRE UNE SECTION DE BADGES -->
-</div>
+<!-- TODO FAIRE UN GRAPHIQUE EN MODE PES AVEC LES INFOS -->
+<!-- TODO FAIRE UNE SECTION DE BADGES -->

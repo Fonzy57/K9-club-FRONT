@@ -1,48 +1,123 @@
 <h1 class="text-2xl md:text-3xl font-semibold">Mon compte</h1>
 
-<!-- TODO RECUPERER LES INFOS DE LA BDD (VOIR SI JE FAIS DE L'OFFUSQUATION) -->
+<div class="mt-6">
+  <app-back-button [routerLink]="AppRoutes.app.user.dashboardFull" />
+</div>
 
-<!-- TODO SUREMENT MODIFIER LA DIV PAR UNE BALISE FORM -->
-<div class="mt-8 sm:mt-10">
-  <div class="sm:w-[500px] sm:mx-auto lg:mt-14">
-    <div class="flex flex-col gap-y-5">
-      <app-custom-input
-        inputName="name"
-        label="Nom"
-        placeholder="Doe"
-        type="text"
-      />
-      <app-custom-input
-        inputName="firstname"
-        label="Télephone"
-        placeholder="06 00 00 00 00"
-        type="text"
-      />
-      <app-custom-input
-        inputName="phone"
-        label="Prénom"
-        placeholder="John"
-        type="tel"
-      />
-      <app-custom-input
-        inputName="mail"
-        label="E-mail"
-        placeholder="john.doe@gmail.com"
-        type="mail"
-      />
-      <app-custom-input
-        inputName="password"
-        label="Mot de passe"
-        placeholder="********************"
-        type="password"
-      />
-      <!-- TODO PREVOIR UN INPUT POUR CHOISIR UN AVATAR -->
+<div
+  class="mt-8 sm:mt-14 lg:flex lg:items-center lg:justify-center lg:gap-x-40"
+>
+  <app-card-wrapper>
+    <div class="">
+      <form
+        [formGroup]="editUserForm"
+        (ngSubmit)="onClick()"
+        class="sm:w-[500px]"
+      >
+        <div class="flex flex-col gap-y-5">
+          <app-custom-input
+            inputName="lastname"
+            label="Nom"
+            placeholder="Doe"
+            type="text"
+            formControlName="lastname"
+            [errorMessage]="displayErrors ? lastnameError : ''"
+            (valueChange)="onFieldChange()"
+          />
+          <app-custom-input
+            inputName="firstname"
+            label="Prénom"
+            placeholder="John"
+            type="text"
+            formControlName="firstname"
+            [errorMessage]="displayErrors ? firstnameError : ''"
+            (valueChange)="onFieldChange()"
+          />
+          <app-custom-input
+            inputName="mail"
+            label="E-mail"
+            placeholder="john.doe@gmail.com"
+            type="email"
+            formControlName="email"
+            [errorMessage]="displayErrors ? emailError : ''"
+            (valueChange)="onFieldChange()"
+            hintMessage="Si vous changer d'e-mail vous devrez vous reconnecter avec le nouvel e-mail"
+          />
+        </div>
+        <div class="mt-10">
+          <app-button [disabled]="!hasChanges || disableButton">
+            Modifier
+          </app-button>
+        </div>
+      </form>
     </div>
+  </app-card-wrapper>
 
-    <!-- TODO DISABLED LE BOUTON SI PAS DE CHANGEMENT -->
-    <div class="mt-10">
-      <app-button> Modifier </app-button>
+  <app-card-wrapper class="mt-10 lg:hidden">
+    <div class="sm:w-[500px] sm:mx-auto lg:hidden">
+      <h2 class="text-center text-xl">Découvrez notre application mobile :</h2>
+      <div class="mt-4 flex items-center justify-center gap-x-4">
+        <div class="w-[135px]">
+          <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+          <img
+            src="/images/store/google-badge.svg"
+            alt=""
+            srcset=""
+            class="w-full"
+          />
+        </div>
+        <div class="w-[125px]">
+          <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+          <img
+            src="/images/store/apple-badge.svg"
+            alt=""
+            srcset=""
+            class="w-full"
+          />
+        </div>
+      </div>
+      <div class="mt-4 text-text">
+        <p>
+          Vous pouvez télécharger l'application mobile sur l'App Store ou sur
+          Google Play !
+        </p>
+        <p>L'expérience mobile sera bien meilleure que sur le site 😉</p>
+      </div>
     </div>
-  </div>
-  <div>TODO ICI METTRE UN QR CODE</div>
+  </app-card-wrapper>
+
+  <!-- QR CODE FOR BIG SCREEENS -->
+  <app-card-wrapper class="hidden lg:block">
+    <div class="lg:flex lg:flex-col lg:items-center lg:gap-y-4">
+      <div class="w-[250px] xl:w-[280px]">
+        <!-- TODO CHANGER LE QR CODE UNE FOIS FINIE -->
+        <img
+          src="/images/account/Rickrolling_QR_code.png"
+          alt=""
+          srcset=""
+          class="w-full"
+        />
+      </div>
+      <div class="flex items-center justify-center gap-x-4">
+        <div class="w-[135px]">
+          <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+          <img
+            src="/images/store/google-badge.svg"
+            alt=""
+            srcset=""
+            class="w-full"
+          />
+        </div>
+        <div class="w-[125px]">
+          <!-- TODO FAIRE UNE IMAGE CLIQUABLE SI EN LIGNE -->
+          <img
+            src="/images/store/apple-badge.svg"
+            alt=""
+            srcset=""
+            class="w-full"
+          />
+        </div>
+      </div>
+    </div>
+  </app-card-wrapper>
 </div>

@@ -1,36 +1,39 @@
 // ANGULAR
-import { Component, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, inject } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
+import { FormBuilder, FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { ActivatedRoute, Router } from "@angular/router";
+import { filter, take } from "rxjs";
 
 // COMPONENTS
-import { BackButtonComponent } from '@components/back-button/back-button.component';
-import { ButtonComponent } from '@components/button/button.component';
-import { CustomInputComponent } from '@components/custom-input/custom-input.component';
+import { BackButtonComponent } from "@components/back-button/back-button.component";
+import { ButtonComponent } from "@components/button/button.component";
+import { CustomInputComponent } from "@components/custom-input/custom-input.component";
 
 // VALIDATORS
-import { FormValidators } from 'app/validators/form-validators';
+import { FormValidators } from "app/validators/form-validators";
 
 // SERVICES
-import { ToastMessageService } from '@services/toast/toast-message.service';
-import { AuthService } from '@services/auth/auth.service';
-import { UserInfoService } from '@services/user/user-info.service';
+import { ToastMessageService } from "@services/toast/toast-message.service";
+import { AuthService } from "@services/auth/auth.service";
+import { UserInfoService } from "@services/user/user-info.service";
 
 // CONFIG
-import { AppRoutes } from '@config/routes';
-import { k9Config } from '@config/global';
+import { AppRoutes } from "@config/routes";
+import { k9Config } from "@config/global";
+import { CardWrapperComponent } from "../../../../components/card/card-wrapper/card-wrapper.component";
 
 @Component({
-  selector: 'app-admin-account',
+  selector: "app-admin-account",
   imports: [
     CustomInputComponent,
     ButtonComponent,
     FormsModule,
     ReactiveFormsModule,
     BackButtonComponent,
+    CardWrapperComponent,
   ],
-  templateUrl: './admin-account.component.html',
+  templateUrl: "./admin-account.component.html",
 })
 export class AdminAccountComponent {
   AppRoutes = AppRoutes;
@@ -47,29 +50,32 @@ export class AdminAccountComponent {
 
   adminToEdit: AdminEditDto = {
     id: 0,
-    firstname: '',
-    lastname: '',
-    email: '',
-    createdAt: '',
-    updatedAt: '',
+    firstname: "",
+    lastname: "",
+    email: "",
+    createdAt: "",
+    updatedAt: "",
   };
 
   editAdminForm = this.formBuilder.group({
-    firstname: ['', FormValidators.nameValidator()],
-    lastname: ['', FormValidators.nameValidator()],
-    email: ['', FormValidators.emailValidator()],
+    firstname: ["", FormValidators.nameValidator()],
+    lastname: ["", FormValidators.nameValidator()],
+    email: ["", FormValidators.emailValidator()],
   });
 
   ngOnInit() {
-    this.userInfoService.getUserInfo().subscribe({
-      next: (admin) => {
+    // Déclenche la récupération des infos (remplit le BehaviorSubject)
+    this.userInfoService.getUserInfos();
+
+    this.userInfoService.user$
+      .pipe(
+        filter((admin) => !!admin),
+        take(1)
+      )
+      .subscribe((admin) => {
         this.editAdminForm.patchValue(admin);
         this.adminToEdit = admin;
-      },
-      error: (error) => {
-        console.error('ERROR fetching account data', error);
-      },
-    });
+      });
   }
 
   onClick() {
@@ -99,10 +105,10 @@ export class AdminAccountComponent {
         next: () => {
           if (emailChanged) {
             this.toastService.show({
-              severity: 'success',
-              title: 'Modification réussie',
+              severity: "success",
+              title: "Modification réussie",
               content:
-                'Vos informations ont bien été modifié, merci de vous reconnecter',
+                "Vos informations ont bien été modifié, merci de vous reconnecter",
               time: 3000,
             });
 
@@ -112,17 +118,17 @@ export class AdminAccountComponent {
             this.disableButton = true;
 
             this.toastService.show({
-              severity: 'success',
-              title: 'Modification réussie',
-              content: 'Vos informations ont bien été modifié',
+              severity: "success",
+              title: "Modification réussie",
+              content: "Vos informations ont bien été modifié",
               time: 3000,
             });
           }
         },
         error: () => {
           this.toastService.show({
-            severity: 'error',
-            title: 'Modification échouée',
+            severity: "error",
+            title: "Modification échouée",
             content: "Les informations de votre compte n'ont pas été modifié",
             sticky: true,
           });
@@ -155,44 +161,44 @@ export class AdminAccountComponent {
   }
 
   get firstnameError() {
-    const control = this.editAdminForm.get('firstname');
+    const control = this.editAdminForm.get("firstname");
 
     if (!control) {
-      return '';
+      return "";
     }
 
     if ((control.touched || control.dirty) && control.invalid) {
-      return FormValidators.getNameError(control, 'prénom');
+      return FormValidators.getNameError(control, "prénom");
     }
 
-    return '';
+    return "";
   }
 
   get lastnameError() {
-    const control = this.editAdminForm.get('lastname');
+    const control = this.editAdminForm.get("lastname");
 
     if (!control) {
-      return '';
+      return "";
     }
 
     if ((control.touched || control.dirty) && control.invalid) {
-      return FormValidators.getNameError(control, 'nom');
+      return FormValidators.getNameError(control, "nom");
     }
 
-    return '';
+    return "";
   }
 
   get emailError() {
-    const control = this.editAdminForm.get('email');
+    const control = this.editAdminForm.get("email");
 
     if (!control) {
-      return '';
+      return "";
     }
 
     if ((control.touched || control.dirty) && control.invalid) {
       return FormValidators.getEmailError(control);
     }
 
-    return '';
+    return "";
   }
 }

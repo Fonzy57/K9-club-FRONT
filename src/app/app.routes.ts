@@ -1,45 +1,46 @@
 // ANGULAR
-import { Routes } from '@angular/router';
+import { Routes } from "@angular/router";
 
 // GUARDS
-import { loggedGuard } from './guards/logged.guard';
-import { ownerGuard } from './guards/owner.guard';
-import { adminGuard } from './guards/admin.guard';
-import { coachGuard } from './guards/coach.guard';
+import { loggedGuard } from "./guards/logged.guard";
+import { ownerGuard } from "./guards/owner.guard";
+import { adminGuard } from "./guards/admin.guard";
+import { coachGuard } from "./guards/coach.guard";
 
 // CONFIG
-import { AppRoutes } from '@config/routes';
+import { AppRoutes } from "@config/routes";
 
 // LAYOUTS
-import { MainLayoutComponent } from '@layouts/main-layout/main-layout.component';
-import { AuthLayoutComponent } from '@layouts/auth-layout/auth-layout.component';
-import { AppLayoutComponent } from '@layouts/app-layout/app-layout.component';
+import { MainLayoutComponent } from "@layouts/main-layout/main-layout.component";
+import { AuthLayoutComponent } from "@layouts/auth-layout/auth-layout.component";
+import { AppLayoutComponent } from "@layouts/app-layout/app-layout.component";
 
 // PAGES
 // WEBSITE
-import { HomeComponent } from '@pages/home/home.component';
-import { LegalNoticeComponent } from '@pages/legal-notice/legal-notice.component';
-import { TermsOfUseComponent } from '@pages/terms-of-use/terms-of-use.component';
+import { HomeComponent } from "@pages/home/home.component";
+import { LegalNoticeComponent } from "@pages/legal-notice/legal-notice.component";
+import { TermsOfUseComponent } from "@pages/terms-of-use/terms-of-use.component";
 
 // AUTH
-import { RegisterComponent } from '@pages/auth/register/register.component';
-import { LoginComponent } from '@pages/auth/login/login.component';
+import { RegisterComponent } from "@pages/auth/register/register.component";
+import { LoginComponent } from "@pages/auth/login/login.component";
 
 // APP - ADMIN
-import { AdminDashboardComponent } from '@pages/app/admin/admin-dashboard/admin-dashboard.component';
-import { AdminCoachesComponent } from '@pages/app/admin/admin-coaches/admin-coaches.component';
-import { AdminCoachEditComponent } from '@pages/app/admin/admin-coach-edit/admin-coach-edit.component';
-import { AdminCoachAddComponent } from '@pages/app/admin/admin-coach-add/admin-coach-add.component';
-import { AdminAccountComponent } from '@pages/app/admin/admin-account/admin-account.component';
+import { AdminDashboardComponent } from "@pages/app/admin/admin-dashboard/admin-dashboard.component";
+import { AdminCoachesComponent } from "@pages/app/admin/admin-coaches/admin-coaches.component";
+import { AdminCoachEditComponent } from "@pages/app/admin/admin-coach-edit/admin-coach-edit.component";
+import { AdminCoachAddComponent } from "@pages/app/admin/admin-coach-add/admin-coach-add.component";
+import { AdminAccountComponent } from "@pages/app/admin/admin-account/admin-account.component";
 
 // APP - COACH
-import { CoachDashboardComponent } from '@pages/app/coach/coach-dashboard/coach-dashboard.component';
+import { CoachDashboardComponent } from "@pages/app/coach/coach-dashboard/coach-dashboard.component";
 
 // APP - OWNER
-import { DashboardComponent } from '@pages/app/user/dashboard/dashboard.component';
-import { DogComponent } from '@pages/app/user/dog/dog.component';
-import { CourseComponent } from '@pages/app/user/course/course.component';
-import { UserAccountComponent } from '@pages/app/user/user-account/user-account.component';
+import { DashboardComponent } from "@pages/app/user/dashboard/dashboard.component";
+import { DogComponent } from "@pages/app/user/dog/dog.component";
+import { CourseComponent } from "@pages/app/user/course/course.component";
+import { UserAccountComponent } from "@pages/app/user/user-account/user-account.component";
+import { DogAddComponent } from "@pages/app/user/dog/dog-add/dog-add.component";
 
 export const routes: Routes = [
   // --- PUBLIC SITE ---
@@ -47,7 +48,7 @@ export const routes: Routes = [
     path: AppRoutes.home,
     component: MainLayoutComponent,
     children: [
-      { path: '', component: HomeComponent },
+      { path: "", component: HomeComponent },
       { path: AppRoutes.legalNotice, component: LegalNoticeComponent },
       {
         path: AppRoutes.termsOfUse,
@@ -62,26 +63,26 @@ export const routes: Routes = [
     component: AuthLayoutComponent,
     children: [
       {
-        path: '',
-        pathMatch: 'full',
+        path: "",
+        pathMatch: "full",
         redirectTo: AppRoutes.auth.register, // If user go to /auth he'll be redirect to /auth/inscription
       },
       {
         path: AppRoutes.auth.register,
         component: RegisterComponent,
         data: {
-          title: 'Rejoignez la communauté K9 Club',
+          title: "Rejoignez la communauté K9 Club",
           subtitle:
-            'Inscrivez-vous pour accéder à nos services dédiés aux passionnés de chiens.',
+            "Inscrivez-vous pour accéder à nos services dédiés aux passionnés de chiens.",
         },
       },
       {
         path: AppRoutes.auth.login,
         component: LoginComponent,
         data: {
-          title: 'Connectez-vous à votre espace K9 Club',
+          title: "Connectez-vous à votre espace K9 Club",
           subtitle:
-            'Accédez à votre compte et profitez de tous nos services dédiés aux passionnés de chiens.',
+            "Accédez à votre compte et profitez de tous nos services dédiés aux passionnés de chiens.",
         },
       },
     ],
@@ -96,14 +97,14 @@ export const routes: Routes = [
       // 1) /app redirects to home page
       // TODO CHANGER ICI SELON LE ROLE, FAIRE UN GUARD QUI RENVOIE SUR LE BON DASHBOARD SELON LE ROLE
       {
-        path: '',
-        pathMatch: 'full',
+        path: "",
+        pathMatch: "full",
         redirectTo: AppRoutes.home, // 'dashboard'
       },
 
       // 2) “owner” routes (ROLE_OWNER / ROLE_COACH / ROLE_SUPER_ADMIN if desired)
       {
-        path: '',
+        path: "",
         canActivateChild: [ownerGuard],
         children: [
           {
@@ -113,6 +114,10 @@ export const routes: Routes = [
           {
             path: AppRoutes.app.user.dog, // 'mes-chiens'
             component: DogComponent,
+          },
+          {
+            path: `${AppRoutes.app.user.dog}/${AppRoutes.app.user.addDog}`, // 'dog/ajouter'
+            component: DogAddComponent,
           },
           {
             path: AppRoutes.app.user.course, // 'les-cours'
@@ -182,5 +187,5 @@ export const routes: Routes = [
   },
 
   // --- CATCH ALL ---
-  { path: '**', redirectTo: AppRoutes.home },
+  { path: "**", redirectTo: AppRoutes.home },
 ];

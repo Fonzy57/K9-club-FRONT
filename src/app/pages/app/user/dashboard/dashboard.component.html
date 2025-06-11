@@ -10,15 +10,14 @@
     {{ dogs.length > 1 ? "Mes chiens" : "Mon chien" }}
   </h2>
   <div class="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">
-    @for (dog of dogs; track $index) {
+    @if (dogs.length === 0) {
+    <div>
+      <app-card-empty-dog />
+    </div>
+    } @else { @for (dog of dogs; track $index) {
     <app-card-dog [dog]="dog" />
-    }
+    } }
   </div>
-
-  <!-- TODO FAIRE UNE CARD EMPTY AVEC LIEN POUR AJOUTER UN CHIEN -->
-  @if (dogs.length === 0) {
-  <div class="text-gray-400 py-6">Aucun chien trouvé.</div>
-  }
 </div>
 <!-- TODO DANS UN ELSE FAIRE LES LOADERS -->
 } @else {

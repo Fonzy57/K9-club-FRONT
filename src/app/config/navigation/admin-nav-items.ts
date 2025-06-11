@@ -9,8 +9,8 @@ export const adminNavItems: any[] = [
   },
   {
     name: 'coaches',
-    label: 'Les coachs',
-    icon: 'ionBodyOutline',
+    label: 'Coachs',
+    icon: 'ionTennisballOutline',
     url: AppRoutes.app.admin.coachesFull,
   },
 ];

@@ -9,6 +9,7 @@ import { Component, Input } from '@angular/core';
 })
 export class TagNameComponent {
   @Input() tag!: TagDto;
+  @Input() class = '';
 
   get size(): TagSize {
     return this.tag?.size ?? 'tiny'; // Par défaut, la taille est 'tiny' si non précisée

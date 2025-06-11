@@ -1,0 +1,17 @@
+.custom-date-picker .p-datepicker-prev-button,
+.custom-date-picker .p-datepicker-next-button {
+  color: var(--color-main);
+}
+
+.custom-date-picker .p-button-text.p-datepicker-prev-button:hover,
+.custom-date-picker .p-button-text.p-datepicker-next-button:hover {
+  color: var(--color-main);
+  background-color: var(--color-main-100);
+}
+
+.custom-date-picker .p-button-text.p-datepicker-prev-button:active,
+.custom-date-picker .p-button-text.p-datepicker-next-button:active {
+  color: var(--color-main);
+  background-color: var(--color-main-100);
+  border: 1px solid var(--color-main);
+}

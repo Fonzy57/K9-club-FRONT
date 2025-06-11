@@ -1,0 +1,22 @@
+<!-- TODO REVOIR LE STYLE DE CETTE CARD -->
+<div
+  class="p-5 bg-information-50 border border-information-300 rounded-lg shadow-sm"
+>
+  <div class="flex flex-col items-center gap-y-4">
+    <app-custom-icon name="ionPawOutline" size="48" class="text-information" />
+    <div class="flex flex-col gap-y-2 max-w-4/5">
+      <p>Aucun compagnon à quatre pattes n’a encore rejoint votre profil !</p>
+      <p>
+        Ajoutez-le pour profiter de toutes les fonctionnalités du club et suivre
+        ses progrès !
+      </p>
+    </div>
+  </div>
+  <div class="w-max mx-auto mt-5">
+    <app-button
+      [routerLink]="[AppRoutes.app.user.dogFull, AppRoutes.app.user.addDog]"
+    >
+      Ajouter un chien
+    </app-button>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 // ANGULAR
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { catchError, Observable, EMPTY } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 // SERVICES
 import { ToastMessageService } from '@services/toast/toast-message.service';
@@ -16,20 +16,25 @@ export class UserInfoService {
   http: HttpClient = inject(HttpClient);
   toastService: ToastMessageService = inject(ToastMessageService);
 
-  getUserInfo(): Observable<OwnerInfoDto> {
-    return this.http.get<OwnerInfoDto>(`${k9Config.apiRoot}/user/me`).pipe(
-      catchError((error) => {
+  readonly user$ = new BehaviorSubject<UserInfoDto | null>(null);
+
+  getUserInfos() {
+    this.http.get<UserInfoDto>(k9Config.apiRoot + '/user/me').subscribe({
+      next: (user) => {
+        this.user$.next(user);
+      },
+      error: (error) => {
+        console.error("Erreur fetching owner's informations : ", error);
         this.toastService.show({
           severity: 'error',
-          title: 'Erreur de chargement',
-          content: 'Impossible de récupérer vos informations utilisateur.',
+          title: 'Récupération des informations',
+          content:
+            'Une erreur est survenue lors de la récupération de vos informations.',
           sticky: true,
         });
-
-        console.error('ERROR API : ', error);
-
-        return EMPTY;
-      })
-    );
+      },
+    });
   }
+
+  /* TODO AJOUTER LES AUTRES PARTIES DU CRUD */
 }
