@@ -1,6 +1,6 @@
 // ANGULAR
 import { Component, EventEmitter, Input, Output } from "@angular/core";
-import { DatePipe, NgClass, NgIf, UpperCasePipe } from "@angular/common";
+import { DatePipe, NgClass, UpperCasePipe } from "@angular/common";
 
 // COMPONENTS
 import { ButtonComponent } from "@components/button/button.component";
@@ -27,7 +27,10 @@ export class CardCourseComponent {
   }
 
   get reservedPlaces(): number {
-    return this.course?.registrations?.length ?? 0;
+    return (
+      this.course?.registrations?.filter((reg) => reg.status === "CONFIRMED")
+        .length ?? 0
+    );
   }
 
   get isCourseFull(): boolean {
