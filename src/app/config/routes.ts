@@ -29,12 +29,18 @@ export const AppRoutes = {
       coaches: "coachs",
       addCoach: "ajouter",
       updateCoach: "modifier",
+      courses: "cours",
+      addCourse: "ajouter",
+      updateCourse: "modifier",
       account: "mon-compte",
       get dashboardFull() {
         return `/${appRoot}/${this.root}/${this.dashboard}`;
       },
       get coachesFull() {
         return `/${appRoot}/${this.root}/${this.coaches}`;
+      },
+      get coursesFull() {
+        return `/${appRoot}/${this.root}/${this.courses}`;
       },
       /* get addCoachFull() {
         return `/${appRoot}/${this.root}/${this.addCoach}`;

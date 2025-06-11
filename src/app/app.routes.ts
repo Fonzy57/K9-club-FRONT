@@ -31,6 +31,9 @@ import { AdminCoachesComponent } from "@pages/app/admin/admin-coaches/admin-coac
 import { AdminCoachEditComponent } from "@pages/app/admin/admin-coach-edit/admin-coach-edit.component";
 import { AdminCoachAddComponent } from "@pages/app/admin/admin-coach-add/admin-coach-add.component";
 import { AdminAccountComponent } from "@pages/app/admin/admin-account/admin-account.component";
+import { AdminCoursesComponent } from "@pages/app/admin/admin-courses/admin-courses.component";
+import { AdminCoursesAddComponent } from "@pages/app/admin/admin-courses-add/admin-courses-add.component";
+import { AdminCoursesEditComponent } from "@pages/app/admin/admin-courses-edit/admin-courses-edit.component";
 
 // APP - COACH
 import { CoachDashboardComponent } from "@pages/app/coach/coach-dashboard/coach-dashboard.component";
@@ -151,6 +154,18 @@ export const routes: Routes = [
           {
             path: `${AppRoutes.app.admin.coaches}/${AppRoutes.app.admin.updateCoach}/:id`, // 'coachs/modifier/:id'
             component: AdminCoachEditComponent,
+          },
+          {
+            path: AppRoutes.app.admin.courses, // 'cours'
+            component: AdminCoursesComponent,
+          },
+          {
+            path: `${AppRoutes.app.admin.courses}/${AppRoutes.app.admin.addCourse}`, // 'coachs/ajouter'
+            component: AdminCoursesAddComponent,
+          },
+          {
+            path: `${AppRoutes.app.admin.courses}/${AppRoutes.app.admin.updateCourse}/:id`, // 'coachs/modifier/:id'
+            component: AdminCoursesEditComponent,
           },
           {
             path: AppRoutes.app.admin.account, // 'mon-compte'
