@@ -1,6 +1,8 @@
 <h1 class="text-2xl md:text-3xl font-semibold">Réserver un cours</h1>
 
-<div class="flex flex-col gap-y-4 mt-8 sm:flex-row sm:gap-x-6 md:gap-x-3">
+<div
+  class="flex flex-col gap-y-4 mt-8 sm:flex-row sm:gap-x-6 md:gap-x-3 xl:mt-4"
+>
   @if (dogs$ | async; as dogs) {
   <p-select
     [options]="dogs"
@@ -44,18 +46,15 @@
   }
 </div>
 
-<!-- 
-
-
-TODO VOIR POUR UN BOUTON "SEE MORE" pour afficher tous les cours
-COMME J'AVAIS FAIT POUR LE SITE DE PE AVEC LA GALERIE DE TATTOOS
- 
-
--->
-
 <!-- TODO AFFICHER LA CARD DU EMPTY DOG SI PAS DE CHIEN ICI -->
-
-<div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:mt-6">
+<!-- 460 px -->
+<div
+  class="relative mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:mt-6"
+  [ngClass]="{
+    'max-h-[535px] lg:max-h-[470px] overflow-hidden': !showAllCourses,
+    'max-h-none': showAllCourses
+  }"
+>
   @if (nextCoursesAvailable$ | async; as nextCourse) { @if (nextCourse.length >
   0) { @for (course of nextCourse; track $index) {
   <app-card-course [course]="course" (reserve)="onReserveCourse($event)" />
@@ -69,18 +68,26 @@ COMME J'AVAIS FAIT POUR LE SITE DE PE AVEC LA GALERIE DE TATTOOS
   }
 </div>
 
-<div class="mt-8 flex items-center justify-between">
-  <h2 class="font-semibold text-2xl">Les trois prochains cours réservés</h2>
-
-  <!-- TODO REVOIR LE STYLE CAR LEGER SAUT EN CHANGEANT DE CHIEN -->
-
-  @if (totalReservedCoursesCount > 3) {
-  <app-button class="hidden sm:block" typeButton="ghost">
-    Voir tous les cours réservés
+@if (nextCoursesAvailable$ | async; as nextCourse) { @if (nextCourse.length > 6)
+{
+<div class="mt-4 text-center w-max mx-auto">
+  <app-button class="" typeButton="ghost" (click)="toggleShowAllCourses()">
+    {{ showAllCourses ? "Voir moins" : "Voir tous les cours" }}
   </app-button>
-  }
 </div>
-<div class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3">
+} }
+
+<div class="mt-8 xl:mt-4">
+  <h2 class="font-semibold text-2xl">Les trois prochains cours réservés</h2>
+</div>
+<div
+  class="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3"
+  [ngClass]="{
+    'max-h-[380px] sm:max-h-[180px] lg:max-h-[105px] overflow-hidden':
+      !showAllReservedCourses,
+    'max-h-none': showAllReservedCourses
+  }"
+>
   @if (nextCoursesReservedForSelectedDog.length > 0) { @for (reservedCourse of
   nextCoursesReservedForSelectedDog; track $index) {
   <app-card-reserved-course [course]="reservedCourse" />
@@ -91,8 +98,14 @@ COMME J'AVAIS FAIT POUR LE SITE DE PE AVEC LA GALERIE DE TATTOOS
   }
 </div>
 
-<!-- TODO AJOUTER LA PROPRIETE ROUTERLINK QUAND J'AURAIS LA PAGE -->
-<!-- TODO AFFICHER LE BOUTON QUE S'IL Y A PLUS DE 3 COURS RESERVES -->
-<app-button class="mt-10 block sm:hidden" typeButton="ghost">
-  Voir tous les cours réservés
-</app-button>
+@if (nextCoursesReservedForSelectedDog.length > 3) {
+<div class="mt-4 text-center w-max mx-auto">
+  <app-button
+    class=""
+    typeButton="ghost"
+    (click)="toggleShowAllReservedCourses()"
+  >
+    {{ showAllReservedCourses ? "Voir moins" : "Voir tous les cours réservés" }}
+  </app-button>
+</div>
+}

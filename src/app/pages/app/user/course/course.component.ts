@@ -3,6 +3,14 @@ import { CommonModule } from "@angular/common";
 import { Component, inject } from "@angular/core";
 import { map, Observable, BehaviorSubject, combineLatest } from "rxjs";
 import { FormsModule } from "@angular/forms";
+/* TODO REVOIR LES ANIMATIONS PLUS TARD */
+/* import {
+  trigger,
+  state,
+  style,
+  transition,
+  animate,
+} from "@angular/animations"; */
 
 // COMPONENTS
 import { CardCourseComponent } from "@components/card/card-course/card-course.component";
@@ -35,6 +43,32 @@ import { ToastMessageService } from "@services/toast/toast-message.service";
     CardEmptyReservedCourseComponent,
   ],
   templateUrl: "./course.component.html",
+  /* TODO REVOIR LES ANIMATIONS PLUS TARD */
+  /* animations: [
+    trigger("expandCollapse", [
+      state(
+        "collapsed",
+        style({
+          maxHeight: "470px", // même valeur que max-h-[470px]
+          overflow: "hidden",
+        })
+      ),
+      state(
+        "expanded",
+        style({
+          maxHeight: "*", // auto
+          overflow: "visible",
+        })
+      ),
+      transition("collapsed <=> expanded", [animate("300ms ease-in-out")]),
+    ]),
+    trigger("fadeOverlay", [
+      state("visible", style({ opacity: 1 })),
+      state("hidden", style({ opacity: 0 })),
+      transition("hidden => visible", [animate("400ms ease-in")]),
+      transition("visible => hidden", [animate("200ms ease-out")]),
+    ]),
+  ], */
 })
 export class CourseComponent {
   dogService: DogService = inject(DogService);
@@ -64,6 +98,17 @@ export class CourseComponent {
 
   // Stream of available courses filtered according to dog/dog age/type selection
   nextCoursesAvailable$!: Observable<CourseDto[]>;
+
+  showAllCourses = false;
+  showAllReservedCourses = false;
+
+  toggleShowAllCourses() {
+    this.showAllCourses = !this.showAllCourses;
+  }
+
+  toggleShowAllReservedCourses() {
+    this.showAllReservedCourses = !this.showAllReservedCourses;
+  }
 
   ngOnInit() {
     // --- Fetch all data streams from services ---
@@ -196,7 +241,7 @@ export class CourseComponent {
     // Update total registrations number
     this.totalReservedCoursesCount = upcomingReservedCoursesFiltered.length;
 
-    return upcomingReservedCoursesFiltered.slice(0, max);
+    return upcomingReservedCoursesFiltered /* .slice(0, max) */;
   }
 
   /**
@@ -266,9 +311,7 @@ export class CourseComponent {
       .sort(
         (a, b) =>
           new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
-      )
-      .slice(0, max);
-
-    return upcomingCourses;
+      );
+    /* .slice(0, max) */ return upcomingCourses;
   }
 }
