@@ -149,6 +149,7 @@ export class CourseComponent {
   }
 
   onReserveCourse(course: any) {
+    /* TODO SUPPRIMER APRES LES TESTS */
     console.log("Dans la page : ", course);
     if (!this.selectedDog) {
       this.toastService.show({
@@ -186,6 +187,35 @@ export class CourseComponent {
           title: "Réservation d'un cours",
           content: "Il y a eu une erreur lors de la réservation du cours.",
           sticky: true,
+        });
+      },
+    });
+  }
+
+  onCancelCourse(registrationId: number) {
+    /* TODO SUPPRIMER APRES TESTS */
+    console.log("Parent je clique", registrationId);
+
+    this.courseService.ownerCancelRegistration(registrationId).subscribe({
+      next: () => {
+        // Re-fetch all courses to update data
+        this.courseService.getAllCourse();
+
+        // Re-fetch all dogs for new courses
+        this.dogService.getAllDogs();
+
+        this.toastService.show({
+          severity: "success",
+          title: "Annulé",
+          content: "La réservation a bien été annulée.",
+        });
+      },
+      error: (error) => {
+        console.error("Erreur annulation cours : ", error);
+        this.toastService.show({
+          severity: "error",
+          title: "Erreur",
+          content: "Impossible d'annuler cette réservation.",
         });
       },
     });
@@ -231,6 +261,7 @@ export class CourseComponent {
         return courseDate >= today && registration.status === "CONFIRMED";
       })
       .map((registration: CourseRegistrationDto) => ({
+        id: registration.course.id,
         name: registration.course.name,
         date: registration.course.startDate,
         tag: registration.course.courseType,
@@ -246,7 +277,7 @@ export class CourseComponent {
 
   /**
    * Get the next available courses for the selected dog, filtered by type and dog's age
-   * Excludes courses already reserved by the dog (confirmed or pending)
+   * Excludes courses already reserved by the dog (confirmed)
    * @param courses List of all courses
    * @param max Max number of results
    * @param selectedDog Selected dog for filtering (required)
@@ -294,12 +325,11 @@ export class CourseComponent {
           return false;
         }
 
-        // Exclude courses already reserved or pending for this dog
+        // Exclude courses already reserved for this dog
         const alreadyHasARegistration = course.registrations.some(
           (registration: any) =>
             registration.dog?.id === selectedDog.id &&
-            (registration.status === "CONFIRMED" ||
-              registration.status === "PENDING")
+            registration.status === "CONFIRMED"
         );
         if (alreadyHasARegistration) {
           return false;

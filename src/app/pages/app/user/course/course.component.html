@@ -90,7 +90,10 @@
 >
   @if (nextCoursesReservedForSelectedDog.length > 0) { @for (reservedCourse of
   nextCoursesReservedForSelectedDog; track $index) {
-  <app-card-reserved-course [course]="reservedCourse" />
+  <app-card-reserved-course
+    [course]="reservedCourse"
+    (cancelCourse)="onCancelCourse($event)"
+  />
   } } @else {
   <div>
     <app-card-empty-reserved-course />
