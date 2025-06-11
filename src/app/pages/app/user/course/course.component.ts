@@ -19,6 +19,7 @@ import { SelectModule } from "primeng/select";
 import { DogService } from "@services/user/dog.service";
 import { CourseTypeService } from "@services/course-type/course-type.service";
 import { CoursesService } from "@services/courses/courses.service";
+import { ToastMessageService } from "@services/toast/toast-message.service";
 
 @Component({
   selector: "app-course",
@@ -39,6 +40,7 @@ export class CourseComponent {
   dogService: DogService = inject(DogService);
   courseTypeService: CourseTypeService = inject(CourseTypeService);
   courseService: CoursesService = inject(CoursesService);
+  toastService: ToastMessageService = inject(ToastMessageService);
 
   // Observable streams for data
   dogs$!: Observable<DogDto[]>;
@@ -99,6 +101,49 @@ export class CourseComponent {
         )
       )
     );
+  }
+
+  onReserveCourse(course: any) {
+    console.log("Dans la page : ", course);
+    if (!this.selectedDog) {
+      this.toastService.show({
+        severity: "error",
+        title: "Réservation d'un cours",
+        content: "Veuillez selectionner un chien avant de réserver un cours.",
+        sticky: true,
+      });
+      return;
+    }
+
+    const dto: any = {
+      dogId: this.selectedDog.id,
+      courseId: course.id,
+      status: "CONFIRMED",
+    };
+
+    this.courseService.registerCourse(dto).subscribe({
+      next: (saved) => {
+        // 1) Recharger la liste des cours
+        this.courseService.getAllCourse();
+        // 2) Recharger la liste des dogs (pour récupérer la nouvelle registration)
+        this.dogService.getAllDogs();
+
+        this.toastService.show({
+          severity: "success",
+          title: "Réservation réussie",
+          content: `Le cours ${course.name} a bien été réservé pour ${this.selectedDog?.name}.`,
+        });
+      },
+      error: (error) => {
+        console.error("Erreur réservation", error);
+        this.toastService.show({
+          severity: "error",
+          title: "Réservation d'un cours",
+          content: "Il y a eu une erreur lors de la réservation du cours.",
+          sticky: true,
+        });
+      },
+    });
   }
 
   // --- Update reserved courses and observable when changing dog selection ---

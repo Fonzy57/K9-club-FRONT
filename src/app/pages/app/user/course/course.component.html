@@ -58,7 +58,7 @@ COMME J'AVAIS FAIT POUR LE SITE DE PE AVEC LA GALERIE DE TATTOOS
 <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 xl:grid-cols-3 xl:mt-6">
   @if (nextCoursesAvailable$ | async; as nextCourse) { @if (nextCourse.length >
   0) { @for (course of nextCourse; track $index) {
-  <app-card-course [course]="course" />
+  <app-card-course [course]="course" (reserve)="onReserveCourse($event)" />
   } } @else {
   <div class="col-span-full">
     <app-card-empty-course />
