@@ -6,7 +6,9 @@
     <div class="md:min-w-[260px]">
       <h6 class="font-semibold lg:text-lg">{{ nextCourse.name }}</h6>
       <div class="mt-1 flex items-center justify-between font-medium text-sm">
-        <p class="text-main font-medium">{{ nextCourse.date | date }}</p>
+        <p class="text-main font-medium">
+          {{ nextCourse.date | date : "dd MMMM YYYY à HH:mm" }}
+        </p>
       </div>
       <div
         class="mt-1.5 flex items-center justify-between flex-wrap-reverse gap-y-1.5"
