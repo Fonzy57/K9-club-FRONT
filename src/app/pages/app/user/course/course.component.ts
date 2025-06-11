@@ -102,13 +102,8 @@ export class CourseComponent {
   showAllCourses = false;
   showAllReservedCourses = false;
 
-  toggleShowAllCourses() {
-    this.showAllCourses = !this.showAllCourses;
-  }
-
-  toggleShowAllReservedCourses() {
-    this.showAllReservedCourses = !this.showAllReservedCourses;
-  }
+  // CHANGED: flag pour ne choisir le premier chien qu'une fois
+  private isFirstDogEmission = true;
 
   ngOnInit() {
     // --- Fetch all data streams from services ---
@@ -121,15 +116,8 @@ export class CourseComponent {
     this.courseService.getAllCourse();
     this.courses$ = this.courseService.courses$;
 
-    // --- Select first dog by default when data arrives, and update reserved courses ---
-    this.dogs$.subscribe((dogs) => {
-      if (dogs && dogs.length > 0) {
-        this.selectedDog = dogs[0];
-        this.selectedDog$.next(dogs[0]);
-        this.nextCoursesReservedForSelectedDog =
-          this.getNextReservedCoursesForDog(dogs[0]);
-      }
-    });
+    // CHANGED: on centralise la logique de sélection dans handleDogsEmission
+    this.dogs$.subscribe((dogs) => this.handleDogsEmission(dogs));
 
     // --- Combine latest value of courses, selected dog, and selected type to filter available courses reactively ---
     this.nextCoursesAvailable$ = combineLatest([
@@ -146,6 +134,47 @@ export class CourseComponent {
         )
       )
     );
+  }
+
+  // CHANGED: méthode qui gère chaque émission de la liste de chiens
+  private handleDogsEmission(dogs: DogDto[]) {
+    if (!dogs || dogs.length === 0) {
+      this.selectedDog = undefined;
+      this.selectedDog$.next(undefined);
+      this.nextCoursesReservedForSelectedDog = [];
+      return;
+    }
+
+    if (this.isFirstDogEmission) {
+      // PREMIÈRE ÉMISSION : on choisit le premier chien
+      this.selectDog(dogs[0]);
+      this.isFirstDogEmission = false;
+    } else if (this.selectedDog) {
+      // Émissions suivantes : on tente de retrouver le même chien
+      const same = dogs.find((d) => d.id === this.selectedDog!.id);
+      if (same) {
+        this.selectDog(same);
+      } else {
+        // Si le chien a disparu (rare), fallback sur le premier
+        this.selectDog(dogs[0]);
+      }
+    }
+  }
+
+  // ADDED: centralisation de tout ce qu'on fait quand on change de chien
+  selectDog(dog: DogDto) {
+    this.selectedDog = dog;
+    this.selectedDog$.next(dog);
+    this.nextCoursesReservedForSelectedDog =
+      this.getNextReservedCoursesForDog(dog);
+  }
+
+  toggleShowAllCourses() {
+    this.showAllCourses = !this.showAllCourses;
+  }
+
+  toggleShowAllReservedCourses() {
+    this.showAllReservedCourses = !this.showAllReservedCourses;
   }
 
   onReserveCourse(course: any) {
