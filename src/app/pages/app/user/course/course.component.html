@@ -92,7 +92,7 @@
   nextCoursesReservedForSelectedDog; track $index) {
   <app-card-reserved-course
     [course]="reservedCourse"
-    (cancelCourse)="onCancelCourse($event)"
+    (cancelCourse)="onConfirmCancel($event)"
   />
   } } @else {
   <div>
@@ -112,3 +112,57 @@
   </app-button>
 </div>
 }
+
+<!-- MODAL DELETE CONFIRMATION -->
+<p-confirmdialog #confirmCancelCourse>
+  <ng-template
+    #headless
+    let-message
+    let-onAccept="onAccept"
+    let-onReject="onReject"
+  >
+    <div class="flex flex-col items-center p-4 sm:p-8 bg-white rounded">
+      <!-- WARNING LOGO -->
+      <div
+        class="rounded-full bg-primary inline-flex justify-center items-center h-24 w-24 -mt-16 sm:-mt-20"
+      >
+        <div class="p-3 rounded-full bg-error-100">
+          <app-custom-icon
+            name="ionWarningOutline"
+            size="40"
+            class="text-error-600! pb-1"
+          />
+        </div>
+      </div>
+      <!-- HEADER -->
+      <span
+        class="font-poppins font-bold text-xl sm:text-2xl block mt-2 sm:mt-3 text-error-600"
+      >
+        {{ message.header }}
+      </span>
+      <!-- CONTENT -->
+      <div
+        class="mb-0 mt-4 text-text flex flex-col gap-y-2 max-w-[315px] sm:max-w-[350px] text-sm sm:text-base"
+      >
+        <p>
+          Voulez vous vraiment annuler le cours
+          <span class="font-bold">{{ message.message }}</span>
+          ?
+        </p>
+        <p>
+          Vous pourrez de nouveau inscrire votre chien s'il reste de la place à
+          ce cours.
+        </p>
+      </div>
+      <!-- BUTTONS ROW -->
+      <div class="flex items-center gap-4 mt-6">
+        <app-button typeButton="ghost" (onClick)="onReject()">
+          Retour
+        </app-button>
+        <app-button typeButton="cancel" (onClick)="onAccept()">
+          Annuler la réservation
+        </app-button>
+      </div>
+    </div>
+  </ng-template>
+</p-confirmdialog>

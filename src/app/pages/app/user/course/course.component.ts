@@ -19,9 +19,12 @@ import { ButtonComponent } from "@components/button/button.component";
 import { TagNameComponent } from "@components/tag-name/tag-name.component";
 import { CardEmptyCourseComponent } from "@components/card/card-empty-course/card-empty-course.component";
 import { CardEmptyReservedCourseComponent } from "@components/card/card-empty-reserved-course/card-empty-reserved-course.component";
+import { CustomIconComponent } from "@components/custom-icon/custom-icon.component";
 
 // PRIME NG
 import { SelectModule } from "primeng/select";
+import { ConfirmationService } from "primeng/api";
+import { ConfirmDialog } from "primeng/confirmdialog";
 
 // SERVICES
 import { DogService } from "@services/user/dog.service";
@@ -41,7 +44,10 @@ import { ToastMessageService } from "@services/toast/toast-message.service";
     TagNameComponent,
     CardEmptyCourseComponent,
     CardEmptyReservedCourseComponent,
+    CustomIconComponent,
+    ConfirmDialog,
   ],
+  providers: [ConfirmationService],
   templateUrl: "./course.component.html",
   /* TODO REVOIR LES ANIMATIONS PLUS TARD */
   /* animations: [
@@ -75,6 +81,7 @@ export class CourseComponent {
   courseTypeService: CourseTypeService = inject(CourseTypeService);
   courseService: CoursesService = inject(CoursesService);
   toastService: ToastMessageService = inject(ToastMessageService);
+  confirmationService: ConfirmationService = inject(ConfirmationService);
 
   // Observable streams for data
   dogs$!: Observable<DogDto[]>;
@@ -219,6 +226,24 @@ export class CourseComponent {
     });
   }
 
+  onConfirmCancel(registration: NextReservedCardCourseDto) {
+    this.confirmationService.confirm({
+      header: "Annulation d'une réservation",
+      message: `${registration.name}`,
+      accept: () => {
+        this.onCancelCourse(registration.id);
+      },
+      reject: () => {
+        this.toastService.show({
+          severity: "info",
+          title: "Suppression annulée",
+          content: `La réservation au cours ${registration.name} n'a pas été annulé.`,
+          time: 4000,
+        });
+      },
+    });
+  }
+
   onCancelCourse(registrationId: number) {
     this.courseService.ownerCancelRegistration(registrationId).subscribe({
       next: () => {
@@ -230,7 +255,7 @@ export class CourseComponent {
 
         this.toastService.show({
           severity: "success",
-          title: "Annulé",
+          title: "Réservation annulé",
           content: "La réservation a bien été annulée.",
         });
       },
