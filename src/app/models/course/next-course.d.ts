@@ -7,6 +7,7 @@ interface NextCourseDto {
 }
 
 interface NextReservedCardCourseDto {
+  id: number;
   name: string;
   date: string;
   tag: TagDto;
