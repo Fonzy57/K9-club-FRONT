@@ -1,16 +1,16 @@
 // ANGULAR
-import { HttpClient } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from "@angular/common/http";
+import { inject, Injectable } from "@angular/core";
+import { BehaviorSubject } from "rxjs";
 
 // SERVICES
-import { ToastMessageService } from '@services/toast/toast-message.service';
+import { ToastMessageService } from "@services/toast/toast-message.service";
 
 // CONFIG
-import { k9Config } from '@config/global';
+import { k9Config } from "@config/global";
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: "root",
 })
 export class CoursesService {
   http: HttpClient = inject(HttpClient);
@@ -19,19 +19,25 @@ export class CoursesService {
   readonly courses$ = new BehaviorSubject<CourseDto[]>([]);
 
   getAllCourse() {
-    this.http.get<CourseDto[]>(k9Config.apiRoot + '/courses').subscribe({
+    this.http.get<CourseDto[]>(k9Config.apiRoot + "/courses").subscribe({
       next: (courses) => {
         this.courses$.next(courses);
       },
       error: (error) => {
-        console.error('Erreur fetching course : ', error);
+        console.error("Erreur fetching course : ", error);
         this.toastService.show({
-          severity: 'error',
-          title: 'Récupération des cours',
-          content: 'Une erreur est survenue lors de la récupération des cours.',
+          severity: "error",
+          title: "Récupération des cours",
+          content: "Une erreur est survenue lors de la récupération des cours.",
           sticky: true,
         });
       },
     });
+  }
+
+  /* TODO REVOIR, PEUT ÊTRE FAIRE UN SUBSCRIBE ICI */
+  /* TODO REVOIR TYPAGE */
+  registerCourse(course: any) {
+    return this.http.post(k9Config.apiRoot + "/course-registration", course);
   }
 }
