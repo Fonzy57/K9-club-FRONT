@@ -17,6 +17,6 @@ export class CardReservedCourseComponent {
   @Output() cancelCourse = new EventEmitter<any>();
 
   onCancelClick() {
-    this.cancelCourse.emit(this.course.id);
+    this.cancelCourse.emit(this.course);
   }
 }
