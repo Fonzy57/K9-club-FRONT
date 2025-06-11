@@ -1,5 +1,5 @@
 // ANGULAR
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { DatePipe, NgClass, NgIf, UpperCasePipe } from "@angular/common";
 
 // COMPONENTS
@@ -19,6 +19,12 @@ import { TagNameComponent } from "@components/tag-name/tag-name.component";
 })
 export class CardCourseComponent {
   @Input() course!: CourseDto;
+
+  @Output() reserve = new EventEmitter<any>();
+
+  onReserveClick() {
+    this.reserve.emit(this.course);
+  }
 
   get reservedPlaces(): number {
     return this.course?.registrations?.length ?? 0;
