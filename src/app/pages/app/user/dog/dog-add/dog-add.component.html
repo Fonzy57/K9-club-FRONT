@@ -83,20 +83,23 @@
       </div>
 
       <!-- GENDER -->
-      <div class="flex flex-col gap-y-1 xs:flex-row xs:gap-x-6">
-        @for (gender of genders; track $index) {
-        <div class="flex items-center gap-x-2">
-          <p-radiobutton
-            [inputId]="gender.label"
-            [value]="gender.value"
-            formControlName="gender"
-            styleClass="custom-radio"
-          />
-          <label [for]="gender.label">
-            {{ gender.label | titlecase }}
-          </label>
+      <div class="flex flex-col gap-y-1 xs:gap-x-6">
+        <div class="flex items-center gap-x-6">
+          @for (gender of genders; track $index) {
+          <div class="flex items-center gap-x-2">
+            <p-radiobutton
+              [inputId]="gender.label"
+              [value]="gender.value"
+              formControlName="gender"
+              styleClass="custom-radio"
+            />
+            <label [for]="gender.label">
+              {{ gender.label | titlecase }}
+            </label>
+          </div>
+          }
         </div>
-        } @if (displayErrors && genderError) {
+        @if (displayErrors && genderError) {
         <p class="text-xs text-error">{{ genderError }}</p>
         }
       </div>
